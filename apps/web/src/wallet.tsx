@@ -15,8 +15,10 @@ import {
   WalletSession,
   sendWithSession,
   type WalletSessionToken,
+  type WalletNetwork,
 } from "./wallet-session";
 type WalletState = {
+  network: WalletNetwork;
   account: string;
   busy: boolean;
   error: string;
@@ -32,19 +34,25 @@ export const useWallet = () => {
   if (!c) throw new Error("Wallet provider missing");
   return c;
 };
-export function WalletProvider({
-  children,
-  rpcUrl,
-}: {
+type WalletProviderProps = {
   children: ReactNode;
   rpcUrl?: string;
-}) {
+  network?: WalletNetwork;
+};
+export function WalletProvider(props: WalletProviderProps) {
+  return <NetworkWalletProvider key={props.network ?? "testnet"} {...props} />;
+}
+function NetworkWalletProvider({
+  children,
+  rpcUrl,
+  network = "testnet",
+}: WalletProviderProps) {
   const [account, setAccount] = useState(""),
     [busy, setBusy] = useState(false),
     [error, setError] = useState("");
   const [connector, setConnector] = useState<NearConnector | null>(null);
   const pending = useRef<Promise<NearConnector> | null>(null);
-  const [session] = useState(() => new WalletSession());
+  const [session] = useState(() => new WalletSession(network));
   const connectionAttempt = useRef(0);
   const selectAccount = useCallback(
     (accountId: string) => {
@@ -59,16 +67,16 @@ export function WalletProvider({
       pending.current = import("@hot-labs/near-connect")
         .then(({ NearConnector }) => {
           const c = new NearConnector({
-            network: "testnet",
+            network,
             autoConnect: false,
             features: {
-              testnet: true,
+              [network]: true,
               signInWithoutAddKey: true,
               signAndSendTransaction: true,
             },
             footerBranding: null,
             ...(rpcUrl
-              ? { providers: { testnet: [currentRpcUrl(rpcUrl)] } }
+              ? { providers: { [network]: [currentRpcUrl(rpcUrl)] } }
               : {}),
           });
           setConnector(c);
@@ -101,7 +109,7 @@ export function WalletProvider({
       const c = await getConnector();
       await c.connect();
       const w = await c.wallet();
-      const accounts = await w.getAccounts({ network: "testnet" });
+      const accounts = await w.getAccounts({ network });
       if (attempt === connectionAttempt.current)
         selectAccount(accounts[0]?.accountId ?? "");
     } catch (e) {
@@ -136,6 +144,7 @@ export function WalletProvider({
   return (
     <Context.Provider
       value={{
+        network,
         account,
         session,
         busy,
@@ -166,7 +175,7 @@ export function WalletControl() {
       </button>
       {menu && (
         <div className="account-popover">
-          <span className="eyebrow">NEAR TESTNET</span>
+          <span className="eyebrow">NEAR {w.network.toUpperCase()}</span>
           <strong>{w.account}</strong>
           <button
             className="button secondary small"

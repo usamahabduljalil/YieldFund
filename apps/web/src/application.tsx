@@ -23,7 +23,11 @@ import { Brand, Badge } from "./components";
 import { WalletControl, WalletProvider } from "./wallet";
 import { ChainProvider, loadRuntime } from "./chain-store";
 import { ChainBanner, ChainRoutes } from "./chain-pages";
-import type { RuntimeConfig } from "../../../packages/near-client/src/chain";
+import type {
+  RuntimeConfig,
+  Deployment,
+} from "../../../packages/near-client/src/chain";
+import { CampaignDirectory } from "./campaign-directory";
 import { PreviewProvider } from "./preview-store";
 import {
   Overview,
@@ -38,6 +42,7 @@ import {
 import { NotFound } from "./public-pages";
 const links = [
   ["/app", "Overview", SquaresFour],
+  ["/app/campaigns", "Campaigns", Stack],
   ["/app/positions", "My position", Stack],
   ["/app/treasury", "Treasury", Bank],
   ["/app/activity", "Activity", ClockCounterClockwise],
@@ -45,9 +50,11 @@ const links = [
 function Shell({
   chain = false,
   network = "testnet",
+  deployment,
 }: {
   chain?: boolean;
   network?: string;
+  deployment?: Deployment;
 }) {
   const [open, setOpen] = useState(false);
   const [mobile, setMobile] = useState(
@@ -101,17 +108,23 @@ function Shell({
   }, [open, mobile]);
   const location = useLocation();
   const navigate = useNavigate();
-  const name = location.pathname.includes("campaigns")
-    ? "Campaign"
-    : location.pathname.includes("operations")
-      ? "Operation"
-      : location.pathname.includes("manage")
-        ? chain
-          ? "Campaign operations"
-          : "Scenario controls"
-        : (links.find(
-            ([path]) => path !== "/app" && location.pathname.startsWith(path),
-          )?.[1] ?? "Overview");
+  const name =
+    location.pathname === "/app/campaigns"
+      ? "Campaigns"
+      : location.pathname === "/app/campaigns/new"
+        ? "Create campaign"
+        : location.pathname.includes("campaigns")
+          ? "Campaign"
+          : location.pathname.includes("operations")
+            ? "Operation"
+            : location.pathname.includes("manage")
+              ? chain
+                ? "Campaign operations"
+                : "Scenario controls"
+              : (links.find(
+                  ([path]) =>
+                    path !== "/app" && location.pathname.startsWith(path),
+                )?.[1] ?? "Overview");
   return (
     <div className="application">
       <a className="skip-link" href="#app-main">
@@ -224,7 +237,11 @@ function Shell({
           </div>
         )}
         <main id="app-main" className="app-main" key={location.pathname}>
-          {chain ? (
+          {["/app/campaigns", "/app/campaigns/new"].includes(
+            location.pathname,
+          ) ? (
+            <CampaignDirectory current={deployment} />
+          ) : chain ? (
             <ChainRoutes />
           ) : (
             <Routes>
@@ -295,7 +312,7 @@ export default function Application() {
       rpcUrl={runtime.network === "testnet" ? runtime.rpcUrl : undefined}
     >
       <ChainProvider deployment={runtime}>
-        <Shell chain network={runtime.network} />
+        <Shell chain network={runtime.network} deployment={runtime} />
       </ChainProvider>
     </WalletProvider>
   ) : (

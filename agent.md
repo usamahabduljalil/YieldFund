@@ -1,7 +1,7 @@
 ## YieldFund project memory and build tracker
 
 Last updated: 13 November 2026 (Africa/Lagos).
-Stage: permissionless campaign factory and DAO attestation contract implementation; local verification and first public release preparation in progress. 122 TypeScript tests pass, one optional Sandbox check skipped; hosted build/typecheck and four packaging checks pass. Historical testnet artifacts are now separate fixtures. Campaign browser flows, mainnet wallet/real-yield adapter, Trezu rehearsal and callback recovery remain incomplete.
+Stage: public GitHub/Vercel read-only release published; campaign discovery/draft reviews and network-bound wallet adapter implemented. 146 TypeScript tests pass, one optional Sandbox check skipped; hosted build/typecheck passes. Full contract CI passed at c282f40 (32 units, 14 Sandbox scenarios). Signed multi-campaign flows, real-yield adapter, Trezu rehearsal and recovery gaps remain incomplete.
 
 ## Read first
 
@@ -64,11 +64,11 @@ No borrowing, leverage, swaps, bridges, Intents, rebalancing, transferable share
 
 ## Current expansion and next task
 
-- Permissionless factory: normal templates compile; actual Sandbox test proves two independent creators, two keyless vault/strategy pairs, isolated 100/200 token deposits, exact funding checks, duplicate rejection and real Sputnik two-approval verification. Evidence: `docs/evidence/campaign-factory-sandbox.json`; API and failure limitations: `docs/contracts/campaign-factory.md`. Browser creation/selection and public factory deployment are not done.
+- Permissionless factory: normal templates compile; actual Sandbox test proves two independent creators, two keyless vault/strategy pairs, isolated 100/200 token deposits, exact funding checks, duplicate rejection and real Sputnik two-approval verification. Evidence: `docs/evidence/campaign-factory-sandbox.json`; API and failure limitations: `docs/contracts/campaign-factory.md`. Network-scoped registry UI and unsigned creation drafts are implemented; stale reviews are invalidated. Signed creation, campaign selection, DAO verification UI and public factory deployment remain incomplete.
 - Activity persistence: updates preserve other campaign scopes and no longer truncate unresolved rows. Three new cases pass. Historical deployment tests now always use hash-verified fixtures downloaded from public testnet code, independent of current source builds.
 - Mainnet: user account `7816689a9b3a6aea2f74f9ff8d7228603f440fffff9a138a43558c6d0dff596b`, total cap **5 NEAR**, no separately approved token budget. Read-only discovery block 224267966 returned UNKNOWN_ACCOUNT. Vault/simulator code storage alone is 6.10859 NEAR; embedded factory code adds 9.10144 NEAR. Current architecture exceeds the cap; no mainnet signature or broadcast. Rhea config/asset/account reads succeeded; no lifecycle proof.
-- Publication: user authorizes GitHub `usamahabduljalil/YieldFund` and Vercel `usamahabduljalils-projects`. README rewritten, CI and `build:host` prepared. Hosted runtime pins old audited testnet manifest with signing disabled; original source documents and approval evidence preserved. Record actual URLs/commit only after publication.
-- Next: complete current contract regression and publish/verify the initial read-only release, then implement campaign registry UI, creation reviews and verification DAO proposals. Mainnet wallet precision/network support, real Rhea adapter, Trezu lifecycle and recovery gaps remain required work. A funded mainnet account and revised deployable budget/design are external prerequisites to spending.
+- Publication: public repository https://github.com/usamahabduljalil/YieldFund and live https://yieldfund-eosin.vercel.app/ on the authorized accounts. Current pre-increment deployment c282f40 is READY; both CI jobs passed. Hosted runtime pins the reviewed (not externally audited) testnet manifest with signing disabled. Vercel is manually deployed from exact SHAs, not auto-linked to Git. See milestone-14-public-release.md for updated release evidence.
+- Next: publish the verified campaign-directory increment, then complete signed factory creation/receipt tracking, campaign selection and verification DAO proposal UI. Wallet sessions now bind network/account/revision, with mainnet dispatch and cross-network rejection tests; public mainnet signing remains disabled. Real Rhea adapter, Trezu lifecycle, token precision across legacy screens and recovery gaps remain required. A funded mainnet account and revised deployable budget/design are external prerequisites to spending.
 
 ## Progress
 
@@ -87,7 +87,7 @@ No borrowing, leverage, swaps, bridges, Intents, rebalancing, transferable share
 | Interrupted-operation recovery                      | Partial, supported stages verified                        | Five-minute/version-bound balance-read restart and simulator completion proof; unknown payout/allocation and simulator-internal callback failure stay locked                                            |
 | Deployment tooling and actor accounts               | Complete for approved setup                               | Four public contracts deployed/initialized and eight accounts registered; 19 finalized receipts, 0.0411723816874521 NEAR fees, exact authority/balance reconciliation and public audit. See milestone 8 |
 | Acceptance AC01–AC12 and release rehearsal | On-chain rehearsal complete; browser acceptance partial | All 11 approved calls finalized; 800 backing/units, 30 donated, DAO payment 20, withdrawal 200. Exact channels and remaining checks in milestone-9-execution-notes.md |
-| Demo, public repository and submission              | Read-only walkthrough prepared; video/publication not done | docs/DEMO_WALKTHROUGH.md; user facts/authorization required at release                                                                                                                                                            |
+| Demo, public repository and submission              | Public repository and read-only hosting live; video/submission pending | docs/DEMO_WALKTHROUGH.md; user facts/authorization required at release                                                                                                                                                            |
 
 ## Decisions and unresolved inputs
 

@@ -2627,3 +2627,66 @@ details summary { cursor: pointer; padding: 14px 0; font-size: 13px; }
 .full-width { width: 100%; }
 @media(max-width:800px){ .chain-columns { grid-template-columns: 1fr; } .chain-panel-body { padding: 18px; } }
 @media(max-width:450px){ .chain-data > div { grid-template-columns: 1fr; gap: 8px; } .chain-data dd { text-align: left; } }
+.campaign-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 20px 0;
+  font-size: 12px;
+}
+.campaign-toolbar label,
+.campaign-form label {
+  display: grid;
+  gap: 8px;
+  font-size: 12px;
+}
+.campaign-toolbar select,
+.campaign-form input {
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--foreground);
+  font: inherit;
+}
+.campaign-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+  gap: 20px;
+}
+.campaign-directory-card {
+  padding: 24px;
+}
+.campaign-directory-card h2 {
+  margin: 24px 0 12px;
+}
+.campaign-directory-card p,
+.campaign-review p {
+  font-size: 12px;
+  line-height: 1.7;
+}
+.campaign-card-top {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.campaign-form {
+  display: grid;
+  gap: 18px;
+  max-width: 620px;
+}
+.campaign-form > button {
+  justify-self: start;
+}
+.campaign-review {
+  border-top: 1px solid var(--border);
+  margin-top: 28px;
+  padding-top: 24px;
+  max-width: 620px;
+}
+.campaign-review dd,
+.campaign-directory-card dd {
+  overflow-wrap: anywhere;
+}

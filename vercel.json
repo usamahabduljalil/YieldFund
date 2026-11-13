@@ -11,6 +11,10 @@
   ],
   "headers": [
     {
+      "source": "/registry.json",
+      "headers": [{ "key": "Cache-Control", "value": "no-store" }]
+    },
+    {
       "source": "/deployment.json",
       "headers": [{ "key": "Cache-Control", "value": "no-store" }]
     },

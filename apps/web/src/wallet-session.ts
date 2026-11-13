@@ -1,15 +1,18 @@
 import type { Call } from "../../../packages/near-client/src/chain";
 import { isWalletRejection } from "../../../packages/near-client/src/actions";
 
+export type WalletNetwork = "testnet" | "mainnet";
 export type WalletSessionToken = Readonly<{
   account: string;
   revision: number;
+  network: WalletNetwork;
 }>;
 
 /** Only used when the signing method has definitely not been invoked. */
 export class WalletNotSubmittedError extends Error {}
 
 export class WalletSession {
+  constructor(readonly network: WalletNetwork = "testnet") {}
   private account = "";
   private revision = 0;
 
@@ -20,11 +23,21 @@ export class WalletSession {
 
   capture(): WalletSessionToken {
     if (!this.account)
-      throw new WalletNotSubmittedError("Connect your testnet wallet first.");
-    return Object.freeze({ account: this.account, revision: this.revision });
+      throw new WalletNotSubmittedError(
+        `Connect your ${this.network} wallet first.`,
+      );
+    return Object.freeze({
+      account: this.account,
+      revision: this.revision,
+      network: this.network,
+    });
   }
 
   assert(token: WalletSessionToken) {
+    if (token.network !== this.network)
+      throw new WalletNotSubmittedError(
+        "Wallet network changed. Review again.",
+      );
     if (
       !token.account ||
       token.account !== this.account ||
@@ -35,12 +48,12 @@ export class WalletSession {
 }
 
 interface SigningWallet {
-  manifest: { features: { testnet?: boolean } };
+  manifest: { features: { testnet?: boolean; mainnet?: boolean } };
   getAccounts(params: {
-    network: "testnet";
+    network: WalletNetwork;
   }): Promise<Array<{ accountId: string }>>;
   signAndSendTransaction(params: {
-    network: "testnet";
+    network: WalletNetwork;
     signerId: string;
     receiverId: string;
     actions: Array<{
@@ -67,9 +80,9 @@ export async function sendWithSession(
     session.assert(token);
     wallet = await getWallet();
     session.assert(token);
-    if (!wallet.manifest.features.testnet)
-      throw new WalletNotSubmittedError("Choose a testnet wallet.");
-    const accounts = await wallet.getAccounts({ network: "testnet" });
+    if (!wallet.manifest.features[token.network])
+      throw new WalletNotSubmittedError(`Choose a ${token.network} wallet.`);
+    const accounts = await wallet.getAccounts({ network: token.network });
     session.assert(token);
     if (!accounts.some((a) => a.accountId === token.account)) {
       selectAccount(accounts[0]?.accountId ?? "");
@@ -85,7 +98,7 @@ export async function sendWithSession(
   // Errors after this boundary must retain their original, possibly unknown outcome.
   session.assert(token);
   return wallet.signAndSendTransaction({
-    network: "testnet",
+    network: token.network,
     signerId: token.account,
     receiverId: call.receiverId,
     actions: [

@@ -39,6 +39,53 @@ function fixture() {
 }
 
 describe("wallet session signing boundary", () => {
+  it("dispatches mainnet only through a mainnet-bound session and wallet", async () => {
+    const session = new WalletSession("mainnet");
+    session.select("alice.near");
+    const wallet = {
+      manifest: { features: { mainnet: true } },
+      getAccounts: vi.fn(async () => [{ accountId: "alice.near" }]),
+      signAndSendTransaction: vi.fn(async () => ({
+        transaction: { hash: "hash" },
+      })),
+    };
+    const mainnetCall = { ...call, receiverId: "vault.near" };
+    await sendWithSession(
+      session,
+      session.capture(),
+      mainnetCall,
+      async () => wallet,
+      () => {},
+    );
+    expect(wallet.getAccounts).toHaveBeenCalledWith({ network: "mainnet" });
+    expect(wallet.signAndSendTransaction).toHaveBeenCalledWith(
+      expect.objectContaining({
+        network: "mainnet",
+        signerId: "alice.near",
+        receiverId: "vault.near",
+      }),
+    );
+  });
+  it("rejects a review from another network even when account and revision match", async () => {
+    const testnet = new WalletSession("testnet"),
+      mainnet = new WalletSession("mainnet");
+    testnet.select("ab".repeat(32));
+    mainnet.select("ab".repeat(32));
+    const getWallet = vi.fn();
+    await expect(
+      sendWithSession(mainnet, testnet.capture(), call, getWallet, () => {}),
+    ).rejects.toThrow("network changed");
+    expect(getWallet).not.toHaveBeenCalled();
+  });
+  it("refuses a mainnet handoff through a wallet supporting only testnet", async () => {
+    const session = new WalletSession("mainnet");
+    session.select("alice.near");
+    const f = fixture();
+    await expect(
+      sendWithSession(session, session.capture(), call, f.getWallet, () => {}),
+    ).rejects.toThrow("Choose a mainnet wallet");
+    expect(f.wallet.signAndSendTransaction).not.toHaveBeenCalled();
+  });
   it("requires a connected account to start a review", () => {
     expect(() => new WalletSession().capture()).toThrow(
       "Connect your testnet wallet",

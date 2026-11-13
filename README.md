@@ -19,9 +19,9 @@ The approved public testnet lifecycle completed eleven transactions: **30 tUSD d
 | Funded profit, settlement, loss and delay | Actual test-token simulator; profit lifecycle on testnet, loss/delay in Sandbox                                                                    |
 | Sputnik DAO payments                      | Pinned upstream contract; three council members, two approvals; testnet payment completed                                                          |
 | Wallet and receipt tracking               | Account-bound reviews, exact call/receipt checks and persistent recovery; CLI handoffs exercised; live rejection/switch acceptance remains partial |
-| Permissionless campaigns                  | Factory and real Sandbox two-campaign/DAO lifecycle verified. Browser creation/discovery and public factory deployment remain pending                       |
+| Permissionless campaigns                  | Factory and real Sandbox two-campaign/DAO lifecycle verified. Network-scoped discovery and unsigned draft reviews implemented; signed creation/selection and public factory deployment remain pending                       |
 | DAO verification                          | DAO-only expiring attestations, immutable metadata binding and revocation. A badge is not a safety or return guarantee                             |
-| Mainnet                                   | Read-only protocol/Rhea discovery. Wallet transactions, adapter deployment and lifecycle verification pending                                      |
+| Mainnet                                   | Read-only protocol/Rhea discovery and network-bound wallet adapter tests. Public mainnet transactions, adapter deployment and lifecycle verification pending                                      |
 | Rhea real yield                           | Mainnet state read successfully; supply/redemption adapter and funded lifecycle proof incomplete                                                   |
 | Trezu                                     | Source/interoperability investigation; actual discovery/proposal/payment rehearsal incomplete                                                      |
 | Callback recovery                         | Balance-read restart and proven simulator redemption supported. Unknown outgoing transfers/allocation and some callback failures remain locked     |
@@ -94,7 +94,7 @@ npm run test:sites
 npm run build:host
 ```
 
-Current TypeScript suite: **122 passing, one optional local-Sandbox skip**. Production build includes type checking; four Sites packaging checks pass. Check remote CI separately.
+Current TypeScript suite: **146 passing, one optional local-Sandbox skip**. Production build includes type checking; four Sites packaging checks pass. GitHub run [43396632842](https://github.com/usamahabduljalil/YieldFund/actions/runs/43396632842) passed both web and contract jobs for `c282f40`; later revisions require their own checks. Contract regression: 32 units and 14 Sandbox scenarios passed, one fixture generator ignored.
 
 For contracts, use Linux/Ubuntu WSL with Rust **1.95.0**, `wasm32-unknown-unknown`, a C/C++ toolchain, CMake and OpenSSL build dependencies:
 
@@ -133,12 +133,16 @@ Existing **testnet only**:
 
 `vercel.json` configures install `npm ci`, build `npm run build:host`, output `apps/web/dist/client`. Hosting preparation writes only the read-only public testnet manifest into build output; local preview remains unchanged. SPA rewrites cover `/app/*` and `/risks`. Missing assets/API paths do not become the app shell. No private keys, backend signer or secret environment variables are needed.
 
+The Vercel project is currently deployed manually from exact GitHub commit SHAs through the authenticated API; automatic Git-triggered deployment is not connected. See [release evidence](docs/evidence/milestone-14-public-release.md).
+
+`apps/web/public/registry.json` contains an empty `deployments` list until a factory and verification DAO have been deployed and their configuration/code hashes reviewed. `/app/campaigns` supports paginated, network-scoped discovery; `/app/campaigns/new` offers metadata drafts. Draft downloads are explicitly unsigned and do not create campaigns. Browsing mainnet does not switch the existing testnet wallet.
+
 `.github/workflows/verify.yml` runs web and contract checks. Publishing the frontend is separate from deploying contracts or enabling transactions. Verify the exact commit, logs, deep routes, manifest and wallet behavior before describing a release as ready.
 
 ## Remaining integration work
 
-1. Complete campaign discovery/creation, campaign selection and DAO verification proposal UI; exercise wallet handoffs with a new factory deployment.
-2. Add network-bound mainnet wallet sessions and token metadata/precision across every review/display.
+1. Finish signed campaign creation, campaign selection and DAO verification proposal UI; exercise wallet handoffs with a reviewed factory deployment. Discovery and downloadable unsigned drafts are implemented.
+2. Integrate the network-bound wallet adapter into a verified mainnet deployment and apply token metadata/precision across every review/display. Adapter unit tests alone do not prove mainnet wallet acceptance.
 3. Implement Rhea supply-only handling, liquidity delays and redemption evidence. An execute response alone cannot establish completed FT delivery. Verify actual supply, realized redemption and eligible donation with finalized receipts.
 4. Verify the same beneficiary DAO in Trezu: discovery, policy/token display, proposal, threshold execution and recipient balance.
 5. Resolve partial factory creation and unknown outgoing-operation recovery before unrestricted deposits.
