@@ -27,3 +27,11 @@
 ## Remaining work
 
 Public factory deployment, signed creation and receipt tracking, selected-campaign runtime, DAO verification proposal/vote UI, partial-creation repair/refunds, mainnet token precision throughout legacy screens, funded Rhea supply/redemption proof, Trezu discovery/payment rehearsal and unresolved callback recovery. The supplied mainnet account was absent at discovery; the current code-storage cost exceeds the 5 NEAR cap. No mainnet transaction was signed or broadcast. Historical testnet approvals were not replayed.
+
+## Campaign release result
+
+- Application commit `b8c246d4407cdacd4131d941bc561699a73b8651` pushed to the public repository and deployed to the production alias. Vercel deployment `dpl_88bsPf5Cbz8zBZzzQnazKv9uP3BZ` is READY, immutable URL `yieldfund-cz7nt8nel-usamahabduljalils-projects.vercel.app`.
+- [CI run 43469690634](https://github.com/usamahabduljalil/YieldFund/actions/runs/43469690634): web job passed (146 tests, one skip, hosted build and four packaging checks). Contract job was still running at this evidence checkpoint; the unchanged contracts previously passed run 43396632842.
+- Public campaign directory and creation deep links return 200. Both JSON configuration files return `Cache-Control: no-store`; testnet signing remains disabled and the registry list remains empty. Missing asset/API paths still return 404.
+- Actual hosted campaign UI verified without a wallet. Local 390 × 844 viewport also renders the directory without clipped controls; temporary viewport override reset afterward.
+- [Hosted screenshot](milestone-14-hosted-campaigns.png), showing the application at testnet block 277538862. Documentation-only commits after this application revision do not require rebuilding the unchanged site.
