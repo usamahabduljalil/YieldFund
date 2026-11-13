@@ -2,7 +2,13 @@
 
 This walkthrough shows the completed public testnet rehearsal. It does not repeat deposits, votes or withdrawals. All figures use a valueless example token, tUSD, and a funded deterministic strategy simulator.
 
-## Start
+## Start with the hosted demo
+
+Open https://yieldfund-eosin.vercel.app/ and use **Launch app**. No setup or wallet is needed to inspect public state. Use **Campaigns** to open Community Garden or Builder Commons after the campaign release is published. A DAO-verified badge means a metadata attestation, not a return or safety guarantee. The campaign details must show the selected campaign's vault; switch back to The Commons for the historical funded lifecycle below.
+
+The final screenshot bundle and release checks are indexed in `docs/evidence/milestone-15-campaign-release.md`. Screenshots show actual rendered state; they are not a recording of the signing process. For a video, record the sequence below with your screen recorder and keep network labels and limitations visible.
+
+## Local alternative
 
 From the repository root:
 
@@ -11,7 +17,7 @@ npm ci
 node --experimental-strip-types scripts/serve-testnet.mjs --read-only-rehearsal
 ```
 
-Open `http://127.0.0.1:4176/`. The normal production build and default preview are unchanged. This launcher serves the reviewed testnet configuration with signing disabled. Allow contract and historical receipt checks to finish; timestamps identify the displayed snapshot.
+Open `http://127.0.0.1:4176/`. This launcher serves the reviewed testnet configuration with signing disabled. Allow contract and historical receipt checks to finish; timestamps identify the displayed snapshot. The hosted build also uses read-only testnet configuration; default `npm run dev` remains a separate fictional preview.
 
 ## Suggested recording sequence
 
@@ -32,4 +38,15 @@ Suggested narration: “YieldFund directs eligible realized surplus to a fixed c
 - No verified Rhea or Trezu integration. Council keys share local custody. Contract full-access keys are retained. Unknown outgoing callback recovery remains unresolved; this is not ready for public deposits or production money.
 - [Wallet acceptance matrix](evidence/wallet-rehearsal.md) separates controlled tests from actual wallet observations.
 
-This file is a recording plan, not a completed video, observed user study, publication or submission. Record the final demo after the remaining acceptance checks. Public repository, hosting, license, team identity, submission consent and publishing remain separate decisions; no personal facts or public URLs are invented here.
+## Three-minute narration outline
+
+| Time | Screen and point |
+| --- | --- |
+| 0:00–0:25 | Landing → Launch app. Communities fund shared work through eligible yield donations. |
+| 0:25–1:00 | Campaigns → Garden → Overview. Separate keyless vaults; DAO verification is an attestation. |
+| 1:00–1:40 | Return to Commons. Show 800 backing and 30 donated; explain the funded test-token simulator. |
+| 1:40–2:15 | Treasury → proposal #0. Two approvals, 20 paid, 10 remaining. |
+| 2:15–2:40 | Activity → withdrawal operation #4. Show the completed 200 payout and receipt evidence. |
+| 2:40–3:00 | Risks and repository. Mainnet/Rhea/Trezu deferred; callback limits disclosed. |
+
+This is a recording plan, not a completed video. Public repository and hosting exist; original code uses the selected all-rights-reserved license. The user publishes the demo post and completes final submission manually. See [manual submission kit](MANUAL_SUBMISSION.md).

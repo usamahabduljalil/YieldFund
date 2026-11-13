@@ -1,3 +1,18 @@
 {
-  "deployments": []
+  "deployments": [
+    {
+      "network": "testnet",
+      "chainId": "testnet",
+      "rpcUrl": "https://test.rpc.fastnear.com",
+      "factoryId": "yf-factory-261113.testnet",
+      "factoryCodeHash": "ffb6464f6ed462c183e8af7572ea24ff4bfbe65fc92086f786409b30833baa21",
+      "verifierId": "yf-verify-261113.testnet",
+      "verifierCodeHash": "2ed1d58bb2837f29b7629f833fea16bf661b4bea31fd4cceede4dc1f723d6cea",
+      "tokenId": "token.yf-operator-261105.testnet",
+      "tokenDecimals": 6,
+      "vaultCodeHash": "1956c598503bcf2b0730180eb64b87bb9f048250ae73dec07f0694d9be2ff3b1",
+      "strategyCodeHash": "3ccbe4e4389f412bc31c5869c42ba74710420b288c40c7c57414dd44cbd81348",
+      "transactionsEnabled": false
+    }
+  ]
 }

@@ -431,6 +431,21 @@ it("reserves native account storage and gas before opening the wallet", async ()
   await expect(
     client.checkFunding(snapshot(), samples[0].call),
   ).rejects.toThrow("Insufficient available NEAR");
+  // Actual Builders admission rejection: enough for 2x current price, too
+  // little for the protocol's pessimistic prepaid reserve.
+  const creation = {
+    ...samples[0].call,
+    gas: "300000000000000",
+    deposit: "7235220000000000000000000",
+  };
+  amount = "7367383505767004599999993";
+  await expect(client.checkFunding(snapshot(), creation)).rejects.toThrow(
+    "Insufficient available NEAR",
+  );
+  amount = "7567383505767004599999993";
+  await expect(
+    client.checkFunding(snapshot(), creation),
+  ).resolves.toBeUndefined();
 });
 it.runIf(process.env.YIELDFUND_LIVE_SANDBOX === "1")(
   "reads and verifies the running Sandbox through the same browser adapter",

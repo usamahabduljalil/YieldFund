@@ -1,0 +1,157 @@
+{
+  "step": "deploy-verifier",
+  "block": {
+    "approvals": [
+      "ed25519:1S5Cj3mZZmphdVzGG12Lu8HaGf3GsBQbzdq9iNEioUk6dscsDPxsf4RNtJtuw7Yq19v92Wav3a4zr8cJGFpGspF",
+      "ed25519:5v1PcHMEav9FesafgN4jEoEjPuDP6RVDjg7FNwHTEA1q2k7wEnRGCivJ9R9yqCm4mNquU42uXyrpcVVHaRQuvCAD",
+      "ed25519:YVeYycgoGjavBwrpB12YVDwjwzuCr6PAmpZrtrPV8xWQAdkvFcLTZe8puz5eisDPabrAG4fXfJWPxQoqujk8YjZ",
+      "ed25519:PNbU9GT7sNJzw3cN7wiShFWomViy7diVg14trP9bjCWTd7Lh7pSksqaiaWw7QJgvN376CCAQh3agWFDAbFnXdWX",
+      "ed25519:2pwdziJfNNGAiCmyf5a7UiNeiKRCY3vFvZAozDwFQ8nG4foW2ztKwDDwQFacsxNhenWrdbG1MZWPnfPTz7Xjv68P",
+      "ed25519:Gkis96AbDfXH9c4b9gJiPmisqKUCgg6NfVV8xocHf9kVrUTzhSHegN2MddHoZWqzwkeL19oKW9bAJjAV151a3mW",
+      "ed25519:N3W2d4JbRTD45cFCJtTVbxN5HWP8n7yLk5YH4C7bgXj3jVQtaFPThXRCNzPH1wxNZdEojUd8ER3hwBwyhdX1hTW",
+      "ed25519:4NCCAd2qXCc936XawJ1nfb3sS56u5o17u2ogp2Rh2KkaeKQYRNSS9QpfX9NPvuhBG3MidemYYK2qK3UyQJkszmUP",
+      "ed25519:53iVUYd1LFeDhsii7awG6u2o3MbyreoTDgqK4zCFoSAa3XP1H5zQDTFa7n9Z1EGwqmcmGumctXyUiZgSSu4T3ruK",
+      null,
+      "ed25519:29w3MghTq6oVtt5YoBQtkkxYntSuJqB5dssNVHJ116M6WVcXjNeoKirm26ZuBy1TsviXFy12nxzBmrEUsqdHDRhv",
+      "ed25519:yfYVkP5Bo328hPRFnL9iNj6ERUn9uWgXm8hf9pSUE9RNvxkrDFhiJk2zFTd1hciDXF9PZAGfotXbu7vheqaqcUm",
+      "ed25519:2Mv6YXFFmgKWaoTi7ThqigCrDd424qg77YAiViHKBw2hJRpHBb49yg7D9adTQWGaouM3FiQatMEDfZ8B7kBiURNX",
+      "ed25519:3WHAVVZwySK6gvaxZrEfcBMEHsYGjhMtEp3LtSZAZZHxeaYd4fWLqBVo37u1EnrjjineTuTyR3Yr1vSAwHRWt2YH",
+      "ed25519:5KH2cy8KhQYdAxrcBkYdte1ir6ZyzyhYyUqk2vdfkWJB9voDQMfQnSNcJbva75DZzCfWiGwsPcD778FhvpDZf5pU",
+      "ed25519:4Mui5QFmFrqs96invGuEtRxDfXnSkiYRfQojBHWBrkZTfiNuxZRKY5AbB2u45nVVXoRgkPSZb62P7sQqwXSJmycb",
+      "ed25519:3pnv7vZzTS2T87ioggQqBfHaNYn8yqCzs9Y8hRJV7oDg7nB29spPgSALhMJ9HK77BLYbu7USfqfi8Bya9uyDxniB",
+      "ed25519:4P7FnVu3FCZhLNNEa5jvw7QhrUrwz1cRR26J3Hvn5kUqJzaxpzzG1SQTkfaSwdveLCRauc2KsX9xo34z7p8C17Bc",
+      "ed25519:4iDycRidFNMTmPnzdcuXbBcPHJKWLfdV9ro7qiMdz9nEMorCTbVbc7S3eG12uAAbrenKcmoJjt3BpdGJA6B4zf86",
+      "ed25519:2RBsp7QZfzKRHZ8dKux1nUhzMF6fofse6vxnE4MDxxZYPtVd4B1o1sREpNJV3LaD9bP8HApT2hz6DtJjLMXinkUE"
+    ],
+    "block_body_hash": "6ULZBwkVSSopYugvQhHbFHRXm8M1k3sk4wmmTEkfWfAU",
+    "block_merkle_root": "6QyKojrYTFNdKmqFk1o6PqJTAy7HPyP4HVcgtjbjh73U",
+    "block_ordinal": 229561719,
+    "challenges_result": [],
+    "challenges_root": "11111111111111111111111111111111",
+    "chunk_endorsements": [
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        15
+      ],
+      [
+        255,
+        127
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        15
+      ],
+      [
+        255,
+        63
+      ],
+      [
+        255,
+        255,
+        3
+      ],
+      [
+        255,
+        63
+      ],
+      [
+        255,
+        255,
+        1
+      ],
+      [
+        255,
+        255,
+        7
+      ]
+    ],
+    "chunk_headers_root": "7aRxzoe9B9QyY9xDRP9XcNT2ir7SPuq3K8vj5P3C8H1a",
+    "chunk_mask": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "chunk_receipts_root": "Eo3jCEAJiWwtobcWm2D9k488WiAZxHsGUdDF8bnY4XMz",
+    "chunk_tx_root": "CrzSUgJrMKxHWvfjVFCnyvTf82VHETcwgNwXkXVCic2J",
+    "chunks_included": 10,
+    "epoch_id": "8BrCSwxU8snc1rLumc7At8HY9r7Yap1Dg1QFcojv859e",
+    "epoch_sync_data_hash": null,
+    "gas_price": "100000000",
+    "hash": "88U5zwEQZXdF8Wf4LiUyQmmM22ftc84A5fmawm5kiSot",
+    "height": 277569619,
+    "last_ds_final_block": "6JUKvqJH1YjmJ9Ssz7mKnmXDvUgw1VB1gJJrttF67nj2",
+    "last_final_block": "FvSRnMLUPiTRZbQvfcR5PgNDn1uZq9VSFWxmo1FyKgCU",
+    "latest_protocol_version": 88,
+    "next_bp_hash": "7uwi8GR1ConHht9ke5ZEF4rF4H576AHeXG3reQP2vtMB",
+    "next_epoch_id": "HfZaZq5Jmabu5aWgdaxRkCXiR9YcQXNVaTthHwjp55RC",
+    "outcome_root": "HPkUG4AQ39FM5svMoZCDEGnEe8o3Lb75wCt2yD7wKACB",
+    "prev_hash": "6JUKvqJH1YjmJ9Ssz7mKnmXDvUgw1VB1gJJrttF67nj2",
+    "prev_height": 277569618,
+    "prev_state_root": "356xRk1soz7U32vLjZpnTYGrtR98UFQfpBXRjH2K1E9V",
+    "random_value": "6XUhTkXNSQwhgTGyrWZRJEfjm4sEHDLyP9bm6A556MFL",
+    "rent_paid": "0",
+    "shard_split": null,
+    "signature": "ed25519:4gwDXC1G8e1Ke6dJRdqyTBEp4QQhWx1LXyMkri9US9FYymR5R9Vc6osLjJu3FiB6wbA5frYKGxjWgoyBaB9Hg9Hs",
+    "timestamp": 1794607839835459000,
+    "timestamp_nanosec": "1794607839835459169",
+    "total_supply": "2680245429805947431076225985990245",
+    "validator_proposals": [],
+    "validator_reward": "0"
+  },
+  "policy": {
+    "roles": [
+      {
+        "name": "council",
+        "kind": {
+          "Group": [
+            "yf-council1-261105.testnet",
+            "yf-council2-261105.testnet",
+            "yf-council3-261105.testnet"
+          ]
+        },
+        "permissions": [
+          "call:VoteReject",
+          "call:AddProposal",
+          "call:Finalize",
+          "call:VoteApprove"
+        ],
+        "vote_policy": {}
+      }
+    ],
+    "default_vote_policy": {
+      "weight_kind": "RoleWeight",
+      "quorum": "2",
+      "threshold": "2"
+    },
+    "proposal_bond": "100000000000000000000000",
+    "proposal_period": "604800000000000",
+    "bounty_bond": "0",
+    "bounty_forgiveness_period": "86400000000000"
+  },
+  "verifier": {
+    "amount": "9996185548546439200000000",
+    "block_hash": "88U5zwEQZXdF8Wf4LiUyQmmM22ftc84A5fmawm5kiSot",
+    "block_height": 277569619,
+    "code_hash": "49mLHWeLgCbfJbYYH5SrNo35G2EGS57W1W5g3eXvzZhb",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 496336
+  },
+  "campaigns": []
+}

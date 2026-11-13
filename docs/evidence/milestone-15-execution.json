@@ -1,0 +1,69 @@
+{
+  "reviewSha256": "4ae0e4e31e1bd86a94bd1e2a6f0283e67eaa0e96afd25f2cf0151a40fb84c7ad",
+  "network": "testnet",
+  "transactions": [
+    {
+      "id": "deploy-verifier",
+      "hash": "CPVUDCzmusH86K4gysW9JaJamHvaWkiY8mLFBdqxXBE4",
+      "tokensBurnt": "3814451453560800000000",
+      "receiptCount": 2
+    },
+    {
+      "id": "deploy-factory",
+      "hash": "BhvHK6efvzLwEHpH6pDnNPMJuHkENhpfxbW1QXMciqLe",
+      "tokensBurnt": "6773509065250600000000",
+      "receiptCount": 2
+    },
+    {
+      "id": "fund-second-creator",
+      "hash": "5Cm625T3uFdDNCeBnpWxFEzEMsHmAnbpJE1LiFmNx3ws",
+      "tokensBurnt": "44636512500000000000",
+      "receiptCount": 2
+    },
+    {
+      "id": "create-garden",
+      "hash": "2bjV4Uaz3oSuJGoES4dJ15T1fmCWKz84GFEwb4kCmvEP",
+      "tokensBurnt": "23233029220559200000000",
+      "receiptCount": 18
+    },
+    {
+      "id": "create-builders",
+      "hash": "ASCxHHN2zmYiz8yMwnBY8mjdeF5NarQSurQc2Mys2bct",
+      "tokensBurnt": "23236893889155900000000",
+      "receiptCount": 18
+    },
+    {
+      "id": "propose-verification",
+      "hash": "HhPunpCz5F3ZE6V2TfBJJNU7S4xmhn6BCEtTwxyyZ7aB",
+      "tokensBurnt": "234125635955400000000",
+      "receiptCount": 2
+    },
+    {
+      "id": "vote-1",
+      "hash": "3hRdGzKUnKX8QZe3yjrwANm1Hxd7Kd7xDFAyWxAYkL8p",
+      "tokensBurnt": "256643749878200000000",
+      "receiptCount": 2
+    },
+    {
+      "id": "vote-2",
+      "hash": "64JRHpS6VeVezeZPx6QLSZBYWHznHUD2ZBtE76ZQerWQ",
+      "tokensBurnt": "832920071664500000000",
+      "receiptCount": 8
+    },
+    {
+      "id": "fund-correction",
+      "hash": "8fqy8GXrMhBtca9Atzch7fNmehXFGdZBt1SqEzpNHht4",
+      "tokensBurnt": "44636512500000000000",
+      "receiptCount": 2
+    }
+  ],
+  "totalTokensBurnt": "58470846111024600000000",
+  "gasCap": "500000000000000000000000",
+  "finalBlock": 277570993,
+  "verification": {
+    "garden": true,
+    "builders": false
+  },
+  "correction": "Approved 0.2 testnet NEAR top-up; same rejected Builders hash finalized once",
+  "executionChannel": "CLI keychain; independently decoded signed bytes; finalized nested receipts"
+}

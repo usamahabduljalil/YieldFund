@@ -1,0 +1,126 @@
+{
+  "id": "fund-second-creator",
+  "hash": "5Cm625T3uFdDNCeBnpWxFEzEMsHmAnbpJE1LiFmNx3ws",
+  "signerId": "yf-verify-261113.testnet",
+  "receiverId": "yf-operator-261105.testnet",
+  "publicKey": "ed25519:H7UDkSHXzxmsNBUvH33dpXyGK5AWot9JDnbah73tdDGF",
+  "nonce": "277566992000002",
+  "blockHash": "Fi1JVTnvvvW454MeFDZ4tx3cjAYwPwPcAxkFXhGiptzW",
+  "actions": [
+    {
+      "type": "Transfer",
+      "deposit": "4500000000000000000000000"
+    }
+  ],
+  "reviewSha256": "4ae0e4e31e1bd86a94bd1e2a6f0283e67eaa0e96afd25f2cf0151a40fb84c7ad",
+  "savedAt": "2026-11-13T22:11:50.111Z",
+  "verification": "finalized-success",
+  "tokensBurnt": "44636512500000000000",
+  "result": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "9ivQsGWypC5dPoJEu7xBjSnyUxnyw8xnnz2skKx7wyq8",
+        "id": "2KD5XYTZ9aWmFuvCBmYiyqV2EKnPoRboCBXerzZBZicY",
+        "outcome": {
+          "executor_id": "yf-operator-261105.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "E3WQwhGWK2aVPUUnw8ptM7RkFhpq97Yb1PSBxjp9y7mt"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "22318256250000000000"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "4VMtUDjYsifHiB8EK2YhHiwJDyeK2WQwZGF1FcvU4Gkf"
+          },
+          {
+            "direction": "Right",
+            "hash": "9X23KYsVgr5gid9ozWivSXPgdu62FfyggWwkBnnbvWES"
+          }
+        ]
+      },
+      {
+        "block_hash": "FLQLsgFWbifLneUUTTD2nxyrPMGqLhpjr1nAu8Y4GEbR",
+        "id": "E3WQwhGWK2aVPUUnw8ptM7RkFhpq97Yb1PSBxjp9y7mt",
+        "outcome": {
+          "executor_id": "yf-verify-261113.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              {
+                "local": "49mLHWeLgCbfJbYYH5SrNo35G2EGS57W1W5g3eXvzZhb"
+              }
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": []
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        {
+          "Transfer": {
+            "deposit": "4500000000000000000000000"
+          }
+        }
+      ],
+      "hash": "5Cm625T3uFdDNCeBnpWxFEzEMsHmAnbpJE1LiFmNx3ws",
+      "nonce": 277566992000002,
+      "priority_fee": 0,
+      "public_key": "ed25519:H7UDkSHXzxmsNBUvH33dpXyGK5AWot9JDnbah73tdDGF",
+      "receiver_id": "yf-operator-261105.testnet",
+      "signature": "ed25519:4bRFfDQX9HLWPXfqgk1NSQovzHkAVBNDcjWouxtEqE51BMrKyDAP2kKxXhtb5UDJ6NHPmCVzz6cAYqgGdrEukw1T",
+      "signer_id": "yf-verify-261113.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "5JwTbcjAHCiyCvt4cj2J8USmQnNA6jdLnLmf1FWpJpUw",
+      "id": "5Cm625T3uFdDNCeBnpWxFEzEMsHmAnbpJE1LiFmNx3ws",
+      "outcome": {
+        "executor_id": "yf-verify-261113.testnet",
+        "gas_burnt": 223182562500,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "2KD5XYTZ9aWmFuvCBmYiyqV2EKnPoRboCBXerzZBZicY"
+        ],
+        "status": {
+          "SuccessReceiptId": "2KD5XYTZ9aWmFuvCBmYiyqV2EKnPoRboCBXerzZBZicY"
+        },
+        "tokens_burnt": "22318256250000000000"
+      },
+      "proof": [
+        {
+          "direction": "Right",
+          "hash": "AN9rnPsc53zqckrANAdjYRHCXEPF8YHgcke8ni6n59Pj"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "step": "fund-second-creator",
+  "block": {
+    "approvals": [
+      "ed25519:318PEpEngkHHZcZor2422hy3uS3V8DySSCV59ULsZEqD3GqcCH6TSQMRdSgP94SmwSKJnwY1rdX3ty8qFD9gH48M",
+      "ed25519:2muh1SjxQscsZWYBvisPWjwp3RuYyCHuhe4np9SgWnaomc3XrhRj7HHFLqusjXnd58zL6FjDH83VuUT2a4tpckoE",
+      "ed25519:3XFeJxjLXap117nVojRmnxc2zkVarvEmM99kvkg36nJaxUx6hiibErDEA95cyouGVpKdZsPNQT1gNafxKBhP8Tid",
+      "ed25519:GiHojJwZFLcbFnHKAqE8wBJvWELN5ao3P1oBbVEZaQCgShqme63AvAx6noxP5euWHtGiG4f4PdKZJDxijafh6Tt",
+      null,
+      "ed25519:2pbjmmaxe6gbbwcVprsf9Ci6uBvtb9qeCgHF6RBvwyiULe4sbDMXcHzCED7irHTEVLhVnkRMLhNQhWzG5Cgrm8TU",
+      "ed25519:63NsP1BfXFa1dbQxSR8V4Y2GtZK5MgFUGcYwMbxA2GeB6deZ4t1G4TxhGDwb41gt7ecq7ZtkEvGoL1uxu6ppXno4",
+      "ed25519:4F2TjRYnhMDG1hvL3W11MF4mBpobhzUWo9fyyutAvKRSMZ1GEFBnVi6AXe52cb5n7bdzGdmo6sJmSb9nsvZuaXmx",
+      null,
+      "ed25519:3UwYPwxe7K1wM2iLAams3QwjLGgTSBs3oBhyupdDLbi6F8kvFbrbQa8cjYPNpY22A4CQ3AepZqCwYkc9h3d8CSZY",
+      "ed25519:2M8cv3Wt45YY2tMjnQSs65mrFvjoz8fjaq6qisn2frSeimF5MNvdjWKs2mgaJrKrP7ETEMND3mssfaRSdbTPFDv2",
+      "ed25519:4rAevKAfE8Mt4AgqPoPUfNAVWk4yYHX4zc3bSy5EHoj7yQaCZovKtfTPz5LhXpCqmPqnwnAzZ81ha6pJri37hCNa",
+      "ed25519:5Nmm7SfzP75yTJ3fLm9VoowLYL6BBtZ1kwAZGUJXUqvvKovy4rmpFw9jCm1c3cDTFgrXzAWW3zzM9EkmUHywFRRm",
+      "ed25519:2QYAYHWr55qzwQzMNt1ZmboPymxyn5R2qLAByFzbc5VFcSMS3CfKTrXt3ZSbRZdZYZFKQYVtzfcifBPezqn5NhKj",
+      "ed25519:3P7AKLPR1yk4NxNx2qBVnB597es6ivoctRzC7sR76LqK3eRnBe1ZKufWskSRSHWDdkwxy851VxE8cR8s97TLVkpB",
+      "ed25519:2hBnNRxSmeWVyP34rkaiF2kyJqKWhESGPBAHQkLiLZDkN4z69fbUCUrC9os11zqBgxbKPjqYwzJ1Bwb32eGjuug2",
+      "ed25519:2TjcTkhyjbUHMyPcSmZ4ZQyMyWFkFhVKn6GPRSjjFsdKphsbTr4SUNqg3EogAgr72HxFzP7eVUUqhf2kwn8SfMEj",
+      "ed25519:5LEBvJLVTCtp1xcVGWFhmTT1Lbjne4Tkav6tapT1njCrH4JMHanVbg5R9E4fdLUVDm56EJyLDj9HNcdDazVJundR",
+      null,
+      "ed25519:2thjvRhyYHL46TDgkvqPDwBF4FYqAU6uJiQtksHaM35CSFyUnzW21nvxX6s4rap9QArsDkSCiwYt4aYWHFD3CvWm"
+    ],
+    "block_body_hash": "3Nv3DBdk7qiTnYoaLrgkSAiayrNzU2WSb9kgkxJ2d1cu",
+    "block_merkle_root": "BS14k2dXXr2RVsQWpD9M8shn7iUVz46Z7GjWwWUqWJPR",
+    "block_ordinal": 229561864,
+    "challenges_result": [],
+    "challenges_root": "11111111111111111111111111111111",
+    "chunk_endorsements": [
+      [
+        255,
+        255,
+        3
+      ],
+      [
+        255,
+        255,
+        1
+      ],
+      [
+        255,
+        63
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        127
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        127
+      ],
+      [
+        255,
+        255,
+        7
+      ],
+      [
+        255,
+        255,
+        31
+      ]
+    ],
+    "chunk_headers_root": "Bxew1pV8XwF594pQrrWUFXUDR9xT3aaccF5ixzc7UTyZ",
+    "chunk_mask": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "chunk_receipts_root": "8QfrcbLksnYt5JzkZoAMz2zSK9K9fRt9HWKCzXWke69D",
+    "chunk_tx_root": "3rmiKf5MJu3PWsoF6ry1NwGPJqkKLv5gzQuV76LmVSs8",
+    "chunks_included": 10,
+    "epoch_id": "8BrCSwxU8snc1rLumc7At8HY9r7Yap1Dg1QFcojv859e",
+    "epoch_sync_data_hash": null,
+    "gas_price": "100000000",
+    "hash": "GgyFuSpVzEBcTGAhX8ZP4XsuYjHyrzn1pvUbtwp3KpNo",
+    "height": 277569764,
+    "last_ds_final_block": "CeW5AQvnGBpJZ4ZvsEjCx7DdTYWwtd6xxn7q9gKZQf27",
+    "last_final_block": "B1UToMM5a9vhm4gkiR6GqZg2jfbG2hjRERQQnZGnSng1",
+    "latest_protocol_version": 88,
+    "next_bp_hash": "7uwi8GR1ConHht9ke5ZEF4rF4H576AHeXG3reQP2vtMB",
+    "next_epoch_id": "HfZaZq5Jmabu5aWgdaxRkCXiR9YcQXNVaTthHwjp55RC",
+    "outcome_root": "6w8hNhTeKWk5oVAkk8wpRjJpAhFo2szmq38aog2Xi3JU",
+    "prev_hash": "CeW5AQvnGBpJZ4ZvsEjCx7DdTYWwtd6xxn7q9gKZQf27",
+    "prev_height": 277569763,
+    "prev_state_root": "EzRaaAC5TCpSYdPMor96zRX6aD3ciNGfWWVpog33StKz",
+    "random_value": "5VGTXj5syffUg7TjtM18gHzEfMArbbKNfW9172ConRjH",
+    "rent_paid": "0",
+    "shard_split": null,
+    "signature": "ed25519:2HGjgBUSW1zamd1XzUGZ9dQbk2ZCdXyxADWurKhXvXmNgqBzZhRuMoVQNXi3XxFQnLn6Qq4TF8WdYbiuWzVTpJLV",
+    "timestamp": 1794607921448207400,
+    "timestamp_nanosec": "1794607921448207324",
+    "total_supply": "2680245429347023962902682785990245",
+    "validator_proposals": [],
+    "validator_reward": "0"
+  },
+  "policy": {
+    "roles": [
+      {
+        "name": "council",
+        "kind": {
+          "Group": [
+            "yf-council1-261105.testnet",
+            "yf-council2-261105.testnet",
+            "yf-council3-261105.testnet"
+          ]
+        },
+        "permissions": [
+          "call:VoteReject",
+          "call:AddProposal",
+          "call:Finalize",
+          "call:VoteApprove"
+        ],
+        "vote_policy": {}
+      }
+    ],
+    "default_vote_policy": {
+      "weight_kind": "RoleWeight",
+      "quorum": "2",
+      "threshold": "2"
+    },
+    "proposal_bond": "100000000000000000000000",
+    "proposal_period": "604800000000000",
+    "bounty_bond": "0",
+    "bounty_forgiveness_period": "86400000000000"
+  },
+  "verifier": {
+    "amount": "5496140912033939200000000",
+    "block_hash": "GgyFuSpVzEBcTGAhX8ZP4XsuYjHyrzn1pvUbtwp3KpNo",
+    "block_height": 277569764,
+    "code_hash": "49mLHWeLgCbfJbYYH5SrNo35G2EGS57W1W5g3eXvzZhb",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 496336
+  },
+  "factory": {
+    "amount": "9993226490934749400000000",
+    "block_hash": "GgyFuSpVzEBcTGAhX8ZP4XsuYjHyrzn1pvUbtwp3KpNo",
+    "block_height": 277569764,
+    "code_hash": "JDCAiee7qR2aDbRPt9kPJQeG2A4GZwCZCDnpn2qV3wyA",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 910470
+  },
+  "config": {
+    "verifier_id": "yf-verify-261113.testnet",
+    "token_id": "token.yf-operator-261105.testnet",
+    "token_decimals": 6,
+    "strategy_mode": "funded_simulator",
+    "vault_code_hash": "1956c598503bcf2b0730180eb64b87bb9f048250ae73dec07f0694d9be2ff3b1",
+    "strategy_code_hash": "3ccbe4e4389f412bc31c5869c42ba74710420b288c40c7c57414dd44cbd81348",
+    "creation_cost": "7235220000000000000000000",
+    "campaign_count": "0"
+  },
+  "operator": {
+    "amount": "7367383505767004599999993",
+    "block_hash": "GgyFuSpVzEBcTGAhX8ZP4XsuYjHyrzn1pvUbtwp3KpNo",
+    "block_height": 277569764,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  "campaigns": []
+}

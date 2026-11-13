@@ -1,0 +1,178 @@
+{
+  "step": "deploy-factory",
+  "block": {
+    "approvals": [
+      null,
+      "ed25519:5RkRLxXfFduSK9XaQwsZWhbncVg372MMDEc8QqVKJaxsy4h6AdMWWXc5eMLu11KhjbZ9DoVzV8HPWfptBy2Wf1tT",
+      "ed25519:3zKWYeqJVVwtJgVx2vjKRgyh5qWkZUEempiEQqgwJ2d65jFYWh576SNYkk3yxD6XpyuCZ91rYE3kKV6r8fhszvRQ",
+      "ed25519:4jgCa4nWfY2FsfqtQpMVpC5CtMKjvXZpzL9SXcNoBsw6eKUsyrFPEgnBFLB5v32ztUGpJhaUenNSn9jq7BfGd9Pb",
+      null,
+      "ed25519:2acFnvKBGwS5qha4etBcJSgpkbPyhGWyiJScUy4XDtyjdFkeoBpxrbfjWu73ZTLFobAbHXg6DA4MD5ZPNiKpRgq4",
+      "ed25519:2PpWNaUbueJiqVefhsuQPgQ6kvUsiXTJFkW2ftjRB71sg1AnR3gn57bmersma27vHt5DFM3s7eWA5NtoCopLasAz",
+      "ed25519:4CSnrfDfxSxTtndkRsX1Bc2RpPkYbPoJbqMbRAnUdtq27bTvnboHygwSSPT3VNnSagEB2PmLPq7MJq1UB9peF86D",
+      "ed25519:2JXVUvWZEfDJoXzbjzmqEK2sbgfE5VoZkawj55SRsCiMgZy82vnEfwbAWB4J76AF5wScpWoL5jypZbdAjWQKfZyn",
+      "ed25519:5kACL1x8nATt9mWtjw15ES7MAWWD5quVc5o5SBoGi9edujgJeo76czazPF65JsBjJw5YvWLre99MGuAuQyp17pah",
+      "ed25519:khfAwQB6dgXvAthvbQzMyTDG61qC7GryRNSqdRBDdFHxtjVmZhTohm6T94X5NxA9rtnnckM1q9JwAZkpC1tgxMu",
+      "ed25519:vahx6mMHQMwNoyvcC7CKZi3oHgmFGvc2cmriXAZdWemAuP9EBGX3UcSdHM8oy2gocGT1G6E9Rbo6stGRWwjimbR",
+      "ed25519:4kLK8JuH161SCuPNF85Enm1RXhJiX2Lq6Qphoxbz15aSV3ZhpvxPgwNQbRGi9vNurqdPimaXUbL1SknPVtA3acGA",
+      "ed25519:4RNX5x2sFqLYurYjTkwjnuNXhtnzTota4xgoq2XdZiufahoreKG5ArkuA9CLF3mKuZF1opyWoxXXbtQ8uHftkZDZ",
+      "ed25519:4EuwV799x4eUqWdLVdESqPng8AcRJDJxytZu5qvh5oaDB3MdZo3EqJh8HmwacDwhek4UBSXywwg2FYY961WV4pCH",
+      "ed25519:41gjCWCqAvK7iSgv8iWFXRyfxHN1CAwZ26HGzoBXcSgjnJXZQJdfjoFKdgBJd38zuYusuvQGL6m5GJVJGNJgm4Dp",
+      "ed25519:5vEqZC6ngWLyniByFEo3JHXGt3vWtkNqRn5frvtzFT6RvTfDVs9u1CQ46GLRV3oLAZt2eFia7ndjV4rTtP6SvGNq",
+      "ed25519:3pVsA4SMdzebJ2o2UJKAT9atnYBMEZJ1rZErm5hFsFmu9vkKvB6HNgKuScv6Q3JwJkGu6nXuvAUjFDHA1hfS1Sn9",
+      "ed25519:3o5rKMvbLH4KATjATkoqw878FT9g953C8KHVXowUpqAfYX8UnkGqz9peXWVU4foX99k6LxURgUka1oJTs7RgbRFz",
+      "ed25519:joBDimxUwTu2BrAp8ssk3an1EMp9HJhBcnZE2CLuDeVdqo9JvUwyLnS1qfKmzCQM1dodAtTa6m9vzqA1EFvcu9V"
+    ],
+    "block_body_hash": "QUhoY3qQSB7rxcQoMC9jqE9T5Gc3mefHfpP4ZgfYpPJ",
+    "block_merkle_root": "2vq9WTFH7zrhq6cTE1wwxdJkxpMgdYfNoEdJs8TgqKoa",
+    "block_ordinal": 229561801,
+    "challenges_result": [],
+    "challenges_root": "11111111111111111111111111111111",
+    "chunk_endorsements": [
+      [
+        255,
+        255,
+        3
+      ],
+      [
+        255,
+        255,
+        1
+      ],
+      [
+        255,
+        255,
+        3
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        3
+      ],
+      [
+        255,
+        255,
+        1
+      ],
+      [
+        255,
+        255,
+        3
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255
+      ]
+    ],
+    "chunk_headers_root": "HjVbxqfsmHdReebQSK6RJZQAvEirqC6xTnFkCkF4vyj",
+    "chunk_mask": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "chunk_receipts_root": "2w1W1DhpYcpGjUqA2ymuPjMTBXqjCZVqZ5nHMwJ8RNvX",
+    "chunk_tx_root": "8VsgUoze9TzvoAaGSBoDfxHTiXQoj2RUNKkFzpBJeTwM",
+    "chunks_included": 10,
+    "epoch_id": "8BrCSwxU8snc1rLumc7At8HY9r7Yap1Dg1QFcojv859e",
+    "epoch_sync_data_hash": null,
+    "gas_price": "100000000",
+    "hash": "5RPqiSXuMBSLPcfLztKQwRub512b8w8XYg4epMb65Nqb",
+    "height": 277569701,
+    "last_ds_final_block": "7u2YaC59RwmWhTsDjnn9jXLCEFZ9eFLSymwo8nkHJvfP",
+    "last_final_block": "9G2zXgzqxiPLYzjA3khrhk76Rkvsk7krXaoPceFhpwwc",
+    "latest_protocol_version": 88,
+    "next_bp_hash": "7uwi8GR1ConHht9ke5ZEF4rF4H576AHeXG3reQP2vtMB",
+    "next_epoch_id": "HfZaZq5Jmabu5aWgdaxRkCXiR9YcQXNVaTthHwjp55RC",
+    "outcome_root": "C8JbGLYxV7twERkc3gyfXcRtpt9sZWvZU1SRpRPSmrBi",
+    "prev_hash": "7u2YaC59RwmWhTsDjnn9jXLCEFZ9eFLSymwo8nkHJvfP",
+    "prev_height": 277569700,
+    "prev_state_root": "J2SdLXSEMnJ71hBXYVVD7oi8g1hMmpmTcVDDZ1AP26NM",
+    "random_value": "BCrSpZcp8ZWaC96kYpT94QFcFRzRtuoPu5ycxpK2gFZP",
+    "rent_paid": "0",
+    "shard_split": null,
+    "signature": "ed25519:3whqgCapguPd1t52BQ27GMJkmNPJYTy2dXQWk45aQEUdp3j811j422cuWBmvuM27nkhHEjmG2DK8mSt8NryzoVRi",
+    "timestamp": 1794607884421362400,
+    "timestamp_nanosec": "1794607884421362548",
+    "total_supply": "2680245429564812174281818085990245",
+    "validator_proposals": [],
+    "validator_reward": "0"
+  },
+  "policy": {
+    "roles": [
+      {
+        "name": "council",
+        "kind": {
+          "Group": [
+            "yf-council1-261105.testnet",
+            "yf-council2-261105.testnet",
+            "yf-council3-261105.testnet"
+          ]
+        },
+        "permissions": [
+          "call:VoteReject",
+          "call:AddProposal",
+          "call:Finalize",
+          "call:VoteApprove"
+        ],
+        "vote_policy": {}
+      }
+    ],
+    "default_vote_policy": {
+      "weight_kind": "RoleWeight",
+      "quorum": "2",
+      "threshold": "2"
+    },
+    "proposal_bond": "100000000000000000000000",
+    "proposal_period": "604800000000000",
+    "bounty_bond": "0",
+    "bounty_forgiveness_period": "86400000000000"
+  },
+  "verifier": {
+    "amount": "9996185548546439200000000",
+    "block_hash": "5RPqiSXuMBSLPcfLztKQwRub512b8w8XYg4epMb65Nqb",
+    "block_height": 277569701,
+    "code_hash": "49mLHWeLgCbfJbYYH5SrNo35G2EGS57W1W5g3eXvzZhb",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 496336
+  },
+  "factory": {
+    "amount": "9993226490934749400000000",
+    "block_hash": "5RPqiSXuMBSLPcfLztKQwRub512b8w8XYg4epMb65Nqb",
+    "block_height": 277569701,
+    "code_hash": "JDCAiee7qR2aDbRPt9kPJQeG2A4GZwCZCDnpn2qV3wyA",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 910470
+  },
+  "config": {
+    "verifier_id": "yf-verify-261113.testnet",
+    "token_id": "token.yf-operator-261105.testnet",
+    "token_decimals": 6,
+    "strategy_mode": "funded_simulator",
+    "vault_code_hash": "1956c598503bcf2b0730180eb64b87bb9f048250ae73dec07f0694d9be2ff3b1",
+    "strategy_code_hash": "3ccbe4e4389f412bc31c5869c42ba74710420b288c40c7c57414dd44cbd81348",
+    "creation_cost": "7235220000000000000000000",
+    "campaign_count": "0"
+  },
+  "campaigns": []
+}

@@ -1,5 +1,5 @@
 import type { DaoPolicy, TransferKind } from "./index";
-import { pacedReadTransport } from "./read-transport.ts";
+import { publicReadTransport } from "./read-transport.ts";
 
 export interface VaultConfig {
   campaign_id: string;
@@ -13,6 +13,7 @@ export interface VaultConfig {
   strategy_id: string;
 }
 export interface Deployment {
+  displayName?: string;
   mode: "chain";
   network: "testnet" | "sandbox";
   chainId: string;
@@ -207,7 +208,7 @@ export function parseDeployment(value: unknown): RuntimeConfig {
   const c = d.config;
   requireThat(
     c &&
-      c.campaign_id === "commons" &&
+      /^[a-z0-9](?:[a-z0-9-]{0,22}[a-z0-9])?$/.test(c.campaign_id) &&
       c.token_decimals === 6 &&
       !!c.disclosure_version,
     "Unsupported campaign configuration",
@@ -287,7 +288,7 @@ export class ChainClient {
   private snapshots = new Map<string, Promise<Snapshot>>();
   constructor(
     deployment: Deployment,
-    transport: typeof fetch = pacedReadTransport(),
+    transport: typeof fetch = publicReadTransport,
   ) {
     this.deployment = deployment;
     this.transport = transport;
@@ -573,12 +574,14 @@ export class ChainClient {
       BigInt(native.storage_usage) *
       BigInt(raw(protocol.runtime_config.storage_amount_per_byte));
     // Conservative preflight, not a fee quote: retain account storage and a
-    // 2x gas-price buffer plus 5 Tgas for transaction overhead. The wallet and
+    // 10x gas-price admission reserve plus 5 Tgas overhead. Testnet rejected
+    // a 300 Tgas creation despite sufficient balance for the old 2x estimate.
+    // This is temporary available balance, not the expected burned fee. Wallet and
     // network still enforce actual fees and access-key allowance at signing.
     const gas =
       (BigInt(raw(call.gas)) + 5_000_000_000_000n) *
       BigInt(raw(price.gas_price)) *
-      2n;
+      10n;
     requireThat(
       BigInt(raw(native.amount)) >= storage + gas + BigInt(raw(call.deposit)),
       "Insufficient available NEAR for storage, deposit and gas buffer",

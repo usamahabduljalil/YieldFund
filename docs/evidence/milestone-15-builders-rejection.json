@@ -1,0 +1,77 @@
+{
+  "recordedAt": "2026-11-13T22:14:57.917Z",
+  "blockHeight": 277570062,
+  "blockHash": "GAHxxMazXGEW6P2v5jQcQkkYYqZDVkQPwfTAYw8R4xq8",
+  "journal": {
+    "id": "create-builders",
+    "hash": "ASCxHHN2zmYiz8yMwnBY8mjdeF5NarQSurQc2Mys2bct",
+    "signerId": "yf-operator-261105.testnet",
+    "receiverId": "yf-factory-261113.testnet",
+    "publicKey": "ed25519:f7h5tvUvj7pz8e8hT8SEY7udNTxpRXpi3JVPcVCri1b",
+    "nonce": "276321233000021",
+    "blockHash": "A6tU6hGiH5AAuVx22nQnyytxMke4vEJmFCarHdZsK8nP",
+    "actions": [
+      {
+        "type": "FunctionCall",
+        "methodName": "create_campaign",
+        "args": {
+          "id": "builders",
+          "name": "Builder Commons",
+          "beneficiary_id": "dao.yf-operator-261105.testnet",
+          "metadata_hash": "e56289b76b8336c91057579f1c4cedfc5b0edf21d20ca759ddc0aa4d9d02e808",
+          "deposit_cap": "1000000000"
+        },
+        "gas": "300000000000000",
+        "deposit": "7235220000000000000000000"
+      }
+    ],
+    "reviewSha256": "4ae0e4e31e1bd86a94bd1e2a6f0283e67eaa0e96afd25f2cf0151a40fb84c7ad",
+    "savedAt": "2026-11-13T22:13:25.728Z"
+  },
+  "tx": {
+    "jsonrpc": "2.0",
+    "error": {
+      "name": "HANDLER_ERROR",
+      "cause": {
+        "info": {
+          "requested_transaction_hash": "ASCxHHN2zmYiz8yMwnBY8mjdeF5NarQSurQc2Mys2bct"
+        },
+        "name": "UNKNOWN_TRANSACTION"
+      },
+      "code": -32000,
+      "message": "Server error",
+      "data": "Transaction ASCxHHN2zmYiz8yMwnBY8mjdeF5NarQSurQc2Mys2bct doesn't exist"
+    },
+    "id": "rejection-audit"
+  },
+  "key": {
+    "jsonrpc": "2.0",
+    "result": {
+      "block_hash": "GAHxxMazXGEW6P2v5jQcQkkYYqZDVkQPwfTAYw8R4xq8",
+      "block_height": 277570062,
+      "nonce": 276321233000020,
+      "permission": "FullAccess"
+    },
+    "id": "rejection-audit"
+  },
+  "campaign": {
+    "jsonrpc": "2.0",
+    "result": {
+      "block_hash": "GAHxxMazXGEW6P2v5jQcQkkYYqZDVkQPwfTAYw8R4xq8",
+      "block_height": 277570062,
+      "logs": [],
+      "result": [
+        110,
+        117,
+        108,
+        108
+      ]
+    },
+    "id": "rejection-audit"
+  },
+  "admissionRejection": {
+    "reason": "NotEnoughBalance",
+    "balance": "7367383505767004599999993",
+    "cost": "7536140385384293500000000"
+  }
+}

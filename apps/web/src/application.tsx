@@ -28,6 +28,11 @@ import type {
   Deployment,
 } from "../../../packages/near-client/src/chain";
 import { CampaignDirectory } from "./campaign-directory";
+import {
+  CampaignRegistry,
+  parseRegistry,
+  type RegistryDeployment,
+} from "../../../packages/near-client/src/campaigns";
 import { PreviewProvider } from "./preview-store";
 import {
   Overview,
@@ -51,10 +56,14 @@ function Shell({
   chain = false,
   network = "testnet",
   deployment,
+  baseline,
+  onSelect,
 }: {
   chain?: boolean;
   network?: string;
   deployment?: Deployment;
+  baseline?: Deployment;
+  onSelect?: (deployment: Deployment) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [mobile, setMobile] = useState(
@@ -150,8 +159,12 @@ function Shell({
         </div>
         <div className="workspace-label">
           <span className="eyebrow">YOUR COMMUNITY SPACE</span>
-          <strong>The Commons</strong>
-          <span>Open-source community</span>
+          <strong>{deployment?.displayName ?? "The Commons"}</strong>
+          <span>
+            {deployment?.config.campaign_id === "commons" || !deployment
+              ? "Open-source community"
+              : deployment.config.campaign_id}
+          </span>
         </div>
         <nav aria-label="Application navigation">
           {links.map(([path, label, Icon]) => (
@@ -240,7 +253,10 @@ function Shell({
           {["/app/campaigns", "/app/campaigns/new"].includes(
             location.pathname,
           ) ? (
-            <CampaignDirectory current={deployment} />
+            <CampaignDirectory
+              current={baseline ?? deployment}
+              onSelect={onSelect}
+            />
           ) : chain ? (
             <ChainRoutes />
           ) : (
@@ -274,12 +290,42 @@ function Shell({
   );
 }
 export default function Application() {
+  const navigate = useNavigate();
+  const [baseline, setBaseline] = useState<Deployment | undefined>();
   const [runtime, setRuntime] = useState<RuntimeConfig | null>(null),
     [error, setError] = useState("");
   useEffect(() => {
     let active = true;
     void loadRuntime()
-      .then((value) => {
+      .then(async (value) => {
+        if (value.mode === "chain") {
+          if (active) setBaseline(value);
+          const direct = /^\/app\/campaigns\/([a-z0-9-]+)$/.exec(
+            location.pathname,
+          )?.[1];
+          const saved = sessionStorage.getItem("yieldfund.selected-campaign");
+          const id = direct && direct !== "new" ? direct : saved;
+          if (direct === "commons")
+            sessionStorage.removeItem("yieldfund.selected-campaign");
+          if (id && id !== "commons") {
+            const response = await fetch("/registry.json", {
+              cache: "no-store",
+              signal: AbortSignal.timeout(10000),
+            });
+            if (!response.ok) throw Error("Campaign registry unavailable");
+            const data = await response.json();
+            const registry: RegistryDeployment | undefined = data.deployments
+              .map(parseRegistry)
+              .find((d: RegistryDeployment) => d.network === value.network);
+            if (!registry)
+              throw Error("Selected campaign registry unavailable");
+            const selected = await new CampaignRegistry(
+              registry,
+            ).resolveCampaign(id, value);
+            if (active) setRuntime(selected);
+            return;
+          }
+        }
         if (active) setRuntime(value);
       })
       .catch((e) => {
@@ -290,6 +336,14 @@ export default function Application() {
       active = false;
     };
   }, []);
+  function select(deployment: Deployment) {
+    sessionStorage.setItem(
+      "yieldfund.selected-campaign",
+      deployment.config.campaign_id,
+    );
+    setRuntime(deployment);
+    navigate(`/app/campaigns/${deployment.config.campaign_id}`);
+  }
   if (error)
     return (
       <main className="loading-screen">
@@ -299,6 +353,19 @@ export default function Application() {
           Retry
         </button>
         <Link to="/">Back to website</Link>
+        {baseline && (
+          <button
+            className="button secondary"
+            onClick={() => {
+              sessionStorage.removeItem("yieldfund.selected-campaign");
+              setError("");
+              setRuntime(baseline);
+              navigate("/app/campaigns");
+            }}
+          >
+            Return to campaign directory
+          </button>
+        )}
       </main>
     );
   if (!runtime)
@@ -311,8 +378,17 @@ export default function Application() {
     <WalletProvider
       rpcUrl={runtime.network === "testnet" ? runtime.rpcUrl : undefined}
     >
-      <ChainProvider deployment={runtime}>
-        <Shell chain network={runtime.network} deployment={runtime} />
+      <ChainProvider
+        key={`${runtime.network}:${runtime.vaultId}`}
+        deployment={runtime}
+      >
+        <Shell
+          chain
+          network={runtime.network}
+          deployment={runtime}
+          baseline={baseline}
+          onSelect={select}
+        />
       </ChainProvider>
     </WalletProvider>
   ) : (

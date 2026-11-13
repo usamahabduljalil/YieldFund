@@ -6,6 +6,14 @@
 
 Built for NEAR HACKATHON. The landing page is wallet-free; connection, positions, treasury proposals, receipts and operation controls live in `/app`.
 
+## Try the demo in two minutes
+
+1. [Launch the app](https://yieldfund-eosin.vercel.app/app): see The Commons' **800 tUSD backing, 800 units and 30 donated**. Public reads require no wallet.
+2. Open **Campaigns**, then **Community Garden**: see a separate campaign and 1,000 tUSD cap. Reload the deep link to retain the selected campaign. **Builder Commons** has separate vault/strategy accounts. Garden's DAO attestation is distinct from Builders' unverified status.
+3. Return to **The Commons → Treasury → proposal #0**: see **two council approvals**, **20 tUSD paid** and **10 remaining**.
+4. Open **Activity → withdrawal operation #4**: inspect the completed **200 tUSD** withdrawal. Fresh browsers have no saved wallet history; contract operations remain readable.
+5. Read [demo walkthrough](docs/DEMO_WALKTHROUGH.md) for a recording sequence and [manual submission kit](docs/MANUAL_SUBMISSION.md) for the human's final post/form checklist.
+
 ## Current release
 
 Last reviewed: **13 November 2026**. This is an experimental hackathon implementation, not an audited mainnet product. The hosted build uses existing testnet contracts in **read-only mode**. Local preview balances are explicitly fictional. The funded simulator uses actual test tokens and is **not Rhea yield**.
@@ -19,14 +27,14 @@ The approved public testnet lifecycle completed eleven transactions: **30 tUSD d
 | Funded profit, settlement, loss and delay | Actual test-token simulator; profit lifecycle on testnet, loss/delay in Sandbox                                                                    |
 | Sputnik DAO payments                      | Pinned upstream contract; three council members, two approvals; testnet payment completed                                                          |
 | Wallet and receipt tracking               | Account-bound reviews, exact call/receipt checks and persistent recovery; CLI handoffs exercised; live rejection/switch acceptance remains partial |
-| Permissionless campaigns                  | Factory and real Sandbox two-campaign/DAO lifecycle verified. Network-scoped discovery and unsigned draft reviews implemented; signed creation/selection and public factory deployment remain pending                       |
+| Permissionless campaigns                  | Factory deployed on testnet; two creators produced isolated keyless vault/strategy pairs. Selected-campaign runtime, wallet-bound creation review and persistent receipt recovery implemented; hosted signing stays disabled pending recovery hardening |
 | DAO verification                          | DAO-only expiring attestations, immutable metadata binding and revocation. A badge is not a safety or return guarantee                             |
 | Mainnet                                   | Read-only protocol/Rhea discovery and network-bound wallet adapter tests. Public mainnet transactions, adapter deployment and lifecycle verification pending                                      |
 | Rhea real yield                           | Mainnet state read successfully; supply/redemption adapter and funded lifecycle proof incomplete                                                   |
 | Trezu                                     | Source/interoperability investigation; actual discovery/proposal/payment rehearsal incomplete                                                      |
 | Callback recovery                         | Balance-read restart and proven simulator redemption supported. Unknown outgoing transfers/allocation and some callback failures remain locked     |
 
-The user selected **DAO approval** for verification and authorized GitHub/Vercel publication. Mainnet has a **5 NEAR total cap**. The supplied account was absent at the observed block, and the current deployment architecture exceeds the cap before gas. No mainnet spending or signatures have occurred. [Read-only discovery evidence](docs/evidence/mainnet-discovery.json).
+The user selected **DAO approval** for verification and authorized GitHub/Vercel publication. Mainnet deployment is now **deferred** to focus on the hackathon demo. The earlier 5 NEAR cap is not an active instruction to spend; the current deployment architecture exceeds it. No mainnet spending or signatures have occurred. [Read-only discovery evidence](docs/evidence/mainnet-discovery.json).
 
 ## Run locally
 
@@ -94,7 +102,7 @@ npm run test:sites
 npm run build:host
 ```
 
-Current TypeScript suite: **146 passing, one optional local-Sandbox skip**. Production build includes type checking; four Sites packaging checks pass. GitHub run [43396632842](https://github.com/usamahabduljalil/YieldFund/actions/runs/43396632842) passed both web and contract jobs for `c282f40`; later revisions require their own checks. Contract regression: 32 units and 14 Sandbox scenarios passed, one fixture generator ignored.
+Current TypeScript suite: **163 passing, one optional local-Sandbox skip**. Production build includes type checking; four Sites packaging checks pass. GitHub run [43469690634](https://github.com/usamahabduljalil/YieldFund/actions/runs/43469690634) passed both web and contract jobs for `b8c246d`; later revisions require their own checks. Contract regression: 32 units and 14 Sandbox scenarios passed, one fixture generator ignored. Current campaign-release evidence and subsequent CI results are tracked in [milestone 15](docs/evidence/milestone-15-campaign-release.md).
 
 For contracts, use Linux/Ubuntu WSL with Rust **1.95.0**, `wasm32-unknown-unknown`, a C/C++ toolchain, CMake and OpenSSL build dependencies:
 
@@ -128,6 +136,10 @@ Existing **testnet only**:
 | Token           | `token.yf-operator-261105.testnet`    |
 | Simulator       | `strategy.yf-operator-261105.testnet` |
 | Beneficiary DAO | `dao.yf-operator-261105.testnet`      |
+| Campaign factory | `yf-factory-261113.testnet` |
+| Verification DAO | `yf-verify-261113.testnet` |
+| Garden vault / simulator | `v-garden.yf-factory-261113.testnet` / `s-garden.yf-factory-261113.testnet` |
+| Builders vault / simulator | `v-builders.yf-factory-261113.testnet` / `s-builders.yf-factory-261113.testnet` |
 
 `deployments/testnet.json` pins configuration, policy and code hashes. The old eleven-call approval is exhausted; do not replay it. Retained full-access keys can replace code, and rehearsal actors share local custody. No state migration is supplied.
 
@@ -135,18 +147,17 @@ Existing **testnet only**:
 
 The Vercel project is currently deployed manually from exact GitHub commit SHAs through the authenticated API; automatic Git-triggered deployment is not connected. See [release evidence](docs/evidence/milestone-14-public-release.md).
 
-`apps/web/public/registry.json` contains an empty `deployments` list until a factory and verification DAO have been deployed and their configuration/code hashes reviewed. `/app/campaigns` supports paginated, network-scoped discovery; `/app/campaigns/new` offers metadata drafts. Draft downloads are explicitly unsigned and do not create campaigns. Browsing mainnet does not switch the existing testnet wallet.
+`apps/web/public/registry.json` pins the deployed testnet factory and verification DAO, with signing disabled. `/app/campaigns` supports paginated discovery and campaign selection; `/app/campaigns/new` reviews immutable metadata and exact creation cost. Draft downloads are explicitly unsigned. DAO controls build exact verification/revocation proposals and votes when an explicitly enabled testnet runtime is used. Reviews bind wallet account/session, recheck funding and persist before wallet dispatch. Receipts and ready-state/code/key checks establish creation completion. No backend signer exists. Browsing mainnet does not switch the testnet wallet.
 
 `.github/workflows/verify.yml` runs web and contract checks. Publishing the frontend is separate from deploying contracts or enabling transactions. Verify the exact commit, logs, deep routes, manifest and wallet behavior before describing a release as ready.
 
 ## Remaining integration work
 
-1. Finish signed campaign creation, campaign selection and DAO verification proposal UI; exercise wallet handoffs with a reviewed factory deployment. Discovery and downloadable unsigned drafts are implemented.
-2. Integrate the network-bound wallet adapter into a verified mainnet deployment and apply token metadata/precision across every review/display. Adapter unit tests alone do not prove mainnet wallet acceptance.
-3. Implement Rhea supply-only handling, liquidity delays and redemption evidence. An execute response alone cannot establish completed FT delivery. Verify actual supply, realized redemption and eligible donation with finalized receipts.
-4. Verify the same beneficiary DAO in Trezu: discovery, policy/token display, proposal, threshold execution and recipient balance.
-5. Resolve partial factory creation and unknown outgoing-operation recovery before unrestricted deposits.
-6. Fund the mainnet account and settle a deployment approach/budget within the approved cap before preparing calls. Never substitute simulated profit for real yield evidence.
+1. Harden partial factory creation/refunds and unknown outgoing-operation recovery before enabling unrestricted creation or public deposits. Current unresolved outcomes stay locked.
+2. Complete live browser-wallet acceptance for the new registry actions. The public campaign release uses inspected CLI-signed bytes and finalized receipts; controlled React tests do not establish every wallet's handoff behavior.
+3. Mainnet work is deferred: general token precision beyond the current six-decimal test token, deployable architecture/budget and mainnet wallet acceptance.
+4. Rhea supply/redemption adapter and funded real-yield proof remain incomplete; public protocol reads are not integration completion.
+5. Trezu discovery, policy/token display, proposal and payment rehearsal remain incomplete. Sputnik governance itself is implemented and verified separately.
 
 References: [official Rhea lending SDK](https://github.com/rhea-finance/lending-sdk-golang), [official Trezu source](https://github.com/NEAR-DevHub/trezu). Research/public reads are not lifecycle verification.
 
@@ -154,10 +165,10 @@ References: [official Rhea lending SDK](https://github.com/rhea-finance/lending-
 
 After meaningful changes, update the date, capability table, exact test counts and remaining work. Link new evidence while preserving historical results. Update `agent.md` in the same change. Add verified repository/demo URLs and deployment commit when publishing. Never mark an integration complete from a mock, source inspection or top-level success alone.
 
-Original hackathon brief and specification are preserved. The [demo walkthrough](docs/DEMO_WALKTHROUGH.md) is prepared; recording, the human's demo post and exact-payload hackathon submission are separate tasks.
+Original hackathon brief and specification are preserved. The [demo walkthrough](docs/DEMO_WALKTHROUGH.md) and screenshot evidence support the hosted demo. The user will publish the demo post and submit manually. Before submitting, the team must disclose any pre-hackathon baseline or other submitted project; those personal/project-history declarations have not been supplied and are not inferred from Git history.
 
 ## Attribution and licensing
 
 Sputnik DAO is reused from `near-daos/sputnik-dao-contract` commit `5434a59dec23ee0c49df8c8c4350c208a7e75b0b`, under its [MIT license](tests/fixtures/reviewed-testnet/LICENSE-Sputnik). NEAR SDK/standards, HOT Connect, React, Vite, IBM Plex Mono and Phosphor retain their respective licenses. [Artwork provenance](docs/design/asset-notes.md).
 
-No project-wide license has been selected for YieldFund's original code. Public repository access does not itself grant an additional software license.
+YieldFund's original code and assets are **all rights reserved**, as selected by the user; see [LICENSE](LICENSE). The event permits any license ([Q-014](https://nearhackathon.com/HACKATHON.md), checked 13 November 2026). Third-party licenses remain in force. Public repository access does not grant a general redistribution or commercial-use license.

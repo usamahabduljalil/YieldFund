@@ -74,3 +74,7 @@ export function pacedReadTransport(
     return run;
   };
 }
+
+// Registry panels and the selected vault share one browser-wide read budget.
+// Separate per-client queues multiplied concurrency when browsing campaigns.
+export const publicReadTransport = pacedReadTransport();

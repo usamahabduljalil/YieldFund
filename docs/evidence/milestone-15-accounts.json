@@ -1,0 +1,306 @@
+{
+  "network": "testnet",
+  "block": {
+    "approvals": [
+      null,
+      "ed25519:5akVePQs2kNG6d7dBJGCU6MTeWdxxN4ihfiUsYMgh5NXrVWmtx1ratNyiSTfB77Gntqnf6vQmY9ysmXXJ4NQeNeU",
+      "ed25519:1m4QbzP3yd85AonZPtejfDkrdHcmyL3PryJqpCYpNqEz4cPaDFs5cjMBtzoGA41G2xdtHHLuxLyJK7vDhw1sFBx",
+      "ed25519:2tEMo5GvmCHA3WqSR4a99vPfzT7suzTPmh2kop31ggGDypxSQeBQ5ZiFYtMFugKtYgHkrXHCiqncW33H4GczXns6",
+      "ed25519:MUpgribbZbHcFqC5CZN9kqJ3SyTNWtiUWbrghrww8Awcb3srLemPoKUsKxkQDkJqBzR7mMsWNsM7a2Nqf4CbeeD",
+      "ed25519:4kJdn2Y2iJyuDzDHCyC6f2Vc7hkU5njAMxCMvbLchEbqfdRWZs5WnSbLPatyeDAF18cB5MLsY1egV2xks32s6L2Y",
+      "ed25519:3tZCmtDWRDotrF4F1u39yt1MpXtfb3kHgZdojSP2RfXJSDCiVR4Ai7j2W914H1zDKrSMEDcudFyEeAEX2S9ksqcW",
+      "ed25519:34RKJY2CTxnB6NtTiGvVHPruKXFwbyWJEZ9D1iaDhPhQjiDrXVqad6vRqwy9hE9m7kXcUL2BxZorMKmj5T3bW9eU",
+      "ed25519:5EF9JQKyY57WCfiGYdGDcNsk1gz2brZ9LVnmk49wV1UL6Wi2rZ9mtmu7atKvoMU9xNh9eX6q99iMRVeJEv2KgWnp",
+      "ed25519:3CsgZ9oTTjwAchUuk2CD7YMuucoyPoGbDi5JxxSet6EkbWw9rXotkE4H3SWN6rFWDv44n1AAp3xtG8WUyz7FRss7",
+      "ed25519:2q5PFttSec8L71G5ENigWVivqD4wD3f4RjGB8UvCchGQc2SapyC2uJAZRabBCViWzT1KApzyJ9Ddt6wegD6ji6xs",
+      "ed25519:44oPjgRQXsa9inM9JDsnjpS2vHApSijNiDYwcUCttaBYdsr5HLUrNS1Wwurrjii9F31dAuiCRmTMtazyUNYYxpWx",
+      "ed25519:3iT2KZW4S1j4aVEHDVRw7jTbbN5FHMPFXaKv6G2D753ZhmFwBBTfAapbqhMbDZiD83UNUNtndrJsbRMBZyGPvJxf",
+      "ed25519:6G9i1fMhmbgiTfMZdxJhmuYWGnBt6V4ktb2YtghRXn2bboavvbMYUf5w37xYoZRfkU4tJgjmwtZQ2WxXxCzCUnU",
+      "ed25519:4WMA7xPaEAx8QoDRdSrFGnkVcrT88Wx2nPHoVym8zwShggtYpYGz9poUvaXpRcaoKUXvAByo78kviSxB9TARv1mk",
+      "ed25519:3tMNzU4ohPBUeESCzhf33RuKowFqXnL3dzJD6gKkYRdtJcymWtvxhrefGfp6W89AYYWhCXcqnWK3VZCmx1USLDLh",
+      "ed25519:9xezpnZ4qDQ8pkzPfEfStW8Spqfqvr6G3GNGjPnq3DD5Z2e6j1bk7nAPja75VDLRPYd4E7H5nzBJZWjRFnCbCps",
+      "ed25519:5DcxCj65EusyT6rcHpqZcfKJrFRmSTMwxnNAECd6qCF9SqTYt8KUzUPSZCQvEmEtD4aUYhWxe8LQ2BYvqSJ1VKZ4",
+      "ed25519:4o3dMwuatyBjVgTbXeKxZ8XkgvktUMj4xULET7TDwFX9f9XxdyaGNYVCJeQ1x4NTay4E8W9ED9ru32Pre6ew8Eg2",
+      "ed25519:2JCuPH1gGoKjP81iDRf2HgR5V5vd5mbJYbvwCXDnEZn7EJFymsFkPwH93sWRU5WDnNrCSDHjYQ3TjpFmuMeK36yQ"
+    ],
+    "block_body_hash": "3NgsbUJodaGciAozmLCrNXF28PpZyQ3uqsLa24ugrS49",
+    "block_merkle_root": "4UVvoiF6mhRaLUiSJTNqnpynP4WJqu5zD7hKbMR55SBy",
+    "block_ordinal": 229559194,
+    "challenges_result": [],
+    "challenges_root": "11111111111111111111111111111111",
+    "chunk_endorsements": [
+      [
+        255,
+        255,
+        3
+      ],
+      [
+        255,
+        255,
+        1
+      ],
+      [
+        255,
+        255,
+        63
+      ],
+      [
+        255,
+        255,
+        1
+      ],
+      [
+        255,
+        127
+      ],
+      [
+        255,
+        63
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        7
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255
+      ]
+    ],
+    "chunk_headers_root": "89YFNtrC5McksZxV9EYAJ8gVKzyuh6YWYhxcW3STEtMm",
+    "chunk_mask": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "chunk_receipts_root": "9F8CgK3Jd6L7cjayWoEs156ER4KJ4jvbDqu6UfaQyygQ",
+    "chunk_tx_root": "7fTwL2i51M3oVXcgFW1VwGFGXbjHFJvK2Jai8sZ97sGU",
+    "chunks_included": 10,
+    "epoch_id": "8BrCSwxU8snc1rLumc7At8HY9r7Yap1Dg1QFcojv859e",
+    "epoch_sync_data_hash": null,
+    "gas_price": "100000000",
+    "hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+    "height": 277567094,
+    "last_ds_final_block": "6GAPgdRBqHpEZcZT5qELHNuKxU2SMokUpGKrdqqC1o6f",
+    "last_final_block": "RCrGvurnSWcSiaDzXXkXx5CC5Hwi8tqkYL3fEsKZDam",
+    "latest_protocol_version": 88,
+    "next_bp_hash": "7uwi8GR1ConHht9ke5ZEF4rF4H576AHeXG3reQP2vtMB",
+    "next_epoch_id": "HfZaZq5Jmabu5aWgdaxRkCXiR9YcQXNVaTthHwjp55RC",
+    "outcome_root": "48sqeiU6XLJ9XQ7pJywoQoWyTGFAJzwdsxZ1VnZuSA7L",
+    "prev_hash": "6GAPgdRBqHpEZcZT5qELHNuKxU2SMokUpGKrdqqC1o6f",
+    "prev_height": 277567093,
+    "prev_state_root": "4ceGQqqfwkuT9tWVGSpFBATQ6kU3ZaChL6AwGqc78W7X",
+    "random_value": "Tw7sMJh5dksJ4wpXBbZwHRuxXGRpJS96ttVkCnoLqBP",
+    "rent_paid": "0",
+    "shard_split": null,
+    "signature": "ed25519:4C6qciwuSRDH9vMX41H8xRReY9cpDQtZYxZMmK236PLLxkmLpz7wvpGz1m2x1C93hqgoZ9NC9LeKpWPYLqXoZ7Tg",
+    "timestamp": 1794606364700958500,
+    "timestamp_nanosec": "1794606364700958570",
+    "total_supply": "2680245436359931587915807685990245",
+    "validator_proposals": [],
+    "validator_reward": "0"
+  },
+  "accounts": {
+    "yf-factory-261113.testnet": {
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277566909000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:8Lh1ZMpqWAqcbeZ2t9pjx33AmJGvPXMyGtADb2w1XS4p"
+          }
+        ]
+      }
+    },
+    "yf-verify-261113.testnet": {
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277566992000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:H7UDkSHXzxmsNBUvH33dpXyGK5AWot9JDnbah73tdDGF"
+          }
+        ]
+      }
+    },
+    "yf-creator-261113.testnet": {
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277566999000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:5xFAsEcpr68rND4awF7Wp8ZHwQaKPHCqbZUM8faD1N2g"
+          }
+        ]
+      }
+    },
+    "yf-operator-261105.testnet": {
+      "account": {
+        "amount": "2867383505767004599999993",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 276321233000020,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:f7h5tvUvj7pz8e8hT8SEY7udNTxpRXpi3JVPcVCri1b"
+          }
+        ]
+      }
+    },
+    "yf-council1-261105.testnet": {
+      "account": {
+        "amount": "4999470083578503000000000",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 276321427000003,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:EMei5HownEJJksUrpgXhArmDeLNG27FwFLagT85ssYfy"
+          }
+        ]
+      }
+    },
+    "yf-council2-261105.testnet": {
+      "account": {
+        "amount": "4999168530458307600000000",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 276321466000002,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:Fbig9wNrrnSi4vvPWCqEBbwW3nefhMHrNWdA2DAnhL12"
+          }
+        ]
+      }
+    },
+    "yf-council3-261105.testnet": {
+      "account": {
+        "amount": "4999955363487500000000000",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 276321517000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:4PPfrvpbzX5J38DQMVWkZQT2pxYFcVQAMk7vMUNe7ekr"
+          }
+        ]
+      }
+    }
+  },
+  "hashes": {
+    "yieldfund_campaign_factory.wasm": {
+      "bytes": 910144,
+      "sha256": "ffb6464f6ed462c183e8af7572ea24ff4bfbe65fc92086f786409b30833baa21"
+    },
+    "yieldfund_vault.wasm": {
+      "bytes": 386222,
+      "sha256": "1956c598503bcf2b0730180eb64b87bb9f048250ae73dec07f0694d9be2ff3b1"
+    },
+    "yieldfund_strategy_simulator.wasm": {
+      "bytes": 224637,
+      "sha256": "3ccbe4e4389f412bc31c5869c42ba74710420b288c40c7c57414dd44cbd81348"
+    },
+    "sputnikdao2.wasm": {
+      "bytes": 495447,
+      "sha256": "2ed1d58bb2837f29b7629f833fea16bf661b4bea31fd4cceede4dc1f723d6cea"
+    }
+  }
+}

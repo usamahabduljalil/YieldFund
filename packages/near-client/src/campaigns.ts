@@ -5,8 +5,13 @@ import {
   raw,
   requireThat,
   type Call,
+  type Deployment,
+  type VaultConfig,
+  parseDeployment,
+  decode,
+  canonical as canonicalValue,
 } from "./chain";
-import { pacedReadTransport } from "./read-transport";
+import { publicReadTransport } from "./read-transport";
 import type { DaoPolicy } from "./index";
 
 export interface RegistryDeployment {
@@ -170,7 +175,7 @@ export class CampaignRegistry {
   readonly deployment: RegistryDeployment;
   constructor(
     deployment: RegistryDeployment,
-    private transport: typeof fetch = pacedReadTransport(),
+    private transport: typeof fetch = publicReadTransport,
   ) {
     this.deployment = parseRegistry(deployment);
   }
@@ -289,6 +294,99 @@ export class CampaignRegistry {
       campaigns: campaigns.map((c) => checkCampaign(c, d)),
       policy,
     };
+  }
+
+  /** Build a runtime only from the reviewed token/DAO code and factory's pinned children. */
+  async resolveCampaign(id: string, baseline: Deployment): Promise<Deployment> {
+    const d = this.deployment;
+    requireThat(
+      d.network === baseline.network && d.tokenId === baseline.config.token_id,
+      "Unsupported campaign network or token",
+    );
+    const s = await this.snapshot();
+    const c = await this.view<RegistryCampaign | null>(
+      d.factoryId,
+      "get_campaign",
+      { id },
+      s.blockHash,
+    );
+    requireThat(c, "Campaign not found");
+    checkCampaign(c, d);
+    requireThat(c.status === "ready", "Campaign creation is not complete");
+    const config = await this.view<VaultConfig>(
+      c.vault_id,
+      "get_config",
+      {},
+      s.blockHash,
+    );
+    requireThat(
+      canonicalValue(config) ===
+        canonicalValue({
+          campaign_id: c.id,
+          token_id: d.tokenId,
+          token_decimals: d.tokenDecimals,
+          beneficiary_id: c.beneficiary_id,
+          guardian_id: c.creator_id,
+          deposit_cap: c.deposit_cap,
+          metadata_hash: c.metadata_hash,
+          disclosure_version: "factory-v1",
+          strategy_id: c.strategy_id,
+        }),
+      "Campaign vault binding changed",
+    );
+    const hashes = {
+      [c.vault_id]: d.vaultCodeHash,
+      [c.strategy_id]: d.strategyCodeHash,
+      [d.tokenId]: baseline.codeHashes[d.tokenId],
+      [c.beneficiary_id]: baseline.codeHashes[baseline.config.beneficiary_id],
+    };
+    for (const [accountId, expected] of Object.entries(hashes)) {
+      const a = await this.rpc<{ code_hash: string }>("query", {
+        request_type: "view_account",
+        account_id: accountId,
+        block_id: s.blockHash,
+      });
+      requireThat(
+        base58HashHex(a.code_hash) === expected,
+        `Unreviewed campaign code: ${accountId}`,
+      );
+    }
+    for (const accountId of [c.vault_id, c.strategy_id]) {
+      const keys = await this.rpc<{ keys: unknown[] }>("query", {
+        request_type: "view_access_key_list",
+        account_id: accountId,
+        block_id: s.blockHash,
+      });
+      requireThat(
+        Array.isArray(keys.keys) && keys.keys.length === 0,
+        "Campaign child has access keys",
+      );
+    }
+    const runtime = parseDeployment({
+      ...baseline,
+      displayName: c.name,
+      vaultId: c.vault_id,
+      rpcUrl: d.rpcUrl,
+      config,
+      codeHashes: hashes,
+      daoPolicy: await this.view(
+        c.beneficiary_id,
+        "get_policy",
+        {},
+        s.blockHash,
+      ),
+      factoryInfo: await this.view(
+        c.beneficiary_id,
+        "get_factory_info",
+        {},
+        s.blockHash,
+      ),
+      transactionsEnabled: d.transactionsEnabled,
+      authority:
+        "Factory-created vault and simulator have no access keys. Creator controls bounded operations. Treasury authority is shown separately; test tokens only.",
+    });
+    requireThat(runtime.mode === "chain", "Invalid campaign runtime");
+    return runtime;
   }
 }
 export interface NewCampaign {
@@ -432,5 +530,95 @@ export function verificationProposal(
         },
       },
     },
+  };
+}
+
+export interface VerificationProposal {
+  id: number;
+  status: string;
+  description: string;
+  votes: Record<string, string>;
+  kind: {
+    FunctionCall: {
+      receiver_id: string;
+      actions: Array<{
+        method_name: string;
+        args: string;
+        deposit: string;
+        gas: string;
+      }>;
+    };
+  };
+}
+export function verificationAction(
+  d: RegistryDeployment,
+  policy: DaoPolicy,
+  actor: string,
+  campaign: RegistryCampaign,
+  proposal: VerificationProposal,
+  action: "VoteApprove" | "VoteReject" | "Finalize",
+  now: string,
+): Call {
+  parseRegistry(d);
+  checkCampaign(campaign, d);
+  account(actor);
+  requireThat(
+    Number.isSafeInteger(proposal.id) && proposal.id >= 0,
+    "Invalid proposal ID",
+  );
+  requireThat(
+    action === "Finalize"
+      ? proposal.status === "Failed"
+      : proposal.status === "InProgress",
+    "Proposal is not actionable",
+  );
+  requireThat(
+    policy.roles.some(
+      (r) =>
+        (r.kind === "Everyone" ||
+          (typeof r.kind === "object" &&
+            "Group" in r.kind &&
+            r.kind.Group.includes(actor))) &&
+        r.permissions.some((p) =>
+          ["*:*", "call:*", `*:${action}`, `call:${action}`].includes(p),
+        ),
+    ),
+    "Verification vote permission required",
+  );
+  const call = proposal.kind?.FunctionCall;
+  requireThat(
+    call?.receiver_id === d.factoryId && call.actions.length === 1,
+    "Unexpected verification target",
+  );
+  const a = call.actions[0],
+    args = decode(a.args) as Record<string, unknown>;
+  requireThat(
+    a.deposit === "1" && a.gas === "30000000000000" && args.id === campaign.id,
+    "Verification parameters changed",
+  );
+  if (a.method_name === "verify_campaign") {
+    requireThat(
+      canonical(Object.keys(args).sort()) ===
+        canonical(["evidence_hash", "expires_at", "id", "metadata_hash"]),
+      "Unexpected verification fields",
+    );
+    requireThat(
+      args.metadata_hash === campaign.metadata_hash &&
+        hash(args.evidence_hash) &&
+        BigInt(u64(args.expires_at)) > BigInt(u64(now)),
+      "Verification metadata changed or expired",
+    );
+  } else
+    requireThat(
+      a.method_name === "revoke_verification" &&
+        canonical(args) === canonical({ id: campaign.id }),
+      "Unsupported verification action",
+    );
+  return {
+    receiverId: d.verifierId,
+    methodName: "act_proposal",
+    args: { id: proposal.id, action, proposal: structuredClone(proposal.kind) },
+    deposit: "0",
+    gas: "250000000000000",
   };
 }

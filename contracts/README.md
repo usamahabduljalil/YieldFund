@@ -1,6 +1,6 @@
 # NEAR contract layer
 
-The current milestone implements **funded simulated strategy settlement**: vault deposits/allocation, complete redemption, proportional loss, eligible yield donations and existing Sputnik governance. All run as real Wasm in local Sandbox. No public deployment is configured. Live lending and frontend chain integration are not implemented.
+The contract layer implements **funded simulated strategy settlement**: vault deposits/allocation, complete redemption, proportional loss, eligible yield donations and existing Sputnik governance. Real Wasm runs in Sandbox and the approved public testnet lifecycle is complete. The frontend reads deployed contracts and includes wallet-bound transaction reviews; hosted signing remains disabled. Live Rhea lending is not implemented. See the root README for current deployment and campaign-release evidence.
 
 ## Components
 
@@ -13,7 +13,7 @@ The current milestone implements **funded simulated strategy settlement**: vault
 | Upstream `sputnikdao2` | Unmodified pinned source; three-member, two-approval token-payment policy tested locally |
 | `tests/integration` | Token transfers and nested receipt assertions in a local Sandbox, including failed and interrupted payouts |
 
-`allocate_idle`, `redeem_strategy` and `distribute_yield` are implemented. The fixed beneficiary receives only proven, liquid surplus after reconciliation. The frontend continues to use its labeled local preview; it is not wired to these ephemeral networks. See [strategy-and-dao.md](../docs/contracts/strategy-and-dao.md) for the complete new API and state-machine boundaries. Fresh deployment is required; milestone 2 state is not migrated.
+`allocate_idle`, `redeem_strategy` and `distribute_yield` are implemented. The fixed beneficiary receives only proven, liquid surplus after reconciliation. The frontend separates fictional local preview from verified public testnet reads. See [strategy-and-dao.md](../docs/contracts/strategy-and-dao.md) for the API and state-machine boundaries, and [campaign-factory.md](../docs/contracts/campaign-factory.md) for permissionless templates and DAO attestations. No migration from historical contract state is supplied.
 
 ## Build and verify
 

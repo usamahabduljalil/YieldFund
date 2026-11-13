@@ -1,0 +1,436 @@
+{
+  "schemaVersion": 1,
+  "network": "testnet",
+  "rpcUrl": "https://test.rpc.fastnear.com",
+  "factoryId": "yf-factory-261113.testnet",
+  "verifierId": "yf-verify-261113.testnet",
+  "creationCost": "7235220000000000000000000",
+  "gasAllowance": "500000000000000000000000",
+  "accounts": {
+    "yf-factory-261113.testnet": {
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277566909000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:8Lh1ZMpqWAqcbeZ2t9pjx33AmJGvPXMyGtADb2w1XS4p"
+          }
+        ]
+      }
+    },
+    "yf-verify-261113.testnet": {
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277566992000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:H7UDkSHXzxmsNBUvH33dpXyGK5AWot9JDnbah73tdDGF"
+          }
+        ]
+      }
+    },
+    "yf-creator-261113.testnet": {
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277566999000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:5xFAsEcpr68rND4awF7Wp8ZHwQaKPHCqbZUM8faD1N2g"
+          }
+        ]
+      }
+    },
+    "yf-operator-261105.testnet": {
+      "account": {
+        "amount": "2867383505767004599999993",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 276321233000020,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:f7h5tvUvj7pz8e8hT8SEY7udNTxpRXpi3JVPcVCri1b"
+          }
+        ]
+      }
+    },
+    "yf-council1-261105.testnet": {
+      "account": {
+        "amount": "4999470083578503000000000",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 276321427000003,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:EMei5HownEJJksUrpgXhArmDeLNG27FwFLagT85ssYfy"
+          }
+        ]
+      }
+    },
+    "yf-council2-261105.testnet": {
+      "account": {
+        "amount": "4999168530458307600000000",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 276321466000002,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:Fbig9wNrrnSi4vvPWCqEBbwW3nefhMHrNWdA2DAnhL12"
+          }
+        ]
+      }
+    },
+    "yf-council3-261105.testnet": {
+      "account": {
+        "amount": "4999955363487500000000000",
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "2bQtsWqfjXFJDikTANrnFsRKa5S5TQ5yC5vTpBjhdHrL",
+        "block_height": 277567094,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 276321517000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:4PPfrvpbzX5J38DQMVWkZQT2pxYFcVQAMk7vMUNe7ekr"
+          }
+        ]
+      }
+    }
+  },
+  "artifacts": {
+    "yieldfund_campaign_factory.wasm": {
+      "bytes": 910144,
+      "sha256": "ffb6464f6ed462c183e8af7572ea24ff4bfbe65fc92086f786409b30833baa21"
+    },
+    "yieldfund_vault.wasm": {
+      "bytes": 386222,
+      "sha256": "1956c598503bcf2b0730180eb64b87bb9f048250ae73dec07f0694d9be2ff3b1"
+    },
+    "yieldfund_strategy_simulator.wasm": {
+      "bytes": 224637,
+      "sha256": "3ccbe4e4389f412bc31c5869c42ba74710420b288c40c7c57414dd44cbd81348"
+    },
+    "sputnikdao2.wasm": {
+      "bytes": 495447,
+      "sha256": "2ed1d58bb2837f29b7629f833fea16bf661b4bea31fd4cceede4dc1f723d6cea"
+    }
+  },
+  "metadata": [
+    {
+      "content": {
+        "id": "garden",
+        "name": "Community Garden",
+        "beneficiary_id": "dao.yf-operator-261105.testnet",
+        "deposit_cap": "1000000000",
+        "token_id": "token.yf-operator-261105.testnet",
+        "disclosure_version": "factory-v1"
+      },
+      "metadataHash": "a8644898bbcb34eddf2105cb8d0c3768baf7348826cfd10d503e47292ed24970"
+    },
+    {
+      "content": {
+        "id": "builders",
+        "name": "Builder Commons",
+        "beneficiary_id": "dao.yf-operator-261105.testnet",
+        "deposit_cap": "1000000000",
+        "token_id": "token.yf-operator-261105.testnet",
+        "disclosure_version": "factory-v1"
+      },
+      "metadataHash": "e56289b76b8336c91057579f1c4cedfc5b0edf21d20ca759ddc0aa4d9d02e808"
+    }
+  ],
+  "steps": [
+    {
+      "id": "deploy-verifier",
+      "signerId": "yf-verify-261113.testnet",
+      "receiverId": "yf-verify-261113.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "new",
+          "args": {
+            "config": {
+              "name": "YieldFund campaign verification",
+              "purpose": "Approve campaign metadata attestations",
+              "metadata": ""
+            },
+            "policy": {
+              "roles": [
+                {
+                  "name": "council",
+                  "kind": {
+                    "Group": [
+                      "yf-council1-261105.testnet",
+                      "yf-council2-261105.testnet",
+                      "yf-council3-261105.testnet"
+                    ]
+                  },
+                  "permissions": [
+                    "call:AddProposal",
+                    "call:VoteApprove",
+                    "call:VoteReject",
+                    "call:Finalize"
+                  ],
+                  "vote_policy": {}
+                }
+              ],
+              "default_vote_policy": {
+                "weight_kind": "RoleWeight",
+                "quorum": "2",
+                "threshold": "2"
+              },
+              "proposal_bond": "100000000000000000000000",
+              "proposal_period": "604800000000000",
+              "bounty_bond": "0",
+              "bounty_forgiveness_period": "86400000000000"
+            }
+          },
+          "deposit": "0",
+          "gas": "100000000000000"
+        }
+      ],
+      "artifact": "sputnikdao2.wasm"
+    },
+    {
+      "id": "deploy-factory",
+      "signerId": "yf-factory-261113.testnet",
+      "receiverId": "yf-factory-261113.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "new",
+          "args": {
+            "verifier_id": "yf-verify-261113.testnet",
+            "token_id": "token.yf-operator-261105.testnet",
+            "token_decimals": 6,
+            "token_storage": "1250000000000000000000"
+          },
+          "deposit": "0",
+          "gas": "100000000000000"
+        }
+      ],
+      "artifact": "yieldfund_campaign_factory.wasm"
+    },
+    {
+      "id": "fund-second-creator",
+      "signerId": "yf-verify-261113.testnet",
+      "receiverId": "yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "Transfer",
+          "deposit": "4500000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "create-garden",
+      "signerId": "yf-creator-261113.testnet",
+      "receiverId": "yf-factory-261113.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "create_campaign",
+          "args": {
+            "id": "garden",
+            "name": "Community Garden",
+            "beneficiary_id": "dao.yf-operator-261105.testnet",
+            "metadata_hash": "a8644898bbcb34eddf2105cb8d0c3768baf7348826cfd10d503e47292ed24970",
+            "deposit_cap": "1000000000"
+          },
+          "deposit": "7235220000000000000000000",
+          "gas": "300000000000000"
+        }
+      ]
+    },
+    {
+      "id": "create-builders",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "yf-factory-261113.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "create_campaign",
+          "args": {
+            "id": "builders",
+            "name": "Builder Commons",
+            "beneficiary_id": "dao.yf-operator-261105.testnet",
+            "metadata_hash": "e56289b76b8336c91057579f1c4cedfc5b0edf21d20ca759ddc0aa4d9d02e808",
+            "deposit_cap": "1000000000"
+          },
+          "deposit": "7235220000000000000000000",
+          "gas": "300000000000000"
+        }
+      ]
+    },
+    {
+      "id": "propose-verification",
+      "signerId": "yf-council1-261105.testnet",
+      "receiverId": "yf-verify-261113.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "add_proposal",
+          "args": {
+            "proposal": {
+              "description": "Verify Community Garden testnet metadata; funded simulation, no mainnet yield claim",
+              "kind": {
+                "FunctionCall": {
+                  "receiver_id": "yf-factory-261113.testnet",
+                  "actions": [
+                    {
+                      "method_name": "verify_campaign",
+                      "args": "eyJpZCI6ImdhcmRlbiIsIm1ldGFkYXRhX2hhc2giOiJhODY0NDg5OGJiY2IzNGVkZGYyMTA1Y2I4ZDBjMzc2OGJhZjczNDg4MjZjZmQxMGQ1MDNlNDcyOTJlZDI0OTcwIiwiZXZpZGVuY2VfaGFzaCI6ImQ1ZDc2OTM5Yjk0MDA5MjY3ZTkwNjVlNDUzYTRjMDBjMWFlMzA5MGQyNjA1MjU1YWM5NGJmMjA1NDVlZDUwNWYiLCJleHBpcmVzX2F0IjoiMTc5NjA4MzIwMDAwMDAwMDAwMCJ9",
+                      "deposit": "1",
+                      "gas": "30000000000000"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "deposit": "100000000000000000000000",
+          "gas": "100000000000000"
+        }
+      ]
+    },
+    {
+      "id": "vote-1",
+      "signerId": "yf-council1-261105.testnet",
+      "receiverId": "yf-verify-261113.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "act_proposal",
+          "args": {
+            "id": 0,
+            "action": "VoteApprove",
+            "proposal": {
+              "FunctionCall": {
+                "receiver_id": "yf-factory-261113.testnet",
+                "actions": [
+                  {
+                    "method_name": "verify_campaign",
+                    "args": "eyJpZCI6ImdhcmRlbiIsIm1ldGFkYXRhX2hhc2giOiJhODY0NDg5OGJiY2IzNGVkZGYyMTA1Y2I4ZDBjMzc2OGJhZjczNDg4MjZjZmQxMGQ1MDNlNDcyOTJlZDI0OTcwIiwiZXZpZGVuY2VfaGFzaCI6ImQ1ZDc2OTM5Yjk0MDA5MjY3ZTkwNjVlNDUzYTRjMDBjMWFlMzA5MGQyNjA1MjU1YWM5NGJmMjA1NDVlZDUwNWYiLCJleHBpcmVzX2F0IjoiMTc5NjA4MzIwMDAwMDAwMDAwMCJ9",
+                    "deposit": "1",
+                    "gas": "30000000000000"
+                  }
+                ]
+              }
+            }
+          },
+          "deposit": "0",
+          "gas": "250000000000000"
+        }
+      ]
+    },
+    {
+      "id": "vote-2",
+      "signerId": "yf-council2-261105.testnet",
+      "receiverId": "yf-verify-261113.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "act_proposal",
+          "args": {
+            "id": 0,
+            "action": "VoteApprove",
+            "proposal": {
+              "FunctionCall": {
+                "receiver_id": "yf-factory-261113.testnet",
+                "actions": [
+                  {
+                    "method_name": "verify_campaign",
+                    "args": "eyJpZCI6ImdhcmRlbiIsIm1ldGFkYXRhX2hhc2giOiJhODY0NDg5OGJiY2IzNGVkZGYyMTA1Y2I4ZDBjMzc2OGJhZjczNDg4MjZjZmQxMGQ1MDNlNDcyOTJlZDI0OTcwIiwiZXZpZGVuY2VfaGFzaCI6ImQ1ZDc2OTM5Yjk0MDA5MjY3ZTkwNjVlNDUzYTRjMDBjMWFlMzA5MGQyNjA1MjU1YWM5NGJmMjA1NDVlZDUwNWYiLCJleHBpcmVzX2F0IjoiMTc5NjA4MzIwMDAwMDAwMDAwMCJ9",
+                    "deposit": "1",
+                    "gas": "30000000000000"
+                  }
+                ]
+              }
+            }
+          },
+          "deposit": "0",
+          "gas": "250000000000000"
+        }
+      ]
+    }
+  ]
+}

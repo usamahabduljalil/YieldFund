@@ -25,7 +25,9 @@ function Heading({ title, children }: { title: string; children?: ReactNode }) {
   return (
     <div className="page-heading">
       <div>
-        <span className="eyebrow">THE COMMONS / ON-CHAIN</span>
+        <span className="eyebrow">
+          {useChain().deployment.displayName ?? "The Commons"} / ON-CHAIN
+        </span>
         <h1>{title}</h1>
       </div>
       {children}
@@ -393,8 +395,8 @@ function Overview() {
   return (
     <>
       <Heading title="Grow a shared future.">
-        <Link className="button" to="/app/campaigns/commons">
-          Support the Commons <ArrowUpRight />
+        <Link className="button" to={`/app/campaigns/${d.config.campaign_id}`}>
+          Support campaign <ArrowUpRight />
         </Link>
       </Heading>
       <div className="metric-grid">
@@ -414,8 +416,8 @@ function Overview() {
         </Notice>
       )}
       <div className="chain-columns">
-        <Panel title="The Commons">
-          <p>Community funding for open-source maintenance.</p>
+        <Panel title={d.displayName ?? "The Commons"}>
+          <p>Community funding through eligible surplus.</p>
           <Data
             items={[
               ["Strategy", "Funded simulator"],
@@ -461,7 +463,7 @@ function Campaign() {
   if (!s) return null;
   return (
     <>
-      <Heading title="Support the Commons" />
+      <Heading title={`Support ${d.displayName ?? "The Commons"}`} />
       <div className="chain-columns">
         <Panel title="Your contribution">
           <Badge tone="blue">Simulated strategy</Badge>
@@ -519,7 +521,7 @@ function Positions() {
         <Empty title="Connect your wallet to see your position" />
       ) : !p ? (
         <Empty title="No position registered">
-          <Link to="/app/campaigns/commons">Support the Commons</Link>
+          <Link to="/app/campaigns">Browse campaigns</Link>
         </Empty>
       ) : (
         <>
@@ -1138,6 +1140,17 @@ export function ChainBanner() {
     </div>
   );
 }
+function SelectedCampaign() {
+  const { campaignId } = useParams();
+  const { deployment } = useChain();
+  return campaignId === deployment.config.campaign_id ? (
+    <Campaign />
+  ) : (
+    <Empty title="Select this campaign from the directory">
+      <Link to="/app/campaigns">Browse campaigns</Link>
+    </Empty>
+  );
+}
 export function ChainRoutes() {
   const c = useChain();
   return (
@@ -1167,7 +1180,10 @@ export function ChainRoutes() {
           </div>
           <Routes>
             <Route index element={<Overview />} />
-            <Route path="campaigns/commons" element={<Campaign />} />
+            <Route
+              path="campaigns/:campaignId"
+              element={<SelectedCampaign />}
+            />
             <Route path="positions" element={<Positions />} />
             <Route path="treasury" element={<Treasury />} />
             <Route

@@ -2637,12 +2637,16 @@ details summary { cursor: pointer; padding: 14px 0; font-size: 13px; }
   font-size: 12px;
 }
 .campaign-toolbar label,
+.chain-submission label,
 .campaign-form label {
   display: grid;
   gap: 8px;
   font-size: 12px;
 }
 .campaign-toolbar select,
+.campaign-form select,
+.chain-submission select,
+.chain-submission input,
 .campaign-form input {
   min-height: 44px;
   padding: 10px 12px;

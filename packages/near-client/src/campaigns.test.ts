@@ -6,9 +6,12 @@ import {
   creationCall,
   parseRegistry,
   verificationProposal,
+  verificationAction,
   type RegistryDeployment,
   type RegistryCampaign,
 } from "./campaigns";
+import { readFileSync } from "node:fs";
+import type { Deployment } from "./chain";
 import type { DaoPolicy } from "./index";
 import { decode } from "./chain";
 const d: RegistryDeployment = {
@@ -280,3 +283,131 @@ describe("registry chain reads", () => {
     expect(tx).not.toHaveBeenCalled();
   });
 });
+
+it("verification votes bind proposal target, metadata and action permissions", () => {
+  const call = verificationProposal(
+    d,
+    policy,
+    "one.testnet",
+    campaign,
+    { kind: "verify", evidenceHash: "b".repeat(64), expiresAt: "100" },
+    "10",
+  );
+  const proposal = {
+    ...(call.args.proposal as any),
+    id: 3,
+    status: "InProgress",
+    votes: {},
+  };
+  expect(
+    verificationAction(
+      d,
+      policy,
+      "one.testnet",
+      campaign,
+      proposal,
+      "VoteApprove",
+      "10",
+    ).args.proposal,
+  ).toEqual(proposal.kind);
+  expect(() =>
+    verificationAction(
+      d,
+      policy,
+      "outsider.testnet",
+      campaign,
+      proposal,
+      "VoteApprove",
+      "10",
+    ),
+  ).toThrow("permission");
+  expect(() =>
+    verificationAction(
+      d,
+      policy,
+      "one.testnet",
+      campaign,
+      proposal,
+      "VoteApprove",
+      "100",
+    ),
+  ).toThrow("expired");
+  proposal.kind.FunctionCall.receiver_id = "attacker.testnet";
+  expect(() =>
+    verificationAction(
+      d,
+      policy,
+      "one.testnet",
+      campaign,
+      proposal,
+      "VoteApprove",
+      "10",
+    ),
+  ).toThrow("target");
+});
+it.each(["ok", "changed-config", "keys"])(
+  "campaign runtime resolution checks %s",
+  async (mode) => {
+    const base = JSON.parse(
+      readFileSync("deployments/testnet.json", "utf8"),
+    ) as Deployment;
+    Object.keys(base.codeHashes).forEach(
+      (id) => (base.codeHashes[id] = "0".repeat(64)),
+    );
+    const registry = new CampaignRegistry({
+      ...d,
+      tokenId: base.config.token_id,
+      vaultCodeHash: "0".repeat(64),
+      strategyCodeHash: "0".repeat(64),
+    });
+    const c = {
+      ...campaign,
+      token_id: base.config.token_id,
+      beneficiary_id: base.config.beneficiary_id,
+    };
+    vi.spyOn(registry, "snapshot").mockResolvedValue({
+      height: 10,
+      blockHash: "final",
+      timestamp: "10",
+      cost: "1",
+      count: "1",
+      campaigns: [c],
+      policy,
+    });
+    vi.spyOn(registry, "view").mockImplementation(
+      async (_id, method) =>
+        ({
+          get_campaign: c,
+          get_config: {
+            campaign_id: c.id,
+            token_id: c.token_id,
+            token_decimals: 6,
+            beneficiary_id: c.beneficiary_id,
+            guardian_id:
+              mode === "changed-config" ? "attacker.testnet" : c.creator_id,
+            deposit_cap: c.deposit_cap,
+            metadata_hash: c.metadata_hash,
+            disclosure_version: "factory-v1",
+            strategy_id: c.strategy_id,
+          },
+          get_policy: base.daoPolicy,
+          get_factory_info: base.factoryInfo,
+        })[method] as never,
+    );
+    vi.spyOn(registry, "rpc").mockImplementation(
+      async (_method, params) =>
+        ((params as any).request_type === "view_access_key_list"
+          ? { keys: mode === "keys" ? [{}] : [] }
+          : { code_hash: "1".repeat(32) }) as never,
+    );
+    if (mode !== "ok")
+      await expect(registry.resolveCampaign("alpha", base)).rejects.toThrow();
+    else {
+      const resolved = await registry.resolveCampaign("alpha", base);
+      expect(resolved.vaultId).toBe(c.vault_id);
+      expect(resolved.displayName).toBe("Alpha");
+      expect(resolved.config.guardian_id).toBe("alice.testnet");
+      expect(resolved.transactionsEnabled).toBe(false);
+    }
+  },
+);

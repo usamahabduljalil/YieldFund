@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type FormEvent,
+} from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowUpRight, Plus, ArrowsClockwise } from "@phosphor-icons/react";
 import { parseAmount } from "@yieldfund/domain";
@@ -13,6 +19,8 @@ import {
   type RegistrySnapshot,
 } from "../../../packages/near-client/src/campaigns";
 import type { Deployment } from "../../../packages/near-client/src/chain";
+import { RegistryAction, RegistryHistory } from "./registry-action";
+import { VerificationPanel } from "./verification-panel";
 
 const message = (e: unknown) =>
   e instanceof Error ? e.message : "Campaigns unavailable.";
@@ -37,7 +45,13 @@ function saveJson(name: string, value: unknown) {
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
-export function CampaignDirectory({ current }: { current?: Deployment }) {
+export function CampaignDirectory({
+  current,
+  onSelect,
+}: {
+  current?: Deployment;
+  onSelect?: (d: Deployment) => void;
+}) {
   const [network, setNetwork] = useState<"testnet" | "mainnet">("testnet");
   const [deployments, setDeployments] = useState<RegistryDeployment[] | null>(
     null,
@@ -52,6 +66,13 @@ export function CampaignDirectory({ current }: { current?: Deployment }) {
     [refresh, setRefresh] = useState(0),
     [offset, setOffset] = useState("0");
   const create = useLocation().pathname.endsWith("/new");
+  const selectionGeneration = useRef(0);
+  useEffect(
+    () => () => {
+      selectionGeneration.current++;
+    },
+    [network],
+  );
   useEffect(() => {
     let active = true;
     fetch("/registry.json", {
@@ -132,6 +153,7 @@ export function CampaignDirectory({ current }: { current?: Deployment }) {
           <select
             value={network}
             onChange={(e) => {
+              selectionGeneration.current++;
               setNetwork(e.target.value as typeof network);
               setOffset("0");
             }}
@@ -181,7 +203,13 @@ export function CampaignDirectory({ current }: { current?: Deployment }) {
                     <dd>tUSD</dd>
                   </div>
                 </dl>
-                <Link className="button secondary" to="/app/campaigns/commons">
+                <Link
+                  className="button secondary"
+                  to="/app/campaigns/commons"
+                  onClick={() => {
+                    if (current) onSelect?.(current);
+                  }}
+                >
                   Open campaign
                   <ArrowUpRight size={17} />
                 </Link>
@@ -226,6 +254,40 @@ export function CampaignDirectory({ current }: { current?: Deployment }) {
                     <dd>{c.beneficiary_id}</dd>
                   </div>
                 </dl>
+                {c.status === "ready" && current && onSelect && (
+                  <button
+                    className="button secondary"
+                    disabled={loading}
+                    onClick={async () => {
+                      const generation = ++selectionGeneration.current;
+                      setLoading(true);
+                      setError("");
+                      try {
+                        const selected = await new CampaignRegistry(
+                          deployment!,
+                        ).resolveCampaign(c.id, current);
+                        if (generation === selectionGeneration.current)
+                          onSelect(selected);
+                      } catch (e) {
+                        if (generation === selectionGeneration.current)
+                          setError(message(e));
+                      } finally {
+                        if (generation === selectionGeneration.current)
+                          setLoading(false);
+                      }
+                    }}
+                  >
+                    Open campaign <ArrowUpRight size={17} />
+                  </button>
+                )}
+                {c.status === "ready" && current && deployment && (
+                  <VerificationPanel
+                    deployment={deployment}
+                    baseline={current}
+                    campaign={c}
+                    onDone={() => setRefresh((n) => n + 1)}
+                  />
+                )}
               </section>
             ))}
           </div>
@@ -263,6 +325,13 @@ export function CampaignDirectory({ current }: { current?: Deployment }) {
             </div>
           )}
         </>
+      )}
+      {deployment && current && (
+        <RegistryHistory
+          deployment={deployment}
+          baseline={current}
+          refresh={refresh}
+        />
       )}
     </>
   );
@@ -311,6 +380,29 @@ function CampaignDraft({
     setError("");
     setBusy(false);
   }
+  const buildCreation = useCallback(
+    async (
+      fresh: RegistrySnapshot,
+      _actor: string,
+      registry: CampaignRegistry,
+    ) => {
+      if (!deployment || !review) throw Error("Review campaign details first");
+      if (
+        await registry.view(
+          deployment.factoryId,
+          "get_campaign",
+          { id: review.input.id },
+          fresh.blockHash,
+        )
+      )
+        throw Error("Campaign ID already exists");
+      return creationCall(deployment, fresh.cost, {
+        ...review.input,
+        metadataHash: review.metadata.hash,
+      });
+    },
+    [deployment, review],
+  );
   async function prepare(event: FormEvent) {
     event.preventDefault();
     const request = ++generation.current;
@@ -533,6 +625,14 @@ function CampaignDraft({
               {review.call ? "Download unsigned call" : "Save campaign draft"}
             </button>
             {saved && <p role="status">Saved. No transaction sent.</p>}
+            {deployment && current && (
+              <RegistryAction
+                deployment={deployment}
+                baseline={current}
+                build={buildCreation}
+                label="Prepare creation transaction"
+              />
+            )}
           </div>
         )}
       </div>

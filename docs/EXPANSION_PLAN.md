@@ -2,6 +2,8 @@
 
 Scope authorized November 12, 2026. This supersedes the original single-campaign/testnet-only boundary without changing historical evidence or the original specification.
 
+November 13 priority change: the user deferred mainnet deployment to focus on the testnet demo, public repository and manual submission. Mainnet spending is inactive. Rhea's real-money lifecycle and Trezu mainnet interoperability remain unverified and are excluded from completion claims. The approved campaign release is recorded in deployments/CAMPAIGN_RELEASE_REVIEW.md; it does not authorize unrelated token movements. Final submission and the public demo post are handled by the user.
+
 ## Deliverables
 
 1. Caller-funded permissionless creation using pinned vault/strategy templates and separate keyless accounts per campaign. Token, beneficiary DAO and accounting bindings are immutable.
