@@ -16,6 +16,6 @@ if [[ -n "${NEAR_SANDBOX_BIN_PATH:-}" ]]; then
 fi
 bash scripts/build-contracts.sh --with-test-faults
 bash scripts/build-factory.sh
-bash scripts/build-dao.sh
+bash scripts/prepare-dao-fixture.sh
 cargo test --locked -p yieldfund-accounting -p yieldfund-vault -p yieldfund-test-token -p yieldfund-strategy-simulator -p yieldfund-campaign-factory --lib
 cargo test --locked -p yieldfund-integration --test vault -- --nocapture

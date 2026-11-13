@@ -2,7 +2,7 @@
 
 **Community fundraising through eligible yield donations.** Supporters allocate tokens to a campaign vault. Realized eligible surplus funds its fixed DAO treasury; the DAO approves community payments. Supporters retain a claim on recoverable capital. Capital can lose value, and withdrawals can be delayed.
 
-[Source repository](https://github.com/usamahabduljalil/YieldFund).
+[Live testnet app](https://yieldfund-eosin.vercel.app/) · [Source repository](https://github.com/usamahabduljalil/YieldFund).
 
 Built for NEAR HACKATHON. The landing page is wallet-free; connection, positions, treasury proposals, receipts and operation controls live in `/app`.
 
@@ -30,7 +30,7 @@ The user selected **DAO approval** for verification and authorized GitHub/Vercel
 
 ## Run locally
 
-Requirements: Node **22.14+**, npm and Git. Run commands from the repository root.
+Requirements: Node **22.x (22.14+)**, npm and Git. Run commands from the repository root.
 
 ```sh
 npm ci
@@ -103,7 +103,7 @@ bash scripts/test-contracts.sh
 cargo fmt --all -- --check
 ```
 
-This builds normal and fault-only artifacts, factory and pinned Sputnik, then runs unit and Sandbox tests. Factory builds follow templates because they embed vault/strategy Wasm. For only normal templates and factory:
+This builds normal and fault-only artifacts and the factory, verifies/copies the exact reviewed Sputnik binary, then runs unit and Sandbox tests. The source rebuild is separate: `bash scripts/build-dao.sh` pins the upstream archive and rejects a different output hash. The first GitHub runner rebuild produced a different hash; byte-for-byte cross-machine reproducibility remains unresolved. Integration tests use the exact deployed historical binary and do not substitute that differing rebuild. Factory builds follow templates because they embed vault/strategy Wasm. For only normal templates and factory:
 
 ```sh
 bash scripts/build-factory.sh
