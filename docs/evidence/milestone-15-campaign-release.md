@@ -36,4 +36,10 @@ Original code uses the user's selected all-rights-reserved license; third-party 
 
 ## Public delivery
 
-Publication and final browser evidence pending at this checkpoint; do not infer publication from a local build.
+- Public application commit **85edf30463d5702778c999febf7522716c99dfe3**, Vercel deployment **dpl_2DLnohhgDh4ZfodEvRfmXdARPRnr**, state READY. Production alias https://yieldfund-eosin.vercel.app/; immutable deployment `yieldfund-lmnzblsrw-usamahabduljalils-projects.vercel.app`.
+- [Hosted HTTP checks](milestone-15-hosted-checks.json): landing, campaign directory, both campaign deep links, creation, proposal and risks return 200; both public manifests return no-store and signing disabled. Missing assets/API routes return 404.
+- GitHub CI run [43521145794](https://github.com/usamahabduljalil/YieldFund/actions/runs/43521145794) **passed both web and contract jobs** for the deployed commit. Local checks above also passed.
+- Hosted browser shows all three campaigns, Garden DAO verified, Builders unverified, and verification proposal #0 Approved with two votes. Duplicate `garden` creation review rejects the existing ID without signing. Switching the creation browser to mainnet clears the draft and shows creation unavailable.
+- [Campaign directory screenshot](milestone-15-hosted-campaigns.png) and [full DAO verification screenshot](milestone-15-hosted-verification.png) show actual hosted state. Screenshots are suitable for the human's demo post; they are not a video or live wallet-signing recording.
+- Mobile directory at 390 × 844: document width 375, no horizontal overflow; [mobile screenshot](milestone-15-mobile.png). Temporary viewport override reset.
+- [Hosted Commons overview](milestone-15-hosted-overview.png) reconfirms 800 units/backing, zero eligible yield, 30 donated, 10 treasury balance and four completed operations. New campaign creation did not alter the historical token lifecycle.

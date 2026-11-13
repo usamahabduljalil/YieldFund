@@ -56,6 +56,13 @@ function Footer() {
       <span>Capital with a common purpose.</span>
       <div>
         <Link to="/risks">Risks & disclosures</Link>
+        <a
+          href="https://github.com/usamahabduljalil/YieldFund"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Source <ArrowUpRight size={14} />
+        </a>
         <a href="https://docs.near.org/" target="_blank" rel="noreferrer">
           NEAR docs <ArrowUpRight size={14} />
         </a>

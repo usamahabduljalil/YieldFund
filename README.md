@@ -102,7 +102,7 @@ npm run test:sites
 npm run build:host
 ```
 
-Current TypeScript suite: **163 passing, one optional local-Sandbox skip**. Production build includes type checking; four Sites packaging checks pass. GitHub run [43469690634](https://github.com/usamahabduljalil/YieldFund/actions/runs/43469690634) passed both web and contract jobs for `b8c246d`; later revisions require their own checks. Contract regression: 32 units and 14 Sandbox scenarios passed, one fixture generator ignored. Current campaign-release evidence and subsequent CI results are tracked in [milestone 15](docs/evidence/milestone-15-campaign-release.md).
+Current TypeScript suite: **163 passing, one optional local-Sandbox skip**. Production build includes type checking; four Sites packaging checks pass. GitHub run [43521145794](https://github.com/usamahabduljalil/YieldFund/actions/runs/43521145794) passed both web and contract jobs for deployed `85edf30`. Contract regression: 32 units and 14 Sandbox scenarios passed, one fixture generator ignored. Campaign-release evidence and subsequent results are tracked in [milestone 15](docs/evidence/milestone-15-campaign-release.md).
 
 For contracts, use Linux/Ubuntu WSL with Rust **1.95.0**, `wasm32-unknown-unknown`, a C/C++ toolchain, CMake and OpenSSL build dependencies:
 

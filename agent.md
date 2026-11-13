@@ -1,7 +1,7 @@
 ## YieldFund project memory and build tracker
 
 Last updated: 13 November 2026 (Africa/Lagos).
-Stage: public GitHub/Vercel read-only release published; campaign discovery/draft reviews and network-bound wallet adapter implemented. 146 TypeScript tests pass, one optional Sandbox check skipped; hosted build/typecheck passes. Full contract CI passed at c282f40 (32 units, 14 Sandbox scenarios). Signed multi-campaign flows, real-yield adapter, Trezu rehearsal and recovery gaps remain incomplete.
+Stage: multi-campaign testnet release executed and published as 85edf30; Vercel dpl_2DLnohhgDh4ZfodEvRfmXdARPRnr READY at yieldfund-eosin.vercel.app. Public deep routes, read-only manifests and desktop/mobile UI verified. 163 TypeScript tests pass, one optional Sandbox check skipped; hosted build/typecheck and four packaging checks pass. CI 43521145794 passed both jobs, including 32 units and 14 Sandbox scenarios. Two keyless campaign pairs and two-vote DAO verification proved on-chain. Demo screenshots and manual submission kit prepared. Browser signing acceptance and recovery gaps remain incomplete; hosted signing stays disabled. Mainnet deployment is deferred. User handles final submission.
 
 ## Read first
 
@@ -17,7 +17,7 @@ YieldFund on NEAR is community fundraising through eligible yield donations. Sup
 
 Original hackathon P0: one fictional open-source campaign, one allowlisted test token, one Rust vault, one strategy and one DAO. Its public lifecycle is complete. The user expanded scope to permissionless multiple campaigns, verification by DAO approval, mainnet support, real Rhea/Trezu integration, GitHub publication and Vercel hosting. Follow [the expansion plan](docs/EXPANSION_PLAN.md) for this new work; do not infer completion from the original milestone.
 
-The funded simulator remains the demonstrated baseline. Mainnet Rhea/Trezu lifecycle implementation is now requested but remains incomplete. Never describe simulation or read-only protocol discovery as live yield integration. Reuse Sputnik governance; verification is approved by a configured DAO, not directly by campaign creators or individual council members.
+The funded simulator remains the demonstrated baseline. Mainnet deployment is now deferred; Rhea/Trezu lifecycle implementation remains incomplete. Never describe simulation or read-only protocol discovery as live yield integration. Reuse Sputnik governance; verification is approved by a configured DAO, not directly by campaign creators or individual council members.
 
 ## User requirements that persist
 
@@ -64,9 +64,9 @@ No borrowing, leverage, swaps, bridges, Intents, rebalancing, transferable share
 
 ## Current expansion and next task
 
-November 13 release update: user deferred mainnet deployment and will submit manually. License preference resolved to all rights reserved (event permits any license); LICENSE added. Campaign selection, signed registry reviews, persistent receipt recovery and DAO verification controls are implemented: 163 tests passed, one optional Sandbox skip, production host build and four packaging tests passed. Previous application CI run 43469690634 passed both jobs. Public app still runs b8c246d until this release is verified and published.
+November 13 release update: user deferred mainnet deployment and will submit manually. License preference resolved to all rights reserved (event permits any license); LICENSE added. Campaign selection, signed registry reviews, persistent receipt recovery and DAO verification controls are implemented: 163 tests passed, one optional Sandbox skip, production host build and four packaging tests passed. Application CI run 43521145794 passed both jobs. Public app runs 85edf30; a final source-footer link and evidence update follow without contract changes.
 
-The approved eight-step testnet release and separately approved 0.2 NEAR funding correction completed: nine unique finalized transactions, 0.0584708461110246 testnet NEAR fees under the original 0.5 cap. Builders was rejected at admission, then its exact signed bytes/hash finalized once after the correction; no replacement transaction or duplicate campaign. Two creators, separate keyless child pairs, pinned code/configuration and ready states verified. Garden becomes verified only after two distinct DAO votes; Builders stays unverified. Final audit block 277570993. Evidence: docs/evidence/milestone-15-campaign-release.md and milestone-15-execution.json. Both approvals are now exhausted; do not replay them. No mainnet action or repeat of the historical rehearsal. Next: finish hosted browser QA, screenshot demo bundle and publication. Partial factory creation and unknown outgoing callbacks remain fail-closed limitations; public signing stays disabled.
+The approved eight-step testnet release and separately approved 0.2 NEAR funding correction completed: nine unique finalized transactions, 0.0584708461110246 testnet NEAR fees under the original 0.5 cap. Builders was rejected at admission, then its exact signed bytes/hash finalized once after the correction; no replacement transaction or duplicate campaign. Two creators, separate keyless child pairs, pinned code/configuration and ready states verified. Garden becomes verified only after two distinct DAO votes; Builders stays unverified. Final audit block 277570993. Evidence: docs/evidence/milestone-15-campaign-release.md and milestone-15-execution.json. Both approvals are now exhausted; do not replay them. No mainnet action or repeat of the historical rehearsal. Hosted QA proves directory/verification, duplicate rejection, mainnet unavailable state and mobile layout without overflow. Next human task: publish demo post and submit manually using docs/MANUAL_SUBMISSION.md. Next engineering task: recovery hardening and live browser-wallet registry acceptance before public signing. Partial factory creation and unknown outgoing callbacks remain fail-closed limitations.
 
 ### Prior expansion checkpoint (superseded by the release update above)
 
@@ -93,7 +93,7 @@ The approved eight-step testnet release and separately approved 0.2 NEAR funding
 | Interrupted-operation recovery                      | Partial, supported stages verified                        | Five-minute/version-bound balance-read restart and simulator completion proof; unknown payout/allocation and simulator-internal callback failure stay locked                                            |
 | Deployment tooling and actor accounts               | Complete for approved setup                               | Four public contracts deployed/initialized and eight accounts registered; 19 finalized receipts, 0.0411723816874521 NEAR fees, exact authority/balance reconciliation and public audit. See milestone 8 |
 | Acceptance AC01–AC12 and release rehearsal | On-chain rehearsal complete; browser acceptance partial | All 11 approved calls finalized; 800 backing/units, 30 donated, DAO payment 20, withdrawal 200. Exact channels and remaining checks in milestone-9-execution-notes.md |
-| Demo, public repository and submission              | Public repository and read-only hosting live; video/submission pending | docs/DEMO_WALKTHROUGH.md; user facts/authorization required at release                                                                                                                                                            |
+| Demo, public repository and submission              | Hosted demo and public repo live; screenshots/manual kit ready; human post/submission pending | docs/DEMO_WALKTHROUGH.md, docs/MANUAL_SUBMISSION.md and milestone-15 screenshots; user handles submission manually |
 
 ## Decisions and unresolved inputs
 
