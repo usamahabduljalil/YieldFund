@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "rpcUrl": "https://rpc.testnet.near.org",
+  "operatorId": "yf-operator-261105.testnet",
+  "deployerId": "yf-operator-261105.testnet",
+  "contracts": {
+    "vault": {
+      "accountId": "vault.yf-operator-261105.testnet",
+      "publicKey": null
+    },
+    "token": {
+      "accountId": "token.yf-operator-261105.testnet",
+      "publicKey": null
+    },
+    "strategy": {
+      "accountId": "strategy.yf-operator-261105.testnet",
+      "publicKey": null
+    },
+    "dao": {
+      "accountId": "dao.yf-operator-261105.testnet",
+      "publicKey": null
+    }
+  },
+  "guardianId": "yf-operator-261105.testnet",
+  "controllerId": "yf-operator-261105.testnet",
+  "lossSinkId": null,
+  "recipientId": null,
+  "council": [
+    "yf-council1-261105.testnet",
+    "yf-council2-261105.testnet",
+    "yf-council3-261105.testnet"
+  ],
+  "depositCap": "10000000000",
+  "totalSupply": "1000000000000",
+  "authority": null,
+  "metadata": {
+    "name": "YieldFund Commons",
+    "description": "Fictional testnet campaign for open-source community maintenance.",
+    "strategy": "funded_simulator",
+    "asset": "Test-only tUSD; no monetary value",
+    "disclosureVersion": "1.0"
+  }
+}

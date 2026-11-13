@@ -1,0 +1,91 @@
+- link "Skip to content":
+  - /url: "#app-main"
+- complementary "Workspace navigation":
+  - link "YieldFund home":
+    - /url: /
+    - generic: yieldfund.
+  - button "Close navigation":
+  - generic: YOUR COMMUNITY SPACE
+  - strong: The Commons
+  - generic: Open-source community
+  - navigation "Application navigation":
+    - link "Overview":
+      - /url: /app
+      - text: Overview
+    - link "My position":
+      - /url: /app/positions
+      - text: My position
+    - link "Treasury":
+      - /url: /app/treasury
+      - text: Treasury
+    - link "Activity":
+      - /url: /app/activity
+      - text: Activity
+  - link "Campaign operations":
+    - /url: /app/manage
+    - text: Campaign operations
+  - generic: GROW SOMETHING GOOD.
+  - paragraph:
+    - text: Shared capital.
+    - text: Shared possibilities.
+  - link "Risks & disclosures":
+    - /url: /risks
+    - text: Risks & disclosures
+  - link "Back to website":
+    - /url: /
+    - text: Back to website
+- banner:
+  - button "Open navigation" [active]:
+  - strong: Treasury
+  - button "yf-operator-261105.testnet":
+    - text: yf-operator-261105.testnet
+- generic: NEAR TESTNET
+- text: Simulated strategy · Final block 277366965
+- button "Checking…" [disabled]:
+  - text: Checking…
+- main:
+  - generic: Read-only
+  - generic: Data as of 2:08:45 PM
+  - generic: THE COMMONS / ON-CHAIN
+  - heading "A budget built together." [level=1]
+  - generic: Treasury balance
+  - strong: "10.00"
+  - generic: tUSD · example token
+  - generic: Vault funding confirmed
+  - strong: "30.00"
+  - generic: tUSD · example token
+  - generic: Approval policy
+  - strong: "2"
+  - generic: Required council votes
+  - heading "Payment proposals" [level=2]
+  - list:
+    - 'link "Fictional Commons maintenance rehearsal #0 · Approved"':
+      - /url: /app/treasury/proposals/0
+      - strong: Fictional Commons maintenance rehearsal
+      - generic: "#0 · Approved"
+  - generic: Latest 1 of 1 proposals.
+  - heading "Propose a payment" [level=2]
+  - text: Recipient
+  - textbox "Recipient":
+    - /placeholder: contributor.testnet
+  - text: Amount · tUSD
+  - textbox "Amount · tUSD":
+    - /placeholder: "0.00"
+  - text: Purpose
+  - textbox "Purpose"
+  - button "Review proposal" [disabled]
+  - heading "Governance" [level=2]
+  - term: DAO
+  - definition: dao.yf-operator-261105.testnet
+  - term: Token
+  - definition: token.yf-operator-261105.testnet
+  - term: Members
+  - definition: yf-council1-261105.testnet, yf-council2-261105.testnet, yf-council3-261105.testnet
+  - term: Bond
+  - definition: 100000000000000000000000 yoctoNEAR
+  - paragraph: Deposits do not grant voting rights. Payment needs a successful token receipt.
+- contentinfo:
+  - generic: YIELDFUND / COMMUNITY CAPITAL
+  - link "Know the risks":
+    - /url: /risks
+    - text: Know the risks

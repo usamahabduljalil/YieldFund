@@ -1,0 +1,510 @@
+{
+  "schemaVersion": 1,
+  "kind": "unsigned-testnet-plan",
+  "setup": {
+    "schemaVersion": 1,
+    "rpcUrl": "https://rpc.testnet.near.org",
+    "operatorId": "yf-operator-261105.testnet",
+    "deployerId": "yf-operator-261105.testnet",
+    "contracts": {
+      "vault": {
+        "accountId": "vault.yf-operator-261105.testnet",
+        "publicKey": "ed25519:BWCQ3EHaLvQXF9CBpTs12HVobsqikEPXCaNeEFNaCkFc"
+      },
+      "token": {
+        "accountId": "token.yf-operator-261105.testnet",
+        "publicKey": "ed25519:F4RtnAZfi2KcM1Hrak78n7Y52vghFfLTTDX8wPisNENX"
+      },
+      "strategy": {
+        "accountId": "strategy.yf-operator-261105.testnet",
+        "publicKey": "ed25519:f9xGtyaq3SSanFdzrqDRpadbEekYxYh77mw6EVc61kf"
+      },
+      "dao": {
+        "accountId": "dao.yf-operator-261105.testnet",
+        "publicKey": "ed25519:CubYV5sy1Mtcs17E9JbbGVSBUqYF1r2FfgHVUyEf6QYD"
+      }
+    },
+    "guardianId": "yf-operator-261105.testnet",
+    "controllerId": "yf-operator-261105.testnet",
+    "lossSinkId": "yf-council2-261105.testnet",
+    "recipientId": "yf-council3-261105.testnet",
+    "council": [
+      "yf-council1-261105.testnet",
+      "yf-council2-261105.testnet",
+      "yf-council3-261105.testnet"
+    ],
+    "depositCap": "10000000000",
+    "totalSupply": "1000000000000",
+    "authority": "Local testnet rehearsal controlled by the current Windows user. Operator and all three council keys are held in Windows Credential Manager on this machine; they do not represent independent human custodians. Four distinct contract keys are held in a current-user-only local directory outside the repository. Guardian/controller is the operator; the third council account is the fictional payment recipient and the second is the unused normal-build loss sink.",
+    "metadata": {
+      "name": "YieldFund Commons",
+      "description": "Fictional testnet campaign for open-source community maintenance.",
+      "strategy": "funded_simulator",
+      "asset": "Test-only tUSD; no monetary value",
+      "disclosureVersion": "1.0"
+    }
+  },
+  "manifest": {
+    "mode": "chain",
+    "network": "testnet",
+    "chainId": "testnet",
+    "rpcUrl": "https://rpc.testnet.near.org",
+    "vaultId": "vault.yf-operator-261105.testnet",
+    "config": {
+      "campaign_id": "commons",
+      "token_id": "token.yf-operator-261105.testnet",
+      "token_decimals": 6,
+      "beneficiary_id": "dao.yf-operator-261105.testnet",
+      "guardian_id": "yf-operator-261105.testnet",
+      "deposit_cap": "10000000000",
+      "metadata_hash": "8e8b92f99496665008b3d7935d28067466c23779a8a8c1442485b00ac6edfff0",
+      "disclosure_version": "1.0",
+      "strategy_id": "strategy.yf-operator-261105.testnet"
+    },
+    "codeHashes": {
+      "vault.yf-operator-261105.testnet": "250fd465d930ac23081e3e04929d59b036e82a30f11fed7e1dd799efc77d00ad",
+      "token.yf-operator-261105.testnet": "1e22e0afefecbcef57415c96bdbeefe440f675aaabada45255ac51f9587af9ad",
+      "strategy.yf-operator-261105.testnet": "2900d891851a0fd844bed39fda877bb983ece54d2f99f1fb2a3c0c79c009004b",
+      "dao.yf-operator-261105.testnet": "2ed1d58bb2837f29b7629f833fea16bf661b4bea31fd4cceede4dc1f723d6cea"
+    },
+    "daoPolicy": {
+      "roles": [
+        {
+          "name": "council",
+          "kind": {
+            "Group": [
+              "yf-council1-261105.testnet",
+              "yf-council2-261105.testnet",
+              "yf-council3-261105.testnet"
+            ]
+          },
+          "permissions": [
+            "transfer:AddProposal",
+            "transfer:Finalize",
+            "transfer:VoteApprove",
+            "transfer:VoteReject"
+          ],
+          "vote_policy": {}
+        }
+      ],
+      "default_vote_policy": {
+        "weight_kind": "RoleWeight",
+        "quorum": "2",
+        "threshold": "2"
+      },
+      "proposal_bond": "100000000000000000000000",
+      "proposal_period": "604800000000000",
+      "bounty_bond": "0",
+      "bounty_forgiveness_period": "86400000000000"
+    },
+    "factoryInfo": {
+      "factory_id": "dao.yf-operator-261105.testnet",
+      "auto_update": true
+    },
+    "transactionsEnabled": false,
+    "authority": "Local testnet rehearsal controlled by the current Windows user. Operator and all three council keys are held in Windows Credential Manager on this machine; they do not represent independent human custodians. Four distinct contract keys are held in a current-user-only local directory outside the repository. Guardian/controller is the operator; the third council account is the fictional payment recipient and the second is the unused normal-build loss sink. Four contract full-access keys are retained and can replace code. DAO factory is itself, with auto_update=true. Funded simulator; no live lending."
+  },
+  "metadata": {
+    "name": "YieldFund Commons",
+    "description": "Fictional testnet campaign for open-source community maintenance.",
+    "strategy": "funded_simulator",
+    "asset": "Test-only tUSD; no monetary value",
+    "disclosureVersion": "1.0"
+  },
+  "metadataCanonical": "{\"asset\":\"Test-only tUSD; no monetary value\",\"description\":\"Fictional testnet campaign for open-source community maintenance.\",\"disclosureVersion\":\"1.0\",\"name\":\"YieldFund Commons\",\"strategy\":\"funded_simulator\"}",
+  "expectedKeys": {
+    "vault.yf-operator-261105.testnet": [
+      {
+        "public_key": "ed25519:BWCQ3EHaLvQXF9CBpTs12HVobsqikEPXCaNeEFNaCkFc",
+        "permission": "FullAccess"
+      }
+    ],
+    "token.yf-operator-261105.testnet": [
+      {
+        "public_key": "ed25519:F4RtnAZfi2KcM1Hrak78n7Y52vghFfLTTDX8wPisNENX",
+        "permission": "FullAccess"
+      }
+    ],
+    "strategy.yf-operator-261105.testnet": [
+      {
+        "public_key": "ed25519:f9xGtyaq3SSanFdzrqDRpadbEekYxYh77mw6EVc61kf",
+        "permission": "FullAccess"
+      }
+    ],
+    "dao.yf-operator-261105.testnet": [
+      {
+        "public_key": "ed25519:CubYV5sy1Mtcs17E9JbbGVSBUqYF1r2FfgHVUyEf6QYD",
+        "permission": "FullAccess"
+      }
+    ]
+  },
+  "actors": {
+    "operator": "yf-operator-261105.testnet",
+    "deployer": "yf-operator-261105.testnet",
+    "controller": "yf-operator-261105.testnet",
+    "guardian": "yf-operator-261105.testnet",
+    "council": [
+      "yf-council1-261105.testnet",
+      "yf-council2-261105.testnet",
+      "yf-council3-261105.testnet"
+    ],
+    "recipient": "yf-council3-261105.testnet",
+    "lossSink": "yf-council2-261105.testnet"
+  },
+  "totalSupply": "1000000000000",
+  "attachedDepositUpperBound": "22160000000000000000000000",
+  "gasExcluded": true,
+  "prerequisites": [
+    "All actor accounts already exist on testnet and are controlled by the intended people.",
+    "All four contract accounts are absent. Check finality immediately before creation.",
+    "Review vault/token/strategy/DAO funding of 6/5/4/7 NEAR, registration deposits, gas, public keys and custody before any signature.",
+    "DeployContract and new must be one ordered transaction signed by that contract account.",
+    "Do not rerun a broadcast with an unknown outcome; inspect finalized receipts first."
+  ],
+  "steps": [
+    {
+      "id": "create-vault",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "vault.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "CreateAccount"
+        },
+        {
+          "type": "Transfer",
+          "deposit": "6000000000000000000000000"
+        },
+        {
+          "type": "AddKey",
+          "publicKey": "ed25519:BWCQ3EHaLvQXF9CBpTs12HVobsqikEPXCaNeEFNaCkFc",
+          "permission": "FullAccess"
+        }
+      ]
+    },
+    {
+      "id": "create-token",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "CreateAccount"
+        },
+        {
+          "type": "Transfer",
+          "deposit": "5000000000000000000000000"
+        },
+        {
+          "type": "AddKey",
+          "publicKey": "ed25519:F4RtnAZfi2KcM1Hrak78n7Y52vghFfLTTDX8wPisNENX",
+          "permission": "FullAccess"
+        }
+      ]
+    },
+    {
+      "id": "create-strategy",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "strategy.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "CreateAccount"
+        },
+        {
+          "type": "Transfer",
+          "deposit": "4000000000000000000000000"
+        },
+        {
+          "type": "AddKey",
+          "publicKey": "ed25519:f9xGtyaq3SSanFdzrqDRpadbEekYxYh77mw6EVc61kf",
+          "permission": "FullAccess"
+        }
+      ]
+    },
+    {
+      "id": "create-dao",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "dao.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "CreateAccount"
+        },
+        {
+          "type": "Transfer",
+          "deposit": "7000000000000000000000000"
+        },
+        {
+          "type": "AddKey",
+          "publicKey": "ed25519:CubYV5sy1Mtcs17E9JbbGVSBUqYF1r2FfgHVUyEf6QYD",
+          "permission": "FullAccess"
+        }
+      ]
+    },
+    {
+      "id": "initialize-token",
+      "signerId": "token.yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "DeployContract",
+          "artifact": "yieldfund_test_token.wasm",
+          "sha256": "1e22e0afefecbcef57415c96bdbeefe440f675aaabada45255ac51f9587af9ad"
+        },
+        {
+          "type": "FunctionCall",
+          "methodName": "new",
+          "args": {
+            "owner_id": "yf-operator-261105.testnet",
+            "total_supply": "1000000000000"
+          },
+          "gas": "100000000000000",
+          "deposit": "0"
+        }
+      ]
+    },
+    {
+      "id": "initialize-strategy",
+      "signerId": "strategy.yf-operator-261105.testnet",
+      "receiverId": "strategy.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "DeployContract",
+          "artifact": "yieldfund_strategy_simulator.wasm",
+          "sha256": "2900d891851a0fd844bed39fda877bb983ece54d2f99f1fb2a3c0c79c009004b"
+        },
+        {
+          "type": "FunctionCall",
+          "methodName": "new",
+          "args": {
+            "token_id": "token.yf-operator-261105.testnet",
+            "vault_id": "vault.yf-operator-261105.testnet",
+            "controller_id": "yf-operator-261105.testnet",
+            "loss_sink_id": "yf-council2-261105.testnet"
+          },
+          "gas": "100000000000000",
+          "deposit": "0"
+        }
+      ]
+    },
+    {
+      "id": "initialize-vault",
+      "signerId": "vault.yf-operator-261105.testnet",
+      "receiverId": "vault.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "DeployContract",
+          "artifact": "yieldfund_vault.wasm",
+          "sha256": "250fd465d930ac23081e3e04929d59b036e82a30f11fed7e1dd799efc77d00ad"
+        },
+        {
+          "type": "FunctionCall",
+          "methodName": "new",
+          "args": {
+            "config": {
+              "campaign_id": "commons",
+              "token_id": "token.yf-operator-261105.testnet",
+              "token_decimals": 6,
+              "beneficiary_id": "dao.yf-operator-261105.testnet",
+              "guardian_id": "yf-operator-261105.testnet",
+              "deposit_cap": "10000000000",
+              "metadata_hash": "8e8b92f99496665008b3d7935d28067466c23779a8a8c1442485b00ac6edfff0",
+              "disclosure_version": "1.0",
+              "strategy_id": "strategy.yf-operator-261105.testnet"
+            }
+          },
+          "gas": "100000000000000",
+          "deposit": "0"
+        }
+      ]
+    },
+    {
+      "id": "initialize-dao",
+      "signerId": "dao.yf-operator-261105.testnet",
+      "receiverId": "dao.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "DeployContract",
+          "artifact": "sputnikdao2.wasm",
+          "sha256": "2ed1d58bb2837f29b7629f833fea16bf661b4bea31fd4cceede4dc1f723d6cea"
+        },
+        {
+          "type": "FunctionCall",
+          "methodName": "new",
+          "args": {
+            "config": {
+              "name": "YieldFund Commons",
+              "purpose": "Fictional testnet community campaign",
+              "metadata": ""
+            },
+            "policy": {
+              "roles": [
+                {
+                  "name": "council",
+                  "kind": {
+                    "Group": [
+                      "yf-council1-261105.testnet",
+                      "yf-council2-261105.testnet",
+                      "yf-council3-261105.testnet"
+                    ]
+                  },
+                  "permissions": [
+                    "transfer:AddProposal",
+                    "transfer:Finalize",
+                    "transfer:VoteApprove",
+                    "transfer:VoteReject"
+                  ],
+                  "vote_policy": {}
+                }
+              ],
+              "default_vote_policy": {
+                "weight_kind": "RoleWeight",
+                "quorum": "2",
+                "threshold": "2"
+              },
+              "proposal_bond": "100000000000000000000000",
+              "proposal_period": "604800000000000",
+              "bounty_bond": "0",
+              "bounty_forgiveness_period": "86400000000000"
+            }
+          },
+          "gas": "100000000000000",
+          "deposit": "0"
+        }
+      ]
+    },
+    {
+      "id": "register-vault.yf-operator-261105.testnet",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "storage_deposit",
+          "args": {
+            "account_id": "vault.yf-operator-261105.testnet",
+            "registration_only": true
+          },
+          "gas": "30000000000000",
+          "deposit": "20000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "register-token.yf-operator-261105.testnet",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "storage_deposit",
+          "args": {
+            "account_id": "token.yf-operator-261105.testnet",
+            "registration_only": true
+          },
+          "gas": "30000000000000",
+          "deposit": "20000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "register-strategy.yf-operator-261105.testnet",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "storage_deposit",
+          "args": {
+            "account_id": "strategy.yf-operator-261105.testnet",
+            "registration_only": true
+          },
+          "gas": "30000000000000",
+          "deposit": "20000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "register-dao.yf-operator-261105.testnet",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "storage_deposit",
+          "args": {
+            "account_id": "dao.yf-operator-261105.testnet",
+            "registration_only": true
+          },
+          "gas": "30000000000000",
+          "deposit": "20000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "register-yf-operator-261105.testnet",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "storage_deposit",
+          "args": {
+            "account_id": "yf-operator-261105.testnet",
+            "registration_only": true
+          },
+          "gas": "30000000000000",
+          "deposit": "20000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "register-yf-council1-261105.testnet",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "storage_deposit",
+          "args": {
+            "account_id": "yf-council1-261105.testnet",
+            "registration_only": true
+          },
+          "gas": "30000000000000",
+          "deposit": "20000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "register-yf-council2-261105.testnet",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "storage_deposit",
+          "args": {
+            "account_id": "yf-council2-261105.testnet",
+            "registration_only": true
+          },
+          "gas": "30000000000000",
+          "deposit": "20000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "register-yf-council3-261105.testnet",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "storage_deposit",
+          "args": {
+            "account_id": "yf-council3-261105.testnet",
+            "registration_only": true
+          },
+          "gas": "30000000000000",
+          "deposit": "20000000000000000000000"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "buttons": [
+    "",
+    "What happens to my capital?",
+    "Can I withdraw?",
+    "Who decides how funds are spent?",
+    "Is the yield guaranteed?",
+    "What can I try today?"
+  ],
+  "documentWidth": 675,
+  "hasWalletControl": false,
+  "iframeCount": 0,
+  "url": "http://127.0.0.1:4175/",
+  "viewportWidth": 690
+}

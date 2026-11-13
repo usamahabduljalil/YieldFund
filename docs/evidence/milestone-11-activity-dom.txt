@@ -1,0 +1,194 @@
+- link "Skip to content":
+  - /url: "#app-main"
+- complementary "Workspace navigation":
+  - link "YieldFund home":
+    - /url: /
+    - generic: yieldfund.
+  - button "Close navigation":
+  - generic: YOUR COMMUNITY SPACE
+  - strong: The Commons
+  - generic: Open-source community
+  - navigation "Application navigation":
+    - link "Overview":
+      - /url: /app
+      - text: Overview
+    - link "My position":
+      - /url: /app/positions
+      - text: My position
+    - link "Treasury":
+      - /url: /app/treasury
+      - text: Treasury
+    - link "Activity":
+      - /url: /app/activity
+      - text: Activity
+  - link "Campaign operations":
+    - /url: /app/manage
+    - text: Campaign operations
+  - generic: GROW SOMETHING GOOD.
+  - paragraph:
+    - text: Shared capital.
+    - text: Shared possibilities.
+  - link "Risks & disclosures":
+    - /url: /risks
+    - text: Risks & disclosures
+  - link "Back to website":
+    - /url: /
+    - text: Back to website
+- banner:
+  - button "Open navigation" [active]:
+  - strong: Activity
+  - button "yf-operator-261105.testnet":
+    - text: yf-operator-261105.testnet
+- generic: NEAR TESTNET
+- text: Simulated strategy · Final block 277366795
+- button "Checking…" [disabled]:
+  - text: Checking…
+- main:
+  - generic: Read-only
+  - generic: Data as of 2:07:07 PM
+  - generic: THE COMMONS / ON-CHAIN
+  - heading "Every step, accounted for." [level=1]
+  - heading "Wallet submissions" [level=2]
+  - strong: request withdraw
+  - generic: finalized
+  - generic: yf-operator-261105.testnet · 11/10/2026, 9:27:49 AM
+  - strong
+  - paragraph: FbWcmbwx4RVpxdG6yTnYDTms2rzaMjz8gQa2XGj1QUBK
+  - 'link "Operation #4"':
+    - /url: /app/operations/4
+  - link "Transaction explorer":
+    - /url: https://testnet.nearblocks.io/txns/FbWcmbwx4RVpxdG6yTnYDTms2rzaMjz8gQa2XGj1QUBK
+    - text: Transaction explorer
+  - generic "3 finalized outcome IDs"
+  - strong: act proposal
+  - generic: finalized
+  - generic: yf-council2-261105.testnet · 11/10/2026, 9:24:00 AM
+  - strong: DAO token transfer confirmed
+  - paragraph: DhpGTKnChHqWyN5p6mgGvWsdSEG287wNamK3Xac3geci
+  - link "Transaction explorer":
+    - /url: https://testnet.nearblocks.io/txns/DhpGTKnChHqWyN5p6mgGvWsdSEG287wNamK3Xac3geci
+    - text: Transaction explorer
+  - generic "9 finalized outcome IDs"
+  - strong: act proposal
+  - generic: finalized
+  - generic: yf-council1-261105.testnet · 11/10/2026, 9:16:52 AM
+  - strong
+  - paragraph: 29xXYHve8hpGz2Frqw4cEBLn6hAEU4VQdJrPX4umP9jh
+  - link "Transaction explorer":
+    - /url: https://testnet.nearblocks.io/txns/29xXYHve8hpGz2Frqw4cEBLn6hAEU4VQdJrPX4umP9jh
+    - text: Transaction explorer
+  - generic "3 finalized outcome IDs"
+  - strong: add proposal
+  - generic: finalized
+  - generic: yf-council1-261105.testnet · 11/9/2026, 10:22:00 AM
+  - strong
+  - paragraph: 9N3BBjzWc98N4eF5EgKURDXtx7zrHEG7PWrMfBMiUrmw
+  - link "Transaction explorer":
+    - /url: https://testnet.nearblocks.io/txns/9N3BBjzWc98N4eF5EgKURDXtx7zrHEG7PWrMfBMiUrmw
+    - text: Transaction explorer
+  - generic "3 finalized outcome IDs"
+  - strong: distribute yield
+  - generic: finalized
+  - generic: yf-operator-261105.testnet · 11/9/2026, 10:13:20 AM
+  - strong
+  - paragraph: DqrWAXvoQhzVnWSwwXYn5oKCgP1kGXSvSaEFTCCXCQqf
+  - 'link "Operation #3"':
+    - /url: /app/operations/3
+  - link "Transaction explorer":
+    - /url: https://testnet.nearblocks.io/txns/DqrWAXvoQhzVnWSwwXYn5oKCgP1kGXSvSaEFTCCXCQqf
+    - text: Transaction explorer
+  - generic "11 finalized outcome IDs"
+  - strong: redeem strategy
+  - generic: finalized
+  - generic: yf-operator-261105.testnet · 11/9/2026, 10:07:01 AM
+  - strong
+  - paragraph: 5U4RfRBoXzfySxs4npp6emDXM5ANLpNTqYzbCL7N64te
+  - 'link "Operation #2"':
+    - /url: /app/operations/2
+  - link "Transaction explorer":
+    - /url: https://testnet.nearblocks.io/txns/5U4RfRBoXzfySxs4npp6emDXM5ANLpNTqYzbCL7N64te
+    - text: Transaction explorer
+  - generic "15 finalized outcome IDs"
+  - strong: allocate idle
+  - generic: finalized
+  - generic: yf-operator-261105.testnet · 11/9/2026, 10:03:12 AM
+  - strong
+  - paragraph: 5NUq7DNGnTNJpnnE8ZsGcYWQeevy99GKYXovvinHWWfS
+  - 'link "Operation #1"':
+    - /url: /app/operations/1
+  - link "Transaction explorer":
+    - /url: https://testnet.nearblocks.io/txns/5NUq7DNGnTNJpnnE8ZsGcYWQeevy99GKYXovvinHWWfS
+    - text: Transaction explorer
+  - generic "11 finalized outcome IDs"
+  - strong: ft transfer call
+  - generic: finalized
+  - generic: yf-operator-261105.testnet · 11/9/2026, 4:54:34 AM
+  - strong: Deposit accepted
+  - paragraph: FFQJ2dYdVBhUoZYfuK5BfVLS4tGAdDN6xfSr3YieS5Xp
+  - link "Transaction explorer":
+    - /url: https://testnet.nearblocks.io/txns/FFQJ2dYdVBhUoZYfuK5BfVLS4tGAdDN6xfSr3YieS5Xp
+    - text: Transaction explorer
+  - generic "7 finalized outcome IDs"
+  - strong: storage deposit
+  - generic: finalized
+  - generic: yf-operator-261105.testnet · 11/9/2026, 4:47:45 AM
+  - strong
+  - paragraph: 8gviMwprxgvhhjVjhJDwWiCMUW4UCLoxky6PhwxSBKvd
+  - link "Transaction explorer":
+    - /url: https://testnet.nearblocks.io/txns/8gviMwprxgvhhjVjhJDwWiCMUW4UCLoxky6PhwxSBKvd
+    - text: Transaction explorer
+  - generic "3 finalized outcome IDs"
+  - paragraph: Finalized means the receipts were checked. Contract operations determine whether funds were accepted or paid.
+  - heading "Campaign journal" [level=2]
+  - table:
+    - rowgroup:
+      - row "Operation Amount Status Details":
+        - columnheader "Operation"
+        - columnheader "Amount"
+        - columnheader "Status"
+        - columnheader "Details"
+    - rowgroup:
+      - row "#1 · allocation 1,000.00 tUSD completed Open operation 1":
+        - cell "#1 · allocation"
+        - cell "1,000.00 tUSD"
+        - cell "completed":
+          - generic: completed
+        - cell "Open operation 1":
+          - link "Open operation 1":
+            - /url: /app/operations/1
+            - text: View
+      - row "#2 · redemption 1,000.00 tUSD completed Open operation 2":
+        - cell "#2 · redemption"
+        - cell "1,000.00 tUSD"
+        - cell "completed":
+          - generic: completed
+        - cell "Open operation 2":
+          - link "Open operation 2":
+            - /url: /app/operations/2
+            - text: View
+      - row "#3 · donation 30.00 tUSD completed Open operation 3":
+        - cell "#3 · donation"
+        - cell "30.00 tUSD"
+        - cell "completed":
+          - generic: completed
+        - cell "Open operation 3":
+          - link "Open operation 3":
+            - /url: /app/operations/3
+            - text: View
+      - row "#4 · withdrawal 200.00 tUSD completed Open operation 4":
+        - cell "#4 · withdrawal"
+        - cell "200.00 tUSD"
+        - cell "completed":
+          - generic: completed
+        - cell "Open operation 4":
+          - link "Open operation 4":
+            - /url: /app/operations/4
+            - text: View
+  - text: First 50 operations. Open any operation by its ID below.
+  - text: Operation ID
+  - textbox "Operation ID"
+- contentinfo:
+  - generic: YIELDFUND / COMMUNITY CAPITAL
+  - link "Know the risks":
+    - /url: /risks
+    - text: Know the risks

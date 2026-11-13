@@ -1,0 +1,56 @@
+- link "Skip to content":
+  - /url: "#app-main"
+- complementary "Workspace navigation":
+  - link "YieldFund home":
+    - /url: /
+    - generic: yieldfund.
+  - generic: YOUR COMMUNITY SPACE
+  - strong: The Commons
+  - generic: Open-source community
+  - navigation "Application navigation":
+    - link "Overview":
+      - /url: /app
+      - text: Overview
+    - link "My position":
+      - /url: /app/positions
+      - text: My position
+    - link "Treasury":
+      - /url: /app/treasury
+      - text: Treasury
+    - link "Activity":
+      - /url: /app/activity
+      - text: Activity
+  - link "Campaign operations":
+    - /url: /app/manage
+    - text: Campaign operations
+  - generic: GROW SOMETHING GOOD.
+  - paragraph:
+    - text: Shared capital.
+    - text: Shared possibilities.
+  - link "Risks & disclosures":
+    - /url: /risks
+    - text: Risks & disclosures
+  - link "Back to website":
+    - /url: /
+    - text: Back to website
+- banner:
+  - generic: Workspace
+  - generic: /
+  - strong: My position
+  - generic: Testnet wallet
+  - button "Connect wallet":
+    - text: Connect wallet
+- generic: NEAR TESTNETSimulated strategy · Final block 277411991
+- button "Refresh":
+  - text: Refresh
+- main:
+  - generic: Read-only
+  - generic: Data as of 9:24:39 PM
+  - generic: THE COMMONS / ON-CHAIN
+  - heading "Your capital, clearly." [level=1]
+  - heading "Connect your wallet to see your position" [level=3]
+- contentinfo:
+  - generic: YIELDFUND / COMMUNITY CAPITAL
+  - link "Know the risks":
+    - /url: /risks
+    - text: Know the risks

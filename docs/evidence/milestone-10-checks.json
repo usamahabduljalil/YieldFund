@@ -1,0 +1,23 @@
+{
+  "checkedAt": "2026-11-12T07:45:41.873Z",
+  "tests": {
+    "passed": 105,
+    "skipped": 1,
+    "newWalletSessionCases": 16
+  },
+  "typecheckAndProductionBuild": "passed",
+  "hostingPackagingTests": {
+    "passed": 4
+  },
+  "walletTestMethod": "controlled adapter promises; no real wallet or browser interaction",
+  "sourceSha256": {
+    "apps/web/src/wallet-session.ts": "e65fb08c1fbe72b391a1ba5b55a89eb17cf94f863caeb3e48b354f7ded68f5c5",
+    "apps/web/src/wallet-session.test.ts": "a003e54721dd5a10b69a3d590c51c7361788f94887a37c024c57eeee804f3198",
+    "apps/web/src/wallet.tsx": "19f131ac09caaf7fd314c94bfc2c652d38e1cc23d249e5964f79621ebd4ee160",
+    "apps/web/src/chain-store.tsx": "91637cab60c455308a4a8d95089eed0659e1716f1f8c937436dc94c464751bb4",
+    "packages/near-client/src/read-transport.ts": "42af01d9accef43debdb5ec6f9c553de8403949445d2d4c64d59979f222c8e64"
+  },
+  "signedTransactions": 0,
+  "broadcastTransactions": 0,
+  "liveBrowserAcceptance": "unverified: browser controls unavailable"
+}

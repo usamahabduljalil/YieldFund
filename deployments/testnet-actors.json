@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "rpcUrl": "https://rpc.testnet.near.org",
+  "operatorId": "yf-operator-261105.testnet",
+  "council": [
+    "yf-council1-261105.testnet",
+    "yf-council2-261105.testnet",
+    "yf-council3-261105.testnet"
+  ]
+}

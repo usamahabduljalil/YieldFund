@@ -1,0 +1,206 @@
+{
+  "checkedAt": "2026-11-12T07:06:26.677Z",
+  "rpcOverride": "https://rpc.testnet.fastnear.com",
+  "snapshot": {
+    "blockHash": "2oU61pKf4NLH6QfBDidfbDWkR3Z9Kd2sdxZuG58AJXuJ",
+    "height": 277329676,
+    "timestamp": 1794467177382,
+    "fetchedAt": 1794467183597,
+    "accountId": "yf-operator-261105.testnet",
+    "accounting": {
+      "mode": "funded_simulator",
+      "cash": "1000000000",
+      "excluded": "0",
+      "nominal": "1000000000",
+      "backing": "1000000000",
+      "shortfall": "0",
+      "eligible_yield": "0",
+      "reserved_outbound": "0",
+      "paused": false,
+      "active_operation": null,
+      "state_version": "12",
+      "checkpoint_at": "1794215693605925119",
+      "needs_reconciliation": false,
+      "strategy_book": "0",
+      "settled": true,
+      "donated": "30000000",
+      "queued_redemption": null
+    },
+    "operations": [
+      {
+        "id": "1",
+        "kind": "allocation",
+        "owner_id": "yf-operator-261105.testnet",
+        "units": "1000000000",
+        "minimum": "0",
+        "payout": "1000000000",
+        "stage": "completed",
+        "version": "4",
+        "started_at": "1794215039545512081",
+        "updated_at": "1794215041800942330",
+        "error": null
+      },
+      {
+        "id": "2",
+        "kind": "redemption",
+        "owner_id": "yf-operator-261105.testnet",
+        "units": "1000000000",
+        "minimum": "0",
+        "payout": "1030000000",
+        "stage": "completed",
+        "version": "7",
+        "started_at": "1794215381672133015",
+        "updated_at": "1794215385385971928",
+        "error": null
+      },
+      {
+        "id": "3",
+        "kind": "donation",
+        "owner_id": "dao.yf-operator-261105.testnet",
+        "units": "30000000",
+        "minimum": "0",
+        "payout": "30000000",
+        "stage": "completed",
+        "version": "11",
+        "started_at": "1794215692442791099",
+        "updated_at": "1794215694807752883",
+        "error": null
+      },
+      {
+        "id": "4",
+        "kind": "withdrawal",
+        "owner_id": "yf-operator-261105.testnet",
+        "units": "200000000",
+        "minimum": "200000000",
+        "payout": "0",
+        "stage": "requested",
+        "version": "12",
+        "started_at": "1794299301000025456",
+        "updated_at": "1794299301000025456",
+        "error": null
+      }
+    ],
+    "proposals": [
+      {
+        "id": 0,
+        "proposer": "yf-council1-261105.testnet",
+        "description": "Fictional Commons maintenance rehearsal",
+        "kind": {
+          "Transfer": {
+            "token_id": "token.yf-operator-261105.testnet",
+            "receiver_id": "yf-council3-261105.testnet",
+            "amount": "20000000",
+            "msg": null
+          }
+        },
+        "status": "Approved",
+        "vote_counts": {
+          "council": [
+            "2",
+            "0",
+            "0"
+          ]
+        },
+        "votes": {
+          "yf-council1-261105.testnet": "Approve",
+          "yf-council2-261105.testnet": "Approve"
+        },
+        "submission_time": "1794216174859660351",
+        "last_actions_log": [
+          {
+            "block_height": "276901468"
+          },
+          {
+            "block_height": "277041793"
+          },
+          {
+            "block_height": "277042504"
+          }
+        ]
+      }
+    ],
+    "proposalCount": 1,
+    "policy": {
+      "roles": [
+        {
+          "name": "council",
+          "kind": {
+            "Group": [
+              "yf-council1-261105.testnet",
+              "yf-council2-261105.testnet",
+              "yf-council3-261105.testnet"
+            ]
+          },
+          "permissions": [
+            "transfer:AddProposal",
+            "transfer:VoteReject",
+            "transfer:Finalize",
+            "transfer:VoteApprove"
+          ],
+          "vote_policy": {}
+        }
+      ],
+      "default_vote_policy": {
+        "weight_kind": "RoleWeight",
+        "quorum": "2",
+        "threshold": "2"
+      },
+      "proposal_bond": "100000000000000000000000",
+      "proposal_period": "604800000000000",
+      "bounty_bond": "0",
+      "bounty_forgiveness_period": "86400000000000"
+    },
+    "position": {
+      "nominal": "1000000000",
+      "reserved": "200000000",
+      "deposited": "1000000000",
+      "withdrawn": "0"
+    },
+    "tokenBalance": "998970000000",
+    "treasuryBalance": "10000000",
+    "tokenRegistered": true,
+    "vaultRegistered": true,
+    "daoRegistered": true,
+    "costs": {
+      "position": "5120000000000000000000",
+      "operation": "20480000000000000000001",
+      "advance": "1",
+      "refundable": false
+    },
+    "tokenStorageCost": "1250000000000000000000",
+    "strategy": {
+      "mode": "funded_simulator",
+      "token_id": "token.yf-operator-261105.testnet",
+      "vault_id": "vault.yf-operator-261105.testnet",
+      "position": "0",
+      "busy": false,
+      "last_redeem": "2",
+      "last_supply": "1"
+    },
+    "nativeBalance": "2868518909221825699999994"
+  },
+  "operation": {
+    "id": "4",
+    "kind": "withdrawal",
+    "owner_id": "yf-operator-261105.testnet",
+    "units": "200000000",
+    "minimum": "200000000",
+    "payout": "0",
+    "stage": "requested",
+    "version": "12",
+    "started_at": "1794299301000025456",
+    "updated_at": "1794299301000025456",
+    "error": null
+  },
+  "signer": "yf-operator-261105.testnet",
+  "receiver": "vault.yf-operator-261105.testnet",
+  "nonce": "276321233000020",
+  "oldBlockHash": "439SucsrJ4yZYxiiWNWRvkp6r9xCfN4ETiBJvNM6zbmJ",
+  "oldBlockHeight": 277043009,
+  "currentHeight": 277329676,
+  "transactionValidityPeriod": 86400,
+  "expired": true,
+  "confirmedNonce": 276321233000019,
+  "unusedNonce": true,
+  "signedPayloadSha256": "ca397e03bf132b723541c1562031eed5fc5252a693ed06180f25b695c54221bd"
+}

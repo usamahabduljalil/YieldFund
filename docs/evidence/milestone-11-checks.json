@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-11-12T13:11:52.7660210Z",
+  "tests": {
+    "files": 8,
+    "passed": 108,
+    "skipped": 1
+  },
+  "productionBuild": "passed",
+  "typecheck": "passed",
+  "hostingTests": {
+    "passed": 4
+  },
+  "signatures": 0,
+  "broadcasts": 0,
+  "sourceSha256": {
+    "apps/web/src/receipt-tracking.test.ts": "75fe79350b5b047fcb0247578bab086805b228ac144d2ac497efe642a3758bd8",
+    "apps/web/src/receipt-tracking.ts": "a943a39c064c28f2399c1c0c231607c8e834ce3fab17ee59f4c7faf8d2d3f9ce",
+    "packages/near-client/src/read-transport.ts": "e668588b85e72da5d083b39e07a8e2eef9136222b70fd57f600ec7f27d974fce",
+    "packages/near-client/src/read-transport.test.ts": "008d3f370358ab94242773928c7fab5f7814b0e8f7c508643f195b1ad3eec402",
+    "apps/web/src/chain-store.tsx": "eebcc2cb87824a58e2259d607ce9fa361616a5b5dd136c8c5ded02f397ca4d0e"
+  },
+  "browser": {
+    "transactionsEnabled": false,
+    "withdrawn": "200",
+    "reserved": "0",
+    "proposal0": "Approved; two approvals; payment receipt verified",
+    "finalizedSavedSubmissions": 9,
+    "donated": "30",
+    "completedOperations": 4,
+    "nominal": "800",
+    "account": "yf-operator-261105.testnet",
+    "treasury": "10",
+    "proposal0Amount": "20",
+    "finalAdvanceBrowserHandoffVerified": false
+  }
+}

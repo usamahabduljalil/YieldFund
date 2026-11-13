@@ -1,0 +1,6 @@
+{
+  "at": "2026-11-07T04:30:00.163Z",
+  "rpc": "https://archival-rpc.testnet.fastnear.com/",
+  "hash": "F1wydo7R51xk594MjVaF8RL9uTs1RTfX6whdhWmyb9kv",
+  "reason": "Exact transaction absent on two RPC reads; unused nonce and missing registration verified; same signed bytes"
+}

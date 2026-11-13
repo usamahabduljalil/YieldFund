@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-12",
+  "timezone": "Africa/Lagos",
+  "tests": {
+    "passed": 119,
+    "files": 9,
+    "skipped": 1,
+    "newProviderCases": 11
+  },
+  "initialRegressions": {
+    "passed": 5,
+    "failed": 3
+  },
+  "productionBuild": "passed",
+  "typecheck": "passed",
+  "hostingTests": {
+    "passed": 4
+  },
+  "signatures": 0,
+  "broadcasts": 0,
+  "sourceSha256": {
+    "package-lock.json": "7b04ab4cfb50830b5837f77c6aefda3f0a6a64f10e80b487ecd8b872292b0f43",
+    "apps/web/src/chain-store.test.ts": "e939775d4992ae1b6f028ea0df7074051fbf22f720aba7395ba8985f730aea22",
+    "package.json": "ae46f50624face2302d180e875840ad464dac914c89199a47aefeebac587c9f2",
+    "apps/web/src/chain-store.tsx": "e3c14466ffc2983b3893f278612183008dfe75cfabc14242a9e749b927f30acf"
+  },
+  "realWalletSigningAcceptance": "not performed; emulated-DOM provider tests only"
+}

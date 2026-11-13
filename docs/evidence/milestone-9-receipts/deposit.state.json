@@ -1,0 +1,101 @@
+{
+  "id": "deposit",
+  "hash": "FFQJ2dYdVBhUoZYfuK5BfVLS4tGAdDN6xfSr3YieS5Xp",
+  "checkedAt": "2026-11-09T08:51:58.974Z",
+  "balances": {
+    "yf-operator-261105.testnet": "999000000000",
+    "vault.yf-operator-261105.testnet": "1000000000",
+    "strategy.yf-operator-261105.testnet": "0",
+    "dao.yf-operator-261105.testnet": "0",
+    "yf-council3-261105.testnet": "0",
+    "yf-council1-261105.testnet": "0",
+    "yf-council2-261105.testnet": "0"
+  },
+  "snapshot": {
+    "blockHash": "B1PoYfLS84s6GodDhYLX86z2KBH3x42EsBpLDA5RGnT6",
+    "height": 276898297,
+    "timestamp": 1794214286096,
+    "fetchedAt": 1794214302788,
+    "accountId": "yf-operator-261105.testnet",
+    "accounting": {
+      "mode": "funded_simulator",
+      "cash": "1000000000",
+      "excluded": "0",
+      "nominal": "1000000000",
+      "backing": "1000000000",
+      "shortfall": "0",
+      "eligible_yield": "0",
+      "reserved_outbound": "0",
+      "paused": false,
+      "active_operation": null,
+      "state_version": "1",
+      "checkpoint_at": "1794025518110904133",
+      "needs_reconciliation": false,
+      "strategy_book": "0",
+      "settled": true,
+      "donated": "0",
+      "queued_redemption": null
+    },
+    "operations": [],
+    "proposals": [],
+    "proposalCount": 0,
+    "policy": {
+      "roles": [
+        {
+          "name": "council",
+          "kind": {
+            "Group": [
+              "yf-council3-261105.testnet",
+              "yf-council2-261105.testnet",
+              "yf-council1-261105.testnet"
+            ]
+          },
+          "permissions": [
+            "transfer:VoteApprove",
+            "transfer:VoteReject",
+            "transfer:Finalize",
+            "transfer:AddProposal"
+          ],
+          "vote_policy": {}
+        }
+      ],
+      "default_vote_policy": {
+        "weight_kind": "RoleWeight",
+        "quorum": "2",
+        "threshold": "2"
+      },
+      "proposal_bond": "100000000000000000000000",
+      "proposal_period": "604800000000000",
+      "bounty_bond": "0",
+      "bounty_forgiveness_period": "86400000000000"
+    },
+    "position": {
+      "nominal": "1000000000",
+      "reserved": "0",
+      "deposited": "1000000000",
+      "withdrawn": "0"
+    },
+    "tokenBalance": "999000000000",
+    "treasuryBalance": "0",
+    "tokenRegistered": true,
+    "vaultRegistered": true,
+    "daoRegistered": true,
+    "costs": {
+      "position": "5120000000000000000000",
+      "operation": "20480000000000000000001",
+      "advance": "1",
+      "refundable": false
+    },
+    "tokenStorageCost": "1250000000000000000000",
+    "strategy": {
+      "mode": "funded_simulator",
+      "token_id": "token.yf-operator-261105.testnet",
+      "vault_id": "vault.yf-operator-261105.testnet",
+      "position": "0",
+      "busy": false,
+      "last_redeem": "0",
+      "last_supply": "0"
+    },
+    "nativeBalance": "2954883433693928399999999"
+  }
+}

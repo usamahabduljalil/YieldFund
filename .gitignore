@@ -1,0 +1,17 @@
+node_modules/
+dist/
+target/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+coverage/
+test-results/
+artifacts/
+apps/web/public/deployment.local.json
+.vercel/
+.near-credentials/
+*.pem
+*.key
+

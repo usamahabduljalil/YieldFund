@@ -1,0 +1,474 @@
+{
+  "verifiedAt": "2026-11-12T07:08:37.339Z",
+  "reviewSha256": "efb048ff9da1a00cecdf92fae98306cdbf15fe4f8f9376c1f1b95833cdaa79ff",
+  "recoveryApproval": "milestone-9-recovery-approval.json",
+  "transactions": [
+    {
+      "id": "register-position",
+      "hash": "8gviMwprxgvhhjVjhJDwWiCMUW4UCLoxky6PhwxSBKvd",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "vault.yf-operator-261105.testnet",
+      "call": {
+        "methodName": "storage_deposit",
+        "args": {
+          "account_id": "yf-operator-261105.testnet"
+        },
+        "gas": "300000000000000",
+        "deposit": "5120000000000000000000"
+      },
+      "channel": "browser-wallet",
+      "nonce": "276321233000013",
+      "tokensBurnt": "205723921758000000000",
+      "attachment": "5120000000000000000000",
+      "receiptCount": 2
+    },
+    {
+      "id": "deposit",
+      "hash": "FFQJ2dYdVBhUoZYfuK5BfVLS4tGAdDN6xfSr3YieS5Xp",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "call": {
+        "methodName": "ft_transfer_call",
+        "args": {
+          "receiver_id": "vault.yf-operator-261105.testnet",
+          "amount": "1000000000",
+          "msg": "deposit"
+        },
+        "gas": "300000000000000",
+        "deposit": "1"
+      },
+      "channel": "browser-initiated-manual-cli-hash-recovery",
+      "nonce": "276321233000014",
+      "tokensBurnt": "643343691274200000000",
+      "attachment": "1",
+      "receiptCount": 6
+    },
+    {
+      "id": "allocate",
+      "hash": "5NUq7DNGnTNJpnnE8ZsGcYWQeevy99GKYXovvinHWWfS",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "vault.yf-operator-261105.testnet",
+      "call": {
+        "methodName": "allocate_idle",
+        "args": {
+          "amount": "1000000000"
+        },
+        "gas": "300000000000000",
+        "deposit": "20480000000000000000001"
+      },
+      "channel": "browser-wallet",
+      "nonce": "276321233000015",
+      "tokensBurnt": "1062631568942500000000",
+      "attachment": "20480000000000000000001",
+      "receiptCount": 10
+    },
+    {
+      "id": "fund-profit",
+      "hash": "9abHU4XQoBjuefuZ3wYaDdxgnZaShHNQPsqws21R5fCu",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "call": {
+        "methodName": "ft_transfer_call",
+        "args": {
+          "receiver_id": "strategy.yf-operator-261105.testnet",
+          "amount": "30000000",
+          "msg": "fund_profit"
+        },
+        "gas": "300000000000000",
+        "deposit": "1"
+      },
+      "channel": "external-cli",
+      "nonce": "276321233000016",
+      "tokensBurnt": "587812077452900000000",
+      "attachment": "1",
+      "receiptCount": 6
+    },
+    {
+      "id": "redeem",
+      "hash": "5U4RfRBoXzfySxs4npp6emDXM5ANLpNTqYzbCL7N64te",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "vault.yf-operator-261105.testnet",
+      "call": {
+        "methodName": "redeem_strategy",
+        "args": {},
+        "gas": "300000000000000",
+        "deposit": "20480000000000000000001"
+      },
+      "channel": "browser-wallet",
+      "nonce": "276321233000017",
+      "tokensBurnt": "1459987959511600000000",
+      "attachment": "20480000000000000000001",
+      "receiptCount": 14
+    },
+    {
+      "id": "donate",
+      "hash": "DqrWAXvoQhzVnWSwwXYn5oKCgP1kGXSvSaEFTCCXCQqf",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "vault.yf-operator-261105.testnet",
+      "call": {
+        "methodName": "distribute_yield",
+        "args": {
+          "max_amount": "30000000"
+        },
+        "gas": "300000000000000",
+        "deposit": "20480000000000000000001"
+      },
+      "channel": "browser-wallet",
+      "nonce": "276321233000018",
+      "tokensBurnt": "1093737256818000000000",
+      "attachment": "20480000000000000000001",
+      "receiptCount": 10
+    },
+    {
+      "id": "propose",
+      "hash": "9N3BBjzWc98N4eF5EgKURDXtx7zrHEG7PWrMfBMiUrmw",
+      "signerId": "yf-council1-261105.testnet",
+      "receiverId": "dao.yf-operator-261105.testnet",
+      "call": {
+        "methodName": "add_proposal",
+        "args": {
+          "proposal": {
+            "description": "Fictional Commons maintenance rehearsal",
+            "kind": {
+              "Transfer": {
+                "token_id": "token.yf-operator-261105.testnet",
+                "receiver_id": "yf-council3-261105.testnet",
+                "amount": "20000000",
+                "msg": null
+              }
+            }
+          }
+        },
+        "gas": "100000000000000",
+        "deposit": "100000000000000000000000"
+      },
+      "channel": "browser-wallet",
+      "nonce": "276321427000002",
+      "tokensBurnt": "232553849250800000000",
+      "attachment": "100000000000000000000000",
+      "receiptCount": 2
+    },
+    {
+      "id": "vote-one",
+      "hash": "29xXYHve8hpGz2Frqw4cEBLn6hAEU4VQdJrPX4umP9jh",
+      "signerId": "yf-council1-261105.testnet",
+      "receiverId": "dao.yf-operator-261105.testnet",
+      "call": {
+        "methodName": "act_proposal",
+        "args": {
+          "id": 0,
+          "action": "VoteApprove",
+          "proposal": {
+            "Transfer": {
+              "token_id": "token.yf-operator-261105.testnet",
+              "receiver_id": "yf-council3-261105.testnet",
+              "amount": "20000000",
+              "msg": null
+            }
+          }
+        },
+        "gas": "250000000000000",
+        "deposit": "0"
+      },
+      "channel": "browser-wallet",
+      "nonce": "276321427000003",
+      "tokensBurnt": "252726059746200000000",
+      "attachment": "0",
+      "receiptCount": 2
+    },
+    {
+      "id": "vote-two",
+      "hash": "DhpGTKnChHqWyN5p6mgGvWsdSEG287wNamK3Xac3geci",
+      "signerId": "yf-council2-261105.testnet",
+      "receiverId": "dao.yf-operator-261105.testnet",
+      "call": {
+        "methodName": "act_proposal",
+        "args": {
+          "id": 0,
+          "action": "VoteApprove",
+          "proposal": {
+            "Transfer": {
+              "token_id": "token.yf-operator-261105.testnet",
+              "receiver_id": "yf-council3-261105.testnet",
+              "amount": "20000000",
+              "msg": null
+            }
+          }
+        },
+        "gas": "250000000000000",
+        "deposit": "0"
+      },
+      "channel": "browser-wallet",
+      "nonce": "276321466000002",
+      "tokensBurnt": "786833029192400000000",
+      "attachment": "0",
+      "receiptCount": 8
+    },
+    {
+      "id": "request-withdrawal",
+      "hash": "FbWcmbwx4RVpxdG6yTnYDTms2rzaMjz8gQa2XGj1QUBK",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "vault.yf-operator-261105.testnet",
+      "call": {
+        "methodName": "request_withdraw",
+        "args": {
+          "units": "200000000",
+          "min_amount": "200000000"
+        },
+        "gas": "300000000000000",
+        "deposit": "20480000000000000000001"
+      },
+      "channel": "browser-wallet",
+      "nonce": "276321233000019",
+      "tokensBurnt": "240355609377700000000",
+      "attachment": "20480000000000000000001",
+      "receiptCount": 2
+    },
+    {
+      "id": "advance-withdrawal",
+      "hash": "7sQaDjARUZ4vXzKjxLoiyxgiMPLh6sfEDk2r52tJB1yX",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "vault.yf-operator-261105.testnet",
+      "call": {
+        "methodName": "advance_operation",
+        "args": {
+          "operation_id": "4"
+        },
+        "gas": "300000000000000",
+        "deposit": "1"
+      },
+      "channel": "approved-cli-completion",
+      "nonce": "276321233000020",
+      "tokensBurnt": "1135403454821100000000",
+      "attachment": "1",
+      "receiptCount": 10
+    }
+  ],
+  "totalTokensBurnt": "7701108478145400000000",
+  "totalAttachments": "187040000000000000000007",
+  "snapshot": {
+    "blockHash": "21kdbpAB8UVMR1bScPJigtP6av1EvBaWiVAv5SHGMXKm",
+    "height": 277329897,
+    "timestamp": 1794467307131,
+    "fetchedAt": 1794467315105,
+    "accountId": "yf-operator-261105.testnet",
+    "accounting": {
+      "mode": "funded_simulator",
+      "cash": "800000000",
+      "excluded": "0",
+      "nominal": "800000000",
+      "backing": "800000000",
+      "shortfall": "0",
+      "eligible_yield": "0",
+      "reserved_outbound": "0",
+      "paused": false,
+      "active_operation": null,
+      "state_version": "15",
+      "checkpoint_at": "1794467242246062754",
+      "needs_reconciliation": false,
+      "strategy_book": "0",
+      "settled": true,
+      "donated": "30000000",
+      "queued_redemption": null
+    },
+    "operations": [
+      {
+        "id": "1",
+        "kind": "allocation",
+        "owner_id": "yf-operator-261105.testnet",
+        "units": "1000000000",
+        "minimum": "0",
+        "payout": "1000000000",
+        "stage": "completed",
+        "version": "4",
+        "started_at": "1794215039545512081",
+        "updated_at": "1794215041800942330",
+        "error": null
+      },
+      {
+        "id": "2",
+        "kind": "redemption",
+        "owner_id": "yf-operator-261105.testnet",
+        "units": "1000000000",
+        "minimum": "0",
+        "payout": "1030000000",
+        "stage": "completed",
+        "version": "7",
+        "started_at": "1794215381672133015",
+        "updated_at": "1794215385385971928",
+        "error": null
+      },
+      {
+        "id": "3",
+        "kind": "donation",
+        "owner_id": "dao.yf-operator-261105.testnet",
+        "units": "30000000",
+        "minimum": "0",
+        "payout": "30000000",
+        "stage": "completed",
+        "version": "11",
+        "started_at": "1794215692442791099",
+        "updated_at": "1794215694807752883",
+        "error": null
+      },
+      {
+        "id": "4",
+        "kind": "withdrawal",
+        "owner_id": "yf-operator-261105.testnet",
+        "units": "200000000",
+        "minimum": "200000000",
+        "payout": "200000000",
+        "stage": "completed",
+        "version": "15",
+        "started_at": "1794299301000025456",
+        "updated_at": "1794467243424045335",
+        "error": null
+      }
+    ],
+    "proposals": [
+      {
+        "id": 0,
+        "proposer": "yf-council1-261105.testnet",
+        "description": "Fictional Commons maintenance rehearsal",
+        "kind": {
+          "Transfer": {
+            "token_id": "token.yf-operator-261105.testnet",
+            "receiver_id": "yf-council3-261105.testnet",
+            "amount": "20000000",
+            "msg": null
+          }
+        },
+        "status": "Approved",
+        "vote_counts": {
+          "council": [
+            "2",
+            "0",
+            "0"
+          ]
+        },
+        "votes": {
+          "yf-council1-261105.testnet": "Approve",
+          "yf-council2-261105.testnet": "Approve"
+        },
+        "submission_time": "1794216174859660351",
+        "last_actions_log": [
+          {
+            "block_height": "276901468"
+          },
+          {
+            "block_height": "277041793"
+          },
+          {
+            "block_height": "277042504"
+          }
+        ]
+      }
+    ],
+    "proposalCount": 1,
+    "policy": {
+      "roles": [
+        {
+          "name": "council",
+          "kind": {
+            "Group": [
+              "yf-council1-261105.testnet",
+              "yf-council2-261105.testnet",
+              "yf-council3-261105.testnet"
+            ]
+          },
+          "permissions": [
+            "transfer:AddProposal",
+            "transfer:VoteReject",
+            "transfer:Finalize",
+            "transfer:VoteApprove"
+          ],
+          "vote_policy": {}
+        }
+      ],
+      "default_vote_policy": {
+        "weight_kind": "RoleWeight",
+        "quorum": "2",
+        "threshold": "2"
+      },
+      "proposal_bond": "100000000000000000000000",
+      "proposal_period": "604800000000000",
+      "bounty_bond": "0",
+      "bounty_forgiveness_period": "86400000000000"
+    },
+    "position": {
+      "nominal": "800000000",
+      "reserved": "0",
+      "deposited": "1000000000",
+      "withdrawn": "200000000"
+    },
+    "tokenBalance": "999170000000",
+    "treasuryBalance": "10000000",
+    "tokenRegistered": true,
+    "vaultRegistered": true,
+    "daoRegistered": true,
+    "costs": {
+      "position": "5120000000000000000000",
+      "operation": "20480000000000000000001",
+      "advance": "1",
+      "refundable": false
+    },
+    "tokenStorageCost": "1250000000000000000000",
+    "strategy": {
+      "mode": "funded_simulator",
+      "token_id": "token.yf-operator-261105.testnet",
+      "vault_id": "vault.yf-operator-261105.testnet",
+      "position": "0",
+      "busy": false,
+      "last_redeem": "2",
+      "last_supply": "1"
+    },
+    "nativeBalance": "2867383505767004599999993"
+  },
+  "actors": {
+    "yf-operator-261105.testnet": {
+      "amount": "2867383505767004599999993",
+      "block_hash": "21kdbpAB8UVMR1bScPJigtP6av1EvBaWiVAv5SHGMXKm",
+      "block_height": 277329897,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "yf-council1-261105.testnet": {
+      "amount": "4999470083578503000000000",
+      "block_hash": "21kdbpAB8UVMR1bScPJigtP6av1EvBaWiVAv5SHGMXKm",
+      "block_height": 277329897,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "yf-council2-261105.testnet": {
+      "amount": "4999168530458307600000000",
+      "block_hash": "21kdbpAB8UVMR1bScPJigtP6av1EvBaWiVAv5SHGMXKm",
+      "block_height": 277329897,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "yf-council3-261105.testnet": {
+      "amount": "4999955363487500000000000",
+      "block_hash": "21kdbpAB8UVMR1bScPJigtP6av1EvBaWiVAv5SHGMXKm",
+      "block_height": 277329897,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    }
+  },
+  "limitations": [
+    "Final withdrawal advanced through CLI on November 12; browser controls unavailable and final Activity handoff not verified",
+    "Same-user custody for operator and all council keys",
+    "Funded simulator, not live lending",
+    "CLI wallet has no explicit reject control; panel close is ambiguous",
+    "Original deposit intent recovered manually by exact hash after approved nonce-bound exception",
+    "Stale-account-during-signing and explicit wallet rejection remain unverified",
+    "Unknown outgoing payment/allocation and simulator-internal callback recovery remain release blockers"
+  ]
+}

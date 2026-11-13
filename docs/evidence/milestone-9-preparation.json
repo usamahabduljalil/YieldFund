@@ -1,0 +1,86 @@
+{
+  "snapshot": {
+    "blockHash": "EXv3FZzjzqcobxMP2YMDN7xSFebjgip9cytzYsLsajB1",
+    "height": 276688114,
+    "timestamp": 1794088519105,
+    "fetchedAt": 1794088525195,
+    "accountId": "yf-operator-261105.testnet",
+    "accounting": {
+      "mode": "funded_simulator",
+      "cash": "0",
+      "excluded": "0",
+      "nominal": "0",
+      "backing": "0",
+      "shortfall": "0",
+      "eligible_yield": "0",
+      "reserved_outbound": "0",
+      "paused": false,
+      "active_operation": null,
+      "state_version": "0",
+      "checkpoint_at": "1794025518110904133",
+      "needs_reconciliation": false,
+      "strategy_book": "0",
+      "settled": true,
+      "donated": "0",
+      "queued_redemption": null
+    },
+    "operations": [],
+    "proposals": [],
+    "proposalCount": 0,
+    "policy": {
+      "roles": [
+        {
+          "name": "council",
+          "kind": {
+            "Group": [
+              "yf-council3-261105.testnet",
+              "yf-council2-261105.testnet",
+              "yf-council1-261105.testnet"
+            ]
+          },
+          "permissions": [
+            "transfer:VoteApprove",
+            "transfer:VoteReject",
+            "transfer:Finalize",
+            "transfer:AddProposal"
+          ],
+          "vote_policy": {}
+        }
+      ],
+      "default_vote_policy": {
+        "weight_kind": "RoleWeight",
+        "quorum": "2",
+        "threshold": "2"
+      },
+      "proposal_bond": "100000000000000000000000",
+      "proposal_period": "604800000000000",
+      "bounty_bond": "0",
+      "bounty_forgiveness_period": "86400000000000"
+    },
+    "position": null,
+    "tokenBalance": "1000000000000",
+    "treasuryBalance": "0",
+    "tokenRegistered": true,
+    "vaultRegistered": true,
+    "daoRegistered": true,
+    "costs": {
+      "position": "5120000000000000000000",
+      "operation": "20480000000000000000001",
+      "advance": "1",
+      "refundable": false
+    },
+    "tokenStorageCost": "1250000000000000000000",
+    "strategy": {
+      "mode": "funded_simulator",
+      "token_id": "token.yf-operator-261105.testnet",
+      "vault_id": "vault.yf-operator-261105.testnet",
+      "position": "0",
+      "busy": false,
+      "last_redeem": "0",
+      "last_supply": "0"
+    },
+    "nativeBalance": "2960852501306960600000000"
+  },
+  "reviewSha256": "efb048ff9da1a00cecdf92fae98306cdbf15fe4f8f9376c1f1b95833cdaa79ff",
+  "transactionsEnabled": false
+}

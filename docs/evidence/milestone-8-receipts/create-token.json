@@ -1,0 +1,142 @@
+{
+  "id": "create-token",
+  "hash": "KfXQnfxJm24DLHFysAHKUw5o6rLuvpLV1RnNyEAtqA3",
+  "signerId": "yf-operator-261105.testnet",
+  "receiverId": "token.yf-operator-261105.testnet",
+  "publicKey": "ed25519:f7h5tvUvj7pz8e8hT8SEY7udNTxpRXpi3JVPcVCri1b",
+  "nonce": "276321233000002",
+  "blockHash": "5223afRfSK2qiqrTVcPpHxQpnznQpLUsvC2bsjTbwsrj",
+  "actions": [
+    {
+      "type": "CreateAccount"
+    },
+    {
+      "type": "Transfer",
+      "deposit": "5000000000000000000000000"
+    },
+    {
+      "type": "AddKey",
+      "publicKey": "ed25519:F4RtnAZfi2KcM1Hrak78n7Y52vghFfLTTDX8wPisNENX",
+      "permission": "FullAccess"
+    }
+  ],
+  "planSha256": "f4ecd10fb4ee7b85c049a1e8dad4ef587faa30fd30b412e52ede85d7b76550e7",
+  "authorizedBy": "User: testnet actions approved (2026-11-06)",
+  "savedAt": "2026-11-06T22:48:19.711Z",
+  "verification": "finalized-success",
+  "finalizedAt": "2026-11-06T22:48:27.483Z",
+  "tokensBurnt": "7114989537500000000000",
+  "result": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "5c76YTF3KUziSg8oJckBiF8hT38YAXVJ6F7AMXjGMkGU",
+        "id": "GtFgCVWsMDnb4YxBWT3NpKa88MyyGdJW2MHs8i2ZiU6",
+        "outcome": {
+          "executor_id": "token.yf-operator-261105.testnet",
+          "gas_burnt": 7524947687500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null,
+              null,
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "EhrfNnMP1QNf7a2pqSpPXNqMgRsTaHxxb7kmMcdyxGpV"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "7032494768750000000000"
+        },
+        "proof": []
+      },
+      {
+        "block_hash": "AdBGMhNsXBHu2mETy84efjK4ZDrBE6xVMHNWMrS7Jnrd",
+        "id": "EhrfNnMP1QNf7a2pqSpPXNqMgRsTaHxxb7kmMcdyxGpV",
+        "outcome": {
+          "executor_id": "yf-operator-261105.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "32zeq1fpk5qYk2WPBkD1MaPfqWAXZj1YeTdNVrLxRJgX"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        "CreateAccount",
+        {
+          "Transfer": {
+            "deposit": "5000000000000000000000000"
+          }
+        },
+        {
+          "AddKey": {
+            "access_key": {
+              "nonce": 0,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:F4RtnAZfi2KcM1Hrak78n7Y52vghFfLTTDX8wPisNENX"
+          }
+        }
+      ],
+      "hash": "KfXQnfxJm24DLHFysAHKUw5o6rLuvpLV1RnNyEAtqA3",
+      "nonce": 276321233000002,
+      "priority_fee": 0,
+      "public_key": "ed25519:f7h5tvUvj7pz8e8hT8SEY7udNTxpRXpi3JVPcVCri1b",
+      "receiver_id": "token.yf-operator-261105.testnet",
+      "signature": "ed25519:62vkzzEqAcvkXFR2HHDQHYGMyZ2ifoGS5owxigXYhuEPMBPj9PGDWkdsNkhoVQHntKhb3cjsGHisLPCyFUAGAdrm",
+      "signer_id": "yf-operator-261105.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "HzwkD8VkqBscWzZt6hKxAHhYov6aNaYxHkcQ2iQoh5w8",
+      "id": "KfXQnfxJm24DLHFysAHKUw5o6rLuvpLV1RnNyEAtqA3",
+      "outcome": {
+        "executor_id": "yf-operator-261105.testnet",
+        "gas_burnt": 824947687500,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "GtFgCVWsMDnb4YxBWT3NpKa88MyyGdJW2MHs8i2ZiU6"
+        ],
+        "status": {
+          "SuccessReceiptId": "GtFgCVWsMDnb4YxBWT3NpKa88MyyGdJW2MHs8i2ZiU6"
+        },
+        "tokens_burnt": "82494768750000000000"
+      },
+      "proof": [
+        {
+          "direction": "Right",
+          "hash": "5eULCbuQcqewHKHR8azZbYwHNgnaU4uwj9q2XFpPFnmF"
+        }
+      ]
+    }
+  }
+}

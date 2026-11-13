@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "status": "read-only-audit-passed",
+  "planSha256": "f4ecd10fb4ee7b85c049a1e8dad4ef587faa30fd30b412e52ede85d7b76550e7",
+  "checkedAt": "2026-11-12T07:09:37.799Z",
+  "blockHash": "9dZfxSqrJfehFoFH9nVoMVHAuxWJsW5wZ5LaLwCYPutz",
+  "blockHeight": 277329969,
+  "authority": {
+    "vault.yf-operator-261105.testnet": [
+      {
+        "public_key": "ed25519:BWCQ3EHaLvQXF9CBpTs12HVobsqikEPXCaNeEFNaCkFc",
+        "permission": "FullAccess"
+      }
+    ],
+    "token.yf-operator-261105.testnet": [
+      {
+        "public_key": "ed25519:F4RtnAZfi2KcM1Hrak78n7Y52vghFfLTTDX8wPisNENX",
+        "permission": "FullAccess"
+      }
+    ],
+    "strategy.yf-operator-261105.testnet": [
+      {
+        "public_key": "ed25519:f9xGtyaq3SSanFdzrqDRpadbEekYxYh77mw6EVc61kf",
+        "permission": "FullAccess"
+      }
+    ],
+    "dao.yf-operator-261105.testnet": [
+      {
+        "public_key": "ed25519:CubYV5sy1Mtcs17E9JbbGVSBUqYF1r2FfgHVUyEf6QYD",
+        "permission": "FullAccess"
+      }
+    ]
+  },
+  "accounting": {
+    "mode": "funded_simulator",
+    "cash": "800000000",
+    "excluded": "0",
+    "nominal": "800000000",
+    "backing": "800000000",
+    "shortfall": "0",
+    "eligible_yield": "0",
+    "reserved_outbound": "0",
+    "paused": false,
+    "active_operation": null,
+    "state_version": "15",
+    "checkpoint_at": "1794467242246062754",
+    "needs_reconciliation": false,
+    "strategy_book": "0",
+    "settled": true,
+    "donated": "30000000",
+    "queued_redemption": null
+  },
+  "tokenSupply": "1000000000000",
+  "transactionsEnabled": false,
+  "limitations": [
+    "RPC observations are point-in-time, not independent consensus verification.",
+    "Public keys do not prove human identity, key custody or three independent council members.",
+    "Passing this audit does not authorize signing or enable the app.",
+    "Controller/loss-sink bindings are initialized by reviewed actions but not exposed by the current strategy view; retain initialization receipt evidence."
+  ],
+  "rpcOverride": {
+    "original": "https://rpc.testnet.near.org",
+    "effective": "https://rpc.testnet.fastnear.com/"
+  }
+}

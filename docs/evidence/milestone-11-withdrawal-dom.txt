@@ -1,0 +1,80 @@
+- link "Skip to content":
+  - /url: "#app-main"
+- complementary "Workspace navigation":
+  - link "YieldFund home":
+    - /url: /
+    - generic: yieldfund.
+  - button "Close navigation":
+  - generic: YOUR COMMUNITY SPACE
+  - strong: The Commons
+  - generic: Open-source community
+  - navigation "Application navigation":
+    - link "Overview":
+      - /url: /app
+      - text: Overview
+    - link "My position":
+      - /url: /app/positions
+      - text: My position
+    - link "Treasury":
+      - /url: /app/treasury
+      - text: Treasury
+    - link "Activity":
+      - /url: /app/activity
+      - text: Activity
+  - link "Campaign operations":
+    - /url: /app/manage
+    - text: Campaign operations
+  - generic: GROW SOMETHING GOOD.
+  - paragraph:
+    - text: Shared capital.
+    - text: Shared possibilities.
+  - link "Risks & disclosures":
+    - /url: /risks
+    - text: Risks & disclosures
+  - link "Back to website":
+    - /url: /
+    - text: Back to website
+- banner:
+  - button "Open navigation":
+  - strong: Operation
+  - button "yf-operator-261105.testnet":
+    - text: yf-operator-261105.testnet
+- generic: NEAR TESTNET
+- text: Simulated strategy · Final block 277366965
+- button "Checking…" [disabled]:
+  - text: Checking…
+- main:
+  - generic: Read-only
+  - generic: Data as of 2:08:45 PM
+  - generic: THE COMMONS / ON-CHAIN
+  - 'heading "Operation #4" [level=1]'
+  - heading "withdrawal" [level=2]
+  - generic: completed
+  - term: Owner / recipient
+  - definition: yf-operator-261105.testnet
+  - term: Requested
+  - definition: 200.00 tUSD
+  - term: Payout / returned
+  - definition: 200.00 tUSD
+  - term: Minimum
+  - definition: 200.00 tUSD
+  - term: Version
+  - definition: "15"
+  - term: Updated
+  - definition: 11/12/2026, 8:07:23 AM
+  - strong: request withdraw
+  - generic: finalized
+  - generic: yf-operator-261105.testnet · 11/10/2026, 9:27:49 AM
+  - strong
+  - paragraph: FbWcmbwx4RVpxdG6yTnYDTms2rzaMjz8gQa2XGj1QUBK
+  - 'link "Operation #4"':
+    - /url: /app/operations/4
+  - link "Transaction explorer":
+    - /url: https://testnet.nearblocks.io/txns/FbWcmbwx4RVpxdG6yTnYDTms2rzaMjz8gQa2XGj1QUBK
+    - text: Transaction explorer
+  - generic "3 finalized outcome IDs"
+- contentinfo:
+  - generic: YIELDFUND / COMMUNITY CAPITAL
+  - link "Know the risks":
+    - /url: /risks
+    - text: Know the risks

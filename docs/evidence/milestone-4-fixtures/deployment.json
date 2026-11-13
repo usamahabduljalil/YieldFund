@@ -1,0 +1,60 @@
+{
+  "authority": "Ephemeral local fixture. Full-access test keys retained; simulator controls enabled. No public funds.",
+  "chainId": "test-chain-pucu6",
+  "codeHashes": {
+    "strategy.test": "4ebe6b2bbe5b6b7b15ab18e29df8a1fdedd7396960446d16e50efe0a498ccb1a",
+    "token.test": "1e22e0afefecbcef57415c96bdbeefe440f675aaabada45255ac51f9587af9ad",
+    "treasury.test": "2ed1d58bb2837f29b7629f833fea16bf661b4bea31fd4cceede4dc1f723d6cea",
+    "vault.test": "170f9b9e1d11a766528d036df980031faa734bae4122ae772da0c4fa83722084"
+  },
+  "config": {
+    "beneficiary_id": "treasury.test",
+    "campaign_id": "commons",
+    "deposit_cap": "10000000000",
+    "disclosure_version": "1.0",
+    "guardian_id": "guardian.test",
+    "metadata_hash": "sandbox-fixture",
+    "strategy_id": "strategy.test",
+    "token_decimals": 6,
+    "token_id": "token.test"
+  },
+  "daoPolicy": {
+    "bounty_bond": "0",
+    "bounty_forgiveness_period": "86400000000000",
+    "default_vote_policy": {
+      "quorum": "2",
+      "threshold": "2",
+      "weight_kind": "RoleWeight"
+    },
+    "proposal_bond": "100000000000000000000000",
+    "proposal_period": "604800000000000",
+    "roles": [
+      {
+        "kind": {
+          "Group": [
+            "member3.test",
+            "member2.test",
+            "member1.test"
+          ]
+        },
+        "name": "council",
+        "permissions": [
+          "transfer:AddProposal",
+          "transfer:Finalize",
+          "transfer:VoteReject",
+          "transfer:VoteApprove"
+        ],
+        "vote_policy": {}
+      }
+    ]
+  },
+  "factoryInfo": {
+    "auto_update": true,
+    "factory_id": "treasury.test"
+  },
+  "mode": "chain",
+  "network": "sandbox",
+  "rpcUrl": "http://127.0.0.1:34445",
+  "transactionsEnabled": false,
+  "vaultId": "vault.test"
+}

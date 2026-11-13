@@ -1,0 +1,96 @@
+- link "Skip to content":
+  - /url: "#app-main"
+- complementary "Workspace navigation":
+  - link "YieldFund home":
+    - /url: /
+    - generic: yieldfund.
+  - button "Close navigation":
+  - generic: YOUR COMMUNITY SPACE
+  - strong: The Commons
+  - generic: Open-source community
+  - navigation "Application navigation":
+    - link "Overview":
+      - /url: /app
+      - text: Overview
+    - link "My position":
+      - /url: /app/positions
+      - text: My position
+    - link "Treasury":
+      - /url: /app/treasury
+      - text: Treasury
+    - link "Activity":
+      - /url: /app/activity
+      - text: Activity
+  - link "Campaign operations":
+    - /url: /app/manage
+    - text: Campaign operations
+  - generic: GROW SOMETHING GOOD.
+  - paragraph:
+    - text: Shared capital.
+    - text: Shared possibilities.
+  - link "Risks & disclosures":
+    - /url: /risks
+    - text: Risks & disclosures
+  - link "Back to website":
+    - /url: /
+    - text: Back to website
+- banner:
+  - button "Open navigation" [active]:
+  - strong: My position
+  - button "yf-operator-261105.testnet":
+    - text: yf-operator-261105.testnet
+- generic: NEAR TESTNET
+- text: Simulated strategy · Final block 277366795
+- button "Checking…" [disabled]:
+  - text: Checking…
+- main:
+  - generic: Read-only
+  - generic: Data as of 2:07:07 PM
+  - generic: THE COMMONS / ON-CHAIN
+  - heading "Your capital, clearly." [level=1]
+  - generic: Nominal units
+  - strong: "800.00"
+  - generic: tUSD · example token
+  - generic: Reserved units
+  - strong: "0.00"
+  - generic: tUSD · example token
+  - generic: Paid withdrawals
+  - strong: "200.00"
+  - generic: tUSD · example token
+  - heading "Request a withdrawal" [level=2]
+  - text: Nominal units
+  - textbox "Nominal units":
+    - /placeholder: "0.00"
+  - text: Minimum payout · tUSD
+  - textbox "Minimum payout · tUSD":
+    - /placeholder: Set your minimum
+  - button "Review withdraw" [disabled]
+  - heading "Settlement" [level=2]
+  - term: Status
+  - definition: Settled
+  - term: Available units
+  - definition: 800.00 tUSD
+  - generic: A request reserves units. Payment happens after strategy redemption and a fresh balance check.
+  - heading "Your requests" [level=2]
+  - table:
+    - rowgroup:
+      - row "Operation Amount Status Details":
+        - columnheader "Operation"
+        - columnheader "Amount"
+        - columnheader "Status"
+        - columnheader "Details"
+    - rowgroup:
+      - row "#4 · withdrawal 200.00 tUSD completed Open operation 4":
+        - cell "#4 · withdrawal"
+        - cell "200.00 tUSD"
+        - cell "completed":
+          - generic: completed
+        - cell "Open operation 4":
+          - link "Open operation 4":
+            - /url: /app/operations/4
+            - text: View
+- contentinfo:
+  - generic: YIELDFUND / COMMUNITY CAPITAL
+  - link "Know the risks":
+    - /url: /risks
+    - text: Know the risks

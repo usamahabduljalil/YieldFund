@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "rpcUrl": "https://rpc.testnet.near.org",
+  "operatorId": null,
+  "deployerId": null,
+  "contracts": {
+    "vault": { "accountId": null, "publicKey": null },
+    "token": { "accountId": null, "publicKey": null },
+    "strategy": { "accountId": null, "publicKey": null },
+    "dao": { "accountId": null, "publicKey": null }
+  },
+  "guardianId": null,
+  "controllerId": null,
+  "lossSinkId": null,
+  "recipientId": null,
+  "council": [null, null, null],
+  "depositCap": "10000000000",
+  "totalSupply": "1000000000000",
+  "authority": null,
+  "metadata": {
+    "name": "YieldFund Commons",
+    "description": "Fictional testnet campaign for open-source community maintenance.",
+    "strategy": "funded_simulator",
+    "asset": "Test-only tUSD; no monetary value",
+    "disclosureVersion": "1.0"
+  }
+}

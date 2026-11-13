@@ -1,0 +1,30 @@
+name: Verify
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  web:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.14.0"
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build:host
+      - run: npm run test:sites
+  contracts:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.95.0
+        with:
+          targets: wasm32-unknown-unknown
+          components: rustfmt
+      - run: sudo apt-get update && sudo apt-get install -y build-essential cmake pkg-config libssl-dev
+      - run: cargo fmt --all -- --check
+      - run: bash scripts/test-contracts.sh

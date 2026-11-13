@@ -1,0 +1,10 @@
+{
+  "hash": "F1wydo7R51xk594MjVaF8RL9uTs1RTfX6whdhWmyb9kv",
+  "unknown": true,
+  "absent": true,
+  "observedNonce": 276321233000011,
+  "signedNonce": "276321233000012",
+  "blockHash": "5FLf4Cn2rRsnLaSf4wsGSG6UPZ4HHz92Ai3SYFLfYMgQ",
+  "rpcUrl": "https://test.rpc.fastnear.com",
+  "action": "Submit identical signed bytes after absent transaction/account and unused nonce checks"
+}

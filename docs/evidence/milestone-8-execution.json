@@ -1,0 +1,345 @@
+{
+  "schemaVersion": 1,
+  "status": "all-19-approved-transactions-finalized",
+  "planSha256": "f4ecd10fb4ee7b85c049a1e8dad4ef587faa30fd30b412e52ede85d7b76550e7",
+  "checkedAt": "2026-11-07T04:30:32.396Z",
+  "blockHash": "383d5csRiMagToE5MVd5mL1evAAQM2fW8eRzsRAgK4Bj",
+  "blockHeight": 276582913,
+  "transactions": [
+    {
+      "id": "topup-1",
+      "hash": "9pMcF8EgBWF7p397bPpM6TaYT6KbF1kRHVHvpG6g95FS",
+      "signerId": "yf-council1-261105.testnet",
+      "receiverId": "yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-06T22:40:58.418Z",
+      "receiptCount": 2,
+      "tokensBurnt": "44636512500000000000"
+    },
+    {
+      "id": "topup-2",
+      "hash": "58Npfx8dDkEywAgoDbaQJCJe6iuckPo7ywu7HCAgYtAZ",
+      "signerId": "yf-council2-261105.testnet",
+      "receiverId": "yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-06T22:44:42.346Z",
+      "receiptCount": 2,
+      "tokensBurnt": "44636512500000000000"
+    },
+    {
+      "id": "topup-3",
+      "hash": "6mR3onx4Xij4GPjwhz885zhYMVUjEf6T6qdr5QwtCNut",
+      "signerId": "yf-council3-261105.testnet",
+      "receiverId": "yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-06T22:45:50.294Z",
+      "receiptCount": 2,
+      "tokensBurnt": "44636512500000000000"
+    },
+    {
+      "id": "create-vault",
+      "hash": "G5vwG7jmBhG16ykuXy2WWS2Je6iBozHMYnDAr9WJuHHr",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "vault.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-06T22:47:41.996Z",
+      "receiptCount": 2,
+      "tokensBurnt": "7114989537500000000000"
+    },
+    {
+      "id": "create-token",
+      "hash": "KfXQnfxJm24DLHFysAHKUw5o6rLuvpLV1RnNyEAtqA3",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-06T22:48:27.483Z",
+      "receiptCount": 2,
+      "tokensBurnt": "7114989537500000000000"
+    },
+    {
+      "id": "create-strategy",
+      "hash": "C7yzH3vhVbo9qqpPJASXUc5dTfhD3FrxcYGjqEpGBnwW",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "strategy.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-06T22:50:24.797Z",
+      "receiptCount": 2,
+      "tokensBurnt": "7114989537500000000000"
+    },
+    {
+      "id": "create-dao",
+      "hash": "4dVctWieQ6enKUD8SBTmGE8Gf9TGfkq8cBe6ubvZPnkg",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "dao.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-06T22:57:52.547Z",
+      "receiptCount": 2,
+      "tokensBurnt": "7114989537500000000000"
+    },
+    {
+      "id": "initialize-token",
+      "hash": "7wW2Xyt7Kz1NtJyWpRgzE4gcKY6bHWoBgBRLkvqAmKrW",
+      "signerId": "token.yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-06T22:58:33.782Z",
+      "receiptCount": 2,
+      "tokensBurnt": "2082095821227200000000"
+    },
+    {
+      "id": "initialize-strategy",
+      "hash": "DeZxQRV32fZX1wdDmxxoEqodtGinHczLk34HCkdZLoQ",
+      "signerId": "strategy.yf-operator-261105.testnet",
+      "receiverId": "strategy.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-07T04:24:47.937Z",
+      "receiptCount": 2,
+      "tokensBurnt": "1772880676589400000000"
+    },
+    {
+      "id": "initialize-vault",
+      "hash": "91RFQNrfbJwCjziQjKWRPXMSm6V6ppkoV97hdXS2Jefy",
+      "signerId": "vault.yf-operator-261105.testnet",
+      "receiverId": "vault.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-07T04:25:20.973Z",
+      "receiptCount": 2,
+      "tokensBurnt": "2965734496720100000000"
+    },
+    {
+      "id": "initialize-dao",
+      "hash": "2H9VxPuJ99K3oexRo5DaaJ7JQyEVBJU6UFhoZv6Ey1mk",
+      "signerId": "dao.yf-operator-261105.testnet",
+      "receiverId": "dao.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-07T04:25:29.586Z",
+      "receiptCount": 2,
+      "tokensBurnt": "3820262462376000000000"
+    },
+    {
+      "id": "register-vault.yf-operator-261105.testnet",
+      "hash": "Bpx5XhKvCXUHGAfzq1Zwi5qwiyNNf8Dky3dvGWELQooR",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-07T04:25:38.813Z",
+      "receiptCount": 4,
+      "tokensBurnt": "242907654017700000000"
+    },
+    {
+      "id": "register-token.yf-operator-261105.testnet",
+      "hash": "9kFGanGTqedKtwhaffW1FKggCMLk5tz2E2MxMX87u79f",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-07T04:25:47.869Z",
+      "receiptCount": 4,
+      "tokensBurnt": "243363654017700000000"
+    },
+    {
+      "id": "register-strategy.yf-operator-261105.testnet",
+      "hash": "3Pnr6m4RRx4yT7muSWAqqJxEUCaybc66y3KKd5Z5FY6v",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-07T04:25:56.802Z",
+      "receiptCount": 4,
+      "tokensBurnt": "243437079960600000000"
+    },
+    {
+      "id": "register-dao.yf-operator-261105.testnet",
+      "hash": "31GKPis876B8Ep3GtKvFSeNqZutkFXPwcmg5VUCX6B8N",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-07T04:26:06.116Z",
+      "receiptCount": 4,
+      "tokensBurnt": "243302279773500000000"
+    },
+    {
+      "id": "register-yf-operator-261105.testnet",
+      "hash": "8u2wySUNvv2LAnFG8HcjuuhZnrqPPDzVhhr4Tep7GVuc",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-07T04:26:19.747Z",
+      "receiptCount": 4,
+      "tokensBurnt": "233111251731000000000"
+    },
+    {
+      "id": "register-yf-council1-261105.testnet",
+      "hash": "HLthALKG3uyMd5AawBSdGPVzDd89ycgjxVzRTeQu2iBi",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-07T04:26:30.357Z",
+      "receiptCount": 4,
+      "tokensBurnt": "243426207846300000000"
+    },
+    {
+      "id": "register-yf-council2-261105.testnet",
+      "hash": "E6oLGKPcaHbz3W1piqfnnQCw32H2ALeuB7kDGkDvFcBD",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-07T04:26:39.920Z",
+      "receiptCount": 4,
+      "tokensBurnt": "243882207846300000000"
+    },
+    {
+      "id": "register-yf-council3-261105.testnet",
+      "hash": "F1wydo7R51xk594MjVaF8RL9uTs1RTfX6whdhWmyb9kv",
+      "signerId": "yf-operator-261105.testnet",
+      "receiverId": "token.yf-operator-261105.testnet",
+      "finalizedAt": "2026-11-07T04:30:16.609Z",
+      "receiptCount": 4,
+      "tokensBurnt": "244110207846300000000"
+    }
+  ],
+  "councilTopups": "15000000000000000000000000",
+  "contractFunding": "22000000000000000000000000",
+  "registrationAttachments": "160000000000000000000000",
+  "setupAttachedDeposits": "22160000000000000000000000",
+  "totalTokensBurnt": "41172381687452100000000",
+  "gasAllowance": "2000000000000000000000000",
+  "initialAggregateNativeBalance": "40000000000000000000000000",
+  "finalAggregateNativeBalance": "39958827618312547900000000",
+  "netNativeBalanceReduction": "41172381687452100000000",
+  "accounts": {
+    "yf-council2-261105.testnet": {
+      "amount": "4999955363487500000000000",
+      "block_hash": "383d5csRiMagToE5MVd5mL1evAAQM2fW8eRzsRAgK4Bj",
+      "block_height": 276582913,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182,
+      "keys": [
+        {
+          "public_key": "ed25519:Fbig9wNrrnSi4vvPWCqEBbwW3nefhMHrNWdA2DAnhL12",
+          "permission": "FullAccess"
+        }
+      ],
+      "tokenBalance": "0",
+      "storageLocked": "1820000000000000000000",
+      "availableNative": "4998135363487500000000000"
+    },
+    "yf-council3-261105.testnet": {
+      "amount": "4999955363487500000000000",
+      "block_hash": "383d5csRiMagToE5MVd5mL1evAAQM2fW8eRzsRAgK4Bj",
+      "block_height": 276582913,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182,
+      "keys": [
+        {
+          "public_key": "ed25519:4PPfrvpbzX5J38DQMVWkZQT2pxYFcVQAMk7vMUNe7ekr",
+          "permission": "FullAccess"
+        }
+      ],
+      "tokenBalance": "0",
+      "storageLocked": "1820000000000000000000",
+      "availableNative": "4998135363487500000000000"
+    },
+    "strategy.yf-operator-261105.testnet": {
+      "amount": "3998227119323410600000000",
+      "block_hash": "383d5csRiMagToE5MVd5mL1evAAQM2fW8eRzsRAgK4Bj",
+      "block_height": 276582913,
+      "code_hash": "3m4TuBknstSq1FjoCDV6tiV3fcudw1tyGZvuyijcgcev",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 220140,
+      "keys": [
+        {
+          "public_key": "ed25519:f9xGtyaq3SSanFdzrqDRpadbEekYxYh77mw6EVc61kf",
+          "permission": "FullAccess"
+        }
+      ],
+      "tokenBalance": "0",
+      "storageLocked": "2201400000000000000000000",
+      "availableNative": "1796827119323410600000000"
+    },
+    "vault.yf-operator-261105.testnet": {
+      "amount": "5997034265503279900000000",
+      "block_hash": "383d5csRiMagToE5MVd5mL1evAAQM2fW8eRzsRAgK4Bj",
+      "block_height": 276582913,
+      "code_hash": "3Vg5upGrg8Uuvi7ys5ynSX8eAMJEBg5nz46RNp5cDUJx",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 382570,
+      "keys": [
+        {
+          "public_key": "ed25519:BWCQ3EHaLvQXF9CBpTs12HVobsqikEPXCaNeEFNaCkFc",
+          "permission": "FullAccess"
+        }
+      ],
+      "tokenBalance": "0",
+      "storageLocked": "3825700000000000000000000",
+      "availableNative": "2171334265503279900000000"
+    },
+    "token.yf-operator-261105.testnet": {
+      "amount": "5006667904178772800000000",
+      "block_hash": "383d5csRiMagToE5MVd5mL1evAAQM2fW8eRzsRAgK4Bj",
+      "block_height": 276582913,
+      "code_hash": "32e5Toj8Hk1d5Eor3H8GeuL9xKkyHn2Nr3cRMB63aYVJ",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 256402,
+      "keys": [
+        {
+          "public_key": "ed25519:F4RtnAZfi2KcM1Hrak78n7Y52vghFfLTTDX8wPisNENX",
+          "permission": "FullAccess"
+        }
+      ],
+      "tokenBalance": "0",
+      "storageLocked": "2564020000000000000000000",
+      "availableNative": "2442647904178772800000000"
+    },
+    "dao.yf-operator-261105.testnet": {
+      "amount": "6996179737537624000000000",
+      "block_hash": "383d5csRiMagToE5MVd5mL1evAAQM2fW8eRzsRAgK4Bj",
+      "block_height": 276582913,
+      "code_hash": "49mLHWeLgCbfJbYYH5SrNo35G2EGS57W1W5g3eXvzZhb",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 496342,
+      "keys": [
+        {
+          "public_key": "ed25519:CubYV5sy1Mtcs17E9JbbGVSBUqYF1r2FfgHVUyEf6QYD",
+          "permission": "FullAccess"
+        }
+      ],
+      "tokenBalance": "0",
+      "storageLocked": "4963420000000000000000000",
+      "availableNative": "2032759737537624000000000"
+    },
+    "yf-operator-261105.testnet": {
+      "amount": "2960852501306960600000000",
+      "block_hash": "383d5csRiMagToE5MVd5mL1evAAQM2fW8eRzsRAgK4Bj",
+      "block_height": 276582913,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182,
+      "keys": [
+        {
+          "public_key": "ed25519:f7h5tvUvj7pz8e8hT8SEY7udNTxpRXpi3JVPcVCri1b",
+          "permission": "FullAccess"
+        }
+      ],
+      "tokenBalance": "1000000000000",
+      "storageLocked": "1820000000000000000000",
+      "availableNative": "2959032501306960600000000"
+    },
+    "yf-council1-261105.testnet": {
+      "amount": "4999955363487500000000000",
+      "block_hash": "383d5csRiMagToE5MVd5mL1evAAQM2fW8eRzsRAgK4Bj",
+      "block_height": 276582913,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182,
+      "keys": [
+        {
+          "public_key": "ed25519:EMei5HownEJJksUrpgXhArmDeLNG27FwFLagT85ssYfy",
+          "permission": "FullAccess"
+        }
+      ],
+      "tokenBalance": "0",
+      "storageLocked": "1820000000000000000000",
+      "availableNative": "4998135363487500000000000"
+    }
+  },
+  "transactionsEnabled": false,
+  "limitations": [
+    "RPC evidence is point-in-time, not independent consensus proof.",
+    "tokens_burnt sums transaction and descendant execution fees; contract gas rewards can reduce the net balance reduction.",
+    "Token storage refunds are included in finalized receipts.",
+    "All actor and contract credentials remain under the same local Windows user; retained contract full-access keys can replace code.",
+    "No application deposits, allocation, profit, donation, DAO payments or wallet rehearsal performed."
+  ],
+  "rpcUrl": "https://test.rpc.fastnear.com"
+}

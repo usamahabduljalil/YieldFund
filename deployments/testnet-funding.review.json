@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "kind": "unsigned-testnet-funding-review",
+  "network": "testnet",
+  "planSha256": "f4ecd10fb4ee7b85c049a1e8dad4ef587faa30fd30b412e52ede85d7b76550e7",
+  "operatorId": "yf-operator-261105.testnet",
+  "gasAllowanceTotal": "2000000000000000000000000",
+  "transfers": [
+    {
+      "signerId": "yf-council1-261105.testnet",
+      "receiverId": "yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "Transfer",
+          "deposit": "5000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "signerId": "yf-council2-261105.testnet",
+      "receiverId": "yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "Transfer",
+          "deposit": "5000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "signerId": "yf-council3-261105.testnet",
+      "receiverId": "yf-operator-261105.testnet",
+      "actions": [
+        {
+          "type": "Transfer",
+          "deposit": "5000000000000000000000000"
+        }
+      ]
+    }
+  ],
+  "deploymentAttachedDeposits": "22160000000000000000000000",
+  "proposedRecipient": "yf-council3-261105.testnet",
+  "lossSink": "yf-council2-261105.testnet",
+  "boundaries": [
+    "User approval required before signing or sending these transactions.",
+    "Fresh preflight and exact actor key comparison required before execution.",
+    "Gas allowance is 2 testnet NEAR across top-ups, setup and registration; stop if current estimates exceed it.",
+    "Use no council funds beyond the three explicit 5 NEAR transfers plus their gas.",
+    "No deposits, strategy allocation, profit funding, donation, proposal payment, frontend signing enablement or publication included.",
+    "Keep full-access contract keys; disclose code-replacement authority."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-11-12T07:26:57.719Z",
+  "typecheckAndProductionBuild": "passed",
+  "unitAndToolingTests": {
+    "passed": 89,
+    "skipped": 1,
+    "reason": "Optional Sandbox integration"
+  },
+  "hostingPackagingTests": {
+    "passed": 4
+  },
+  "runtime": {
+    "url": "http://127.0.0.1:4176/deployment.testnet-session.json",
+    "transactionsEnabled": false,
+    "network": "testnet"
+  },
+  "browserFinalReconciliation": "unverified: browser controls unavailable",
+  "onChainLifecycle": "all 11 finalized; see milestone-9-execution.json"
+}

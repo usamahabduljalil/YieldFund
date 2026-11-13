@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "network": "testnet",
+  "rpcUrl": "https://rpc.testnet.near.org/",
+  "checkedAt": "2026-11-05T09:13:31.435Z",
+  "blockHash": "BPRfBHUspbj5J4g6s1Z95fapEQSKxEgPv8scDkinhfar",
+  "blockHeight": 276321550,
+  "blockTimestampNs": "1793870004697145559",
+  "allExist": true,
+  "observations": [
+    {
+      "accountId": "yf-operator-261105.testnet",
+      "status": "exists",
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "BPRfBHUspbj5J4g6s1Z95fapEQSKxEgPv8scDkinhfar",
+        "block_height": 276321550,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      }
+    },
+    {
+      "accountId": "yf-council1-261105.testnet",
+      "status": "exists",
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "BPRfBHUspbj5J4g6s1Z95fapEQSKxEgPv8scDkinhfar",
+        "block_height": 276321550,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      }
+    },
+    {
+      "accountId": "yf-council2-261105.testnet",
+      "status": "exists",
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "BPRfBHUspbj5J4g6s1Z95fapEQSKxEgPv8scDkinhfar",
+        "block_height": 276321550,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      }
+    },
+    {
+      "accountId": "yf-council3-261105.testnet",
+      "status": "exists",
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "BPRfBHUspbj5J4g6s1Z95fapEQSKxEgPv8scDkinhfar",
+        "block_height": 276321550,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      }
+    }
+  ],
+  "limitation": "Existence does not prove control, sufficient spendable balance, or independent council custody."
+}

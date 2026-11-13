@@ -1,0 +1,155 @@
+{
+  "approvedOn": "2026-11-09",
+  "authorizedBy": "User: yes approve",
+  "recoveryAuthorizedBy": "User: Approve the recovery exception",
+  "reviewSha256": "efb048ff9da1a00cecdf92fae98306cdbf15fe4f8f9376c1f1b95833cdaa79ff",
+  "checkedAt": "2026-11-09T08:49:50.021Z",
+  "audit": {
+    "schemaVersion": 1,
+    "status": "read-only-audit-passed",
+    "planSha256": "f4ecd10fb4ee7b85c049a1e8dad4ef587faa30fd30b412e52ede85d7b76550e7",
+    "checkedAt": "2026-11-09T08:49:25.756Z",
+    "blockHash": "H5vTStNXsr6EB1EYAE7yUQZXYc4rSRgZMEXiKb4uWjp",
+    "blockHeight": 276898025,
+    "authority": {
+      "vault.yf-operator-261105.testnet": [
+        {
+          "public_key": "ed25519:BWCQ3EHaLvQXF9CBpTs12HVobsqikEPXCaNeEFNaCkFc",
+          "permission": "FullAccess"
+        }
+      ],
+      "token.yf-operator-261105.testnet": [
+        {
+          "public_key": "ed25519:F4RtnAZfi2KcM1Hrak78n7Y52vghFfLTTDX8wPisNENX",
+          "permission": "FullAccess"
+        }
+      ],
+      "strategy.yf-operator-261105.testnet": [
+        {
+          "public_key": "ed25519:f9xGtyaq3SSanFdzrqDRpadbEekYxYh77mw6EVc61kf",
+          "permission": "FullAccess"
+        }
+      ],
+      "dao.yf-operator-261105.testnet": [
+        {
+          "public_key": "ed25519:CubYV5sy1Mtcs17E9JbbGVSBUqYF1r2FfgHVUyEf6QYD",
+          "permission": "FullAccess"
+        }
+      ]
+    },
+    "accounting": {
+      "mode": "funded_simulator",
+      "cash": "0",
+      "excluded": "0",
+      "nominal": "0",
+      "backing": "0",
+      "shortfall": "0",
+      "eligible_yield": "0",
+      "reserved_outbound": "0",
+      "paused": false,
+      "active_operation": null,
+      "state_version": "0",
+      "checkpoint_at": "1794025518110904133",
+      "needs_reconciliation": false,
+      "strategy_book": "0",
+      "settled": true,
+      "donated": "0",
+      "queued_redemption": null
+    },
+    "tokenSupply": "1000000000000",
+    "transactionsEnabled": false,
+    "limitations": [
+      "RPC observations are point-in-time, not independent consensus verification.",
+      "Public keys do not prove human identity, key custody or three independent council members.",
+      "Passing this audit does not authorize signing or enable the app.",
+      "Controller/loss-sink bindings are initialized by reviewed actions but not exposed by the current strategy view; retain initialization receipt evidence."
+    ]
+  },
+  "snapshot": {
+    "blockHash": "48sKB3uYDfv4DznNVqF1xi5o4XRHLzSHZQSSVy73rdKt",
+    "height": 276898091,
+    "timestamp": 1794214165220,
+    "fetchedAt": 1794214190020,
+    "accountId": "yf-operator-261105.testnet",
+    "accounting": {
+      "mode": "funded_simulator",
+      "cash": "0",
+      "excluded": "0",
+      "nominal": "0",
+      "backing": "0",
+      "shortfall": "0",
+      "eligible_yield": "0",
+      "reserved_outbound": "0",
+      "paused": false,
+      "active_operation": null,
+      "state_version": "0",
+      "checkpoint_at": "1794025518110904133",
+      "needs_reconciliation": false,
+      "strategy_book": "0",
+      "settled": true,
+      "donated": "0",
+      "queued_redemption": null
+    },
+    "operations": [],
+    "proposals": [],
+    "proposalCount": 0,
+    "policy": {
+      "roles": [
+        {
+          "name": "council",
+          "kind": {
+            "Group": [
+              "yf-council3-261105.testnet",
+              "yf-council2-261105.testnet",
+              "yf-council1-261105.testnet"
+            ]
+          },
+          "permissions": [
+            "transfer:VoteApprove",
+            "transfer:VoteReject",
+            "transfer:Finalize",
+            "transfer:AddProposal"
+          ],
+          "vote_policy": {}
+        }
+      ],
+      "default_vote_policy": {
+        "weight_kind": "RoleWeight",
+        "quorum": "2",
+        "threshold": "2"
+      },
+      "proposal_bond": "100000000000000000000000",
+      "proposal_period": "604800000000000",
+      "bounty_bond": "0",
+      "bounty_forgiveness_period": "86400000000000"
+    },
+    "position": {
+      "nominal": "0",
+      "reserved": "0",
+      "deposited": "0",
+      "withdrawn": "0"
+    },
+    "tokenBalance": "1000000000000",
+    "treasuryBalance": "0",
+    "tokenRegistered": true,
+    "vaultRegistered": true,
+    "daoRegistered": true,
+    "costs": {
+      "position": "5120000000000000000000",
+      "operation": "20480000000000000000001",
+      "advance": "1",
+      "refundable": false
+    },
+    "tokenStorageCost": "1250000000000000000000",
+    "strategy": {
+      "mode": "funded_simulator",
+      "token_id": "token.yf-operator-261105.testnet",
+      "vault_id": "vault.yf-operator-261105.testnet",
+      "position": "0",
+      "busy": false,
+      "last_redeem": "0",
+      "last_supply": "0"
+    },
+    "nativeBalance": "2955526777385202600000000"
+  }
+}

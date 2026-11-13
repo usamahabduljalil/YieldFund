@@ -1,0 +1,20 @@
+[package]
+name = "yieldfund-vault"
+version = "0.2.0"
+edition.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+# Only the separate fault-injection Wasm used by the local Sandbox suite.
+test-faults = []
+
+[dependencies]
+near-sdk.workspace = true
+yieldfund-accounting = { path = "../accounting" }
+
+[dev-dependencies]
+near-sdk = { workspace = true, features = ["unit-testing"] }

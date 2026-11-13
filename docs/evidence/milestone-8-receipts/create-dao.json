@@ -1,0 +1,150 @@
+{
+  "id": "create-dao",
+  "hash": "4dVctWieQ6enKUD8SBTmGE8Gf9TGfkq8cBe6ubvZPnkg",
+  "signerId": "yf-operator-261105.testnet",
+  "receiverId": "dao.yf-operator-261105.testnet",
+  "publicKey": "ed25519:f7h5tvUvj7pz8e8hT8SEY7udNTxpRXpi3JVPcVCri1b",
+  "nonce": "276321233000004",
+  "blockHash": "HCbfWYUiDQ5muaYRvC2MkFiKPH2hvft9QBhFu1cjYReu",
+  "actions": [
+    {
+      "type": "CreateAccount"
+    },
+    {
+      "type": "Transfer",
+      "deposit": "7000000000000000000000000"
+    },
+    {
+      "type": "AddKey",
+      "publicKey": "ed25519:CubYV5sy1Mtcs17E9JbbGVSBUqYF1r2FfgHVUyEf6QYD",
+      "permission": "FullAccess"
+    }
+  ],
+  "planSha256": "f4ecd10fb4ee7b85c049a1e8dad4ef587faa30fd30b412e52ede85d7b76550e7",
+  "authorizedBy": "User: testnet actions approved (2026-11-06)",
+  "savedAt": "2026-11-06T22:57:47.174Z",
+  "verification": "finalized-success",
+  "finalizedAt": "2026-11-06T22:57:52.547Z",
+  "tokensBurnt": "7114989537500000000000",
+  "result": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "SGCSFU3z9d4P9C1d1zH45tFz9gVLpXYMUNqqkeTTDBL",
+        "id": "FeYErV9nTdSRCWL4pqaj8HFpTs69cxY4vZy2B78vXFef",
+        "outcome": {
+          "executor_id": "dao.yf-operator-261105.testnet",
+          "gas_burnt": 7524947687500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null,
+              null,
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "3LBiD819xWtdcw6nWvFxPjiiLR4Tx7k1yKfMr5FPY1B5"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "7032494768750000000000"
+        },
+        "proof": []
+      },
+      {
+        "block_hash": "8vv7xFGqX2T7UyuG85gaRJaPFL1L8EUPrdcU55Jr595S",
+        "id": "3LBiD819xWtdcw6nWvFxPjiiLR4Tx7k1yKfMr5FPY1B5",
+        "outcome": {
+          "executor_id": "yf-operator-261105.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Left",
+            "hash": "7k3WGRNnSgok4hciMpF4EBbsd7dDPYobW8XyhCZQJ3fb"
+          },
+          {
+            "direction": "Left",
+            "hash": "DTxGN45V2oZDvpX6nYHcJX7suCnPavbpxXdcsuk4Yo2P"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        "CreateAccount",
+        {
+          "Transfer": {
+            "deposit": "7000000000000000000000000"
+          }
+        },
+        {
+          "AddKey": {
+            "access_key": {
+              "nonce": 0,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:CubYV5sy1Mtcs17E9JbbGVSBUqYF1r2FfgHVUyEf6QYD"
+          }
+        }
+      ],
+      "hash": "4dVctWieQ6enKUD8SBTmGE8Gf9TGfkq8cBe6ubvZPnkg",
+      "nonce": 276321233000004,
+      "priority_fee": 0,
+      "public_key": "ed25519:f7h5tvUvj7pz8e8hT8SEY7udNTxpRXpi3JVPcVCri1b",
+      "receiver_id": "dao.yf-operator-261105.testnet",
+      "signature": "ed25519:2bXAKT69Fj2Zvsn7SSUgmD8stV3jRzDd4szqKxehoG6YHaFobcJSgcyXJWopKE3jrFog4xfrVoB4HoenAB291dpp",
+      "signer_id": "yf-operator-261105.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "AALkJkLSsLfdN1hPcwB28KpsDnUikb4XUdyFkUy1uXaR",
+      "id": "4dVctWieQ6enKUD8SBTmGE8Gf9TGfkq8cBe6ubvZPnkg",
+      "outcome": {
+        "executor_id": "yf-operator-261105.testnet",
+        "gas_burnt": 824947687500,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "FeYErV9nTdSRCWL4pqaj8HFpTs69cxY4vZy2B78vXFef"
+        ],
+        "status": {
+          "SuccessReceiptId": "FeYErV9nTdSRCWL4pqaj8HFpTs69cxY4vZy2B78vXFef"
+        },
+        "tokens_burnt": "82494768750000000000"
+      },
+      "proof": [
+        {
+          "direction": "Right",
+          "hash": "3fYJT6XKGEnNBwjw3UMdTnqPQvv6jSEcBKD4eiN59aXs"
+        },
+        {
+          "direction": "Right",
+          "hash": "5XVsAbAFWA2mDC1VBspSgDofNoCFzSXnqqKJy4YwifWW"
+        }
+      ]
+    }
+  }
+}

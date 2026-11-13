@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "kind": "read-only-deployment-preflight",
+  "planSha256": "f4ecd10fb4ee7b85c049a1e8dad4ef587faa30fd30b412e52ede85d7b76550e7",
+  "checkedAt": "2026-11-06T22:46:31.099Z",
+  "blockHash": "6cs1FLhZvhXGFEDb6mtDzYhZToR5FdRoHAva9Yyg5qAq",
+  "blockHeight": 276548492,
+  "blockTimestampNs": "1794005174138798283",
+  "protocolVersion": 88,
+  "artifactInfo": {
+    "vault": {
+      "file": "yieldfund_vault.wasm",
+      "sha256": "250fd465d930ac23081e3e04929d59b036e82a30f11fed7e1dd799efc77d00ad",
+      "bytes": 381967
+    },
+    "token": {
+      "file": "yieldfund_test_token.wasm",
+      "sha256": "1e22e0afefecbcef57415c96bdbeefe440f675aaabada45255ac51f9587af9ad",
+      "bytes": 255425
+    },
+    "strategy": {
+      "file": "yieldfund_strategy_simulator.wasm",
+      "sha256": "2900d891851a0fd844bed39fda877bb983ece54d2f99f1fb2a3c0c79c009004b",
+      "bytes": 219748
+    },
+    "dao": {
+      "file": "sputnikdao2.wasm",
+      "sha256": "2ed1d58bb2837f29b7629f833fea16bf661b4bea31fd4cceede4dc1f723d6cea",
+      "bytes": 495447
+    }
+  },
+  "accounts": {
+    "yf-council1-261105.testnet": {
+      "amount": "4999955363487500000000000",
+      "block_hash": "6cs1FLhZvhXGFEDb6mtDzYhZToR5FdRoHAva9Yyg5qAq",
+      "block_height": 276548492,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "yf-operator-261105.testnet": {
+      "amount": "25000000000000000000000000",
+      "block_hash": "6cs1FLhZvhXGFEDb6mtDzYhZToR5FdRoHAva9Yyg5qAq",
+      "block_height": 276548492,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "yf-council3-261105.testnet": {
+      "amount": "4999955363487500000000000",
+      "block_hash": "6cs1FLhZvhXGFEDb6mtDzYhZToR5FdRoHAva9Yyg5qAq",
+      "block_height": 276548492,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "yf-council2-261105.testnet": {
+      "amount": "4999955363487500000000000",
+      "block_hash": "6cs1FLhZvhXGFEDb6mtDzYhZToR5FdRoHAva9Yyg5qAq",
+      "block_height": 276548492,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    }
+  },
+  "keys": {
+    "yf-council1-261105.testnet": [
+      {
+        "public_key": "ed25519:EMei5HownEJJksUrpgXhArmDeLNG27FwFLagT85ssYfy",
+        "permission": "FullAccess"
+      }
+    ],
+    "yf-operator-261105.testnet": [
+      {
+        "public_key": "ed25519:f7h5tvUvj7pz8e8hT8SEY7udNTxpRXpi3JVPcVCri1b",
+        "permission": "FullAccess"
+      }
+    ],
+    "yf-council2-261105.testnet": [
+      {
+        "public_key": "ed25519:Fbig9wNrrnSi4vvPWCqEBbwW3nefhMHrNWdA2DAnhL12",
+        "permission": "FullAccess"
+      }
+    ],
+    "yf-council3-261105.testnet": [
+      {
+        "public_key": "ed25519:4PPfrvpbzX5J38DQMVWkZQT2pxYFcVQAMk7vMUNe7ekr",
+        "permission": "FullAccess"
+      }
+    ]
+  },
+  "contractAccounts": {
+    "token.yf-operator-261105.testnet": {
+      "status": "absent"
+    },
+    "vault.yf-operator-261105.testnet": {
+      "status": "absent"
+    },
+    "strategy.yf-operator-261105.testnet": {
+      "status": "absent"
+    },
+    "dao.yf-operator-261105.testnet": {
+      "status": "absent"
+    }
+  },
+  "funding": {
+    "byteCost": "10000000000000000000",
+    "gasPrice": "100000000",
+    "gasMultiplier": 3,
+    "transactionGasAllowance": "300000000000000",
+    "stateHeadroomBytes": "65536",
+    "contracts": {
+      "vault": {
+        "allocated": "6000000000000000000000000",
+        "storageWithHeadroom": "4475030000000000000000000",
+        "gasAllowance": "90000000000000000000000",
+        "operatingReserve": "1000000000000000000000000",
+        "required": "5565030000000000000000000",
+        "sufficient": true
+      },
+      "token": {
+        "allocated": "5000000000000000000000000",
+        "storageWithHeadroom": "3209610000000000000000000",
+        "gasAllowance": "90000000000000000000000",
+        "operatingReserve": "1000000000000000000000000",
+        "required": "4299610000000000000000000",
+        "sufficient": true
+      },
+      "strategy": {
+        "allocated": "4000000000000000000000000",
+        "storageWithHeadroom": "2852840000000000000000000",
+        "gasAllowance": "90000000000000000000000",
+        "operatingReserve": "1000000000000000000000000",
+        "required": "3942840000000000000000000",
+        "sufficient": true
+      },
+      "dao": {
+        "allocated": "7000000000000000000000000",
+        "storageWithHeadroom": "5609830000000000000000000",
+        "gasAllowance": "90000000000000000000000",
+        "operatingReserve": "1000000000000000000000000",
+        "required": "6699830000000000000000000",
+        "sufficient": true
+      }
+    },
+    "deployer": {
+      "accountId": "yf-operator-261105.testnet",
+      "available": "24998180000000000000000000",
+      "storageLocked": "1820000000000000000000",
+      "attachedDeposits": "22160000000000000000000000",
+      "gasAllowance": "1080000000000000000000000",
+      "operatingReserve": "1000000000000000000000000",
+      "required": "24240000000000000000000000",
+      "shortfall": "0"
+    }
+  },
+  "readyForReview": true,
+  "blockers": [],
+  "transactionsEnabled": false,
+  "limitations": [
+    "Read-only point-in-time evidence, not signing authorization.",
+    "Fee allowances and initial-state headroom are planning estimates; check again before each transaction.",
+    "Actor key lists require custody review; this tool does not prove possession or independent council control."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "approvedOn": "2026-11-09",
+  "authorizedBy": "User: Approve the recovery exception",
+  "review": "deployments/REHEARSAL_RECOVERY_REVIEW.md",
+  "originalReviewSha256": "efb048ff9da1a00cecdf92fae98306cdbf15fe4f8f9376c1f1b95833cdaa79ff",
+  "requiredNonce": "276321233000014",
+  "depositRaw": "1000000000",
+  "attachedDepositCeiling": "188000000000000000000000",
+  "totalGasCeiling": "1250000000000000000000000"
+}
