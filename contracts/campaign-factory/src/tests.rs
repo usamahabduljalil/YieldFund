@@ -51,7 +51,11 @@ fn ready(f: &mut Factory, id: &str) {
             PromiseResult::Successful(vec![]),
         ],
     );
-    assert!(f.on_created(id.into()));
+    assert!(f.on_created(
+        id.into(),
+        f.progress.get(&id.to_string()).unwrap().version,
+        3
+    ));
     context(
         "factory.test",
         0,
@@ -60,7 +64,7 @@ fn ready(f: &mut Factory, id: &str) {
             .map(|_| PromiseResult::Successful(b"{}".to_vec()))
             .collect(),
     );
-    assert!(f.on_registered(id.into()));
+    assert!(f.on_registered(id.into(), f.progress.get(&id.to_string()).unwrap().version));
 }
 #[test]
 fn permissionless_creation_is_isolated_and_keyless() {
@@ -102,15 +106,23 @@ fn failed_child_never_appears_ready_and_cannot_be_replayed() {
         2,
         vec![PromiseResult::Successful(vec![]), PromiseResult::Failed],
     );
-    assert!(!f.on_created("alpha".into()));
+    assert!(!f.on_created(
+        "alpha".into(),
+        f.progress.get(&"alpha".to_string()).unwrap().version,
+        3
+    ));
     assert_eq!(
         f.get_campaign("alpha".into()).unwrap().status,
         CreationStatus::Failed
     );
-    assert!(std::panic::catch_unwind(
-        std::panic::AssertUnwindSafe(|| f.on_created("alpha".into()))
-    )
-    .is_err());
+    assert!(
+        std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| f.on_created(
+            "alpha".into(),
+            f.progress.get(&"alpha".to_string()).unwrap().version,
+            3
+        )))
+        .is_err()
+    );
 }
 #[test]
 fn failed_registration_never_appears_ready() {
@@ -125,7 +137,11 @@ fn failed_registration_never_appears_ready() {
             PromiseResult::Successful(vec![]),
         ],
     );
-    f.on_created("alpha".into());
+    f.on_created(
+        "alpha".into(),
+        f.progress.get(&"alpha".to_string()).unwrap().version,
+        3,
+    );
     context(
         "factory.test",
         0,
@@ -136,7 +152,10 @@ fn failed_registration_never_appears_ready() {
             PromiseResult::Successful(vec![]),
         ],
     );
-    assert!(!f.on_registered("alpha".into()));
+    assert!(!f.on_registered(
+        "alpha".into(),
+        f.progress.get(&"alpha".to_string()).unwrap().version
+    ));
     assert!(!f.is_verified("alpha".into()));
 }
 #[test]

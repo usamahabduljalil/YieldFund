@@ -280,6 +280,19 @@ export function CampaignDirectory({
                     Open campaign <ArrowUpRight size={17} />
                   </button>
                 )}
+                {c.status !== "ready" &&
+                  current &&
+                  deployment?.recoveryVersion === 2 && (
+                    <RegistryAction
+                      deployment={deployment}
+                      baseline={current}
+                      label="Resume setup"
+                      build={(snapshot, _account, registry) =>
+                        registry.recoveryCall(c.id, snapshot)
+                      }
+                      onDone={() => setRefresh((n) => n + 1)}
+                    />
+                  )}
                 {c.status === "ready" && current && deployment && (
                   <VerificationPanel
                     deployment={deployment}
@@ -433,7 +446,11 @@ function CampaignDraft({
         throw Error("Enter a positive deposit cap.");
       if (input.beneficiaryId === token)
         throw Error("The treasury must differ from the token contract.");
-      const metadata = await campaignMetadata(input, token);
+      const metadata = await campaignMetadata(
+        input,
+        token,
+        deployment?.recoveryVersion,
+      );
       // Read again before fixing any funding amount or factory destination in a review.
       const registry = deployment ? new CampaignRegistry(deployment) : null;
       const fresh = registry ? await registry.snapshot() : null;

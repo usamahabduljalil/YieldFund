@@ -265,6 +265,39 @@ describe("unsigned vault actions", () => {
       prepareCall(testnet, s, "alice.test", { kind: "recover", operation: op }),
     ).toThrow("No automatic recovery");
   });
+  it("offers payment and allocation recovery only for the receipt-aware vault", () => {
+    const s = snapshot();
+    s.accounting.active_operation = "9";
+    const op: Operation = {
+      id: "9",
+      kind: "withdrawal",
+      owner_id: "alice.test",
+      units: "200",
+      minimum: "0",
+      payout: "200",
+      stage: "transfer_pending",
+      version: "21",
+      started_at: "0",
+      updated_at: "0",
+      error: null,
+    };
+    const v2 = {
+      ...testnet,
+      config: { ...testnet.config, disclosure_version: "factory-v2" },
+    };
+    expect(
+      prepareCall(v2, s, "alice.test", { kind: "recover", operation: op }).args,
+    ).toEqual({ operation_id: "9", version: "21" });
+    expect(() =>
+      prepareCall(testnet, s, "alice.test", { kind: "recover", operation: op }),
+    ).toThrow("No automatic recovery");
+    expect(
+      prepareCall(v2, s, "alice.test", {
+        kind: "recover",
+        operation: { ...op, kind: "allocation", stage: "needs_reconciliation" },
+      }).methodName,
+    ).toBe("recover_operation");
+  });
   it("recovers only the existing queued strategy redemption", () => {
     const s = snapshot();
     s.accounting.active_operation = "2";

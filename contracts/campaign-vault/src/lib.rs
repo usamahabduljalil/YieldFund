@@ -119,20 +119,41 @@ struct RedemptionResult {
 #[ext_contract(ft)]
 trait Token {
     fn ft_balance_of(&self, account_id: AccountId) -> U128;
-    fn ft_transfer(&mut self, receiver_id: AccountId, amount: U128, memo: Option<String>);
-    fn ft_transfer_call(
+    fn get_transfer_call_receipt(&self, sender_id: AccountId) -> Option<recovery::CallReceipt>;
+    fn ft_resolve_call_intent(
         &mut self,
         receiver_id: AccountId,
         amount: U128,
-        memo: Option<String>,
+        sequence: U64,
+        msg: String,
+    ) -> recovery::CallReceipt;
+    fn ft_transfer(&mut self, receiver_id: AccountId, amount: U128, memo: Option<String>);
+    fn ft_transfer_once(
+        &mut self,
+        receiver_id: AccountId,
+        amount: U128,
+        sequence: U64,
+    ) -> recovery::TransferReceipt;
+    fn ft_resolve_once(
+        &mut self,
+        receiver_id: AccountId,
+        amount: U128,
+        sequence: U64,
+    ) -> recovery::TransferReceipt;
+    fn ft_transfer_call_once(
+        &mut self,
+        receiver_id: AccountId,
+        amount: U128,
+        sequence: U64,
         msg: String,
     ) -> U128;
 }
 #[allow(dead_code)]
 #[ext_contract(strategy)]
 trait Strategy {
-    fn redeem_all(&mut self, operation_id: U64) -> RedemptionResult;
+    fn redeem_all(&mut self, operation_id: U64, sequence: U64) -> RedemptionResult;
     fn get_position(&self) -> recovery::StrategyEvidence;
+    fn recover_position(&mut self, operation_id: U64, sequence: U64) -> recovery::StrategyEvidence;
 }
 #[allow(dead_code)]
 #[ext_contract(callbacks)]
@@ -143,6 +164,8 @@ trait Callbacks {
     fn on_redemption(&mut self, operation_id: U64, version: U64) -> bool;
     fn on_donation(&mut self, operation_id: U64, version: U64) -> bool;
     fn on_recovery_redemption(&mut self, operation_id: U64, version: U64) -> bool;
+    fn on_recovery_transfer(&mut self, operation_id: U64, version: U64) -> bool;
+    fn on_recovery_allocation(&mut self, operation_id: U64, version: U64) -> bool;
 }
 
 #[near(contract_state)]
@@ -163,12 +186,15 @@ pub struct Vault {
     eligible: u128,
     donated: u128,
     pending_redemption: Option<u64>,
+    pending_transfer_sequence: u64,
     #[cfg(feature = "test-faults")]
     fail_callback: bool,
     #[cfg(feature = "test-faults")]
     fail_balance_callback: bool,
     #[cfg(feature = "test-faults")]
     fail_redemption_callback: bool,
+    #[cfg(feature = "test-faults")]
+    fail_allocation_callback: bool,
 }
 
 #[near]
@@ -247,12 +273,15 @@ impl Vault {
             eligible: 0,
             donated: 0,
             pending_redemption: None,
+            pending_transfer_sequence: 0,
             #[cfg(feature = "test-faults")]
             fail_callback: false,
             #[cfg(feature = "test-faults")]
             fail_balance_callback: false,
             #[cfg(feature = "test-faults")]
             fail_redemption_callback: false,
+            #[cfg(feature = "test-faults")]
+            fail_allocation_callback: false,
         };
         vault.emit("campaign_initialized", None, None, 0);
         vault
@@ -529,14 +558,15 @@ impl Vault {
             self.emit("withdrawal_completed", Some(op.id), Some(&op.owner_id), 0);
             return PromiseOrValue::Value(true);
         }
+        self.pending_transfer_sequence = op.version.0;
         PromiseOrValue::Promise(
             ft::ext(self.config.token_id.clone())
                 .with_attached_deposit(NearToken::from_yoctonear(1))
                 .with_static_gas(TRANSFER_GAS)
-                .ft_transfer(
+                .ft_transfer_once(
                     op.owner_id.clone(),
                     U128(payout),
-                    Some(format!("yieldfund:{}", op.id.0)),
+                    U64(self.pending_transfer_sequence),
                 )
                 .then(
                     callbacks::ext(env::current_account_id())
@@ -548,65 +578,11 @@ impl Vault {
 
     #[private]
     pub fn on_transfer(&mut self, operation_id: U64, version: U64) -> bool {
-        let mut op = self.expected(operation_id, version, Stage::TransferPending);
+        let op = self.expected(operation_id, version, Stage::TransferPending);
         assert_eq!(op.kind, Kind::Withdrawal, "wrong callback kind");
         #[cfg(feature = "test-faults")]
         assert!(!self.fail_callback, "injected callback interruption");
-        assert_eq!(env::promise_results_count(), 1, "ambiguous transfer result");
-        let mut p = self.positions.get(&op.owner_id).expect("position missing");
-        let success = match env::promise_result_checked(0, 64) {
-            Ok(_) => {
-                // The pinned standard token's ft_transfer is atomic, not transfer_call.
-                p.withdrawn.0 = p
-                    .withdrawn
-                    .0
-                    .checked_add(op.payout.0)
-                    .expect("history overflow");
-                op.stage = Stage::Completed;
-                true
-            }
-            Err(PromiseError::Failed) => {
-                self.cash = self.cash.checked_add(op.payout.0).expect("cash overflow");
-                self.nominal = self
-                    .nominal
-                    .checked_add(op.units.0)
-                    .expect("units overflow");
-                p.nominal.0 = p
-                    .nominal
-                    .0
-                    .checked_add(op.units.0)
-                    .expect("position overflow");
-                p.reserved.0 = p
-                    .reserved
-                    .0
-                    .checked_add(op.units.0)
-                    .expect("reservation overflow");
-                op.stage = Stage::RetryableFailure;
-                op.error = Some("token_transfer_failed".into());
-                false
-            }
-            Err(_) => {
-                // An oversized successful response is not evidence of transfer failure.
-                // Keep the original pending reservation and lock; never restore/replay it.
-                op.error = Some("unexpected_transfer_response".into());
-                self.save_operation(&mut op);
-                return false;
-            }
-        };
-        self.positions.insert(&op.owner_id, &p);
-        self.active = None;
-        self.save_operation(&mut op);
-        self.emit(
-            if success {
-                "withdrawal_completed"
-            } else {
-                "withdrawal_restored"
-            },
-            Some(op.id),
-            Some(&op.owner_id),
-            op.payout.0,
-        );
-        success
+        self.finish_payment_result(op, false)
     }
 
     #[payable]
@@ -640,6 +616,8 @@ impl Vault {
         match stage.as_str() {
             "balance" => self.fail_balance_callback = enabled,
             "redemption" => self.fail_redemption_callback = enabled,
+            "payment" => self.fail_callback = enabled,
+            "allocation" => self.fail_allocation_callback = enabled,
             _ => env::panic_str("unsupported test fault"),
         }
     }

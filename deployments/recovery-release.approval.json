@@ -1,0 +1,6 @@
+{
+  "reviewSha256": "6d55bbccf4108a7bc6c8ac362c965ac4409b7695f4f122b07803d0aaed75bec5",
+  "authorization": "User: Approve testnet v2 release",
+  "recordedAt": "2026-11-14T18:59:08.386884+00:00",
+  "scope": "deployments/RECOVERY_RELEASE_REVIEW.md; 20 calls plus four faucet accounts; public testnet activation only after actual acceptance; no mainnet"
+}

@@ -15,6 +15,7 @@ import { publicReadTransport } from "./read-transport";
 import type { DaoPolicy } from "./index";
 
 export interface RegistryDeployment {
+  recoveryVersion?: 2;
   network: "testnet" | "mainnet" | "sandbox";
   chainId: string;
   rpcUrl: string;
@@ -75,6 +76,10 @@ export function parseRegistry(value: unknown): RegistryDeployment {
     "Invalid registry configuration",
   );
   const d = value as RegistryDeployment;
+  requireThat(
+    d.recoveryVersion === undefined || d.recoveryVersion === 2,
+    "Unsupported recovery version",
+  );
   requireThat(
     ["testnet", "mainnet", "sandbox"].includes(d.network),
     "Unsupported registry network",
@@ -267,6 +272,10 @@ export class CampaignRegistry {
         config.strategy_mode === "funded_simulator",
       "Registry configuration changed",
     );
+    requireThat(
+      (config.recovery_version ?? 1) === (d.recoveryVersion ?? 1),
+      "Registry recovery version changed",
+    );
     const campaigns = await this.view<RegistryCampaign[]>(
       d.factoryId,
       "list_campaigns",
@@ -293,6 +302,48 @@ export class CampaignRegistry {
       count: u64(config.campaign_count),
       campaigns: campaigns.map((c) => checkCampaign(c, d)),
       policy,
+    };
+  }
+
+  async recoveryCall(id: string, snapshot: RegistrySnapshot): Promise<Call> {
+    const d = this.deployment;
+    requireThat(
+      d.recoveryVersion === 2,
+      "This factory does not support recovery",
+    );
+    const c = await this.view<RegistryCampaign | null>(
+      d.factoryId,
+      "get_campaign",
+      { id },
+      snapshot.blockHash,
+    );
+    requireThat(c, "Campaign not found");
+    checkCampaign(c, d);
+    requireThat(c.status !== "ready", "Campaign is already ready");
+    const p = await this.view<{
+      version: string;
+      updated_at: string;
+      children: boolean[];
+      registered: boolean[];
+    }>(d.factoryId, "get_creation_progress", { id }, snapshot.blockHash);
+    requireThat(
+      p &&
+        p.children?.length === 2 &&
+        p.registered?.length === 3 &&
+        [...p.children, ...p.registered].every((v) => typeof v === "boolean"),
+      "Invalid creation progress",
+    );
+    requireThat(
+      BigInt(u64(snapshot.timestamp)) >=
+        BigInt(u64(p.updated_at)) + 300_000_000_000n,
+      "Wait five minutes before recovery",
+    );
+    return {
+      receiverId: d.factoryId,
+      methodName: "recover_campaign",
+      args: { id, version: u64(p.version) },
+      deposit: "1",
+      gas: "300000000000000",
     };
   }
 
@@ -329,7 +380,8 @@ export class CampaignRegistry {
           guardian_id: c.creator_id,
           deposit_cap: c.deposit_cap,
           metadata_hash: c.metadata_hash,
-          disclosure_version: "factory-v1",
+          disclosure_version:
+            d.recoveryVersion === 2 ? "factory-v2" : "factory-v1",
           strategy_id: c.strategy_id,
         }),
       "Campaign vault binding changed",
@@ -443,6 +495,7 @@ export function creationCall(
 export async function campaignMetadata(
   input: Omit<NewCampaign, "metadataHash">,
   tokenId: string,
+  recoveryVersion?: 2,
 ) {
   const content = canonical({
     id: input.id,
@@ -450,7 +503,7 @@ export async function campaignMetadata(
     beneficiary_id: input.beneficiaryId,
     deposit_cap: raw(input.depositCap),
     token_id: account(tokenId),
-    disclosure_version: "factory-v1",
+    disclosure_version: recoveryVersion === 2 ? "factory-v2" : "factory-v1",
   });
   const digest = await crypto.subtle.digest(
     "SHA-256",

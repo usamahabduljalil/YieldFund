@@ -36,7 +36,7 @@ async fn permissionless_campaigns_and_dao_verification() -> Result<()> {
         "factory",
         "new",
         json!({"verifier_id":"verification.test",
-        "token_id":"token.test","token_decimals":6,"token_storage":"1250000000000000000000"}),
+        "token_id":"token.test","token_decimals":6,"token_storage":h.view("token", "storage_balance_bounds", json!({})).await?["min"]}),
         0,
     )
     .await?
@@ -182,7 +182,8 @@ async fn permissionless_campaigns_and_dao_verification() -> Result<()> {
             .await?,
         false
     );
-    let output = root().join("docs/evidence/campaign-factory-sandbox.json");
+    let output = evidence_dir().join("campaign-factory-sandbox.json");
+    std::fs::create_dir_all(evidence_dir())?;
     std::fs::write(
         output,
         serde_json::to_vec_pretty(&json!({
@@ -192,4 +193,109 @@ async fn permissionless_campaigns_and_dao_verification() -> Result<()> {
         }))?,
     )?;
     Ok(())
+}
+
+#[tokio::test]
+async fn partial_creation_and_lost_callbacks_resume_without_redeploying_children() -> Result<()> {
+    let h = Harness::new(false).await?;
+    h._sandbox
+        .create_account("factory.test".parse()?)
+        .initial_balance(NearToken::from_near(30))
+        .send()
+        .await?;
+    Contract::deploy("factory.test".parse()?)
+        .use_code(std::fs::read(
+            root().join("artifacts/yieldfund_campaign_factory_faults.wasm"),
+        )?)
+        .without_init_call()
+        .with_signer(h.signer.clone())
+        .send_to(&h.network)
+        .await?
+        .assert_success();
+    let storage = h.view("token", "storage_balance_bounds", json!({})).await?["min"].clone();
+    h.call("factory", "factory", "new", json!({"verifier_id":"treasury.test","token_id":"token.test","token_decimals":6,"token_storage":storage}), 0).await?.assert_success();
+    let cost = h
+        .view("factory", "creation_cost", json!({}))
+        .await?
+        .as_str()
+        .unwrap()
+        .parse()?;
+    for (stage, creator) in [(1, "alice"), (2, "alice"), (4, "bob"), (8, "bob")] {
+        let id = format!("fault-{stage}");
+        h.call(
+            "factory",
+            "factory",
+            "test_set_creation_fault",
+            json!({"stage":stage}),
+            0,
+        )
+        .await?
+        .assert_success();
+        // Some callbacks are deliberately detached. Inspect durable state rather than
+        // treating the outer transaction's return value as a ready campaign.
+        let _ = h.call(creator, "factory", "create_campaign", json!({"id":id,"name":id,"beneficiary_id":"treasury.test","metadata_hash":"a".repeat(64),"deposit_cap":amount(1000)}), cost).await?;
+        let c = h.view("factory", "get_campaign", json!({"id":id})).await?;
+        assert_ne!(c["status"], "ready");
+        let progress = h
+            .view("factory", "get_creation_progress", json!({"id":id}))
+            .await?;
+        let before = h
+            .view(&format!("v-{id}.factory"), "get_config", json!({}))
+            .await?;
+        h.call(
+            "bob",
+            "factory",
+            "recover_campaign",
+            json!({"id":id,"version":progress["version"]}),
+            1,
+        )
+        .await?
+        .assert_failure();
+        h.call(
+            "factory",
+            "factory",
+            "test_set_creation_fault",
+            json!({"stage":0}),
+            0,
+        )
+        .await?
+        .assert_success();
+        h.recovery_cooldown(&progress).await?;
+        h.call(
+            "bob",
+            "factory",
+            "recover_campaign",
+            json!({"id":id,"version":progress["version"]}),
+            1,
+        )
+        .await?
+        .assert_success();
+        let done = h.view("factory", "get_campaign", json!({"id":id})).await?;
+        assert_eq!(done["status"], "ready", "stage {stage}");
+        assert_eq!(done["creator_id"], format!("{creator}.test"));
+        assert_eq!(
+            h.view(&format!("v-{id}.factory"), "get_config", json!({}))
+                .await?,
+            before
+        );
+        h.call(
+            "bob",
+            "factory",
+            "recover_campaign",
+            json!({"id":id,"version":progress["version"]}),
+            1,
+        )
+        .await?
+        .assert_failure();
+        for prefix in ["v", "s"] {
+            let account = format!("{prefix}-{id}.factory.test");
+            let keys = browser_fixture::rpc(
+                &h._sandbox.rpc_addr,
+                "query",
+                json!({"request_type":"view_access_key_list","finality":"final","account_id":account}),
+            )?;
+            assert!(keys["keys"].as_array().unwrap().is_empty());
+        }
+    }
+    h.save("factory-partial-and-callback-recovery")
 }

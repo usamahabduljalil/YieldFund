@@ -11,5 +11,8 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 near-sdk.workspace = true
 
+[features]
+test-faults = []
+
 [dev-dependencies]
 near-sdk = { workspace = true, features = ["unit-testing"] }

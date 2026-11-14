@@ -105,6 +105,9 @@ describe("campaign registry preparation", () => {
       );
     expect(a.hash).toMatch(/^[0-9a-f]{64}$/);
     expect(a.hash).not.toBe(b.hash);
+    const v2 = await campaignMetadata(input, d.tokenId, 2);
+    expect(v2.hash).not.toBe(a.hash);
+    expect(JSON.parse(v2.content).disclosure_version).toBe("factory-v2");
     expect(
       (await campaignMetadata({ ...input, name: " Alpha " }, d.tokenId)).hash,
     ).toBe(a.hash);
@@ -411,3 +414,47 @@ it.each(["ok", "changed-config", "keys"])(
     }
   },
 );
+
+describe("factory recovery reviews", () => {
+  it("uses a fresh, version-bound intent and refuses legacy/ready/cooldown states", async () => {
+    const registry = new CampaignRegistry({ ...d, recoveryVersion: 2 });
+    const snapshot = {
+      blockHash: "final",
+      timestamp: "600000000000",
+    } as import("./campaigns").RegistrySnapshot;
+    const view = vi.spyOn(registry, "view");
+    view
+      .mockResolvedValueOnce({ ...campaign, status: "failed" })
+      .mockResolvedValueOnce({
+        version: "4",
+        updated_at: "1",
+        children: [true, false],
+        registered: [false, false, false],
+      });
+    expect(await registry.recoveryCall("alpha", snapshot)).toEqual({
+      receiverId: d.factoryId,
+      methodName: "recover_campaign",
+      args: { id: "alpha", version: "4" },
+      deposit: "1",
+      gas: "300000000000000",
+    });
+    await expect(
+      new CampaignRegistry(d).recoveryCall("alpha", snapshot),
+    ).rejects.toThrow("does not support");
+    view.mockResolvedValueOnce(campaign);
+    await expect(registry.recoveryCall("alpha", snapshot)).rejects.toThrow(
+      "already ready",
+    );
+    view
+      .mockResolvedValueOnce({ ...campaign, status: "creating" })
+      .mockResolvedValueOnce({
+        version: "5",
+        updated_at: snapshot.timestamp,
+        children: [true, true],
+        registered: [false, false, false],
+      });
+    await expect(registry.recoveryCall("alpha", snapshot)).rejects.toThrow(
+      "five minutes",
+    );
+  });
+});

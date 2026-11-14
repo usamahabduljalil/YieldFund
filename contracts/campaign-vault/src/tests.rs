@@ -57,17 +57,17 @@ fn balance_recovery_supersedes_stale_callback_and_reserves_once() {
 }
 
 #[test]
-fn unknown_outgoing_payment_cannot_be_recovered_even_after_timeout() {
+fn unknown_outgoing_payment_requires_durable_evidence_after_timeout() {
     let mut v = vault();
     deposit(&mut v, 1000);
     let id = request(&mut v, 200);
     reconcile(&mut v, id, 1000);
     let version = v.operation(id.0).version;
     context_at("guardian.test", 1, None, RECOVERY_DELAY_NS);
-    assert!(std::panic::catch_unwind(std::panic::AssertUnwindSafe(
-        || v.recover_operation(id, version)
-    ))
-    .is_err());
+    v.recover_operation(id, version).detach();
+    let current = v.operation(id.0).version;
+    context("vault.test", 0, Some(PromiseResult::Failed));
+    assert!(!v.on_recovery_transfer(id, current));
     assert_eq!((v.cash, v.nominal), (800, 800));
     assert_eq!(v.active, Some(id.0));
 }
@@ -90,7 +90,7 @@ fn proof(last: &str, busy: bool) -> PromiseResult {
     PromiseResult::Successful(
         near_sdk::serde_json::to_vec(&near_sdk::serde_json::json!({
             "mode":"funded_simulator","token_id":"token.test","vault_id":"vault.test",
-            "last_redeem":last,"position":"0","busy":busy
+            "last_redeem":last,"return_sequence":"3","position":"0","busy":busy
         }))
         .unwrap(),
     )
@@ -258,7 +258,7 @@ fn pending_units_stay_in_denominator_until_payout_and_finalize_once() {
     assert_eq!((v.cash, v.nominal), (800, 800));
     assert_eq!(v.get_accounting().reserved_outbound.0, 200);
     let version = v.operation(id.0).version;
-    context("vault.test", 0, Some(PromiseResult::Successful(vec![])));
+    context("vault.test", 0, Some(payment_proof(&v, id, true)));
     assert!(v.on_transfer(id, version));
     assert!(v.active.is_none());
     assert_eq!(v.operation(id.0).stage, Stage::Completed);
@@ -494,4 +494,52 @@ fn redemption_failure_after_return_keeps_cash_locked_and_yield_ineligible() {
     assert_eq!(v.active, Some(1));
     assert_eq!(v.cash, 1030);
     assert_eq!(v.get_accounting().eligible_yield.0, 0);
+}
+
+fn payment_proof(v: &Vault, id: U64, applied: bool) -> PromiseResult {
+    let op = v.operation(id.0);
+    PromiseResult::Successful(
+        near_sdk::serde_json::to_vec(&near_sdk::serde_json::json!({
+            "sender_id":"vault.test","receiver_id":op.owner_id,"amount":op.payout,
+            "sequence":U64(v.pending_transfer_sequence),"applied":applied
+        }))
+        .unwrap(),
+    )
+}
+fn check_payment_recovery(applied: bool) {
+    let mut v = vault();
+    deposit(&mut v, 1000);
+    let id = request(&mut v, 200);
+    reconcile(&mut v, id, 1000);
+    let original = v.operation(id.0).version;
+    let sequence = v.pending_transfer_sequence;
+    context_at("bob.test", 1, None, RECOVERY_DELAY_NS);
+    v.recover_operation(id, original).detach();
+    let current = v.operation(id.0).version;
+    assert_eq!(sequence, v.pending_transfer_sequence);
+    context("vault.test", 0, Some(payment_proof(&v, id, applied)));
+    assert!(
+        std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| v.on_transfer(id, original)))
+            .is_err()
+    );
+    assert_eq!(v.on_recovery_transfer(id, current), applied);
+    assert_eq!(v.cash, if applied { 800 } else { 1000 });
+    assert_eq!(v.nominal, if applied { 800 } else { 1000 });
+    assert_eq!(
+        v.positions.get(&account("alice.test")).unwrap().withdrawn.0,
+        if applied { 200 } else { 0 }
+    );
+    assert!(v.active.is_none());
+    assert!(std::panic::catch_unwind(std::panic::AssertUnwindSafe(
+        || v.on_recovery_transfer(id, current)
+    ))
+    .is_err());
+}
+#[test]
+fn paid_recovery_is_exactly_once() {
+    check_payment_recovery(true);
+}
+#[test]
+fn cancelled_recovery_is_exactly_once() {
+    check_payment_recovery(false);
 }

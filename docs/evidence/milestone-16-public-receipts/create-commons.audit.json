@@ -1,0 +1,384 @@
+{
+  "reviewSha256": "6d55bbccf4108a7bc6c8ac362c965ac4409b7695f4f122b07803d0aaed75bec5",
+  "index": 3,
+  "block": {
+    "approvals": [
+      "ed25519:3gta7YeZS7qWwu2UxJhBqos6DCF8FvHspng8HDwrpvEsQQFgcKcd3LfYeC4PY8oxBKRCTiUAmRq5rGHwqqQZteeT",
+      null,
+      "ed25519:3GsAFS6JMXjxXE9ZukcLjYGKESXgbM4yCrJFsmiRcDTCsNxjoE9LAWXbw4P4J3shJZWFD6zWyA9vf8fbjbk2uAQ2",
+      "ed25519:3NW96XmeM4bKVx5dTEmukG6bb8BA8bsM8MARVby1kLm36JkpzTMh6H6S6ndJQrCtCLcuB9wHzaQFP9WyB9XBXLi7",
+      "ed25519:2kyjKzA4Fpse7RTDUg4ZAYpDzixAxAFFqivReyhfiCDuJEfhoKkSJ73RJFDZaxzwHxrut6uR4FEXpoWt8TLitwJg",
+      "ed25519:22aaxLH9QpKsvq1WN8EvvK1gNFYcVHGxMcrcpJn1M1eWB9F4TJS4LktVPoyuVNpG7v3sKnc89c4pZ4CFBfLhAMc4",
+      null,
+      "ed25519:2eDbWNFFWj3pFpGYtLybncgFEXWPJHatCgYk71x5uCpD2DMmmD5SbkZ8NiCgiR1qwjw7VLTyD1excr9zS1iiQ9MJ",
+      "ed25519:5WsTDymTZ8zdcu9rFL3976RoBUmAxs1RiRuqxRz7qJk6P4NN7gfoF8pkyETivPSqLurMnwKr8TgCBb34M4GDS63S",
+      "ed25519:5FgPzfGFqHAkua6RBJaEGDy4VH9a8M6StBuVogkyJNJHQPKmEooD9bZE1k7ypnqqAfeXeHrWyqc7AiKvF9iqQkWm",
+      "ed25519:4AkmixFFsCsHrAWqdqh23ScARH9cHc4WQcCByCEPMgjercBxDfHh7KJaN7bq5rWMyrhuJPumBEBwmahNEEcG5Wu3",
+      null,
+      null,
+      "ed25519:5cWjfocJf6Ez4Afjwztwk3ForumraUgQd8CtVFtVDGxbRHU7LRUtoDo45kCM7ufxSynDQeLN77vgoNH4p6sMoCPP",
+      null,
+      "ed25519:5R2LANQZurjqVfFep8KmZs4aFm8g58kNKGV7doS2qKqQVa3GGdm93aS6homDevyj2gryzAKVg9HkP3Jvio9E9z9W",
+      "ed25519:26NM6a3hNYhVvzfF8tdZHYURBF48zF8yAuztCp9oKjbjUsycKfc2SfpkMJfNEMuwsYeabUdbWLssYu6BCvqktuBE",
+      "ed25519:4KyJvnfRxuYPPEbHj7QfwkBfwRqLeG5A5VhgBpGPWhy1LmjuYG9PoRKRX6NuwrV2FNovcTh6kme3Aep1pVJ6ZXQg",
+      "ed25519:4AnkofT8ovAfWhixCBrbDhHAvW1vTBuRLTrHNMzYbpJk1tratyymzUjF39tStHcFDaLwHsKnLD84Se9edcXeCppy",
+      null
+    ],
+    "block_body_hash": "FToLAdVfUkA2rhd5om7fAfeSnASNVDyM5RUxyakiQq8b",
+    "block_merkle_root": "A1RnmW6nFffKez4WJByUnEGX6SzBmWP893Nd398CCPCT",
+    "block_ordinal": 229690911,
+    "challenges_result": [],
+    "challenges_root": "11111111111111111111111111111111",
+    "chunk_endorsements": [
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        1
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        63
+      ],
+      [
+        255,
+        255,
+        1
+      ],
+      [
+        255,
+        255,
+        1
+      ],
+      [
+        255,
+        255,
+        63
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        1
+      ],
+      [
+        255,
+        255,
+        1
+      ]
+    ],
+    "chunk_headers_root": "HrFdXr8ZfWUBMJuXf5rhAkL1ZNLYXNgbJkyZg3MYpjS2",
+    "chunk_mask": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "chunk_receipts_root": "Am8ZcyFzxygAGcdnq3KMMPpy6H1E9ahNGE35cW5JdDAH",
+    "chunk_tx_root": "5P2fxzYKmakLEytNx5NBqw5t8DVNEspENZuwoXpzvXFC",
+    "chunks_included": 10,
+    "epoch_id": "5zii244eheJxTt1T3DJZQnAYmceHiVRJKfX3C3ajEBGo",
+    "epoch_sync_data_hash": null,
+    "gas_price": "100000000",
+    "hash": "9nAjsxHyMpWauiUnkPHdTfzo7Ts8PEEUyoE8VcbJcUKb",
+    "height": 277698834,
+    "last_ds_final_block": "7nsYPGzbVnLgtA3kcAmPsZFY74t2SnVLVGS1UxZrEJQu",
+    "last_final_block": "6MWmXbeXbvv6sYZChTXWcTJGcXdVXaAnJfGaqDA45dDx",
+    "latest_protocol_version": 88,
+    "next_bp_hash": "BnZ6KU38HBQy2k58FAGyTm11TCcyHjtygJoSV7XaqNuR",
+    "next_epoch_id": "3JAteA5yGRZChzkcMCKZwg5SqDn5i4eY1PWz4Dd4eeXF",
+    "outcome_root": "AGfzuKUYFkxCXStSodaVwo966TRY1YYVqChshPF5HRTV",
+    "prev_hash": "7nsYPGzbVnLgtA3kcAmPsZFY74t2SnVLVGS1UxZrEJQu",
+    "prev_height": 277698833,
+    "prev_state_root": "HocbpPBoj4aXdBx8pezCA3Sg99AXD5DxHrJbnGWBqnsj",
+    "random_value": "54GpA2nBMrpNU47j7rMek9RLpo9B8p2akPBiq59bzdHZ",
+    "rent_paid": "0",
+    "shard_split": null,
+    "signature": "ed25519:4mVieNbw9SW1wV51KthocU46ueQAYAwWimxdHfbSKRiEuAykLWCa2x89GWzj7aev1sUtaqXvhLuN3wodYvMAQz3e",
+    "timestamp": 1794683763053672200,
+    "timestamp_nanosec": "1794683763053672189",
+    "total_supply": "2680405733193020234702476065961701",
+    "validator_proposals": [],
+    "validator_reward": "0"
+  },
+  "accounts": {
+    "yf-v2-factory-261114.testnet": {
+      "account": {
+        "amount": "13033576679573388400000000",
+        "block_hash": "9nAjsxHyMpWauiUnkPHdTfzo7Ts8PEEUyoE8VcbJcUKb",
+        "block_height": 277698834,
+        "code_hash": "3jCy2XaY89djFkCosdZzN5R3LrYwt7XvWvaDSNmzPXfh",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 994957
+      },
+      "keys": {
+        "block_hash": "9nAjsxHyMpWauiUnkPHdTfzo7Ts8PEEUyoE8VcbJcUKb",
+        "block_height": 277698834,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277696716000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:CoGzCsQuR4aoR9HhrdheUQKPoeaDM1FEqM2VdrQdVHmX"
+          }
+        ]
+      }
+    },
+    "yf-v2-token-261114.testnet": {
+      "account": {
+        "amount": "7062681450832548700000000",
+        "block_hash": "9nAjsxHyMpWauiUnkPHdTfzo7Ts8PEEUyoE8VcbJcUKb",
+        "block_height": 277698834,
+        "code_hash": "FKjHUcPVSxdeEHQnpMx59arDpuacT8C7qzBApF5FGABF",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 309382
+      },
+      "keys": {
+        "block_hash": "9nAjsxHyMpWauiUnkPHdTfzo7Ts8PEEUyoE8VcbJcUKb",
+        "block_height": 277698834,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277696723000002,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:139sWsJYEur3sBiKrwoFLu5gLkwp2ymQnwmRUYFiH8mk"
+          }
+        ]
+      }
+    },
+    "yf-v2-demo-261114.testnet": {
+      "account": {
+        "amount": "2289124492390781100000000",
+        "block_hash": "9nAjsxHyMpWauiUnkPHdTfzo7Ts8PEEUyoE8VcbJcUKb",
+        "block_height": 277698834,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "9nAjsxHyMpWauiUnkPHdTfzo7Ts8PEEUyoE8VcbJcUKb",
+        "block_height": 277698834,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277696731000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:4mcunHbLnsAibtcFFHZktCjBW63BUrNLvSFeC5E8aGC8"
+          }
+        ]
+      }
+    },
+    "yf-v2-builder-261114.testnet": {
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "9nAjsxHyMpWauiUnkPHdTfzo7Ts8PEEUyoE8VcbJcUKb",
+        "block_height": 277698834,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "9nAjsxHyMpWauiUnkPHdTfzo7Ts8PEEUyoE8VcbJcUKb",
+        "block_height": 277698834,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277696739000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:JDF9qcaeKLQWhfk3iXaLEt44epe7hWfqr4Yekr7fUPXd"
+          }
+        ]
+      }
+    },
+    "dao.yf-operator-261105.testnet": {
+      "account": {
+        "amount": "6996179737537623999999999",
+        "block_hash": "9nAjsxHyMpWauiUnkPHdTfzo7Ts8PEEUyoE8VcbJcUKb",
+        "block_height": 277698834,
+        "code_hash": "49mLHWeLgCbfJbYYH5SrNo35G2EGS57W1W5g3eXvzZhb",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 496856
+      },
+      "policy": {
+        "roles": [
+          {
+            "name": "council",
+            "kind": {
+              "Group": [
+                "yf-council1-261105.testnet",
+                "yf-council2-261105.testnet",
+                "yf-council3-261105.testnet"
+              ]
+            },
+            "permissions": [
+              "transfer:AddProposal",
+              "transfer:VoteReject",
+              "transfer:Finalize",
+              "transfer:VoteApprove"
+            ],
+            "vote_policy": {}
+          }
+        ],
+        "default_vote_policy": {
+          "weight_kind": "RoleWeight",
+          "quorum": "2",
+          "threshold": "2"
+        },
+        "proposal_bond": "100000000000000000000000",
+        "proposal_period": "604800000000000",
+        "bounty_bond": "0",
+        "bounty_forgiveness_period": "86400000000000"
+      }
+    },
+    "yf-verify-261113.testnet": {
+      "account": {
+        "amount": "5496140912033939199999999",
+        "block_hash": "9nAjsxHyMpWauiUnkPHdTfzo7Ts8PEEUyoE8VcbJcUKb",
+        "block_height": 277698834,
+        "code_hash": "49mLHWeLgCbfJbYYH5SrNo35G2EGS57W1W5g3eXvzZhb",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 497107
+      },
+      "policy": {
+        "roles": [
+          {
+            "name": "council",
+            "kind": {
+              "Group": [
+                "yf-council1-261105.testnet",
+                "yf-council2-261105.testnet",
+                "yf-council3-261105.testnet"
+              ]
+            },
+            "permissions": [
+              "call:VoteApprove",
+              "call:VoteReject",
+              "call:Finalize",
+              "call:AddProposal"
+            ],
+            "vote_policy": {}
+          }
+        ],
+        "default_vote_policy": {
+          "weight_kind": "RoleWeight",
+          "quorum": "2",
+          "threshold": "2"
+        },
+        "proposal_bond": "100000000000000000000000",
+        "proposal_period": "604800000000000",
+        "bounty_bond": "0",
+        "bounty_forgiveness_period": "86400000000000"
+      }
+    }
+  },
+  "campaigns": [
+    {
+      "campaign": {
+        "id": "commons",
+        "name": "The Commons",
+        "creator_id": "yf-v2-demo-261114.testnet",
+        "vault_id": "v-commons.yf-v2-factory-261114.testnet",
+        "strategy_id": "s-commons.yf-v2-factory-261114.testnet",
+        "beneficiary_id": "dao.yf-operator-261105.testnet",
+        "token_id": "yf-v2-token-261114.testnet",
+        "metadata_hash": "06054c13d1eb5687a27aab618daf5a310e5a3c17f6716d4fcd7bf75b9e55a049",
+        "deposit_cap": "1000000000",
+        "status": "ready",
+        "verification": null,
+        "created_at": "1794683759353434652"
+      },
+      "config": {
+        "campaign_id": "commons",
+        "token_id": "yf-v2-token-261114.testnet",
+        "token_decimals": 6,
+        "beneficiary_id": "dao.yf-operator-261105.testnet",
+        "guardian_id": "yf-v2-demo-261114.testnet",
+        "deposit_cap": "1000000000",
+        "metadata_hash": "06054c13d1eb5687a27aab618daf5a310e5a3c17f6716d4fcd7bf75b9e55a049",
+        "disclosure_version": "factory-v2",
+        "strategy_id": "s-commons.yf-v2-factory-261114.testnet"
+      },
+      "strategy": {
+        "mode": "funded_simulator",
+        "token_id": "yf-v2-token-261114.testnet",
+        "vault_id": "v-commons.yf-v2-factory-261114.testnet",
+        "position": "0",
+        "busy": false,
+        "last_redeem": "0",
+        "last_supply": "0",
+        "controller_id": "yf-v2-demo-261114.testnet",
+        "loss_sink_id": "yf-v2-demo-261114.testnet",
+        "return_used": null,
+        "return_sequence": "0"
+      },
+      "accounting": {
+        "mode": "funded_simulator",
+        "cash": "0",
+        "excluded": "0",
+        "nominal": "0",
+        "backing": "0",
+        "shortfall": "0",
+        "eligible_yield": "0",
+        "reserved_outbound": "0",
+        "paused": false,
+        "active_operation": null,
+        "state_version": "0",
+        "checkpoint_at": "1794683760020985054",
+        "needs_reconciliation": false,
+        "strategy_book": "0",
+        "settled": true,
+        "donated": "0",
+        "queued_redemption": null
+      }
+    }
+  ],
+  "supply": "1000000000000",
+  "storage": {
+    "min": "21730000000000000000000",
+    "max": "21730000000000000000000"
+  },
+  "factoryConfig": {
+    "verifier_id": "yf-verify-261113.testnet",
+    "token_id": "yf-v2-token-261114.testnet",
+    "token_decimals": 6,
+    "strategy_mode": "funded_simulator",
+    "vault_code_hash": "5eda8dc62e18b324d1f788431bcd53c89e112685b17295e19f405a5749808fa0",
+    "strategy_code_hash": "d554fa9c50978da21c9045dc713f30d045a332e395fe1b3ea1e3d9a506be0497",
+    "recovery_version": 2,
+    "creation_cost": "7687100000000000000000000",
+    "campaign_count": "1"
+  },
+  "tokenBalances": {
+    "yf-v2-demo-261114.testnet": "1000000000000",
+    "v-commons.yf-v2-factory-261114.testnet": "0",
+    "s-commons.yf-v2-factory-261114.testnet": "0",
+    "dao.yf-operator-261105.testnet": "0",
+    "yf-council3-261105.testnet": "0"
+  }
+}

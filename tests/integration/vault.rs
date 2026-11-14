@@ -201,7 +201,11 @@ impl Harness {
             token,
             "storage_deposit",
             json!({"account_id":format!("{name}.test"),"registration_only":true}),
-            NearToken::from_millinear(10).as_yoctonear(),
+            self.view(token, "storage_balance_bounds", json!({}))
+                .await?["min"]
+                .as_str()
+                .unwrap()
+                .parse()?,
         )
         .await?
         .assert_success();

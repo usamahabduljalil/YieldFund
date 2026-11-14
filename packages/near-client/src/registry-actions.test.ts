@@ -155,3 +155,67 @@ describe("registry submission recovery", () => {
     ).toBe("attention");
   });
 });
+
+it("permits only matching campaign recovery after a finalized incomplete setup", () => {
+  const intent = {
+    ...row.call,
+    methodName: "recover_campaign",
+    deposit: "1",
+    args: { id: "alpha", version: "3" },
+  };
+  const incomplete = {
+    ...row,
+    state: "attention" as const,
+    hash: "hash",
+    receipts: ["receipt"],
+  };
+  expect(() =>
+    assertRegistryAvailable(
+      [incomplete],
+      { ...d, recoveryVersion: 2 },
+      row.account,
+      intent,
+    ),
+  ).not.toThrow();
+  for (const patch of [
+    { state: "unknown" as const },
+    { hash: undefined },
+    { receipts: [] },
+  ]) {
+    expect(() =>
+      assertRegistryAvailable(
+        [{ ...incomplete, ...patch }],
+        { ...d, recoveryVersion: 2 },
+        row.account,
+        intent,
+      ),
+    ).toThrow("existing");
+  }
+  expect(() =>
+    assertRegistryAvailable(
+      [incomplete],
+      { ...d, recoveryVersion: 2 },
+      row.account,
+      {
+        ...intent,
+        args: { id: "beta" },
+      },
+    ),
+  ).toThrow("existing");
+  expect(() =>
+    assertRegistryAvailable(
+      [incomplete],
+      { ...d, recoveryVersion: 2 },
+      row.account,
+      row.call,
+    ),
+  ).toThrow("existing");
+  expect(() =>
+    assertRegistryAvailable(
+      [{ ...incomplete, state: "recovered" }],
+      d,
+      row.account,
+      row.call,
+    ),
+  ).not.toThrow();
+});

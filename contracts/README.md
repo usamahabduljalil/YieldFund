@@ -52,6 +52,8 @@ On this Ubuntu 22.04 workspace, `test-contracts.sh` automatically reuses the iso
 
 ## Incomplete recovery and trust limits
 
+The paragraph below describes the historical public v1 artifacts. **New v2 source** implements atomic test-token payment receipts/cancellation, transfer-call resolver receipts, allocation and simulator-finalizer recovery, and resumable factory creation. See [Recovery v2](../docs/contracts/recovery-v2.md) for its scope, registration costs, fresh-deployment requirement and release gates. No public deployment has been upgraded merely by changing this source.
+
 A callback lost after an outgoing token payment is deliberately fail-closed. Stage-specific recovery can now restart interrupted balance reads or prove a completed simulator redemption from authenticated contract state. It cannot unlock unknown outgoing payments, allocation outcomes or unexplained custody shortfalls. See [recovery](../docs/contracts/recovery.md). Complete those remaining paths before claiming P0 completion or accepting public deposits. Receipt IDs are collected off-chain from finalized outcomes; they are not invented inside contract state.
 
 The vault assumes the configured token has the pinned standard token's atomic `ft_transfer` semantics. A symbol/decimals match is insufficient. Retained full-access deployment keys can replace code or call private methods as the vault account; remove or govern them before any stronger trust claim. Local fixture accounts intentionally retain keys. There is no production-readiness or security-audit claim.

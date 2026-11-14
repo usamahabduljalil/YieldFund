@@ -1,0 +1,304 @@
+{
+  "reviewSha256": "6d55bbccf4108a7bc6c8ac362c965ac4409b7695f4f122b07803d0aaed75bec5",
+  "index": 0,
+  "block": {
+    "approvals": [
+      null,
+      "ed25519:46MsbNwJryC3M3ovHjnDAQQikxDc1moJY4nQkYcE2F9LvkN6cyieiFHG7Frp7vs8kz3J8RjK24pRWt8e5BTjQPqS",
+      "ed25519:5kfhvcsVXNJHS4wPGwPZqZXW8sCkmt2w38JQ2J917Jcf5ecDsSsZpar8BbPW8gMLSGneNXXcFTu2yGuixMeJjzMx",
+      "ed25519:335B66heq12yvYwCofsEpHpA6CihP4HNCEAsAK7moYgLdWpC5VJGvE8TdtNqxPEHBCy1E8cS9YMz7uA7PtiRAGor",
+      "ed25519:o1XiF73rTnQuN5Uw4EBSsEwa334f66L11V6UWpaNKofas5Js6tuPYDmeDygop2pxDxXA9Rim5GoMfgCuFLxJ4U2",
+      null,
+      "ed25519:3L4qWCkH6JysBMEj1HwDu83mRP9oDwbE2RxsTMcJPmj8gA1ng9d3977DxHowahmnYPSwL18yymeZ9h13FxCgdXvb",
+      "ed25519:BRaDZH1o2waRD2iZapAqyu6ihVPJm9gL3NNiYMnwmKqd9XxKH7qadgNcsxprdUhHbL279RSTC7TaTqBL8fZ49Bd",
+      "ed25519:4NXQg2884u8PNvpJgvBw63qqHe3F1fup8C1yhdDXeFyEBsZfXnPJVzcjbQmX7FZvDAw7ayNcQEiX4Lz4MPanAS63",
+      "ed25519:27mGSoB1h6qAZtUi7bMcU6FBWFBQpfUG47wXHZX2RUTbRT6ydH61EAEfNm5SERnZ6Kx83czkWGpUcEdX8kfnjVSC",
+      "ed25519:24eemdgrWaj5oaM54kx2h8URBkgk9c34VS3KtuCEhenq3Zyj9YZoo6fNH1H3FSZgLts2xkRJjrUkbhgKNQbyrEM9",
+      "ed25519:BHrXZaw81K32fp2PNmKGQBW7iQc8MxDXRKTeN7pnDnshDBd39bsp6LB7M1hvW4LpvA9C3LNuyvRK96gQAQMeYM4",
+      "ed25519:5oNzgEYYA3BdU9wKgUvWW6JJy5XXT135wMhSQMpTEfa6pL6vJetrraHtH4THW8T2VRCe2MxP7keVJ3BpSfBoaJLF",
+      "ed25519:31GiFGF9JrMp3nZYhd6ophBce8z3Yy1yyEZXoaZsX9G6CCFJUjD3d9YcN3xjuLHNw1ki7LVzX7zVpMEHhasgdVa7",
+      "ed25519:27cnvQTdKC2e3dN5duhm89ThP9yJJnFFL1V7DTndJ8p54T6JLTDTfgFzBv6ZFjftjrY2SuiqjS8PKiXowAgHPiUN",
+      "ed25519:4E8PwenM8R3EagmgritEr6X6zxQjBDdASxnANCN87ZiX2Ue8Kphmy2J6S5cgU5dhfoFFRYp2aSruCLNC3q8s3ugK",
+      "ed25519:5T9sTpcBmBJz4dHpmEQMuNZdq76VGobPzYtXhx8XAMb4koyeHgFKAdcYNm7dd1U1oxhSN9eyjteHWuFSiggUrjms",
+      "ed25519:2XDjoE4WuVDZn61mU4ZXTe8qf2kgscRZJgYthM3WqAmK2nhhTaybbYThZmbQCUnowSWgKedWzyekGTckS67jD2Su",
+      "ed25519:2vTxDuZ4et6ASGLU6TmyErp5ZA24ktijGiYzPQ9eNbef4Zcwtmtdkq4Hf5kptmE5PAxCLM7Q9JdLFRJHfjq6i2jj",
+      "ed25519:2e5GsZYeaHLEJ1jg16W9AZh8a8YP6LPmLNZ7pvrVUov4GdVJgpgFgQ88zJbPghrttqdPZZCWN4dDfyt1Wa2h6HAR"
+    ],
+    "block_body_hash": "65mowqyU2N2f2GqThpN8oMuqr7xkYZ5Ugdz9uJFeWNyR",
+    "block_merkle_root": "7VfnaDH9Hn9iAAvfBRdadWp6GqGA5kxwvKZL7QysyLBG",
+    "block_ordinal": 229690188,
+    "challenges_result": [],
+    "challenges_root": "11111111111111111111111111111111",
+    "chunk_endorsements": [
+      [
+        255,
+        255,
+        7
+      ],
+      [
+        255,
+        63
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        3
+      ],
+      [
+        255,
+        255,
+        1
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        63
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        127
+      ],
+      [
+        255,
+        255
+      ]
+    ],
+    "chunk_headers_root": "J5i1vHVZhsAuqMTVpBWdwgkGZBisNyA7De1s1p2QCQtA",
+    "chunk_mask": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "chunk_receipts_root": "7FB5EYMxx4nEkuPs6dySwktB4Lmbk5SDgB3oow27EMGz",
+    "chunk_tx_root": "5BLp1waSytCW5icY7En77tgteocxgmZpJw5HMmr447g8",
+    "chunks_included": 10,
+    "epoch_id": "5zii244eheJxTt1T3DJZQnAYmceHiVRJKfX3C3ajEBGo",
+    "epoch_sync_data_hash": null,
+    "gas_price": "100000000",
+    "hash": "AoR2wbAe1EtQW4KDyiSQWj1deaf8UyYHhmMqTHAn6fdK",
+    "height": 277698111,
+    "last_ds_final_block": "H9QoZaDdoYht6C9v6tY4jDBG2UProQK2wS7K2WYZjGD9",
+    "last_final_block": "99wKu81KrgTiEgz8NPCkrQU2NWTMpdybFUzcqSUB4jYN",
+    "latest_protocol_version": 88,
+    "next_bp_hash": "BnZ6KU38HBQy2k58FAGyTm11TCcyHjtygJoSV7XaqNuR",
+    "next_epoch_id": "3JAteA5yGRZChzkcMCKZwg5SqDn5i4eY1PWz4Dd4eeXF",
+    "outcome_root": "CrbBUfu95D42zjPBKcE7cfbNHmqoenL1aLNLkQckEkrM",
+    "prev_hash": "H9QoZaDdoYht6C9v6tY4jDBG2UProQK2wS7K2WYZjGD9",
+    "prev_height": 277698110,
+    "prev_state_root": "FU7xsaWFf9WWWvL1Vz7h8wyRSM3YJdcxnou68GsgwyA8",
+    "random_value": "FG3fjT7QECtwaD2jHkE9n3Ey8u1z9RJrcmcGwufvZqvY",
+    "rent_paid": "0",
+    "shard_split": null,
+    "signature": "ed25519:65r46PJ3q8CX9oGAL5tU7reEAr7cqXkjFs8K85rjUrDWyULyuK9HH3TPoXegkrhit2hVHtf7QqbBBbq7EfYLaiGj",
+    "timestamp": 1794683325761346000,
+    "timestamp_nanosec": "1794683325761346054",
+    "total_supply": "2680405736131728316986753765961701",
+    "validator_proposals": [],
+    "validator_reward": "0"
+  },
+  "accounts": {
+    "yf-v2-factory-261114.testnet": {
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "AoR2wbAe1EtQW4KDyiSQWj1deaf8UyYHhmMqTHAn6fdK",
+        "block_height": 277698111,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "AoR2wbAe1EtQW4KDyiSQWj1deaf8UyYHhmMqTHAn6fdK",
+        "block_height": 277698111,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277696716000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:CoGzCsQuR4aoR9HhrdheUQKPoeaDM1FEqM2VdrQdVHmX"
+          }
+        ]
+      }
+    },
+    "yf-v2-token-261114.testnet": {
+      "account": {
+        "amount": "9997536087345048700000000",
+        "block_hash": "AoR2wbAe1EtQW4KDyiSQWj1deaf8UyYHhmMqTHAn6fdK",
+        "block_height": 277698111,
+        "code_hash": "FKjHUcPVSxdeEHQnpMx59arDpuacT8C7qzBApF5FGABF",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 309093
+      },
+      "keys": {
+        "block_hash": "AoR2wbAe1EtQW4KDyiSQWj1deaf8UyYHhmMqTHAn6fdK",
+        "block_height": 277698111,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277696723000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:139sWsJYEur3sBiKrwoFLu5gLkwp2ymQnwmRUYFiH8mk"
+          }
+        ]
+      }
+    },
+    "yf-v2-demo-261114.testnet": {
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "AoR2wbAe1EtQW4KDyiSQWj1deaf8UyYHhmMqTHAn6fdK",
+        "block_height": 277698111,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "AoR2wbAe1EtQW4KDyiSQWj1deaf8UyYHhmMqTHAn6fdK",
+        "block_height": 277698111,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277696731000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:4mcunHbLnsAibtcFFHZktCjBW63BUrNLvSFeC5E8aGC8"
+          }
+        ]
+      }
+    },
+    "yf-v2-builder-261114.testnet": {
+      "account": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "AoR2wbAe1EtQW4KDyiSQWj1deaf8UyYHhmMqTHAn6fdK",
+        "block_height": 277698111,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "keys": {
+        "block_hash": "AoR2wbAe1EtQW4KDyiSQWj1deaf8UyYHhmMqTHAn6fdK",
+        "block_height": 277698111,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277696739000000,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:JDF9qcaeKLQWhfk3iXaLEt44epe7hWfqr4Yekr7fUPXd"
+          }
+        ]
+      }
+    },
+    "dao.yf-operator-261105.testnet": {
+      "account": {
+        "amount": "6996179737537623999999999",
+        "block_hash": "AoR2wbAe1EtQW4KDyiSQWj1deaf8UyYHhmMqTHAn6fdK",
+        "block_height": 277698111,
+        "code_hash": "49mLHWeLgCbfJbYYH5SrNo35G2EGS57W1W5g3eXvzZhb",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 496856
+      },
+      "policy": {
+        "roles": [
+          {
+            "name": "council",
+            "kind": {
+              "Group": [
+                "yf-council1-261105.testnet",
+                "yf-council2-261105.testnet",
+                "yf-council3-261105.testnet"
+              ]
+            },
+            "permissions": [
+              "transfer:AddProposal",
+              "transfer:VoteReject",
+              "transfer:Finalize",
+              "transfer:VoteApprove"
+            ],
+            "vote_policy": {}
+          }
+        ],
+        "default_vote_policy": {
+          "weight_kind": "RoleWeight",
+          "quorum": "2",
+          "threshold": "2"
+        },
+        "proposal_bond": "100000000000000000000000",
+        "proposal_period": "604800000000000",
+        "bounty_bond": "0",
+        "bounty_forgiveness_period": "86400000000000"
+      }
+    },
+    "yf-verify-261113.testnet": {
+      "account": {
+        "amount": "5496140912033939199999999",
+        "block_hash": "AoR2wbAe1EtQW4KDyiSQWj1deaf8UyYHhmMqTHAn6fdK",
+        "block_height": 277698111,
+        "code_hash": "49mLHWeLgCbfJbYYH5SrNo35G2EGS57W1W5g3eXvzZhb",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 497107
+      },
+      "policy": {
+        "roles": [
+          {
+            "name": "council",
+            "kind": {
+              "Group": [
+                "yf-council1-261105.testnet",
+                "yf-council2-261105.testnet",
+                "yf-council3-261105.testnet"
+              ]
+            },
+            "permissions": [
+              "call:VoteApprove",
+              "call:VoteReject",
+              "call:Finalize",
+              "call:AddProposal"
+            ],
+            "vote_policy": {}
+          }
+        ],
+        "default_vote_policy": {
+          "weight_kind": "RoleWeight",
+          "quorum": "2",
+          "threshold": "2"
+        },
+        "proposal_bond": "100000000000000000000000",
+        "proposal_period": "604800000000000",
+        "bounty_bond": "0",
+        "bounty_forgiveness_period": "86400000000000"
+      }
+    }
+  },
+  "campaigns": [],
+  "supply": "1000000000000",
+  "storage": {
+    "min": "21730000000000000000000",
+    "max": "21730000000000000000000"
+  }
+}

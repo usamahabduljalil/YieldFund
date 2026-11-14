@@ -1,0 +1,487 @@
+{
+  "schemaVersion": 2,
+  "network": "testnet",
+  "rpcUrl": "https://rpc.testnet.fastnear.com",
+  "approvalStatus": "awaiting user approval",
+  "accounts": {
+    "yf-v2-factory-261114.testnet": "not created; proposed faucet account",
+    "yf-v2-token-261114.testnet": "not created; proposed faucet account",
+    "yf-v2-demo-261114.testnet": "not created; proposed faucet account",
+    "yf-v2-builder-261114.testnet": "not created; proposed faucet account"
+  },
+  "faucetFundingPerAccount": "10000000000000000000000000",
+  "gasAllowance": "750000000000000000000000",
+  "factoryId": "yf-v2-factory-261114.testnet",
+  "tokenId": "yf-v2-token-261114.testnet",
+  "verifierId": "yf-verify-261113.testnet",
+  "creationCost": "7687100000000000000000000",
+  "tokenStorage": "21730000000000000000000",
+  "artifacts": {
+    "yieldfund_vault.wasm": {
+      "bytes": 407485,
+      "sha256": "5eda8dc62e18b324d1f788431bcd53c89e112685b17295e19f405a5749808fa0"
+    },
+    "yieldfund_strategy_simulator.wasm": {
+      "bytes": 242418,
+      "sha256": "d554fa9c50978da21c9045dc713f30d045a332e395fe1b3ea1e3d9a506be0497"
+    },
+    "yieldfund_test_token.wasm": {
+      "bytes": 308741,
+      "sha256": "d4cfe1dd3f1ad350ccbcde0faf17c125e08a5bc206e3d1c0ca0616e361d2444e"
+    },
+    "yieldfund_campaign_factory.wasm": {
+      "bytes": 994134,
+      "sha256": "28874c3ca9f73f0e0429d8feb7c62a1e7450396ba2881858184d0a8d175c6e3c"
+    }
+  },
+  "metadata": [
+    {
+      "content": {
+        "id": "commons",
+        "name": "The Commons",
+        "beneficiary_id": "dao.yf-operator-261105.testnet",
+        "deposit_cap": "1000000000",
+        "token_id": "yf-v2-token-261114.testnet",
+        "disclosure_version": "factory-v2"
+      },
+      "metadataHash": "06054c13d1eb5687a27aab618daf5a310e5a3c17f6716d4fcd7bf75b9e55a049"
+    },
+    {
+      "content": {
+        "id": "builders",
+        "name": "Builder Commons",
+        "beneficiary_id": "dao.yf-operator-261105.testnet",
+        "deposit_cap": "1000000000",
+        "token_id": "yf-v2-token-261114.testnet",
+        "disclosure_version": "factory-v2"
+      },
+      "metadataHash": "94850a6596bd69e1ebd463c0d81bb52d35b6406f761e18e6e5a030ec9e89674f"
+    }
+  ],
+  "steps": [
+    {
+      "id": "deploy-token",
+      "signerId": "yf-v2-token-261114.testnet",
+      "receiverId": "yf-v2-token-261114.testnet",
+      "channel": "cli",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "new",
+          "args": {
+            "owner_id": "yf-v2-demo-261114.testnet",
+            "total_supply": "1000000000000"
+          },
+          "deposit": "0",
+          "gas": "300000000000000"
+        }
+      ],
+      "artifact": "yieldfund_test_token.wasm"
+    },
+    {
+      "id": "fund-factory-reserve",
+      "signerId": "yf-v2-token-261114.testnet",
+      "receiverId": "yf-v2-factory-261114.testnet",
+      "channel": "cli",
+      "actions": [
+        {
+          "type": "Transfer",
+          "deposit": "3000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "deploy-factory",
+      "signerId": "yf-v2-factory-261114.testnet",
+      "receiverId": "yf-v2-factory-261114.testnet",
+      "channel": "cli",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "new",
+          "args": {
+            "verifier_id": "yf-verify-261113.testnet",
+            "token_id": "yf-v2-token-261114.testnet",
+            "token_decimals": 6,
+            "token_storage": "21730000000000000000000"
+          },
+          "deposit": "0",
+          "gas": "300000000000000"
+        }
+      ],
+      "artifact": "yieldfund_campaign_factory.wasm"
+    },
+    {
+      "id": "create-commons",
+      "signerId": "yf-v2-demo-261114.testnet",
+      "receiverId": "yf-v2-factory-261114.testnet",
+      "channel": "cli",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "create_campaign",
+          "args": {
+            "id": "commons",
+            "name": "The Commons",
+            "beneficiary_id": "dao.yf-operator-261105.testnet",
+            "metadata_hash": "06054c13d1eb5687a27aab618daf5a310e5a3c17f6716d4fcd7bf75b9e55a049",
+            "deposit_cap": "1000000000"
+          },
+          "deposit": "7687100000000000000000000",
+          "gas": "300000000000000"
+        }
+      ]
+    },
+    {
+      "id": "create-builders",
+      "signerId": "yf-v2-builder-261114.testnet",
+      "receiverId": "yf-v2-factory-261114.testnet",
+      "channel": "browser-wallet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "create_campaign",
+          "args": {
+            "id": "builders",
+            "name": "Builder Commons",
+            "beneficiary_id": "dao.yf-operator-261105.testnet",
+            "metadata_hash": "94850a6596bd69e1ebd463c0d81bb52d35b6406f761e18e6e5a030ec9e89674f",
+            "deposit_cap": "1000000000"
+          },
+          "deposit": "7687100000000000000000000",
+          "gas": "300000000000000"
+        }
+      ]
+    },
+    {
+      "id": "register-position",
+      "signerId": "yf-v2-demo-261114.testnet",
+      "receiverId": "v-commons.yf-v2-factory-261114.testnet",
+      "channel": "browser-wallet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "storage_deposit",
+          "args": {
+            "account_id": "yf-v2-demo-261114.testnet"
+          },
+          "deposit": "5120000000000000000000",
+          "gas": "300000000000000"
+        }
+      ]
+    },
+    {
+      "id": "deposit",
+      "signerId": "yf-v2-demo-261114.testnet",
+      "receiverId": "yf-v2-token-261114.testnet",
+      "channel": "browser-wallet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "ft_transfer_call",
+          "args": {
+            "receiver_id": "v-commons.yf-v2-factory-261114.testnet",
+            "amount": "100000000",
+            "msg": "deposit"
+          },
+          "deposit": "1",
+          "gas": "300000000000000"
+        }
+      ]
+    },
+    {
+      "id": "allocate",
+      "signerId": "yf-v2-demo-261114.testnet",
+      "receiverId": "v-commons.yf-v2-factory-261114.testnet",
+      "channel": "browser-wallet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "allocate_idle",
+          "args": {
+            "amount": "100000000"
+          },
+          "deposit": "20480000000000000000001",
+          "gas": "300000000000000"
+        }
+      ]
+    },
+    {
+      "id": "fund-profit",
+      "signerId": "yf-v2-demo-261114.testnet",
+      "receiverId": "yf-v2-token-261114.testnet",
+      "channel": "cli",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "ft_transfer_call",
+          "args": {
+            "receiver_id": "s-commons.yf-v2-factory-261114.testnet",
+            "amount": "3000000",
+            "msg": "fund_profit"
+          },
+          "deposit": "1",
+          "gas": "300000000000000"
+        }
+      ]
+    },
+    {
+      "id": "redeem",
+      "signerId": "yf-v2-demo-261114.testnet",
+      "receiverId": "v-commons.yf-v2-factory-261114.testnet",
+      "channel": "browser-wallet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "redeem_strategy",
+          "args": {},
+          "deposit": "20480000000000000000001",
+          "gas": "300000000000000"
+        }
+      ]
+    },
+    {
+      "id": "donate",
+      "signerId": "yf-v2-demo-261114.testnet",
+      "receiverId": "v-commons.yf-v2-factory-261114.testnet",
+      "channel": "browser-wallet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "distribute_yield",
+          "args": {
+            "max_amount": "3000000"
+          },
+          "deposit": "20480000000000000000001",
+          "gas": "300000000000000"
+        }
+      ]
+    },
+    {
+      "id": "request-withdrawal",
+      "signerId": "yf-v2-demo-261114.testnet",
+      "receiverId": "v-commons.yf-v2-factory-261114.testnet",
+      "channel": "browser-wallet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "request_withdraw",
+          "args": {
+            "units": "20000000",
+            "min_amount": "20000000"
+          },
+          "deposit": "20480000000000000000001",
+          "gas": "300000000000000"
+        }
+      ]
+    },
+    {
+      "id": "advance-withdrawal",
+      "signerId": "yf-v2-demo-261114.testnet",
+      "receiverId": "v-commons.yf-v2-factory-261114.testnet",
+      "channel": "browser-wallet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "advance_operation",
+          "args": {
+            "operation_id": "4"
+          },
+          "deposit": "1",
+          "gas": "300000000000000"
+        }
+      ]
+    },
+    {
+      "id": "register-recipient",
+      "signerId": "yf-v2-demo-261114.testnet",
+      "receiverId": "yf-v2-token-261114.testnet",
+      "channel": "cli",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "storage_deposit",
+          "args": {
+            "account_id": "yf-council3-261105.testnet",
+            "registration_only": true
+          },
+          "deposit": "21730000000000000000000",
+          "gas": "300000000000000"
+        }
+      ]
+    },
+    {
+      "id": "propose-payment",
+      "signerId": "yf-council1-261105.testnet",
+      "receiverId": "dao.yf-operator-261105.testnet",
+      "channel": "cli",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "add_proposal",
+          "args": {
+            "proposal": {
+              "description": "YieldFund v2 demo community payment",
+              "kind": {
+                "Transfer": {
+                  "token_id": "yf-v2-token-261114.testnet",
+                  "receiver_id": "yf-council3-261105.testnet",
+                  "amount": "2000000",
+                  "msg": null
+                }
+              }
+            }
+          },
+          "deposit": "100000000000000000000000",
+          "gas": "100000000000000"
+        }
+      ]
+    },
+    {
+      "id": "vote-payment-1",
+      "signerId": "yf-council1-261105.testnet",
+      "receiverId": "dao.yf-operator-261105.testnet",
+      "channel": "cli",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "act_proposal",
+          "args": {
+            "id": 1,
+            "action": "VoteApprove",
+            "proposal": {
+              "Transfer": {
+                "token_id": "yf-v2-token-261114.testnet",
+                "receiver_id": "yf-council3-261105.testnet",
+                "amount": "2000000",
+                "msg": null
+              }
+            }
+          },
+          "deposit": "0",
+          "gas": "250000000000000"
+        }
+      ]
+    },
+    {
+      "id": "vote-payment-2",
+      "signerId": "yf-council2-261105.testnet",
+      "receiverId": "dao.yf-operator-261105.testnet",
+      "channel": "cli",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "act_proposal",
+          "args": {
+            "id": 1,
+            "action": "VoteApprove",
+            "proposal": {
+              "Transfer": {
+                "token_id": "yf-v2-token-261114.testnet",
+                "receiver_id": "yf-council3-261105.testnet",
+                "amount": "2000000",
+                "msg": null
+              }
+            }
+          },
+          "deposit": "0",
+          "gas": "250000000000000"
+        }
+      ]
+    },
+    {
+      "id": "propose-verification",
+      "signerId": "yf-council1-261105.testnet",
+      "receiverId": "yf-verify-261113.testnet",
+      "channel": "browser-wallet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "add_proposal",
+          "args": {
+            "proposal": {
+              "description": "Verify campaign commons",
+              "kind": {
+                "FunctionCall": {
+                  "receiver_id": "yf-v2-factory-261114.testnet",
+                  "actions": [
+                    {
+                      "method_name": "verify_campaign",
+                      "args": "eyJpZCI6ImNvbW1vbnMiLCJtZXRhZGF0YV9oYXNoIjoiMDYwNTRjMTNkMWViNTY4N2EyN2FhYjYxOGRhZjVhMzEwZTVhM2MxN2Y2NzE2ZDRmY2Q3YmY3NWI5ZTU1YTA0OSIsImV2aWRlbmNlX2hhc2giOiJiNmE0N2E5OGEzYTBjZmEyNGU5MDY2ZTBiMzkzNjZlODk5ZDJmNTFjMmNjYmU2NjQ0YmVkNjk4NzI0ZDc0Zjc3IiwiZXhwaXJlc19hdCI6IjE3OTYwODMyMDAwMDAwMDAwMDAifQ==",
+                      "deposit": "1",
+                      "gas": "30000000000000"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "deposit": "100000000000000000000000",
+          "gas": "100000000000000"
+        }
+      ]
+    },
+    {
+      "id": "vote-verification-1",
+      "signerId": "yf-council1-261105.testnet",
+      "receiverId": "yf-verify-261113.testnet",
+      "channel": "browser-wallet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "act_proposal",
+          "args": {
+            "id": 1,
+            "action": "VoteApprove",
+            "proposal": {
+              "FunctionCall": {
+                "receiver_id": "yf-v2-factory-261114.testnet",
+                "actions": [
+                  {
+                    "method_name": "verify_campaign",
+                    "args": "eyJpZCI6ImNvbW1vbnMiLCJtZXRhZGF0YV9oYXNoIjoiMDYwNTRjMTNkMWViNTY4N2EyN2FhYjYxOGRhZjVhMzEwZTVhM2MxN2Y2NzE2ZDRmY2Q3YmY3NWI5ZTU1YTA0OSIsImV2aWRlbmNlX2hhc2giOiJiNmE0N2E5OGEzYTBjZmEyNGU5MDY2ZTBiMzkzNjZlODk5ZDJmNTFjMmNjYmU2NjQ0YmVkNjk4NzI0ZDc0Zjc3IiwiZXhwaXJlc19hdCI6IjE3OTYwODMyMDAwMDAwMDAwMDAifQ==",
+                    "deposit": "1",
+                    "gas": "30000000000000"
+                  }
+                ]
+              }
+            }
+          },
+          "deposit": "0",
+          "gas": "250000000000000"
+        }
+      ]
+    },
+    {
+      "id": "vote-verification-2",
+      "signerId": "yf-council2-261105.testnet",
+      "receiverId": "yf-verify-261113.testnet",
+      "channel": "browser-wallet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "methodName": "act_proposal",
+          "args": {
+            "id": 1,
+            "action": "VoteApprove",
+            "proposal": {
+              "FunctionCall": {
+                "receiver_id": "yf-v2-factory-261114.testnet",
+                "actions": [
+                  {
+                    "method_name": "verify_campaign",
+                    "args": "eyJpZCI6ImNvbW1vbnMiLCJtZXRhZGF0YV9oYXNoIjoiMDYwNTRjMTNkMWViNTY4N2EyN2FhYjYxOGRhZjVhMzEwZTVhM2MxN2Y2NzE2ZDRmY2Q3YmY3NWI5ZTU1YTA0OSIsImV2aWRlbmNlX2hhc2giOiJiNmE0N2E5OGEzYTBjZmEyNGU5MDY2ZTBiMzkzNjZlODk5ZDJmNTFjMmNjYmU2NjQ0YmVkNjk4NzI0ZDc0Zjc3IiwiZXhwaXJlc19hdCI6IjE3OTYwODMyMDAwMDAwMDAwMDAifQ==",
+                    "deposit": "1",
+                    "gas": "30000000000000"
+                  }
+                ]
+              }
+            }
+          },
+          "deposit": "0",
+          "gas": "250000000000000"
+        }
+      ]
+    }
+  ]
+}

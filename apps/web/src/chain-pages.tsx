@@ -188,9 +188,17 @@ function TransactionReview({
         )}
         {recovery && (
           <Notice>
-            {recoveryKind(recovery) === "balance"
-              ? "Restarts the balance check and may complete the original payment. Losses and your original minimum still apply."
-              : "Checks the strategy's completed return. This does not resend the redemption or credit funds twice."}
+            {recoveryKind(recovery, c.deployment.config.disclosure_version) ===
+            "allocation"
+              ? "Checks the token resolver receipt, including any refunded amount. It does not allocate again."
+              : recoveryKind(
+                    recovery,
+                    c.deployment.config.disclosure_version,
+                  ) === "payment"
+                ? "Checks the token receipt or cancels an unexecuted payment. It cannot pay twice."
+                : recoveryKind(recovery) === "balance"
+                  ? "Restarts the balance check and may complete the original payment. Losses and your original minimum still apply."
+                  : "Checks the strategy's completed return. This does not resend the redemption or credit funds twice."}
           </Notice>
         )}
         <details>
@@ -995,13 +1003,24 @@ function OperationDetail() {
           />
           {o.error && <Notice>{label(o.error)}</Notice>}
           <div className="chain-actions">
-            {recoveryKind(o) &&
+            {recoveryKind(o, c.deployment.config.disclosure_version) &&
               c.snapshot?.accounting.active_operation === o.id &&
               (c.snapshot.timestamp >= recoveryReadyAt(o) ? (
                 <ActionButton intent={{ kind: "recover", operation: o }}>
-                  {recoveryKind(o) === "balance"
-                    ? "Resume balance check"
-                    : "Verify strategy return"}
+                  {recoveryKind(o, c.deployment.config.disclosure_version) ===
+                  "allocation"
+                    ? "Resolve allocation"
+                    : recoveryKind(
+                          o,
+                          c.deployment.config.disclosure_version,
+                        ) === "payment"
+                      ? "Resolve payment"
+                      : recoveryKind(
+                            o,
+                            c.deployment.config.disclosure_version,
+                          ) === "balance"
+                        ? "Resume balance check"
+                        : "Verify strategy return"}
                 </ActionButton>
               ) : (
                 <small>

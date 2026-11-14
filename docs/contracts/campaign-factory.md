@@ -21,6 +21,8 @@ Read `get_config` and `creation_cost`. Creation funding covers each child templa
 | `create_campaign({id,name,beneficiary_id,metadata_hash,deposit_cap})` | Anyone; exact creation cost; at least 250 Tgas | Creates keyless `v-ID.FACTORY` and `s-ID.FACTORY` children, registers token storage |
 | `get_config()` | View | Fixed token/verifier, template hashes, creation cost and count |
 | `get_campaign({id})` | View | Immutable identity, creator, child accounts, status and optional attestation |
+| `get_creation_progress({id})` | View, v2 | Child/registration proofs, version and last update |
+| `recover_campaign({id,version})` | Anyone, v2; 1 yoctoNEAR; 300 Tgas; five-minute cooldown | Proves existing work and resumes the immutable setup without another creation deposit |
 | `list_campaigns({from_index,limit})` | View | At most 50 records; decimal-string u64 offset |
 | `is_verified({id})` | View | Ready, unrevoked, matching metadata and not expired |
 | `verify_campaign({id,metadata_hash,evidence_hash,expires_at})` | Configured DAO only; exactly 1 yoctoNEAR | Records expiring attestation for ready campaign |
@@ -38,6 +40,6 @@ Beneficiary DAO payment permissions and verification DAO function-call permissio
 
 `creating` → `registering` → `ready` requires successful child initialization and all three registrations. A failed callback result records `failed`; stale callbacks are rejected. The current first callback schedules registrations asynchronously, so a successful outer result is not sufficient: inspect final receipts and the registry's ready state.
 
-Partial creation may leave one funded child or returned funds in the factory. Automated refund/repair is not implemented. Missing callbacks may retain a pending status. Never retry deployment blindly or describe failed creation as refunded. Creation IDs cannot be reused. This limitation must be resolved before unrestricted public creation.
+The historical v1 deployment has no partial-creation recovery. New v2 source preserves per-child/registration proofs, fences stale callbacks and resumes setup using protected native reserves. It never redeploys an existing child or accepts a second creation deposit. Pending native refunds can delay a retry; setup remains incomplete until all proofs succeed. IDs cannot be reused, and recovery is completion of the original setup, not a cancellation/refund promise. See [Recovery v2](recovery-v2.md). New state layouts require fresh deployments; these changes do not upgrade the historical public factory.
 
 Child accounts have no access keys, but factory deployment authority is a separate trust decision. An upgradeable factory can change future template behavior or registry data. Inspect and disclose keys/code hashes. Historical testnet contracts retain their original keys and are not factory children.

@@ -22,7 +22,23 @@ export type Intent =
       proposal: Proposal;
       action: "VoteApprove" | "VoteReject" | "Finalize";
     };
-export function recoveryKind(o: Operation): "balance" | "redemption" | null {
+export function recoveryKind(
+  o: Operation,
+  disclosureVersion?: string,
+): "balance" | "redemption" | "payment" | "allocation" | null {
+  if (
+    disclosureVersion === "factory-v2" &&
+    o.kind === "allocation" &&
+    ["allocating", "needs_reconciliation"].includes(o.stage)
+  )
+    return "allocation";
+  if (
+    disclosureVersion === "factory-v2" &&
+    o.stage === "transfer_pending" &&
+    ["withdrawal", "donation"].includes(o.kind) &&
+    BigInt(o.payout) > 0n
+  )
+    return "payment";
   if (
     o.stage === "reconciling" &&
     ["checkpoint", "withdrawal", "donation"].includes(o.kind) &&
@@ -188,7 +204,7 @@ export function prepareCall(
     }
     case "recover": {
       const o = intent.operation,
-        kind = recoveryKind(o);
+        kind = recoveryKind(o, d.config.disclosure_version);
       requireThat(
         a.active_operation === o.id && kind,
         "No automatic recovery for this stage",

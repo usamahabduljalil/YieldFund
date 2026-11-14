@@ -9,6 +9,8 @@ use near_sdk::{
 
 const VAULT: &[u8] = include_bytes!("../../../artifacts/yieldfund_vault.wasm");
 const STRATEGY: &[u8] = include_bytes!("../../../artifacts/yieldfund_strategy_simulator.wasm");
+mod recovery;
+use recovery::CreationProgress;
 const RECORD_BYTES: u128 = 4096;
 const ACCOUNT_BUFFER: u128 = 500_000_000_000_000_000_000_000;
 
@@ -53,8 +55,9 @@ pub struct Campaign {
 #[allow(dead_code)]
 #[ext_contract(callbacks)]
 trait Callbacks {
-    fn on_created(&mut self, id: String) -> bool;
-    fn on_registered(&mut self, id: String) -> bool;
+    fn on_created(&mut self, id: String, version: U64, mask: u8) -> bool;
+    fn on_registered(&mut self, id: String, version: U64) -> bool;
+    fn on_creation_probe(&mut self, id: String, version: U64) -> bool;
 }
 
 #[near(contract_state)]
@@ -66,6 +69,10 @@ pub struct Factory {
     token_storage: u128,
     campaigns: LookupMap<String, Campaign>,
     ids: Vector<String>,
+    progress: LookupMap<String, CreationProgress>,
+    reserved_native: u128,
+    #[cfg(feature = "test-faults")]
+    fault_stage: u8,
 }
 
 #[near]
@@ -93,6 +100,10 @@ impl Factory {
             token_storage: token_storage.0,
             campaigns: LookupMap::new(b"c"),
             ids: Vector::new(b"i"),
+            progress: LookupMap::new(b"p"),
+            reserved_native: 0,
+            #[cfg(feature = "test-faults")]
+            fault_stage: 0,
         }
     }
 
@@ -109,7 +120,7 @@ impl Factory {
         near_sdk::serde_json::json!({"verifier_id":self.verifier_id,"token_id":self.token_id,
             "token_decimals":self.token_decimals,"strategy_mode":"funded_simulator",
             "vault_code_hash":hex(&env::sha256(VAULT)),"strategy_code_hash":hex(&env::sha256(STRATEGY)),
-            "creation_cost":self.creation_cost(),"campaign_count":U64(self.ids.len())})
+            "recovery_version":2,"creation_cost":self.creation_cost(),"campaign_count":U64(self.ids.len())})
     }
 
     /// Exact funding; no key is added to either child account.
@@ -174,73 +185,69 @@ impl Factory {
         let before = env::storage_usage();
         self.ids.push(&id);
         self.campaigns.insert(&id, &campaign);
+        let progress = CreationProgress {
+            version: U64(1),
+            updated_at: U64(env::block_timestamp()),
+            children: [false; 2],
+            registered: [false; 3],
+        };
+        self.progress.insert(&id, &progress);
         assert!(
             u128::from(env::storage_usage() - before) <= RECORD_BYTES,
             "record budget exceeded"
         );
-        let vault_args = near_sdk::serde_json::json!({"config":{
-            "campaign_id":id,"token_id":self.token_id,"token_decimals":self.token_decimals,
-            "beneficiary_id":beneficiary_id,"guardian_id":creator,"deposit_cap":deposit_cap,
-            "metadata_hash":metadata_hash,"disclosure_version":"factory-v1","strategy_id":strategy_id}});
-        let strategy_args = near_sdk::serde_json::json!({"token_id":self.token_id,"vault_id":vault_id,
-            "controller_id":creator,"loss_sink_id":creator});
-        Promise::new(vault_id)
-            .create_account()
-            .transfer(NearToken::from_yoctonear(self.account_funding(VAULT)))
-            .deploy_contract(VAULT.to_vec())
-            .function_call(
-                "new_from_factory",
-                vault_args.to_string().into_bytes(),
-                NearToken::from_yoctonear(0),
-                Gas::from_tgas(15),
-            )
-            .and(
-                Promise::new(strategy_id)
-                    .create_account()
-                    .transfer(NearToken::from_yoctonear(self.account_funding(STRATEGY)))
-                    .deploy_contract(STRATEGY.to_vec())
-                    .function_call(
-                        "new_from_factory",
-                        strategy_args.to_string().into_bytes(),
-                        NearToken::from_yoctonear(0),
-                        Gas::from_tgas(15),
-                    ),
-            )
-            .then(
-                callbacks::ext(parent)
-                    .with_static_gas(Gas::from_tgas(110))
-                    .on_created(id),
-            )
+
+        self.reserved_native = self
+            .reserved_native
+            .checked_add(self.remaining(&progress))
+            .expect("reserve overflow");
+        self.assert_liquid();
+        self.deploy_missing(&campaign, &progress)
     }
 
     #[private]
-    pub fn on_created(&mut self, id: String) -> bool {
-        let mut c = self.campaigns.get(&id).expect("unknown campaign");
+    pub fn on_created(&mut self, id: String, version: U64, mask: u8) -> bool {
+        #[cfg(feature = "test-faults")]
+        assert_ne!(self.fault_stage, 1, "injected creation callback failure");
+        let (mut c, mut p) = self.expected(&id, version);
         assert_eq!(c.status, CreationStatus::Creating, "stale callback");
-        if !all_success(2) {
+        assert_eq!(env::promise_results_count(), mask.count_ones() as u64);
+        let mut result = 0;
+        for i in 0..2 {
+            if mask & (1 << i) != 0 {
+                if env::promise_result_checked(result, 4096).is_ok() {
+                    p.children[i] = true;
+                }
+                result += 1;
+            }
+        }
+        self.save_progress(&id, &mut p);
+        if !p.children.iter().all(|v| *v) {
             c.status = CreationStatus::Failed;
             self.campaigns.insert(&id, &c);
             return false;
         }
-        c.status = CreationStatus::Registering;
-        self.campaigns.insert(&id, &c);
-        self.registration(&c.vault_id)
-            .and(self.registration(&c.strategy_id))
-            .and(self.registration(&c.beneficiary_id))
-            .then(
-                callbacks::ext(env::current_account_id())
-                    .with_static_gas(Gas::from_tgas(15))
-                    .on_registered(id),
-            )
-            .detach();
+        self.start_registration(&mut c, &p);
         true
     }
 
     #[private]
-    pub fn on_registered(&mut self, id: String) -> bool {
-        let mut c = self.campaigns.get(&id).expect("unknown campaign");
+    pub fn on_registered(&mut self, id: String, version: U64) -> bool {
+        #[cfg(feature = "test-faults")]
+        assert_ne!(
+            self.fault_stage, 2,
+            "injected registration callback failure"
+        );
+        let (mut c, mut p) = self.expected(&id, version);
         assert_eq!(c.status, CreationStatus::Registering, "stale callback");
-        let ready = all_success(3);
+        assert_eq!(env::promise_results_count(), 3);
+        for i in 0..3 {
+            if env::promise_result_checked(i as u64, 4096).is_ok() {
+                p.registered[i] = true;
+            }
+        }
+        self.save_progress(&id, &mut p);
+        let ready = p.registered.iter().all(|v| *v);
         c.status = if ready {
             CreationStatus::Ready
         } else {
@@ -252,6 +259,11 @@ impl Factory {
 
     pub fn get_campaign(&self, id: String) -> Option<Campaign> {
         self.campaigns.get(&id)
+    }
+    #[cfg(feature = "test-faults")]
+    pub fn test_set_creation_fault(&mut self, stage: u8) {
+        assert_eq!(env::predecessor_account_id(), env::current_account_id());
+        self.fault_stage = stage;
     }
     pub fn list_campaigns(&self, from_index: U64, limit: u32) -> Vec<Campaign> {
         assert!(limit > 0 && limit <= 50, "limit must be 1..50");
@@ -324,8 +336,15 @@ impl Factory {
         (code.len() as u128 + 4096) * env::storage_byte_cost().as_yoctonear() + ACCOUNT_BUFFER
     }
     fn registration(&self, account_id: &AccountId) -> Promise {
+        let method = "storage_deposit";
+        #[cfg(feature = "test-faults")]
+        let method = if self.fault_stage == 8 && account_id.as_str().starts_with("s-") {
+            "injected_missing_method"
+        } else {
+            method
+        };
         Promise::new(self.token_id.clone()).function_call(
-            "storage_deposit",
+            method,
             near_sdk::serde_json::json!({"account_id":account_id,"registration_only":true})
                 .to_string()
                 .into_bytes(),
@@ -333,10 +352,6 @@ impl Factory {
             Gas::from_tgas(15),
         )
     }
-}
-fn all_success(count: u64) -> bool {
-    env::promise_results_count() == count
-        && (0..count).all(|i| env::promise_result_checked(i, 4096).is_ok())
 }
 fn valid_hash(s: &str) -> bool {
     s.len() == 64

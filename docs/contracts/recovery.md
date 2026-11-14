@@ -1,5 +1,7 @@
 # Stage-specific interrupted-operation recovery
 
+This document describes the **historical v1 public deployment**. The new source protocol adds payment, allocation, simulator-finalizer and factory recovery; see [Recovery v2](recovery-v2.md). Its new state layouts require fresh deployments and do not retroactively change the historical contracts.
+
 `recover_operation({ operation_id, version })` is a permissionless payable vault action. Attach exactly 1 yoctoNEAR and at least 110 Tgas (the browser attaches 300 Tgas). The active operation must match both arguments, and at least five minutes must have elapsed since its last saved update. The delay rate-limits retries; elapsed time is never evidence that a transfer failed.
 
 | Interrupted stage | Recovery behavior |

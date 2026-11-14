@@ -32,10 +32,16 @@ impl Vault {
             Some(&strategy_id),
             amount.0,
         );
+        self.pending_transfer_sequence = op.version.0;
         ft::ext(self.config.token_id.clone())
             .with_attached_deposit(NearToken::from_yoctonear(1))
             .with_static_gas(Gas::from_tgas(90))
-            .ft_transfer_call(strategy_id, amount, None, format!("supply:{}", op.id.0))
+            .ft_transfer_call_once(
+                strategy_id,
+                amount,
+                U64(self.pending_transfer_sequence),
+                format!("supply:{}", op.id.0),
+            )
             .then(
                 callbacks::ext(env::current_account_id())
                     .with_static_gas(Gas::from_tgas(30))
@@ -46,22 +52,17 @@ impl Vault {
     #[private]
     pub fn on_allocation(&mut self, operation_id: U64, version: U64) -> bool {
         let mut op = self.expected(operation_id, version, Stage::Allocating);
+        #[cfg(feature = "test-faults")]
+        assert!(
+            !self.fail_allocation_callback,
+            "injected allocation callback failure"
+        );
         // The pinned token resolver returns used tokens only after refund resolution.
         // Failed/unknown outer promise can hide a successful hook: never restore blindly.
         let Some(used) = Self::result::<U128>(64).filter(|v| v.0 <= op.units.0) else {
             return self.uncertain(&mut op, "allocation_outcome_unknown");
         };
-        self.cash = self
-            .cash
-            .checked_add(op.units.0 - used.0)
-            .expect("cash overflow");
-        self.strategy_book = used.0;
-        op.payout = used;
-        self.active = None;
-        op.stage = Stage::Completed;
-        self.save_operation(&mut op);
-        self.emit("allocation_completed", Some(op.id), None, used.0);
-        true
+        self.finish_allocation(op, used)
     }
 
     #[payable]
@@ -138,6 +139,20 @@ impl Vault {
 }
 
 impl Vault {
+    pub(super) fn finish_allocation(&mut self, mut op: Operation, used: U128) -> bool {
+        self.cash = self
+            .cash
+            .checked_add(op.units.0 - used.0)
+            .expect("cash overflow");
+        self.strategy_book = used.0;
+        op.payout = used;
+        self.active = None;
+        op.stage = Stage::Completed;
+        self.save_operation(&mut op);
+        self.emit("allocation_completed", Some(op.id), None, used.0);
+        self.pending_transfer_sequence = 0;
+        true
+    }
     pub(super) fn finish_redemption(&mut self, mut op: Operation) -> bool {
         // Pinned simulator returns complete only after position=0 and token resolver.
         // Cash was credited exactly once by the authenticated return hook, never here.
@@ -163,49 +178,11 @@ impl Vault {
     }
 
     fn finalize_donation(&mut self, operation_id: U64, version: U64) -> bool {
-        let mut op = self.expected(operation_id, version, Stage::TransferPending);
+        let op = self.expected(operation_id, version, Stage::TransferPending);
         assert_eq!(op.kind, Kind::Donation);
         #[cfg(feature = "test-faults")]
         assert!(!self.fail_callback, "injected callback interruption");
-        assert_eq!(env::promise_results_count(), 1);
-        let success = match env::promise_result_checked(0, 64) {
-            Ok(_) => {
-                self.donated = self
-                    .donated
-                    .checked_add(op.payout.0)
-                    .expect("donation history overflow");
-                op.stage = Stage::Completed;
-                true
-            }
-            Err(PromiseError::Failed) => {
-                self.cash = self.cash.checked_add(op.payout.0).expect("cash overflow");
-                self.eligible = self
-                    .eligible
-                    .checked_add(op.payout.0)
-                    .expect("yield overflow");
-                op.stage = Stage::RetryableFailure;
-                op.error = Some("token_transfer_failed".into());
-                false
-            }
-            Err(_) => {
-                op.error = Some("unexpected_transfer_response".into());
-                self.save_operation(&mut op);
-                return false;
-            }
-        };
-        self.active = None;
-        self.save_operation(&mut op);
-        self.emit(
-            if success {
-                "donation_completed"
-            } else {
-                "donation_restored"
-            },
-            Some(op.id),
-            Some(&op.owner_id),
-            op.payout.0,
-        );
-        success
+        self.finish_payment_result(op, false)
     }
 }
 
@@ -217,10 +194,11 @@ impl Vault {
         op.stage = Stage::Redeeming;
         op.error = None;
         self.save_operation(op);
+        self.pending_transfer_sequence = op.version.0;
         strategy::ext(self.config.strategy_id.clone().expect("no strategy"))
             .with_attached_deposit(NearToken::from_yoctonear(1))
             .with_static_gas(Gas::from_tgas(150))
-            .redeem_all(op.id)
+            .redeem_all(op.id, U64(self.pending_transfer_sequence))
             .then(
                 callbacks::ext(env::current_account_id())
                     .with_static_gas(Gas::from_tgas(30))
@@ -252,14 +230,15 @@ impl Vault {
         op.error = None;
         self.save_operation(&mut op);
         self.emit("donation_started", Some(op.id), Some(&op.owner_id), amount);
+        self.pending_transfer_sequence = op.version.0;
         PromiseOrValue::Promise(
             ft::ext(self.config.token_id.clone())
                 .with_attached_deposit(NearToken::from_yoctonear(1))
                 .with_static_gas(TRANSFER_GAS)
-                .ft_transfer(
+                .ft_transfer_once(
                     self.config.beneficiary_id.clone(),
                     U128(amount),
-                    Some(format!("yieldfund:{}", op.id.0)),
+                    U64(self.pending_transfer_sequence),
                 )
                 .then(
                     callbacks::ext(env::current_account_id())
@@ -268,7 +247,7 @@ impl Vault {
                 ),
         )
     }
-    fn result<T: near_sdk::serde::de::DeserializeOwned>(limit: usize) -> Option<T> {
+    pub(super) fn result<T: near_sdk::serde::de::DeserializeOwned>(limit: usize) -> Option<T> {
         if env::promise_results_count() != 1 {
             return None;
         }
@@ -276,7 +255,7 @@ impl Vault {
             .ok()
             .and_then(|b| near_sdk::serde_json::from_slice(&b).ok())
     }
-    fn uncertain(&mut self, op: &mut Operation, error: &str) -> bool {
+    pub(super) fn uncertain(&mut self, op: &mut Operation, error: &str) -> bool {
         op.stage = Stage::NeedsReconciliation;
         op.error = Some(error.into());
         self.save_operation(op);

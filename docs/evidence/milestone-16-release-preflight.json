@@ -1,0 +1,62 @@
+{
+  "checkedAt": "2026-11-14T18:14:26.957Z",
+  "network": "testnet",
+  "blockHeight": 277692518,
+  "blockHash": "A69BBZZ4hDHUrqj1UK5eLLSSbUywTRYriazbudPSYSH4",
+  "availability": {
+    "yf-v2-factory-261114.testnet": "not created; proposed faucet account",
+    "yf-v2-token-261114.testnet": "not created; proposed faucet account",
+    "yf-v2-demo-261114.testnet": "not created; proposed faucet account",
+    "yf-v2-builder-261114.testnet": "not created; proposed faucet account"
+  },
+  "accountEvidence": {
+    "yf-council1-261105.testnet": {
+      "amount": "4998979314192669400000000",
+      "block_hash": "A69BBZZ4hDHUrqj1UK5eLLSSbUywTRYriazbudPSYSH4",
+      "block_height": 277692518,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "yf-council2-261105.testnet": {
+      "amount": "4998335610386643100000000",
+      "block_hash": "A69BBZZ4hDHUrqj1UK5eLLSSbUywTRYriazbudPSYSH4",
+      "block_height": 277692518,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "yf-council3-261105.testnet": {
+      "amount": "4999955363487500000000000",
+      "block_hash": "A69BBZZ4hDHUrqj1UK5eLLSSbUywTRYriazbudPSYSH4",
+      "block_height": 277692518,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "dao.yf-operator-261105.testnet": {
+      "amount": "6996179737537623999999999",
+      "block_hash": "A69BBZZ4hDHUrqj1UK5eLLSSbUywTRYriazbudPSYSH4",
+      "block_height": 277692518,
+      "code_hash": "49mLHWeLgCbfJbYYH5SrNo35G2EGS57W1W5g3eXvzZhb",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 496856
+    },
+    "yf-verify-261113.testnet": {
+      "amount": "5496140912033939199999999",
+      "block_hash": "A69BBZZ4hDHUrqj1UK5eLLSSbUywTRYriazbudPSYSH4",
+      "block_height": 277692518,
+      "code_hash": "49mLHWeLgCbfJbYYH5SrNo35G2EGS57W1W5g3eXvzZhb",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 497107
+    }
+  },
+  "treasuryProposal": 1,
+  "verificationProposal": 1,
+  "reviewSha256": "6d55bbccf4108a7bc6c8ac362c965ac4409b7695f4f122b07803d0aaed75bec5"
+}

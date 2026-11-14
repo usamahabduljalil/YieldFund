@@ -1,0 +1,140 @@
+{
+  "id": "fund-factory-reserve",
+  "hash": "C1wnB9WobxEJwhQxnrDHmPuEcwKXD4G39HeATwxRqLrv",
+  "signerId": "yf-v2-token-261114.testnet",
+  "receiverId": "yf-v2-factory-261114.testnet",
+  "publicKey": "ed25519:139sWsJYEur3sBiKrwoFLu5gLkwp2ymQnwmRUYFiH8mk",
+  "nonce": "277696723000002",
+  "blockHash": "APTsutTZMC8bFp8LbgE2LFWT5Yz3Y6TLm2SCjnyrxf9S",
+  "actions": [
+    {
+      "type": "Transfer",
+      "deposit": "3000000000000000000000000"
+    }
+  ],
+  "reviewSha256": "6d55bbccf4108a7bc6c8ac362c965ac4409b7695f4f122b07803d0aaed75bec5",
+  "channel": "cli",
+  "savedAt": "2026-11-14T19:10:01.123Z",
+  "verification": "finalized-success",
+  "tokensBurnt": "44636512500000000000",
+  "result": {
+    "final_execution_status": "FINAL",
+    "receipts_outcome": [
+      {
+        "block_hash": "6qxjTBuu3KmGii2S9D2diXhwyoUBasVdFRDpP15WmQeG",
+        "id": "AxZk7GoAd8WrSvMjHxFNZRbAwityHPJti4rPycSyxCft",
+        "outcome": {
+          "executor_id": "yf-v2-factory-261114.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              null
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [
+            "37yiQQs2MhxRzienzdQzyAPjzSe1ZSJP2UX7Xy24ypnw"
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "22318256250000000000"
+        },
+        "proof": [
+          {
+            "direction": "Right",
+            "hash": "HVyaRzPjeBkGUxgfVmhFS6bZUSV4PhoCkg6RSsaV2XpN"
+          },
+          {
+            "direction": "Right",
+            "hash": "3xsaoLR6GTMr9QA4bNNujpYrwzVUJTD7ecCVVrwR183K"
+          }
+        ]
+      },
+      {
+        "block_hash": "7C9tsufNFJnKZv7uCV7kwbDhnRPS2FASnEZkPTcnezkD",
+        "id": "37yiQQs2MhxRzienzdQzyAPjzSe1ZSJP2UX7Xy24ypnw",
+        "outcome": {
+          "executor_id": "yf-v2-token-261114.testnet",
+          "gas_burnt": 223182562500,
+          "logs": [],
+          "metadata": {
+            "contracts": [
+              {
+                "local": "FKjHUcPVSxdeEHQnpMx59arDpuacT8C7qzBApF5FGABF"
+              }
+            ],
+            "gas_profile": [],
+            "version": 4
+          },
+          "receipt_ids": [],
+          "status": {
+            "SuccessValue": ""
+          },
+          "tokens_burnt": "0"
+        },
+        "proof": [
+          {
+            "direction": "Right",
+            "hash": "ATxoLCj3HaK5VEPrnKnWMkuF8SFt1U4ievbhBKjZr864"
+          },
+          {
+            "direction": "Right",
+            "hash": "8kjfK61HdnRuByPvCUeQFmpbJE8bWt3KZhTZnMtkHwz5"
+          }
+        ]
+      }
+    ],
+    "status": {
+      "SuccessValue": ""
+    },
+    "transaction": {
+      "actions": [
+        {
+          "Transfer": {
+            "deposit": "3000000000000000000000000"
+          }
+        }
+      ],
+      "hash": "C1wnB9WobxEJwhQxnrDHmPuEcwKXD4G39HeATwxRqLrv",
+      "nonce": 277696723000002,
+      "priority_fee": 0,
+      "public_key": "ed25519:139sWsJYEur3sBiKrwoFLu5gLkwp2ymQnwmRUYFiH8mk",
+      "receiver_id": "yf-v2-factory-261114.testnet",
+      "signature": "ed25519:2FZY1VYz8CHytX9RM4KpRoGhmd9VuN4YtiYF3JPwPyNhBQMUJZtwSHm4kEwyrmHzQtvJLhta6ywZSVUzsq69FV2F",
+      "signer_id": "yf-v2-token-261114.testnet"
+    },
+    "transaction_outcome": {
+      "block_hash": "CEdm92X4DEdJLubiTL6rxx3KZTzECSqHwyKsPid1u6TJ",
+      "id": "C1wnB9WobxEJwhQxnrDHmPuEcwKXD4G39HeATwxRqLrv",
+      "outcome": {
+        "executor_id": "yf-v2-token-261114.testnet",
+        "gas_burnt": 223182562500,
+        "logs": [],
+        "metadata": {
+          "gas_profile": null,
+          "version": 1
+        },
+        "receipt_ids": [
+          "AxZk7GoAd8WrSvMjHxFNZRbAwityHPJti4rPycSyxCft"
+        ],
+        "status": {
+          "SuccessReceiptId": "AxZk7GoAd8WrSvMjHxFNZRbAwityHPJti4rPycSyxCft"
+        },
+        "tokens_burnt": "22318256250000000000"
+      },
+      "proof": [
+        {
+          "direction": "Right",
+          "hash": "34yupo1rB7vrLqTAMEBjuCYeJGahNXphdXTUYYmP4FBx"
+        },
+        {
+          "direction": "Right",
+          "hash": "7RUCXLEkMDoVZaXX9ZUPcm4ehU7FA5yaMQbcK7MnJhmn"
+        }
+      ]
+    }
+  }
+}

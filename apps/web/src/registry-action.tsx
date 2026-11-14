@@ -66,14 +66,15 @@ export function RegistryAction({
     setReview(null);
     try {
       const session = wallet.session.capture();
+      const registry = new CampaignRegistry(deployment),
+        snapshot = await registry.snapshot();
+      const call = await build(snapshot, session.account, registry);
       assertRegistryAvailable(
         registryHistory(localStorage),
         deployment,
         session.account,
+        call,
       );
-      const registry = new CampaignRegistry(deployment),
-        snapshot = await registry.snapshot();
-      const call = await build(snapshot, session.account, registry);
       await new ChainClient({
         ...baseline,
         rpcUrl: deployment.rpcUrl,
@@ -107,6 +108,7 @@ export function RegistryAction({
         registryHistory(localStorage),
         deployment,
         review.session.account,
+        review.call,
       );
       const registry = new CampaignRegistry(deployment),
         snapshot = await registry.snapshot();
@@ -129,6 +131,12 @@ export function RegistryAction({
       wallet.session.assert(review.session);
       if (request !== generation.current)
         throw Error("Review changed. Prepare it again.");
+      assertRegistryAvailable(
+        registryHistory(localStorage),
+        deployment,
+        review.session.account,
+        call,
+      );
       row = {
         id: crypto.randomUUID(),
         scope: registryScope(deployment),
@@ -302,15 +310,17 @@ export function RegistryHistory({
                 />
               </label>
             )}
-            {row.state !== "finalized" && row.state !== "failed" && (
-              <button
-                className="button secondary"
-                disabled={!!busy}
-                onClick={() => void check(row)}
-              >
-                Check receipts
-              </button>
-            )}
+            {row.state !== "finalized" &&
+              row.state !== "failed" &&
+              row.state !== "recovered" && (
+                <button
+                  className="button secondary"
+                  disabled={!!busy}
+                  onClick={() => void check(row)}
+                >
+                  Check receipts
+                </button>
+              )}
             {!!row.receipts.length && (
               <details>
                 <summary>{row.receipts.length} checked receipts</summary>

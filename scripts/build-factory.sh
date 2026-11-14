@@ -7,3 +7,8 @@ bash scripts/build-contracts.sh
 cargo build --locked --release --target wasm32-unknown-unknown -p yieldfund-campaign-factory
 cp "${CARGO_TARGET_DIR:-$repo/target}/wasm32-unknown-unknown/release/yieldfund_campaign_factory.wasm" artifacts/yieldfund_campaign_factory.wasm
 sha256sum artifacts/yieldfund_campaign_factory.wasm
+
+if [[ "${1:-}" == "--with-test-faults" ]]; then
+  cargo build --locked --release --target wasm32-unknown-unknown -p yieldfund-campaign-factory --features test-faults
+  cp "${CARGO_TARGET_DIR:-$repo/target}/wasm32-unknown-unknown/release/yieldfund_campaign_factory.wasm" artifacts/yieldfund_campaign_factory_faults.wasm
+fi

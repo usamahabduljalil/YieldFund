@@ -16,7 +16,7 @@ Built for NEAR HACKATHON. The landing page is wallet-free; connection, positions
 
 ## Current release
 
-Last reviewed: **13 November 2026**. This is an experimental hackathon implementation, not an audited mainnet product. The hosted build uses existing testnet contracts in **read-only mode**. Local preview balances are explicitly fictional. The funded simulator uses actual test tokens and is **not Rhea yield**.
+Last reviewed: **14 November 2026**. This is an experimental hackathon implementation, not an audited mainnet product. The hosted build uses existing testnet contracts in **read-only mode**. Local preview balances are explicitly fictional. The funded simulator uses actual test tokens and is **not Rhea yield**.
 
 The approved public testnet lifecycle completed eleven transactions: **30 tUSD donated, 20 paid by the DAO, 200 withdrawn, 800 tUSD backing 800 remaining units**. See [transaction evidence](docs/evidence/milestone-9-execution-notes.md) and [browser reconciliation](docs/evidence/milestone-11-browser-reconciliation.md).
 
@@ -27,12 +27,12 @@ The approved public testnet lifecycle completed eleven transactions: **30 tUSD d
 | Funded profit, settlement, loss and delay | Actual test-token simulator; profit lifecycle on testnet, loss/delay in Sandbox                                                                    |
 | Sputnik DAO payments                      | Pinned upstream contract; three council members, two approvals; testnet payment completed                                                          |
 | Wallet and receipt tracking               | Account-bound reviews, exact call/receipt checks and persistent recovery; CLI handoffs exercised; live rejection/switch acceptance remains partial |
-| Permissionless campaigns                  | Factory deployed on testnet; two creators produced isolated keyless vault/strategy pairs. Selected-campaign runtime, wallet-bound creation review and persistent receipt recovery implemented; hosted signing stays disabled pending recovery hardening |
+| Permissionless campaigns                  | Factory deployed on testnet; two creators produced isolated keyless vault/strategy pairs. Selected-campaign runtime, wallet-bound creation review and persistent receipt recovery implemented; v2 recovery is implemented and locally tested; hosted signing awaits fresh deployment and browser transaction acceptance |
 | DAO verification                          | DAO-only expiring attestations, immutable metadata binding and revocation. A badge is not a safety or return guarantee                             |
 | Mainnet                                   | Read-only protocol/Rhea discovery and network-bound wallet adapter tests. Public mainnet transactions, adapter deployment and lifecycle verification pending                                      |
 | Rhea real yield                           | Mainnet state read successfully; supply/redemption adapter and funded lifecycle proof incomplete                                                   |
 | Trezu                                     | Source/interoperability investigation; actual discovery/proposal/payment rehearsal incomplete                                                      |
-| Callback recovery                         | Balance-read restart and proven simulator redemption supported. Unknown outgoing transfers/allocation and some callback failures remain locked     |
+| Callback recovery                         | V2 source adds evidence-based payment/allocation/simulator recovery and resumable factory setup. Verified locally; historical deployed contracts retain their old limits     |
 
 The user selected **DAO approval** for verification and authorized GitHub/Vercel publication. Mainnet deployment is now **deferred** to focus on the hackathon demo. The earlier 5 NEAR cap is not an active instruction to spend; the current deployment architecture exceeds it. No mainnet spending or signatures have occurred. [Read-only discovery evidence](docs/evidence/mainnet-discovery.json).
 
@@ -74,7 +74,7 @@ Accounting uses integer token base units. Deposits create nominal units; withdra
 
 The vault journals asynchronous operations and checks authenticated callback stage/version. Unknown outcomes remain locked instead of blindly retrying payments. See [custody rules](contracts/README.md), [strategy/DAO API](docs/contracts/strategy-and-dao.md) and [recovery boundaries](docs/contracts/recovery.md).
 
-Factory campaigns bind token, beneficiary, metadata and strategy immutably. Each creator funds deployment; vault/strategy children have no access keys. Campaigns start unverified and become ready only after deployment and token registration. The configured verification DAO approves an expiring attestation for the exact metadata hash. Initial templates deploy the funded simulator, not real lending. Partial creation recovery remains a limitation.
+Factory campaigns bind token, beneficiary, metadata and strategy immutably. Each creator funds deployment; vault/strategy children have no access keys. Campaigns start unverified and become ready only after deployment and token registration. The configured verification DAO approves an expiring attestation for the exact metadata hash. Initial templates deploy the funded simulator, not real lending. V2 source adds version-bound partial creation recovery with protected native reserves; the historical deployed factory still has its original limitation.
 
 ## Repository map
 
@@ -102,7 +102,7 @@ npm run test:sites
 npm run build:host
 ```
 
-Current TypeScript suite: **163 passing, one optional local-Sandbox skip**. Production build includes type checking; four Sites packaging checks pass. GitHub run [43523127361](https://github.com/usamahabduljalil/YieldFund/actions/runs/43523127361) passed both web and contract jobs for deployed `ad380bd`. Contract regression: 32 units and 14 Sandbox scenarios passed, one fixture generator ignored. Campaign-release evidence and subsequent results are tracked in [milestone 15](docs/evidence/milestone-15-campaign-release.md).
+Current local suite: **170 TypeScript tests passing, one optional local-Sandbox skip; 37 Rust units and 17 Sandbox scenarios passing, one fixture generator ignored**. Production host build/typecheck and four packaging checks pass. See [recovery v2 evidence](docs/evidence/milestone-16-recovery.md). These source changes are not yet deployed. Historical release: GitHub run [43523127361](https://github.com/usamahabduljalil/YieldFund/actions/runs/43523127361) passed both web and contract jobs for deployed `ad380bd`. Contract regression: 32 units and 14 Sandbox scenarios passed, one fixture generator ignored. Campaign-release evidence and subsequent results are tracked in [milestone 15](docs/evidence/milestone-15-campaign-release.md).
 
 For contracts, use Linux/Ubuntu WSL with Rust **1.95.0**, `wasm32-unknown-unknown`, a C/C++ toolchain, CMake and OpenSSL build dependencies:
 
@@ -143,7 +143,7 @@ Existing **testnet only**:
 
 `deployments/testnet.json` pins configuration, policy and code hashes. The old eleven-call approval is exhausted; do not replay it. Retained full-access keys can replace code, and rehearsal actors share local custody. No state migration is supplied.
 
-`vercel.json` configures install `npm ci`, build `npm run build:host`, output `apps/web/dist/client`. Hosting preparation writes only the read-only public testnet manifest into build output; local preview remains unchanged. SPA rewrites cover `/app/*` and `/risks`. Missing assets/API paths do not become the app shell. No private keys, backend signer or secret environment variables are needed.
+`vercel.json` configures install `npm ci`, build `npm run build:host`, output `apps/web/dist/client`. Hosting defaults to the historical read-only testnet manifest. An optional `deployments/public-runtime.json` can select v2; signing requires `deployments/public-signing-acceptance.json` bound to the exact runtime, registry and reviewed release, with every browser/deployment check passed and unique finalized transaction hashes. The guard is a review check, not an independent chain audit. Neither activation file exists yet; local preview remains unchanged. SPA rewrites cover `/app/*` and `/risks`. Missing assets/API paths do not become the app shell. No private keys, backend signer or secret environment variables are needed.
 
 The Vercel project is currently deployed manually from exact GitHub commit SHAs through the authenticated API; automatic Git-triggered deployment is not connected. See [release evidence](docs/evidence/milestone-14-public-release.md).
 
@@ -153,7 +153,7 @@ The Vercel project is currently deployed manually from exact GitHub commit SHAs 
 
 ## Remaining integration work
 
-1. Harden partial factory creation/refunds and unknown outgoing-operation recovery before enabling unrestricted creation or public deposits. Current unresolved outcomes stay locked.
+1. Deploy and reconcile the locally verified recovery v2 contracts through the [20-call testnet review](deployments/RECOVERY_RELEASE_REVIEW.md), pending approval. New state layouts require fresh accounts; historical keyless children cannot be upgraded. The custom demo-token receipt APIs do not apply to arbitrary NEP-141 assets; genuinely pending or inconsistent evidence remains locked.
 2. Complete live browser-wallet acceptance for the new registry actions. The public campaign release uses inspected CLI-signed bytes and finalized receipts; controlled React tests do not establish every wallet's handoff behavior.
 3. Mainnet work is deferred: general token precision beyond the current six-decimal test token, deployable architecture/budget and mainnet wallet acceptance.
 4. Rhea supply/redemption adapter and funded real-yield proof remain incomplete; public protocol reads are not integration completion.
