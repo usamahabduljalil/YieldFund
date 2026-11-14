@@ -43,3 +43,10 @@ Original code uses the user's selected all-rights-reserved license; third-party 
 - [Campaign directory screenshot](milestone-15-hosted-campaigns.png) and [full DAO verification screenshot](milestone-15-hosted-verification.png) show actual hosted state. Screenshots are suitable for the human's demo post; they are not a video or live wallet-signing recording.
 - Mobile directory at 390 × 844: document width 375, no horizontal overflow; [mobile screenshot](milestone-15-mobile.png). Temporary viewport override reset.
 - [Hosted Commons overview](milestone-15-hosted-overview.png) reconfirms 800 units/backing, zero eligible yield, 30 donated, 10 treasury balance and four completed operations. New campaign creation did not alter the historical token lifecycle.
+
+### Final handoff — 14 November 2026
+
+- Final application commit **ad380bdaa60ed92a4b72e124afe187ff94cb4c59** adds the public source link to the landing footer. Vercel deployment **dpl_4gQTsrHgA4dYG6qHwW5XwQrvUR9W** is READY on the same production alias; immutable deployment `yieldfund-opeshaioo-usamahabduljalils-projects.vercel.app`. The deployment's Git SHA was checked; the hosted footer link was inspected in the browser.
+- GitHub run [43523127361](https://github.com/usamahabduljalil/YieldFund/actions/runs/43523127361) **passed both web and contract jobs**. Production host build/typecheck also passed after the footer change. No contract or authorization changes were made.
+- [Landing screenshot](milestone-15-hosted-landing.png) supplements the directory, verification, overview, treasury and mobile screenshots. The local ignored `artifacts/yieldfund-demo-kit.zip` contains these six screenshots plus the walkthrough and manual submission guide. It contains no keys or signed payloads, and is not a video recording.
+- Both testnet approvals are exhausted. Mainnet remains deferred. The user must publish the demo post and complete the submission manually; neither has been submitted by this agent. Recovery hardening and live browser-wallet registry acceptance remain engineering follow-ups before enabling public signing.
