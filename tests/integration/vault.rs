@@ -11,6 +11,7 @@ mod browser_fixture;
 mod campaigns;
 mod lifecycle;
 mod recovery;
+mod rhea;
 fn amount(tokens: u128) -> String {
     (tokens * UNIT).to_string()
 }
@@ -36,6 +37,14 @@ impl Harness {
         Self::configured(faults, false, false).await
     }
     async fn configured(faults: bool, strategy: bool, dao: bool) -> Result<Self> {
+        Self::configured_engine(faults, strategy, dao, false).await
+    }
+    async fn configured_engine(
+        faults: bool,
+        strategy: bool,
+        dao: bool,
+        rhea: bool,
+    ) -> Result<Self> {
         let sandbox = Sandbox::start_sandbox_with_version("2.14.0").await?;
         assert!(
             sandbox.rpc_addr.starts_with("http://127.0.0.1:"),
@@ -73,11 +82,20 @@ impl Harness {
             evidence: RefCell::new(vec![]),
         };
         for (name, file) in [
-            ("token", "yieldfund_test_token.wasm"),
+            (
+                "token",
+                if rhea {
+                    "integration-sources/rhea-lending/releases/fungible_token.wasm"
+                } else {
+                    "yieldfund_test_token.wasm"
+                },
+            ),
             ("fake", "yieldfund_test_token.wasm"),
             (
                 "vault",
-                if faults {
+                if rhea {
+                    "rhea/yieldfund_rhea_vault.wasm"
+                } else if faults {
                     "yieldfund_vault_faults.wasm"
                 } else {
                     "yieldfund_vault.wasm"
@@ -98,7 +116,11 @@ impl Harness {
             (
                 strategy,
                 "strategy",
-                "yieldfund_strategy_simulator_controls.wasm",
+                if rhea {
+                    "rhea/mainnet-rhea.wasm"
+                } else {
+                    "yieldfund_strategy_simulator_controls.wasm"
+                },
             ),
             (dao, "treasury", "sputnikdao2.wasm"),
         ] {
@@ -118,15 +140,22 @@ impl Harness {
                     "guardian",
                     token,
                     "new",
-                    json!({"owner_id":"guardian.test", "total_supply":amount(1_000_000)}),
+                    json!({"owner_id":"guardian.test", "total_supply":amount(1_000_000),
+                        "metadata":{"spec":"ft-1.0.0", "name":"Sandbox token", "symbol":"LOCAL", "decimals":6}}),
                     0,
                 )
                 .await?;
-            assert!(initialized
-                .logs()
-                .iter()
-                .any(|log| log.contains("\"event\":\"ft_mint\"")));
+            if !rhea || token != "token" {
+                assert!(initialized
+                    .logs()
+                    .iter()
+                    .any(|log| log.contains("\"event\":\"ft_mint\"")));
+            }
             initialized.assert_success();
+            assert_eq!(
+                h.view(token, "ft_total_supply", json!({})).await?,
+                amount(1_000_000)
+            );
             for name in [
                 "alice",
                 "bob",
@@ -141,16 +170,16 @@ impl Harness {
         }
         h.call("vault", "vault", "new", json!({"config":{
             "campaign_id":"commons", "token_id":"token.test", "token_decimals":6,
-            "beneficiary_id":"treasury.test", "guardian_id":"guardian.test", "deposit_cap":amount(10_000),
+            "beneficiary_id":"treasury.test", "guardian_id": if rhea && dao { "treasury.test" } else { "guardian.test" }, "deposit_cap":amount(10_000),
             "metadata_hash":"sandbox-fixture", "disclosure_version":"1.0",
-            "strategy_id": if strategy { Some("strategy.test") } else { None }
+            "strategy_id": if strategy { Some("strategy.test") } else { None }, "rhea_extra_decimals":0
         }}), 0).await?.assert_success();
-        if strategy {
+        if strategy && !rhea {
             h.call("strategy", "strategy", "new", json!({"token_id":"token.test", "vault_id":"vault.test", "controller_id":"guardian.test", "loss_sink_id":"sink.test"}), 0).await?.assert_success();
         }
         if dao {
             h.call("treasury", "treasury", "new", json!({"config":{"name":"YieldFund Sandbox DAO","purpose":"Fictional commons","metadata":""},"policy":{
-                "roles":[{"name":"council", "kind":{"Group":["member1.test","member2.test","member3.test"]},"permissions":["transfer:AddProposal","transfer:VoteApprove","transfer:VoteReject","transfer:Finalize"],"vote_policy":{}}],
+                "roles":[{"name":"council", "kind":{"Group":["member1.test","member2.test","member3.test"]},"permissions":if rhea { vec!["transfer:AddProposal","transfer:VoteApprove","transfer:VoteReject","transfer:Finalize", "call:AddProposal", "call:VoteApprove", "call:VoteReject", "call:Finalize"] } else { vec!["transfer:AddProposal","transfer:VoteApprove","transfer:VoteReject","transfer:Finalize"] },"vote_policy":{}}],
                 "default_vote_policy":{"weight_kind":"RoleWeight","quorum":"2","threshold":"2"},
                 "proposal_bond":NearToken::from_millinear(100).as_yoctonear().to_string(),
                 "proposal_period":"604800000000000", "bounty_bond":"0", "bounty_forgiveness_period":"86400000000000"

@@ -38,6 +38,7 @@ impl Vault {
     /// Permissionless, rate-limited restart of a read or proof of completed redemption.
     /// The supplied version prevents a stale UI action from superseding newer work.
     #[payable]
+    #[cfg(not(feature = "rhea"))]
     pub fn recover_operation(&mut self, operation_id: U64, version: U64) -> Promise {
         assert_one_yocto();
         Self::require_gas();
@@ -133,6 +134,7 @@ impl Vault {
     }
 
     #[private]
+    #[cfg(not(feature = "rhea"))]
     pub fn on_recovery_redemption(&mut self, operation_id: U64, version: U64) -> bool {
         let mut op = self.expected(operation_id, version, Stage::Redeeming);
         assert_eq!(op.kind, Kind::Redemption, "wrong recovery kind");
@@ -180,6 +182,7 @@ impl Vault {
     }
 
     #[private]
+    #[cfg(not(feature = "rhea"))]
     pub fn on_recovery_transfer(&mut self, operation_id: U64, version: U64) -> bool {
         let op = self.expected(operation_id, version, Stage::TransferPending);
         assert!(
@@ -190,6 +193,7 @@ impl Vault {
     }
 
     #[private]
+    #[cfg(not(feature = "rhea"))]
     pub fn on_recovery_allocation(&mut self, operation_id: U64, version: U64) -> bool {
         let mut op = self.expected(operation_id, version, Stage::Allocating);
         assert_eq!(op.kind, Kind::Allocation);
@@ -215,6 +219,7 @@ impl Vault {
         } else {
             Err(PromiseError::TooLong(0))
         };
+        #[cfg(not(feature = "rhea"))]
         let applied = match result {
             Ok(bytes) => near_sdk::serde_json::from_slice::<TransferReceipt>(&bytes)
                 .ok()
@@ -227,6 +232,13 @@ impl Vault {
                 .map(|r| r.applied),
             // Only failure of the ORIGINAL atomic transfer proves no payment.
             // Failure of an evidence read/cancellation proves nothing.
+            Err(PromiseError::Failed) if !recovery => Some(false),
+            _ => None,
+        };
+        #[cfg(feature = "rhea")]
+        let applied = match result {
+            // Standard NEP-141 transfer returns unit, not the demo token receipt.
+            Ok(bytes) if !recovery && (bytes.is_empty() || bytes == b"null") => Some(true),
             Err(PromiseError::Failed) if !recovery => Some(false),
             _ => None,
         };

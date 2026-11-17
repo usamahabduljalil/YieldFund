@@ -11,6 +11,8 @@ crate-type = ["cdylib", "rlib"]
 [features]
 # Only the separate fault-injection Wasm used by the local Sandbox suite.
 test-faults = []
+# Separate standard-token/Rhea artifact; never use it to upgrade a simulator vault.
+rhea = []
 
 [dependencies]
 near-sdk.workspace = true

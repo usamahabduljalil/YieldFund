@@ -28,3 +28,8 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y build-essential cmake pkg-config libssl-dev
       - run: cargo fmt --all -- --check
       - run: bash scripts/test-contracts.sh
+      - name: Fetch hash-pinned public Rhea code (read only)
+        shell: pwsh
+        run: ./scripts/fetch-rhea-mainnet.ps1
+      - name: Verify direct Rhea integration
+        run: bash scripts/test-rhea.sh

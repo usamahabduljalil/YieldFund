@@ -16,7 +16,9 @@ Built for NEAR HACKATHON. The landing page is wallet-free; connection, positions
 
 ## Current release
 
-Last reviewed: **14 November 2026**. This is an experimental hackathon implementation, not an audited mainnet product. The hosted build uses existing testnet contracts in **read-only mode**. Local preview balances are explicitly fictional. The funded simulator uses actual test tokens and is **not Rhea yield**.
+Last reviewed: **17 November 2026**. This is an experimental hackathon implementation, not an audited mainnet product. The hosted build uses existing testnet contracts in **read-only mode**. Local preview balances are explicitly fictional. The funded simulator uses actual test tokens and is **not Rhea yield**.
+
+Post-deadline integration work: a separate **direct Rhea vault build** now uses standard NEP-141 supply and payouts plus Rhea's `simple_withdraw` finalizer. Two local Sandbox lifecycles passed against code downloaded from Rhea's actual mainnet deployment: supply/redemption/supporter exit, and borrower-generated interest → donation → two-vote DAO payment. Unsolicited gifts stay excluded. **This is local compatibility evidence, not a mainnet deposit or earned mainnet yield.** Trezu verification/revocation/settlement templates pass Trezu's pinned schema; installation and an actual Trezu proposal/payment are still pending. See [integration details and reproduction](docs/contracts/rhea-and-trezu.md).
 
 The approved public testnet lifecycle completed eleven transactions: **30 tUSD donated, 20 paid by the DAO, 200 withdrawn, 800 tUSD backing 800 remaining units**. See [transaction evidence](docs/evidence/milestone-9-execution-notes.md) and [browser reconciliation](docs/evidence/milestone-11-browser-reconciliation.md).
 
@@ -30,11 +32,11 @@ The approved public testnet lifecycle completed eleven transactions: **30 tUSD d
 | Permissionless campaigns                  | Factory deployed on testnet; two creators produced isolated keyless vault/strategy pairs. Selected-campaign runtime, wallet-bound creation review and persistent receipt recovery implemented; v2 recovery is implemented and locally tested; hosted signing awaits fresh deployment and browser transaction acceptance |
 | DAO verification                          | DAO-only expiring attestations, immutable metadata binding and revocation. A badge is not a safety or return guarantee                             |
 | Mainnet                                   | Read-only protocol/Rhea discovery and network-bound wallet adapter tests. Public mainnet transactions, adapter deployment and lifecycle verification pending                                      |
-| Rhea real yield                           | Mainnet state read successfully; supply/redemption adapter and funded lifecycle proof incomplete                                                   |
-| Trezu                                     | Source/interoperability investigation; actual discovery/proposal/payment rehearsal incomplete                                                      |
+| Rhea real yield                           | Direct vault adapter implemented; actual deployed Rhea binary and standard-token lifecycle tested locally. Funded mainnet lifecycle still pending |
+| Trezu                                     | Verification/revocation/settlement template exporter checks actual DAO authority; manifests pass upstream schema. Live Trezu import/proposal/payment pending |
 | Callback recovery                         | V2 source adds evidence-based payment/allocation/simulator recovery and resumable factory setup. Verified locally; historical deployed contracts retain their old limits     |
 
-The user selected **DAO approval** for verification and authorized GitHub/Vercel publication. Mainnet deployment is now **deferred** to focus on the hackathon demo. The earlier 5 NEAR cap is not an active instruction to spend; the current deployment architecture exceeds it. No mainnet spending or signatures have occurred. [Read-only discovery evidence](docs/evidence/mainnet-discovery.json).
+The user selected **DAO approval** for verification and authorized GitHub/Vercel publication. Real Rhea/Trezu implementation resumed on November 17. The earlier mainnet deployment deferral still applies to spending: no mainnet signatures or transfers have occurred. A funded operator and treasury plus a concrete deployment review are required for live acceptance. The previously supplied operator still reported `UNKNOWN_ACCOUNT` on November 17. [Earlier read-only discovery evidence](docs/evidence/mainnet-discovery.json).
 
 ## Run locally
 

@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-11-17T15:39:43.384Z",
+  "revision": "5694829ba441b9ef10ef34f0cfb3d09e0ad5f6ba",
+  "schemaSha256": "f924f9a89ef97956bc7ffc7ec3127133a122d9fdb92960d3be689f5c2407bb9c",
+  "zod": "4.4.3",
+  "accepted": [
+    "yieldfund-verify",
+    "yieldfund-revoke",
+    "yieldfund-donate",
+    "yieldfund-allocate",
+    "yieldfund-redeem",
+    "yieldfund-continue"
+  ],
+  "fixturesOnly": true,
+  "liveTrezuInstallation": false,
+  "signatures": 0,
+  "broadcasts": 0
+}

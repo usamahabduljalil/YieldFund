@@ -11,6 +11,8 @@ use yieldfund_accounting::Snapshot;
 #[path = "strategy.rs"]
 mod lifecycle;
 mod recovery;
+#[cfg(feature = "rhea")]
+mod rhea;
 
 const POSITION_BYTES: u128 = 512;
 const OPERATION_BYTES: u128 = 2048;
@@ -19,6 +21,7 @@ const RECONCILE_GAS: Gas = Gas::from_tgas(75);
 const TRANSFER_GAS: Gas = Gas::from_tgas(20);
 const FINALIZE_GAS: Gas = Gas::from_tgas(20);
 const START_GAS: u64 = 110;
+#[cfg(not(feature = "rhea"))]
 const RECOVERY_DELAY_NS: u64 = 300_000_000_000;
 
 #[near(serializers = [borsh, json])]
@@ -35,6 +38,8 @@ pub struct Config {
     /// None retains the idle-only deployment path. Immutable after initialization.
     #[serde(default)]
     pub strategy_id: Option<AccountId>,
+    #[cfg(feature = "rhea")]
+    pub rhea_extra_decimals: u8,
 }
 
 #[near(serializers = [borsh, json])]
@@ -118,6 +123,13 @@ struct RedemptionResult {
 #[allow(dead_code)]
 #[ext_contract(ft)]
 trait Token {
+    fn ft_transfer_call(
+        &mut self,
+        receiver_id: AccountId,
+        amount: U128,
+        memo: Option<String>,
+        msg: String,
+    ) -> U128;
     fn ft_balance_of(&self, account_id: AccountId) -> U128;
     fn get_transfer_call_receipt(&self, sender_id: AccountId) -> Option<recovery::CallReceipt>;
     fn ft_resolve_call_intent(
@@ -187,6 +199,10 @@ pub struct Vault {
     donated: u128,
     pending_redemption: Option<u64>,
     pending_transfer_sequence: u64,
+    #[cfg(feature = "rhea")]
+    rhea_phase: rhea::Phase,
+    #[cfg(feature = "rhea")]
+    rhea_pending_amount: u128,
     #[cfg(feature = "test-faults")]
     fail_callback: bool,
     #[cfg(feature = "test-faults")]
@@ -229,6 +245,11 @@ impl Vault {
 #[near]
 impl Vault {
     fn initialize(config: Config) -> Self {
+        #[cfg(feature = "rhea")]
+        assert!(
+            config.strategy_id.is_some() && config.rhea_extra_decimals <= 24,
+            "invalid Rhea configuration"
+        );
         assert!(
             !config.campaign_id.is_empty() && config.campaign_id.len() <= 64,
             "invalid campaign id"
@@ -274,6 +295,10 @@ impl Vault {
             donated: 0,
             pending_redemption: None,
             pending_transfer_sequence: 0,
+            #[cfg(feature = "rhea")]
+            rhea_phase: rhea::Phase::Idle,
+            #[cfg(feature = "rhea")]
+            rhea_pending_amount: 0,
             #[cfg(feature = "test-faults")]
             fail_callback: false,
             #[cfg(feature = "test-faults")]
@@ -322,6 +347,7 @@ impl Vault {
             self.config.token_id,
             "unsupported token"
         );
+        #[cfg(not(feature = "rhea"))]
         if let Some(id) = msg
             .strip_prefix("strategy_return:")
             .and_then(|s| s.parse::<u64>().ok())
@@ -563,7 +589,7 @@ impl Vault {
             ft::ext(self.config.token_id.clone())
                 .with_attached_deposit(NearToken::from_yoctonear(1))
                 .with_static_gas(TRANSFER_GAS)
-                .ft_transfer_once(
+                .send_payment(
                     op.owner_id.clone(),
                     U128(payout),
                     U64(self.pending_transfer_sequence),
@@ -645,7 +671,11 @@ impl Vault {
             .is_some_and(|o| o.stage == Stage::TransferPending);
         AccountingView {
             mode: if self.config.strategy_id.is_some() {
-                "funded_simulator"
+                if cfg!(feature = "rhea") {
+                    "rhea_lending"
+                } else {
+                    "funded_simulator"
+                }
             } else {
                 "idle_only"
             }
@@ -824,5 +854,18 @@ impl Vault {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, not(feature = "rhea")))]
 mod tests;
+
+impl ft::TokenExt {
+    fn send_payment(self, receiver: AccountId, amount: U128, sequence: U64) -> Promise {
+        #[cfg(not(feature = "rhea"))]
+        {
+            self.ft_transfer_once(receiver, amount, sequence)
+        }
+        #[cfg(feature = "rhea")]
+        {
+            self.ft_transfer(receiver, amount, Some(format!("yieldfund:{}", sequence.0)))
+        }
+    }
+}

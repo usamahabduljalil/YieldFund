@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-11-17T15:33:29.451Z",
+  "network": "mainnet",
+  "readOnly": true,
+  "accountId": "contract.main.burrow.near",
+  "block": {
+    "height": 224957490,
+    "hash": "6twmEjFj4Wny7nNMvfQqLHkSJJEzL2sgNFYKJVAHcPZz"
+  },
+  "codeHash": "6Nek1MZ8cwJJ2xMQAUWup9V5AToYS9rkTxJfwo6BCpFa",
+  "wasmSha256": "4fd64e59a0466cf3392ff1914959c59c7c086ed82300571c6e8fc89d9f7dede1",
+  "bytes": 1059499,
+  "versionObserved": "0.16.2",
+  "publicSourceRevision": "2110c7047f2d72a9189abcbaad5eafb4e4a87f9e",
+  "sourceBuildEquivalenceVerified": false,
+  "localVault": {
+    "sha256": "a2c8d5b0be819a2c30d16e0f46b9386d79be950f1e4dbdeee578fbc0246f12d3",
+    "bytes": 428005
+  },
+  "signatures": 0,
+  "broadcasts": 0,
+  "localVerification": {
+    "rheaUnitTests": 6,
+    "sandboxLifecycles": 2,
+    "standardToken": true,
+    "daoControlledOperations": true,
+    "liveMainnetLifecycle": false
+  }
+}

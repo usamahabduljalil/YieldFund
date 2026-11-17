@@ -36,11 +36,11 @@ impl Vault {
         ft::ext(self.config.token_id.clone())
             .with_attached_deposit(NearToken::from_yoctonear(1))
             .with_static_gas(Gas::from_tgas(90))
-            .ft_transfer_call_once(
+            .supply(
                 strategy_id,
                 amount,
                 U64(self.pending_transfer_sequence),
-                format!("supply:{}", op.id.0),
+                op.id,
             )
             .then(
                 callbacks::ext(env::current_account_id())
@@ -85,6 +85,7 @@ impl Vault {
     }
 
     #[private]
+    #[cfg(not(feature = "rhea"))]
     pub fn on_redemption(&mut self, operation_id: U64, version: U64) -> bool {
         let mut op = self.expected(operation_id, version, Stage::Redeeming);
         #[cfg(feature = "test-faults")]
@@ -187,6 +188,7 @@ impl Vault {
 }
 
 impl Vault {
+    #[cfg(not(feature = "rhea"))]
     pub(super) fn start_redemption(&mut self, op: &mut Operation) -> Promise {
         assert_eq!(self.pending_redemption, Some(op.id.0), "stale redemption");
         assert!(env::prepaid_gas().as_tgas() >= 220, "attach 220 Tgas");
@@ -235,7 +237,7 @@ impl Vault {
             ft::ext(self.config.token_id.clone())
                 .with_attached_deposit(NearToken::from_yoctonear(1))
                 .with_static_gas(TRANSFER_GAS)
-                .ft_transfer_once(
+                .send_payment(
                     self.config.beneficiary_id.clone(),
                     U128(amount),
                     U64(self.pending_transfer_sequence),
@@ -260,5 +262,25 @@ impl Vault {
         op.error = Some(error.into());
         self.save_operation(op);
         false
+    }
+}
+
+impl ft::TokenExt {
+    fn supply(self, receiver: AccountId, amount: U128, sequence: U64, operation: U64) -> Promise {
+        #[cfg(not(feature = "rhea"))]
+        {
+            self.ft_transfer_call_once(
+                receiver,
+                amount,
+                sequence,
+                format!("supply:{}", operation.0),
+            )
+        }
+        #[cfg(feature = "rhea")]
+        {
+            let _ = (sequence, operation);
+            // Empty message means supply only: no collateral, borrow, swap or oracle action.
+            self.ft_transfer_call(receiver, amount, None, String::new())
+        }
     }
 }
