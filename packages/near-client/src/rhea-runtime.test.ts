@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   ChainClient,
+  accountCodeHash,
   parseDeployment,
   type Deployment,
   type Operation,
@@ -121,7 +122,9 @@ function fixture() {
         },
       };
     else if (params.request_type === "view_account")
-      result = { code_hash: "11111111111111111111111111111111" };
+      result = values[params.account_id] ?? {
+        code_hash: "11111111111111111111111111111111",
+      };
     else {
       if (!(params.method_name in values))
         throw new Error(`Unexpected simulator method: ${params.method_name}`);
@@ -146,6 +149,32 @@ function fixture() {
   };
 }
 describe("Rhea runtime", () => {
+  it("pins the immutable global code used by Trezu's new Sputnik treasuries", async () => {
+    const f = fixture();
+    const code = {
+      code_hash: "11111111111111111111111111111111",
+      global_contract_hash: "DtHZA1mUmGYeScEaUoUZYQGGFHSMpnjMCvkr5U9hJXuF",
+    };
+    f.values[f.d.config.beneficiary_id] = code;
+    f.d.codeHashes[f.d.config.beneficiary_id] = accountCodeHash(code);
+    await expect(f.client.snapshot()).resolves.toHaveProperty("height", 10);
+    code.global_contract_hash = "11111111111111111111111111111111";
+    await expect(f.client.snapshot()).rejects.toThrow("Contract code changed");
+  });
+  it("does not silently trust mutable global providers or ambiguous code identities", () => {
+    expect(() =>
+      accountCodeHash({
+        code_hash: "11111111111111111111111111111111",
+        global_contract_account_id: "provider.near",
+      }),
+    ).toThrow("provider binding");
+    expect(() =>
+      accountCodeHash({
+        code_hash: "DtHZA1mUmGYeScEaUoUZYQGGFHSMpnjMCvkr5U9hJXuF",
+        global_contract_hash: "DtHZA1mUmGYeScEaUoUZYQGGFHSMpnjMCvkr5U9hJXuF",
+      }),
+    ).toThrow("Ambiguous");
+  });
   it("accepts an explicit read-only Rhea manifest and rejects unreviewed signing or precision", () => {
     const { d } = fixture();
     expect(parseDeployment(d)).toEqual(d);

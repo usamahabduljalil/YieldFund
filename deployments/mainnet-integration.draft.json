@@ -1,0 +1,20 @@
+{
+  "status": "treasury-verified-vault-not-deployed",
+  "network": "mainnet",
+  "rpcUrl": "https://rpc.mainnet.fastnear.com",
+  "operatorId": "loanavalarezo.tg",
+  "daoId": "yieldfund.sputnik-dao.near",
+  "trezuUrl": "https://trezu.app/yieldfund.sputnik-dao.near",
+  "guardianId": "yieldfund.sputnik-dao.near",
+  "beneficiaryId": "yieldfund.sputnik-dao.near",
+  "governanceAccountId": "0s90c1aa4f80a268c9d7f062d8e936dd8ef0bfc430",
+  "rheaId": "contract.main.burrow.near",
+  "proposedTokenId": "wrap.near",
+  "vaultId": null,
+  "factoryId": null,
+  "transactionsEnabled": false,
+  "spendingAuthorized": false,
+  "previousBudgetCapNear": "5",
+  "treasuryEvidence": "docs/evidence/mainnet-treasury-discovery.json",
+  "note": "Planning input only, not an application runtime or signed deployment plan. Token choice, vault/factory design, storage and gas amounts require a concrete release review."
+}

@@ -1,0 +1,212 @@
+{
+  "network": "mainnet",
+  "rpcUrl": "https://rpc.mainnet.fastnear.com",
+  "blockHash": "7LfQeyrjyUUVqCyvgEMJiavmDZJfRvv1SQtwg3zFdSw5",
+  "blockHeight": 225047644,
+  "daoId": "yieldfund.sputnik-dao.near",
+  "trezuUrl": "https://trezu.app/yieldfund.sputnik-dao.near",
+  "operatorId": "loanavalarezo.tg",
+  "signatures": 0,
+  "get_policy": {
+    "roles": [
+      {
+        "name": "Requestor",
+        "kind": {
+          "Group": [
+            "0s90c1aa4f80a268c9d7f062d8e936dd8ef0bfc430"
+          ]
+        },
+        "permissions": [
+          "transfer:VoteRemove",
+          "call:AddProposal",
+          "call:VoteRemove",
+          "transfer:AddProposal"
+        ],
+        "vote_policy": {
+          "call": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "transfer": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          }
+        }
+      },
+      {
+        "name": "Admin",
+        "kind": {
+          "Group": [
+            "0s90c1aa4f80a268c9d7f062d8e936dd8ef0bfc430"
+          ]
+        },
+        "permissions": [
+          "bounty_done:*",
+          "policy_add_or_update_role:*",
+          "policy:*",
+          "add_bounty:*",
+          "config:*",
+          "factory_info_update:*",
+          "policy_remove_role:*",
+          "policy_update_default_vote_policy:*",
+          "policy_update_parameters:*",
+          "remove_member_from_role:*",
+          "upgrade_remote:*",
+          "upgrade_self:*",
+          "set_vote_token:*",
+          "add_member_to_role:*"
+        ],
+        "vote_policy": {
+          "policy_update_parameters": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "config": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "policy": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "set_vote_token": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "upgrade_remote": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "policy_add_or_update_role": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "bounty_done": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "policy_remove_role": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "factory_info_update": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "policy_update_default_vote_policy": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "remove_member_from_role": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "add_member_to_role": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "upgrade_self": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "add_bounty": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          }
+        }
+      },
+      {
+        "name": "Approver",
+        "kind": {
+          "Group": [
+            "0s90c1aa4f80a268c9d7f062d8e936dd8ef0bfc430"
+          ]
+        },
+        "permissions": [
+          "transfer:RemoveProposal",
+          "transfer:VoteApprove",
+          "call:VoteReject",
+          "call:RemoveProposal",
+          "call:VoteApprove",
+          "transfer:VoteReject",
+          "transfer:Finalize",
+          "call:Finalize"
+        ],
+        "vote_policy": {
+          "call": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          },
+          "transfer": {
+            "weight_kind": "RoleWeight",
+            "quorum": "0",
+            "threshold": "1"
+          }
+        }
+      }
+    ],
+    "default_vote_policy": {
+      "weight_kind": "RoleWeight",
+      "quorum": "0",
+      "threshold": [
+        1,
+        2
+      ]
+    },
+    "proposal_bond": "0",
+    "proposal_period": "604800000000000",
+    "bounty_bond": "0",
+    "bounty_forgiveness_period": "604800000000000"
+  },
+  "get_factory_info": {
+    "factory_id": "sputnik-dao.near",
+    "auto_update": true
+  },
+  "get_config": {
+    "name": "YieldFund",
+    "purpose": "managing digital assets",
+    "metadata": ""
+  },
+  "version": "2.3.1",
+  "daoAccount": {
+    "amount": "90000000000000000000000",
+    "block_hash": "7LfQeyrjyUUVqCyvgEMJiavmDZJfRvv1SQtwg3zFdSw5",
+    "block_height": 225047644,
+    "code_hash": "11111111111111111111111111111111",
+    "global_contract_hash": "DtHZA1mUmGYeScEaUoUZYQGGFHSMpnjMCvkr5U9hJXuF",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 2333
+  },
+  "daoAccessKeys": {
+    "block_hash": "7LfQeyrjyUUVqCyvgEMJiavmDZJfRvv1SQtwg3zFdSw5",
+    "block_height": 225047644,
+    "keys": []
+  },
+  "operatorAccount": {
+    "amount": "340904907830145251698960",
+    "block_hash": "7LfQeyrjyUUVqCyvgEMJiavmDZJfRvv1SQtwg3zFdSw5",
+    "block_height": 225047644,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 307
+  }
+}

@@ -320,6 +320,28 @@ export function base58HashHex(hash: string): string {
   requireThat(hex.length === 64, "Invalid hash length");
   return hex;
 }
+/** Hash-addressed global contracts pin immutable code just like local code.
+ * Account-addressed globals need an additional provider binding/read and are
+ * deliberately rejected until the manifest can record that authority.
+ */
+export function accountCodeHash(value: {
+  code_hash: string;
+  global_contract_hash?: string;
+  global_contract_account_id?: string;
+}): string {
+  requireThat(
+    !value.global_contract_account_id,
+    "Account-linked global code requires a reviewed provider binding",
+  );
+  if (value.global_contract_hash) {
+    requireThat(
+      base58HashHex(value.code_hash) === "0".repeat(64),
+      "Ambiguous contract code identity",
+    );
+    return base58HashHex(value.global_contract_hash);
+  }
+  return base58HashHex(value.code_hash);
+}
 const encode = (v: unknown) =>
   btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(v))));
 export function decode(value: string): unknown {
@@ -548,13 +570,17 @@ export class ChainClient {
       ),
       this.view<number>(c.beneficiary_id, "get_last_proposal_id", {}, block),
       ...Object.entries(d.codeHashes).map(async ([id, expected]) => {
-        const a = await this.rpc<{ code_hash: string }>("query", {
+        const a = await this.rpc<{
+          code_hash: string;
+          global_contract_hash?: string;
+          global_contract_account_id?: string;
+        }>("query", {
           request_type: "view_account",
           account_id: id,
           block_id: block,
         });
         requireThat(
-          base58HashHex(a.code_hash) === expected,
+          accountCodeHash(a) === expected,
           `Contract code changed: ${id}`,
         );
       }),
