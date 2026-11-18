@@ -218,7 +218,7 @@ function TransactionReview({
         )}
         {review.intent.kind === "deposit" && (
           <Notice>
-            Test tokens enter vault custody. Capital can lose value, and
+            Tokens enter vault custody. Capital can lose value, and
             withdrawals may be delayed.{" "}
             {strategyMode(c.deployment) === "rhea_lending"
               ? "Rhea returns vary and redemption depends on available liquidity."
@@ -552,7 +552,7 @@ function Campaign() {
           />
           <Link to="/risks">Risks & disclosures</Link>
         </Panel>
-        <Panel title="Deposit test tokens">
+        <Panel title={`Deposit ${tokenSymbol(d)}`}>
           {!w.account ? (
             <Notice>Connect your {d.network} wallet to continue.</Notice>
           ) : (
