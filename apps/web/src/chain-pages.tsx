@@ -16,8 +16,44 @@ import type {
 } from "../../../packages/near-client/src/chain";
 import { useChain, type Review } from "./chain-store";
 import { useWallet } from "./wallet";
-import { Badge, Empty, Metric, Modal, Money, Notice } from "./components";
+import {
+  Badge,
+  Empty,
+  Metric as BaseMetric,
+  Modal,
+  Money as BaseMoney,
+  Notice,
+} from "./components";
+import {
+  strategyMode,
+  tokenSymbol,
+} from "../../../packages/near-client/src/chain";
+import {
+  trezuLinks,
+  rheaOperationTemplates,
+} from "../../../packages/near-client/src/trezu";
 import { NotFound } from "./public-pages";
+function Money(props: { amount: bigint; unit?: boolean }) {
+  const { deployment: d } = useChain();
+  return (
+    <BaseMoney
+      {...props}
+      decimals={d.config.token_decimals}
+      symbol={tokenSymbol(d)}
+    />
+  );
+}
+function Metric(props: { label: string; amount: bigint; note?: string }) {
+  const { deployment: d } = useChain();
+  return (
+    <BaseMetric
+      {...props}
+      note={props.note ?? tokenSymbol(d)}
+      decimals={d.config.token_decimals}
+      symbol={tokenSymbol(d)}
+    />
+  );
+}
 const label = (text: string) => text.replaceAll("_", " ");
 const message = (e: unknown) =>
   e instanceof Error ? e.message : "Could not complete this action.";
@@ -123,7 +159,7 @@ function TransactionReview({
   return (
     <Modal
       title="Review transaction"
-      contextLabel="YIELDFUND / NEAR TESTNET"
+      contextLabel={`YIELDFUND / ${c.deployment.network.toUpperCase()}`}
       onClose={() => {
         if (!busy) onClose();
       }}
@@ -144,7 +180,7 @@ function TransactionReview({
                   ],
                   [
                     "Minimum payout",
-                    `${formatAmount(BigInt(recovery.minimum))} tUSD`,
+                    `${formatAmount(BigInt(recovery.minimum), 2, c.deployment.config.token_decimals)} ${tokenSymbol(c.deployment)}`,
                   ] as [string, ReactNode],
                 ]
               : []),
@@ -155,7 +191,7 @@ function TransactionReview({
               ? [
                   [
                     "Amount",
-                    `${formatAmount(BigInt(String(tokenAmount)))} tUSD`,
+                    `${formatAmount(BigInt(String(tokenAmount)), 2, c.deployment.config.token_decimals)} ${tokenSymbol(c.deployment)}`,
                   ] as [string, ReactNode],
                 ]
               : []),
@@ -163,7 +199,7 @@ function TransactionReview({
               ? [
                   [
                     "Minimum payout",
-                    `${formatAmount(BigInt(review.intent.minimum))} tUSD`,
+                    `${formatAmount(BigInt(review.intent.minimum), 2, c.deployment.config.token_decimals)} ${tokenSymbol(c.deployment)}`,
                   ] as [string, ReactNode],
                 ]
               : []),
@@ -183,7 +219,10 @@ function TransactionReview({
         {review.intent.kind === "deposit" && (
           <Notice>
             Test tokens enter vault custody. Capital can lose value, and
-            withdrawals may be delayed. Strategy profit is simulated.
+            withdrawals may be delayed.{" "}
+            {strategyMode(c.deployment) === "rhea_lending"
+              ? "Rhea returns vary and redemption depends on available liquidity."
+              : "Strategy profit is simulated."}
           </Notice>
         )}
         {recovery && (
@@ -296,11 +335,21 @@ function AmountForm({
     setError("");
     setBusy(true);
     try {
-      const amount = parseAmount(value).toString();
+      const amount = parseAmount(
+        value,
+        c.deployment.config.token_decimals,
+      ).toString();
       setReview(
         await c.prepare(
           kind === "withdraw"
-            ? { kind, amount, minimum: parseAmount(min).toString() }
+            ? {
+                kind,
+                amount,
+                minimum: parseAmount(
+                  min,
+                  c.deployment.config.token_decimals,
+                ).toString(),
+              }
             : { kind, amount },
         ),
       );
@@ -313,7 +362,9 @@ function AmountForm({
   return (
     <form className="chain-form" onSubmit={(e) => void submit(e)}>
       <label>
-        {kind === "withdraw" ? "Nominal units" : "Amount · tUSD"}
+        {kind === "withdraw"
+          ? "Nominal units"
+          : `Amount · ${tokenSymbol(c.deployment)}`}
         <input
           required
           inputMode="decimal"
@@ -324,7 +375,7 @@ function AmountForm({
       </label>
       {kind === "withdraw" && (
         <label>
-          Minimum payout · tUSD
+          Minimum payout · {tokenSymbol(c.deployment)}
           <input
             required
             inputMode="decimal"
@@ -428,7 +479,12 @@ function Overview() {
           <p>Community funding through eligible surplus.</p>
           <Data
             items={[
-              ["Strategy", "Funded simulator"],
+              [
+                "Strategy",
+                strategyMode(d) === "rhea_lending"
+                  ? "Rhea lending"
+                  : "Funded simulator",
+              ],
               ["Vault", d.vaultId],
               ["Treasury", d.config.beneficiary_id],
               ["Capital status", a.settled ? "Settled" : "Unsettled"],
@@ -474,7 +530,11 @@ function Campaign() {
       <Heading title={`Support ${d.displayName ?? "The Commons"}`} />
       <div className="chain-columns">
         <Panel title="Your contribution">
-          <Badge tone="blue">Simulated strategy</Badge>
+          <Badge tone="blue">
+            {strategyMode(d) === "rhea_lending"
+              ? "Rhea lending"
+              : "Simulated strategy"}
+          </Badge>
           <Data
             items={[
               ["Token", d.config.token_id],
@@ -494,7 +554,7 @@ function Campaign() {
         </Panel>
         <Panel title="Deposit test tokens">
           {!w.account ? (
-            <Notice>Connect your testnet wallet to continue.</Notice>
+            <Notice>Connect your {d.network} wallet to continue.</Notice>
           ) : (
             <>
               <div className="chain-actions">
@@ -591,7 +651,10 @@ function ProposalForm() {
         await c.prepare({
           kind: "propose",
           recipient,
-          amount: parseAmount(amount).toString(),
+          amount: parseAmount(
+            amount,
+            c.deployment.config.token_decimals,
+          ).toString(),
           description,
         }),
       );
@@ -609,11 +672,15 @@ function ProposalForm() {
           required
           value={recipient}
           onChange={(e) => setRecipient(e.target.value)}
-          placeholder="contributor.testnet"
+          placeholder={
+            c.deployment.network === "mainnet"
+              ? "contributor.near"
+              : "contributor.testnet"
+          }
         />
       </label>
       <label>
-        Amount · tUSD
+        Amount · {tokenSymbol(c.deployment)}
         <input
           required
           value={amount}
@@ -653,9 +720,24 @@ function ProposalForm() {
 function Treasury() {
   const { snapshot: s, deployment: d } = useChain();
   if (!s) return null;
+  const trezu =
+    d.network === "mainnet"
+      ? trezuLinks(d.network, d.config.beneficiary_id)
+      : null;
   return (
     <>
-      <Heading title="A budget built together." />
+      <Heading title="A budget built together.">
+        {trezu && (
+          <a
+            className="button secondary"
+            href={trezu.treasury}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open Trezu <ArrowUpRight size={18} />
+          </a>
+        )}
+      </Heading>
       <div className="metric-grid three">
         <Metric label="Treasury balance" amount={BigInt(s.treasuryBalance)} />
         <Metric
@@ -669,7 +751,9 @@ function Treasury() {
               ? s.policy.default_vote_policy.threshold
               : "Policy ratio"}
           </strong>
-          <span className="metric-note">Required council votes</span>
+          <span className="metric-note">
+            Default policy · role rules may differ
+          </span>
         </div>
       </div>
       <div className="chain-columns">
@@ -688,10 +772,11 @@ function Treasury() {
               ))}
             </ul>
           ) : (
-            <Empty title="No proposals yet" />
+            <Empty title="No token payments in recent proposals" />
           )}
           <small>
-            Latest {s.proposals.length} of {s.proposalCount} proposals.
+            {s.proposals.length} matching payments in the latest{" "}
+            {Math.min(50, s.proposalCount)} proposals.
           </small>
         </Panel>
         <Panel title="Propose a payment">
@@ -883,9 +968,9 @@ function SubmissionRow({ row }: { row: Submission }) {
             Operation #{id}
           </Link>
         ))}
-        {row.hash && c.deployment.network === "testnet" && (
+        {row.hash && c.deployment.network !== "sandbox" && (
           <a
-            href={`https://testnet.nearblocks.io/txns/${encodeURIComponent(row.hash)}`}
+            href={`https://${c.deployment.network === "testnet" ? "testnet." : ""}nearblocks.io/txns/${encodeURIComponent(row.hash)}`}
             target="_blank"
             rel="noreferrer"
           >
@@ -1002,8 +1087,27 @@ function OperationDetail() {
             ]}
           />
           {o.error && <Notice>{label(o.error)}</Notice>}
+          {c.snapshot?.strategy.rhea && (
+            <Data
+              items={[["Rhea settlement", c.snapshot.strategy.rhea.phase]]}
+            />
+          )}
           <div className="chain-actions">
-            {recoveryKind(o, c.deployment.config.disclosure_version) &&
+            {c.snapshot?.accounting.active_operation === o.id &&
+              o.kind === "redemption" &&
+              o.stage === "redeeming" &&
+              ["Ready", "Reading"].includes(
+                c.snapshot.strategy.rhea?.phase ?? "",
+              ) && (
+                <ActionButton intent={{ kind: "continue-rhea", operation: o }}>
+                  Continue Rhea settlement
+                </ActionButton>
+              )}
+            {recoveryKind(
+              o,
+              c.deployment.config.disclosure_version,
+              strategyMode(c.deployment),
+            ) &&
               c.snapshot?.accounting.active_operation === o.id &&
               (c.snapshot.timestamp >= recoveryReadyAt(o) ? (
                 <ActionButton intent={{ kind: "recover", operation: o }}>
@@ -1123,6 +1227,43 @@ function Manage() {
           )}
         </Panel>
       </div>
+      {c.deployment.network === "mainnet" &&
+        strategyMode(c.deployment) === "rhea_lending" &&
+        c.deployment.config.guardian_id ===
+          c.deployment.config.beneficiary_id && (
+          <Panel title="Trezu operations">
+            <p>
+              Download a template, then import it in Trezu. DAO approval
+              executes the call.
+            </p>
+            <div className="chain-actions">
+              <a
+                className="button secondary"
+                href={
+                  trezuLinks("mainnet", c.deployment.config.beneficiary_id)
+                    .templates
+                }
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open templates
+              </a>
+              {rheaOperationTemplates(
+                c.deployment.vaultId,
+                s.costs.operation,
+              ).map((template) => (
+                <a
+                  key={template.id}
+                  className="button secondary"
+                  download={`${template.id}.json`}
+                  href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(template, null, 2))}`}
+                >
+                  {template.title}
+                </a>
+              ))}
+            </div>
+          </Panel>
+        )}
       {guardian && (
         <div className="chain-columns">
           <Panel title="Allocate idle capital">
@@ -1144,10 +1285,12 @@ export function ChainBanner() {
         <span className="preview-label">
           {c.deployment.network === "sandbox"
             ? "LOCAL SANDBOX"
-            : "NEAR TESTNET"}
+            : `NEAR ${c.deployment.network.toUpperCase()}`}
         </span>
-        Simulated strategy{!c.deployment.transactionsEnabled && " · Read only"}{" "}
-        ·{" "}
+        {strategyMode(c.deployment) === "rhea_lending"
+          ? "Rhea lending"
+          : "Simulated strategy"}
+        {!c.deployment.transactionsEnabled && " · Read only"} ·{" "}
         {c.snapshot
           ? `Final block ${c.snapshot.height}`
           : "Checking deployment…"}

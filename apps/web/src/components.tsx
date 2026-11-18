@@ -51,14 +51,18 @@ export function Badge({
 export function Money({
   amount,
   unit = true,
+  decimals = 6,
+  symbol = "tUSD",
 }: {
   amount: bigint;
   unit?: boolean;
+  decimals?: number;
+  symbol?: string;
 }) {
   return (
     <>
-      {formatAmount(amount)}
-      {unit && <span className="unit"> tUSD</span>}
+      {formatAmount(amount, 2, decimals)}
+      {unit && <span className="unit"> {symbol}</span>}
     </>
   );
 }
@@ -66,18 +70,27 @@ export function Metric({
   label,
   amount,
   note,
+  decimals = 6,
+  symbol = "tUSD",
 }: {
   label: string;
   amount: bigint;
   note?: string;
+  decimals?: number;
+  symbol?: string;
 }) {
   return (
     <div className="metric">
       <span className="metric-label">{label}</span>
       <strong>
-        <Money amount={amount} unit={false} />
+        <Money
+          amount={amount}
+          unit={false}
+          decimals={decimals}
+          symbol={symbol}
+        />
       </strong>
-      <span className="metric-note">{note ?? "tUSD · example token"}</span>
+      <span className="metric-note">{note ?? `${symbol} · example token`}</span>
     </div>
   );
 }

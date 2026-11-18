@@ -231,7 +231,11 @@ function Shell({
           </div>
           <div className="header-actions">
             <Badge>
-              {network === "sandbox" ? "Local sandbox" : "Testnet wallet"}
+              {network === "sandbox"
+                ? "Local sandbox"
+                : network === "mainnet"
+                  ? "Mainnet wallet"
+                  : "Testnet wallet"}
             </Badge>
             {network !== "sandbox" && <WalletControl />}
           </div>
@@ -303,11 +307,12 @@ export default function Application() {
           const direct = /^\/app\/campaigns\/([a-z0-9-]+)$/.exec(
             location.pathname,
           )?.[1];
-          const saved = sessionStorage.getItem("yieldfund.selected-campaign");
+          const selectionKey = `yieldfund.selected-campaign:${value.network}`;
+          const saved = sessionStorage.getItem(selectionKey);
           const id = direct && direct !== "new" ? direct : saved;
-          if (direct === "commons")
-            sessionStorage.removeItem("yieldfund.selected-campaign");
-          if (id && id !== "commons") {
+          if (direct === value.config.campaign_id)
+            sessionStorage.removeItem(selectionKey);
+          if (id && id !== value.config.campaign_id) {
             const response = await fetch("/registry.json", {
               cache: "no-store",
               signal: AbortSignal.timeout(10000),
@@ -338,7 +343,7 @@ export default function Application() {
   }, []);
   function select(deployment: Deployment) {
     sessionStorage.setItem(
-      "yieldfund.selected-campaign",
+      `yieldfund.selected-campaign:${deployment.network}`,
       deployment.config.campaign_id,
     );
     setRuntime(deployment);
@@ -357,7 +362,9 @@ export default function Application() {
           <button
             className="button secondary"
             onClick={() => {
-              sessionStorage.removeItem("yieldfund.selected-campaign");
+              sessionStorage.removeItem(
+                `yieldfund.selected-campaign:${baseline.network}`,
+              );
               setError("");
               setRuntime(baseline);
               navigate("/app/campaigns");
@@ -376,7 +383,8 @@ export default function Application() {
     );
   return runtime.mode === "chain" ? (
     <WalletProvider
-      rpcUrl={runtime.network === "testnet" ? runtime.rpcUrl : undefined}
+      network={runtime.network === "mainnet" ? "mainnet" : "testnet"}
+      rpcUrl={runtime.network !== "sandbox" ? runtime.rpcUrl : undefined}
     >
       <ChainProvider
         key={`${runtime.network}:${runtime.vaultId}`}

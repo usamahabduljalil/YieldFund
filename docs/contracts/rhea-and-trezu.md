@@ -75,6 +75,8 @@ All six manifests passed; see `docs/evidence/trezu-template-compat.json`. Trezu'
 
 ## Remaining release gates
 
-Funded operator and treasury IDs; refreshed protocol/code/config checks; measured deployment/storage/gas budget and exact signing review; fresh Rhea vault deployment; live supply/redemption/interest/donation receipts; Trezu installation and wallet acceptance; application runtime support for the Rhea deployment and continuation action. The existing campaign factory still deploys simulator pairs and must not be relabeled as Rhea.
+The application now accepts an explicit `strategyMode: "rhea_lending"` manifest with `tokenSymbol` and `config.rhea_extra_decimals`. It reads the vault and Rhea account/asset at one finalized block and checks pinned code/config/policy. All token displays and inputs use configured precision (up to 24 decimals). Operations expose version-bound continuation only in Ready/Reading; unknown withdrawals stay locked. Mainnet treasury screens link to Trezu and DAO-controlled vaults export the four operation templates. Non-transfer proposals are filtered from the payment list and rejected by payment-detail actions. RPC/UI test fixtures do not count as live acceptance.
+
+Remaining: controlled treasury DAO ID and sufficient operator funds; refreshed protocol/code/config checks; measured deployment/storage/gas budget and exact signing review; fresh Rhea vault deployment; live supply/redemption/interest/donation receipts; Trezu installation and wallet acceptance. Public mainnet signing is still disabled. The existing campaign factory still deploys simulator pairs and must not be relabeled as Rhea.
 
 No mainnet spending occurred in this implementation. The previous mainnet spending deferral remains in force; the earlier 5 NEAR cap is not a renewed deployment approval.

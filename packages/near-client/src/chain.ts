@@ -11,11 +11,14 @@ export interface VaultConfig {
   metadata_hash: string;
   disclosure_version: string;
   strategy_id: string;
+  rhea_extra_decimals?: number;
 }
 export interface Deployment {
   displayName?: string;
   mode: "chain";
-  network: "testnet" | "sandbox";
+  network: "mainnet" | "testnet" | "sandbox";
+  strategyMode?: "funded_simulator" | "rhea_lending";
+  tokenSymbol?: string;
   chainId: string;
   rpcUrl: string;
   vaultId: string;
@@ -91,8 +94,25 @@ export interface Snapshot {
   daoRegistered: boolean;
   costs: { position: string; operation: string };
   tokenStorageCost: string;
-  strategy: { position: string; busy: boolean };
+  strategy: { position: string; busy: boolean; rhea?: RheaStatus };
   nativeBalance: string;
+}
+export interface RheaStatus {
+  phase: "Idle" | "Reading" | "Ready" | "Withdrawing" | "Unknown";
+  pending_raw_amount: string;
+  position_owner: string;
+  protocol_id: string;
+  extra_decimals: number;
+}
+export const strategyMode = (d: Deployment) =>
+  d.strategyMode ?? "funded_simulator";
+export const tokenSymbol = (d: Deployment) => d.tokenSymbol ?? "tUSD";
+export function isTokenPayment(p: Proposal, tokenId: string): boolean {
+  return (
+    !!p?.kind?.Transfer &&
+    p.kind.Transfer.token_id === tokenId &&
+    p.kind.Transfer.msg === null
+  );
 }
 export interface Call {
   receiverId: string;
@@ -184,8 +204,8 @@ export function parseDeployment(value: unknown): RuntimeConfig {
   if ((value as { mode: string }).mode === "preview")
     return { mode: "preview" };
   requireThat(
-    d.mode === "chain" && ["testnet", "sandbox"].includes(d.network),
-    "Only testnet or local Sandbox is supported",
+    d.mode === "chain" && ["mainnet", "testnet", "sandbox"].includes(d.network),
+    "Unsupported network",
   );
   const url = new URL(d.rpcUrl);
   requireThat(
@@ -193,8 +213,8 @@ export function parseDeployment(value: unknown): RuntimeConfig {
     "RPC URL must not contain credentials",
   );
   requireThat(
-    d.network === "testnet"
-      ? url.protocol === "https:" && d.chainId === "testnet"
+    d.network !== "sandbox"
+      ? url.protocol === "https:" && d.chainId === d.network
       : ["127.0.0.1", "localhost", "[::1]"].includes(url.hostname) &&
           url.protocol === "http:" &&
           !!d.chainId,
@@ -203,15 +223,42 @@ export function parseDeployment(value: unknown): RuntimeConfig {
   requireThat(
     typeof d.transactionsEnabled === "boolean" &&
       (d.network === "testnet" || !d.transactionsEnabled),
-    "Sandbox browser signing is disabled",
+    "Mainnet and Sandbox browser signing await release acceptance",
   );
   const c = d.config;
   requireThat(
     c &&
       /^[a-z0-9](?:[a-z0-9-]{0,22}[a-z0-9])?$/.test(c.campaign_id) &&
-      c.token_decimals === 6 &&
+      Number.isInteger(c.token_decimals) &&
+      c.token_decimals >= 0 &&
+      c.token_decimals <= 24 &&
       !!c.disclosure_version,
     "Unsupported campaign configuration",
+  );
+  const rhea = strategyMode(d) === "rhea_lending";
+  requireThat(
+    ["funded_simulator", "rhea_lending"].includes(strategyMode(d)),
+    "Unsupported strategy mode",
+  );
+  requireThat(
+    d.network !== "mainnet" || rhea,
+    "Mainnet requires Rhea integration",
+  );
+  requireThat(
+    d.network !== "mainnet" || c.strategy_id === "contract.main.burrow.near",
+    "Unexpected mainnet Rhea contract",
+  );
+  requireThat(
+    rhea
+      ? Number.isInteger(c.rhea_extra_decimals) &&
+          c.rhea_extra_decimals! >= 0 &&
+          c.rhea_extra_decimals! <= 24 &&
+          typeof d.tokenSymbol === "string" &&
+          /^[A-Za-z0-9._-]{1,24}$/.test(d.tokenSymbol)
+      : c.rhea_extra_decimals === undefined &&
+          c.token_decimals === 6 &&
+          tokenSymbol(d) === "tUSD",
+    "Unsupported token/strategy configuration",
   );
   const ids = [d.vaultId, c.token_id, c.strategy_id, c.beneficiary_id].map(
     account,
@@ -238,25 +285,26 @@ export function parseDeployment(value: unknown): RuntimeConfig {
     typeof council.kind === "object" && "Group" in council.kind
       ? council.kind.Group
       : [];
-  requireThat(
-    d.daoPolicy.roles.length === 1 &&
-      new Set(members).size === 3 &&
-      members.length === 3 &&
-      d.daoPolicy.default_vote_policy.weight_kind === "RoleWeight" &&
-      d.daoPolicy.default_vote_policy.threshold === "2" &&
-      d.daoPolicy.default_vote_policy.quorum === "2" &&
-      Object.keys(council.vote_policy).length === 0 &&
-      canonical([...council.permissions].sort()) ===
-        canonical(
-          [
-            "transfer:AddProposal",
-            "transfer:Finalize",
-            "transfer:VoteApprove",
-            "transfer:VoteReject",
-          ].sort(),
-        ),
-    "Unsupported DAO policy: require the three-member, two-vote transfer-only council",
-  );
+  if (!rhea)
+    requireThat(
+      d.daoPolicy.roles.length === 1 &&
+        new Set(members).size === 3 &&
+        members.length === 3 &&
+        d.daoPolicy.default_vote_policy.weight_kind === "RoleWeight" &&
+        d.daoPolicy.default_vote_policy.threshold === "2" &&
+        d.daoPolicy.default_vote_policy.quorum === "2" &&
+        Object.keys(council.vote_policy).length === 0 &&
+        canonical([...council.permissions].sort()) ===
+          canonical(
+            [
+              "transfer:AddProposal",
+              "transfer:Finalize",
+              "transfer:VoteApprove",
+              "transfer:VoteReject",
+            ].sort(),
+          ),
+      "Unsupported DAO policy: require the three-member, two-vote transfer-only council",
+    );
   members.forEach(account);
   return d;
 }
@@ -334,6 +382,88 @@ export class ChainClient {
     this.snapshots.set(accountId, pending);
     return pending;
   }
+  private async readStrategy(block: string): Promise<Snapshot["strategy"]> {
+    const d = this.deployment,
+      c = d.config;
+    if (strategyMode(d) !== "rhea_lending") {
+      const value = await this.view<
+        Snapshot["strategy"] & {
+          vault_id: string;
+          token_id: string;
+          mode: string;
+        }
+      >(c.strategy_id, "get_position", {}, block);
+      requireThat(
+        value.token_id === c.token_id &&
+          value.vault_id === d.vaultId &&
+          value.mode === "funded_simulator",
+        "Strategy binding differs",
+      );
+      return value;
+    }
+    type Asset = { token_id: string; balance: string };
+    const [status, position, asset] = await Promise.all([
+      this.view<RheaStatus>(d.vaultId, "get_rhea_status", {}, block),
+      this.view<{
+        account_id: string;
+        supplied: Asset[];
+        positions: Record<string, { collateral: Asset[]; borrowed: Asset[] }>;
+        is_locked: boolean;
+      } | null>(
+        c.strategy_id,
+        "get_account_all_positions",
+        { account_id: d.vaultId },
+        block,
+      ),
+      this.view<{
+        token_id: string;
+        config: { extra_decimals: number; can_withdraw: boolean };
+      } | null>(c.strategy_id, "get_asset", { token_id: c.token_id }, block),
+    ]);
+    requireThat(
+      status.position_owner === d.vaultId &&
+        status.protocol_id === c.strategy_id &&
+        status.extra_decimals === c.rhea_extra_decimals &&
+        ["Idle", "Reading", "Ready", "Withdrawing", "Unknown"].includes(
+          status.phase,
+        ),
+      "Rhea vault binding differs",
+    );
+    raw(status.pending_raw_amount);
+    requireThat(
+      asset?.token_id === c.token_id &&
+        asset.config.extra_decimals === c.rhea_extra_decimals &&
+        typeof asset.config.can_withdraw === "boolean",
+      "Rhea asset precision/binding changed",
+    );
+    if (position) {
+      requireThat(
+        position.account_id === d.vaultId &&
+          Array.isArray(position.supplied) &&
+          position.supplied.length <= 1 &&
+          position.supplied.every((a) => a.token_id === c.token_id) &&
+          position.positions &&
+          Object.values(position.positions).every(
+            (p) =>
+              Array.isArray(p.borrowed) &&
+              !p.borrowed.length &&
+              Array.isArray(p.collateral) &&
+              !p.collateral.length,
+          ) &&
+          typeof position.is_locked === "boolean",
+        "Unexpected Rhea position or borrowing",
+      );
+    }
+    const balance = position?.supplied[0]?.balance ?? "0";
+    return {
+      position: (
+        BigInt(raw(balance)) /
+        10n ** BigInt(c.rhea_extra_decimals!)
+      ).toString(),
+      busy: !!position?.is_locked || status.phase !== "Idle",
+      rhea: status,
+    };
+  }
   private async loadSnapshot(accountId: string): Promise<Snapshot> {
     const d = this.deployment,
       c = d.config;
@@ -383,13 +513,7 @@ export class ChainClient {
         {},
         block,
       ),
-      this.view<
-        Snapshot["strategy"] & {
-          vault_id: string;
-          token_id: string;
-          mode: string;
-        }
-      >(c.strategy_id, "get_position", {}, block),
+      this.readStrategy(block),
       this.view<Accounting>(d.vaultId, "get_accounting", {}, block),
       this.view<Operation[]>(
         d.vaultId,
@@ -448,17 +572,12 @@ export class ChainClient {
       "DAO upgrade authority changed",
     );
     requireThat(
-      metadata.decimals === 6 && metadata.symbol === "tUSD",
+      metadata.decimals === c.token_decimals &&
+        metadata.symbol === tokenSymbol(d),
       "Unexpected token metadata",
     );
     requireThat(
-      strategy.token_id === c.token_id &&
-        strategy.vault_id === d.vaultId &&
-        strategy.mode === "funded_simulator",
-      "Strategy binding differs",
-    );
-    requireThat(
-      accounting.mode === "funded_simulator",
+      accounting.mode === strategyMode(d),
       "Unexpected strategy mode",
     );
     for (const key of [
@@ -537,7 +656,7 @@ export class ChainClient {
       accountId,
       accounting,
       operations,
-      proposals,
+      proposals: proposals.filter((p) => isTokenPayment(p, c.token_id)),
       proposalCount,
       policy,
       position,
@@ -553,7 +672,7 @@ export class ChainClient {
     };
   }
   async checkFunding(s: Snapshot, call: Call): Promise<void> {
-    requireThat(s.accountId, "Connect your testnet wallet first");
+    requireThat(s.accountId, "Connect your wallet first");
     const [native, protocol, price] = await Promise.all([
       this.rpc<{ amount: string; storage_usage: number }>("query", {
         request_type: "view_account",
@@ -594,13 +713,18 @@ export class ChainClient {
       { operation_id: raw(id) },
     );
   }
-  proposal(id: number) {
+  async proposal(id: number) {
     requireThat(Number.isSafeInteger(id) && id >= 0, "Invalid proposal ID");
-    return this.view<Proposal>(
+    const proposal = await this.view<Proposal>(
       this.deployment.config.beneficiary_id,
       "get_proposal",
       { id },
     );
+    requireThat(
+      isTokenPayment(proposal, this.deployment.config.token_id),
+      "This is not a payment of the campaign token. Open the proposal in Trezu.",
+    );
+    return proposal;
   }
   async transaction(hash: string, sender: string) {
     requireThat(

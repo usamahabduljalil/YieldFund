@@ -3,6 +3,7 @@ import {
   raw,
   account,
   requireThat,
+  strategyMode,
   type Call,
   type Deployment,
   type Snapshot,
@@ -15,7 +16,10 @@ export type Intent =
   | { kind: "deposit" | "allocate" | "donate"; amount: string }
   | { kind: "withdraw"; amount: string; minimum: string }
   | { kind: "pause"; paused: boolean }
-  | { kind: "advance" | "cancel" | "recover"; operation: Operation }
+  | {
+      kind: "advance" | "cancel" | "recover" | "continue-rhea";
+      operation: Operation;
+    }
   | { kind: "propose"; recipient: string; amount: string; description: string }
   | {
       kind: "vote";
@@ -25,14 +29,17 @@ export type Intent =
 export function recoveryKind(
   o: Operation,
   disclosureVersion?: string,
+  mode = "funded_simulator",
 ): "balance" | "redemption" | "payment" | "allocation" | null {
   if (
+    mode === "funded_simulator" &&
     disclosureVersion === "factory-v2" &&
     o.kind === "allocation" &&
     ["allocating", "needs_reconciliation"].includes(o.stage)
   )
     return "allocation";
   if (
+    mode === "funded_simulator" &&
     disclosureVersion === "factory-v2" &&
     o.stage === "transfer_pending" &&
     ["withdrawal", "donation"].includes(o.kind) &&
@@ -46,6 +53,7 @@ export function recoveryKind(
   )
     return "balance";
   if (
+    mode === "funded_simulator" &&
     o.kind === "redemption" &&
     ["redeeming", "needs_reconciliation"].includes(o.stage)
   )
@@ -69,6 +77,10 @@ export function prepareCall(
   );
   const c = d.config,
     a = s.accounting;
+  requireThat(
+    a.mode === strategyMode(d),
+    "Strategy changed; reload deployment",
+  );
   const call = (
     receiverId: string,
     methodName: string,
@@ -170,6 +182,26 @@ export function prepareCall(
         "Advance the queued redemption or allocate first",
       );
       return call(d.vaultId, "redeem_strategy", {}, s.costs.operation);
+    case "continue-rhea": {
+      const o = intent.operation;
+      requireThat(
+        strategyMode(d) === "rhea_lending" &&
+          a.active_operation === o.id &&
+          a.queued_redemption === o.id &&
+          o.kind === "redemption" &&
+          o.stage === "redeeming" &&
+          s.strategy.rhea &&
+          ["Ready", "Reading"].includes(s.strategy.rhea.phase),
+        "Rhea withdrawal outcome unresolved or operation changed",
+      );
+      return call(
+        d.vaultId,
+        "continue_rhea_redemption",
+        { operation_id: raw(o.id), version: raw(o.version) },
+        "1",
+        "260000000000000",
+      );
+    }
     case "checkpoint":
       guardian();
       idle();
@@ -204,7 +236,7 @@ export function prepareCall(
     }
     case "recover": {
       const o = intent.operation,
-        kind = recoveryKind(o, d.config.disclosure_version);
+        kind = recoveryKind(o, d.config.disclosure_version, strategyMode(d));
       requireThat(
         a.active_operation === o.id && kind,
         "No automatic recovery for this stage",

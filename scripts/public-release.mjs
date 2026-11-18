@@ -35,11 +35,25 @@ export function validatePublicRelease(
   const fail = (message) => {
     throw new Error(`Public release: ${message}`);
   };
-  if (deployment.mode !== "chain" || deployment.network !== "testnet")
-    fail("only testnet hosting is supported");
+  if (
+    deployment.mode !== "chain" ||
+    !["testnet", "mainnet"].includes(deployment.network)
+  )
+    fail("unsupported hosted network");
   if (!Array.isArray(registry.deployments))
     fail("missing registry deployments");
   const enabled = registry.deployments.filter((d) => d.transactionsEnabled);
+  if (deployment.network === "mainnet") {
+    if (
+      deployment.strategyMode !== "rhea_lending" ||
+      deployment.transactionsEnabled ||
+      enabled.length
+    )
+      fail(
+        "mainnet Rhea requires read-only manifests until live release acceptance",
+      );
+    return "read-only";
+  }
   if (!deployment.transactionsEnabled && enabled.length === 0)
     return "read-only";
   if (

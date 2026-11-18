@@ -51,6 +51,24 @@ function fixture() {
   return { runtime, registry, review, acceptance };
 }
 describe("public signing release guard", () => {
+  it("permits read-only Rhea mainnet but rejects any enabled registry or simulator", () => {
+    const { runtime, registry } = fixture();
+    const rhea = {
+      ...runtime,
+      network: "mainnet",
+      strategyMode: "rhea_lending",
+      transactionsEnabled: false,
+    };
+    expect(() => validatePublicRelease(rhea, registry)).toThrow("read-only");
+    registry.deployments[0].transactionsEnabled = false;
+    expect(validatePublicRelease(rhea, registry)).toBe("read-only");
+    expect(() =>
+      validatePublicRelease(
+        { ...rhea, strategyMode: "funded_simulator" },
+        registry,
+      ),
+    ).toThrow();
+  });
   it("keeps legacy read-only builds available without an acceptance record", () => {
     const { runtime, registry } = fixture();
     runtime.transactionsEnabled = false;

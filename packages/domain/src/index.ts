@@ -20,13 +20,21 @@ export function parseAmount(value: string, decimals = DECIMALS): bigint {
   return amount;
 }
 
-export function formatAmount(amount: bigint, precision = 2): string {
+export function formatAmount(
+  amount: bigint,
+  precision = 2,
+  decimals = DECIMALS,
+): string {
+  if (!Number.isInteger(decimals) || decimals < 0 || decimals > 24)
+    throw new Error("Invalid token precision.");
+  const scale = 10n ** BigInt(decimals);
   const negative = amount < 0n;
   const absolute = negative ? -amount : amount;
-  const integer = (absolute / SCALE)
+  const integer = (absolute / scale)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  const rawFraction = (absolute % SCALE).toString().padStart(DECIMALS, "0");
+  const rawFraction =
+    decimals === 0 ? "" : (absolute % scale).toString().padStart(decimals, "0");
   const fraction = rawFraction.slice(
     0,
     Math.max(precision, rawFraction.replace(/0+$/, "").length),

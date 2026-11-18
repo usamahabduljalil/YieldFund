@@ -25,4 +25,4 @@ await writeFile(
   new URL("../apps/web/dist/client/deployment.json", import.meta.url),
   JSON.stringify(deployment, null, 2) + "\n",
 );
-console.log(`Hosted runtime: public testnet; ${mode}.`);
+console.log(`Hosted runtime: public ${deployment.network}; ${mode}.`);

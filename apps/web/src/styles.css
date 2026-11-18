@@ -933,6 +933,7 @@ select:focus-visible {
 }
 .metric strong {
   display: block;
+  overflow-wrap: anywhere;
   margin-top: 11px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 32px;
