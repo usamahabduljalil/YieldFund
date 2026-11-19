@@ -1,6 +1,8 @@
 ## YieldFund project memory and build tracker
 
-Last updated: 18 November 2026 (Africa/Lagos).
+Last updated: 19 November 2026 (Africa/Lagos).
+
+November 19 documentation sync: README now records the verified mainnet treasury and single-member policy, global-code compatibility, dated funding observation, published frontend/source distinction, and actual remaining Rhea/Trezu work. Removed stale claims that treasury discovery, token precision and the direct adapter were unimplemented, and corrected the testnet review from pending approval to approved but incomplete. Documentation only; no new chain reads, tests, deployment or signing claimed.
 
 Treasury confirmed November 18: user supplied https://trezu.app/yieldfund.sputnik-dao.near. Finalized mainnet block 225047644 verifies Sputnik version 2.3.1, name YieldFund, zero proposal bond, seven-day proposal period, no account access keys, and factory `sputnik-dao.near` with `auto_update=true`. The supplied passkey account is the sole member of Requestor/Admin/Approver roles; call/transfer approval threshold is one. This is single-member governance, not an independent two-of-three council. Treasury uses hash-addressed global code `DtHZA1mUmGYeScEaUoUZYQGGFHSMpnjMCvkr5U9hJXuF`; client code pins now check that immutable global hash instead of the empty local code hash. Account-addressed mutable global providers remain rejected. Targeted client tests: 30 passed, one optional skip; typecheck passed. Evidence: [treasury discovery](docs/evidence/mainnet-treasury-discovery.json). Public draft bindings: [mainnet draft](deployments/mainnet-integration.draft.json); no vault/factory account is invented or deployed. Operator balance at that same block remains 0.340904907830145251698960 NEAR. No mainnet signatures or spending.
 

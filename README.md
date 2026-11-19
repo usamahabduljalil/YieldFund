@@ -16,7 +16,7 @@ Built for NEAR HACKATHON. The landing page is wallet-free; connection, positions
 
 ## Current release
 
-Last reviewed: **17 November 2026**. This is an experimental hackathon implementation, not an audited mainnet product. The hosted build uses existing testnet contracts in **read-only mode**. Local preview balances are explicitly fictional. The funded simulator uses actual test tokens and is **not Rhea yield**.
+Last reviewed: **19 November 2026**. This is an experimental hackathon implementation, not an audited mainnet product. The hosted build uses existing testnet contracts in **read-only mode**. Local preview balances are explicitly fictional. The funded simulator uses actual test tokens and is **not Rhea yield**.
 
 Post-deadline integration work: a separate **direct Rhea vault build** now uses standard NEP-141 supply and payouts plus Rhea's `simple_withdraw` finalizer. Two local Sandbox lifecycles passed against code downloaded from Rhea's actual mainnet deployment: supply/redemption/supporter exit, and borrower-generated interest → donation → two-vote DAO payment. Unsolicited gifts stay excluded. **This is local compatibility evidence, not a mainnet deposit or earned mainnet yield.** Trezu verification/revocation/settlement templates pass Trezu's pinned schema; installation and an actual Trezu proposal/payment are still pending. See [integration details and reproduction](docs/contracts/rhea-and-trezu.md).
 
@@ -33,10 +33,14 @@ The approved public testnet lifecycle completed eleven transactions: **30 tUSD d
 | DAO verification                          | DAO-only expiring attestations, immutable metadata binding and revocation. A badge is not a safety or return guarantee                             |
 | Mainnet                                   | Explicit Rhea runtime, protocol snapshots, 0–24 decimal token UI and network-bound wallet dispatch implemented. Mainnet signing, deployment and lifecycle verification pending                                      |
 | Rhea real yield                           | Direct vault adapter implemented; actual deployed Rhea binary and standard-token lifecycle tested locally. Funded mainnet lifecycle still pending |
-| Trezu                                     | Verification/revocation/settlement template exporter checks actual DAO authority; manifests pass upstream schema. Live Trezu import/proposal/payment pending |
+| Trezu                                     | Mainnet treasury and policy verified; global-contract code pinning supported. Template exporter checks DAO authority; manifests pass upstream schema. Live Trezu import/proposal/payment pending |
 | Callback recovery                         | V2 source adds evidence-based payment/allocation/simulator recovery and resumable factory setup. Verified locally; historical deployed contracts retain their old limits     |
 
-The user selected **DAO approval** for verification and authorized GitHub/Vercel publication. Real Rhea/Trezu implementation resumed on November 17. The earlier mainnet deployment deferral still applies to spending: no mainnet signatures or transfers have occurred. A funded operator and treasury plus a concrete deployment review are required for live acceptance. The replacement operator exists but its checked balance is below vault code-storage requirements; the supplied Trezu ID is a passkey wallet, so the treasury DAO still needs to be identified. [Earlier read-only discovery evidence](docs/evidence/mainnet-discovery.json).
+The user selected **DAO approval** for verification and authorized GitHub/Vercel publication. Real Rhea/Trezu implementation resumed on November 17. The mainnet treasury is now [yieldfund.sputnik-dao.near on Trezu](https://trezu.app/yieldfund.sputnik-dao.near). At finalized block **225047644** on November 18, it reported Sputnik **2.3.1**, a zero proposal bond and a seven-day proposal period. Its sole passkey member controls Requestor/Admin/Approver roles, with one approval required for calls and transfers. This mainnet policy differs from the historical two-of-three testnet council. The client now pins its hash-addressed global contract code; mutable account-addressed global providers remain unsupported. See [treasury verification evidence](docs/evidence/mainnet-treasury-discovery.json) and [unsigned draft bindings](deployments/mainnet-integration.draft.json).
+
+No mainnet signatures or transfers have occurred. At the same November 18 block, operator `loanavalarezo.tg` held approximately **0.341 NEAR** before storage reserve, below the current vault's code-storage requirement. Funding, the Rhea factory path, a concrete deployment review and live wallet/Trezu acceptance remain outstanding. The latest treasury compatibility checks passed **30 tests**, with one optional test skipped; typecheck passed. These checks do not establish a funded mainnet lifecycle.
+
+Published frontend release: **`b6257de`**, with release evidence in [the runtime release record](docs/evidence/rhea-runtime-release.md). Treasury compatibility source was subsequently pushed as **`f24c993`**; that source update does not deploy a mainnet vault or enable public signing.
 
 ## Run locally
 
@@ -155,11 +159,11 @@ The Vercel project is currently deployed manually from exact GitHub commit SHAs 
 
 ## Remaining integration work
 
-1. Deploy and reconcile the locally verified recovery v2 contracts through the [20-call testnet review](deployments/RECOVERY_RELEASE_REVIEW.md), pending approval. New state layouts require fresh accounts; historical keyless children cannot be upgraded. The custom demo-token receipt APIs do not apply to arbitrary NEP-141 assets; genuinely pending or inconsistent evidence remains locked.
+1. Deploy and reconcile the locally verified recovery v2 contracts under the already approved [20-call testnet review](deployments/RECOVERY_RELEASE_REVIEW.md). Execution remains incomplete; reconcile existing receipts before resuming any interrupted step. New state layouts require fresh accounts; historical keyless children cannot be upgraded. The custom demo-token receipt APIs do not apply to arbitrary NEP-141 assets; genuinely pending or inconsistent evidence remains locked.
 2. Complete live browser-wallet acceptance for the new registry actions. The public campaign release uses inspected CLI-signed bytes and finalized receipts; controlled React tests do not establish every wallet's handoff behavior.
-3. Mainnet work is deferred: general token precision beyond the current six-decimal test token, deployable architecture/budget and mainnet wallet acceptance.
-4. Rhea supply/redemption adapter and funded real-yield proof remain incomplete; public protocol reads are not integration completion.
-5. Trezu discovery, policy/token display, proposal and payment rehearsal remain incomplete. Sputnik governance itself is implemented and verified separately.
+3. Complete the Rhea factory path, fund and review the mainnet deployment, and verify mainnet wallet acceptance. Configured 0–24 decimal token support and read-only Rhea snapshots are implemented; no Rhea vault is deployed on mainnet.
+4. Run the funded Rhea supply, interest, redemption and yield-donation lifecycle on mainnet. The direct adapter and local tests against the actual deployed Rhea binary are implemented; funded mainnet proof remains outstanding.
+5. Install the bound Trezu templates and complete live proposal, approval and payment acceptance with the verified mainnet treasury. Treasury discovery and policy verification are complete; template-schema and local Sputnik tests do not establish live Trezu acceptance.
 
 References: [official Rhea lending SDK](https://github.com/rhea-finance/lending-sdk-golang), [official Trezu source](https://github.com/NEAR-DevHub/trezu). Research/public reads are not lifecycle verification.
 
